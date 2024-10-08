@@ -6,14 +6,33 @@
     <title>Kalkulátor</title>
 </head>
 <body>
-    <h3>Feszültségesés Kalkulátor</h3>
+    <h3>Feszültségesés / Energiaveszteség Kalkulátor</h3>
     <label for="vezHosszNev">Kérem írja be a vezeték (egyirányú) hosszát méterben megadva!</label>
     <br>
-    <input type="number" min="0.1" name="vezHossz" id="vezHossz" placeholder="20"><label>méter</label>
+    <input type="number" min="0.1" name="vezHossz" id="vezHossz" placeholder="20"><label> méter</label>
+    <br><br>
+    <select id="mySelect">
+        <option value="1">1</option>
+        <option value="1.5">1.5</option>
+        <option value="2.5">2.5</option>
+        <option value="4">4</option>
+        <option value="6">6</option>
+        <option value="10">10</option>
+        <option value="16">16</option>
+        <option value="25">25</option>
+        <option value="35">35</option>
+    </select>
+    <label for="vezKereszt">Kérem válassza ki a vezeték keresztmetszetét (egy ér)!</label><br>
     <br>
-    <label for="teljNev">Kérem írja be a maximális teljesítményt kW-ban megadva!</label>
+    <label for="teljNev">Kérem írja be a maximális teljesítményt W-ban megadva!</label> 
     <br>
-    <input type="number" min="1" name="telj" id="telj" placeholder="2kW">
-    <br>
+    <input type="number" min="1" name="telj" id="telj" placeholder="200"><label> W</label><br><br>
+    <input type="radio" id="230" name="KalkulatorKategoriak"> 1 fázis (230V)<br><br>
+    <input type="radio" id="400" name="KalkulatorKategoriak"> 3 fázis (400V)<br><br>
+    <input type="button" id="szamitas" value="Számolás">
+    <br><br>
+    <p id="eredmeny"></p>
+
+    <script src="./js/kalkulator.js"></script>
 </body>
 </html>
