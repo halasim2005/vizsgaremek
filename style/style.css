@@ -3,6 +3,7 @@ body {
     color: #ECEFF4;
     font-family: 'Roboto', sans-serif;
 }
+
 .form-container {
     max-width: 600px;
     margin: 50px auto;
@@ -10,17 +11,118 @@ body {
     padding: 30px;
     border-radius: 10px;
 }
-.form-label, .form-control {
+
+.form-label,
+.form-control {
     color: #ECEFF4;
 }
+
 .form-control {
     background-color: #1F2A32;
     border: 1px solid #ECEFF4;
 }
+
 .btn-primary {
     background-color: #00C7A8;
     border: none;
 }
+
 .btn-primary:hover {
     background-color: #00B293;
+}
+
+.navbar {
+    background-color: #1F2A32;
+}
+
+.navbar-brand,
+.nav-link,
+.cart-button {
+    color: #ECEFF4 !important;
+}
+
+.nav-link:hover {
+    color: #00C7A8 !important;
+}
+
+.regist-button{
+    background-color: #00C7A8;
+    border-radius: 8px;
+    padding: 8px 16px;
+}
+
+.regist-button:hover{
+    background-color: #00B293;
+}
+
+.login-button{
+    background-color: #4b4b4b;
+    border-radius: 8px;
+    padding: 8px 16px;
+}
+
+.login-button:hover{
+    background-color: #7c7c7c;
+}
+
+.cart-button {
+    background-color: #00C7A8;
+    border-radius: 8px;
+    padding: 8px 16px;
+}
+
+.cart-button:hover {
+    background-color: #00B293;
+}
+
+.main-container {
+    padding: 20px;
+}
+
+.card {
+    background-color: #1F2A32;
+    border: none;
+    border-radius: 10px;
+}
+
+.card-body {
+    color: #ECEFF4;
+}
+
+.card-title {
+    color: #ECEFF4;
+}
+
+.btn-primary {
+    background-color: #00C7A8;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #00B293;
+}
+
+.order-summary {
+    background-color: #1F2A32;
+    border-radius: 10px;
+    color: #ECEFF4;
+    padding: 20px;
+}
+
+.checkout-button {
+    background-color: #00C7A8;
+    color: #1F2A32;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.checkout-button:hover {
+    background-color: #00B293;
+}
+
+.kepekImg {
+    height: 160px;
+    width: 160px;
 }
