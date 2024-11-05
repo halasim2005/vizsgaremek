@@ -81,8 +81,8 @@ function Szamolas(){
             szazalek = (feszEses / 400)*100;
         }
         
-        document.getElementById("eredmeny").innerHTML = feszEses + "V <br>";
-        document.getElementById("eredmeny").innerHTML += szazalek + "% <br>";
+        document.getElementById("eredmeny").innerHTML = Math.floor(feszEses * 100)/100 + "V <br>";
+        document.getElementById("eredmeny").innerHTML += Math.floor(szazalek * 100)/100 + "% <br>";
 
     if(szazalek < 3){
         document.getElementById("eredmeny").style.color = "green";

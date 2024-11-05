@@ -24,3 +24,11 @@ body {
 .btn-primary:hover {
     background-color: #00B293;
 }
+
+#vezKeresztId{
+    font-size: small;
+}
+
+#eredmeny{
+    font-size: 30px;
+}
