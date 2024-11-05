@@ -1,0 +1,26 @@
+body {
+    background-color: #12181B;
+    color: #ECEFF4;
+    font-family: 'Roboto', sans-serif;
+}
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #1F2A32;
+    padding: 30px;
+    border-radius: 10px;
+}
+.form-label, .form-control {
+    color: #ECEFF4;
+}
+.form-control {
+    background-color: #1F2A32;
+    border: 1px solid #ECEFF4;
+}
+.btn-primary {
+    background-color: #00C7A8;
+    border: none;
+}
+.btn-primary:hover {
+    background-color: #00B293;
+}
