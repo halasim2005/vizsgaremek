@@ -34,12 +34,24 @@ body {
 .btn-primary {
     background-color: #00C7A8;
     border: none;
+    color: #1F2A32;
 }
 
 .btn-primary:hover {
     background-color: #00B293;
+    color: #1F2A32;
 }
 
+.btn-outline-primary{
+    border-color: #00C7A8;
+    color: #00C7A8;
+}
+
+.btn-outline-primary:hover{
+    background-color: #00B293;
+    border-color: #00B293;
+    color: #1F2A32;
+}
 
 #vezKeresztId{
     font-size: small;
@@ -53,8 +65,7 @@ body {
 }
 
 .navbar-brand,
-.nav-link,
-.cart-button {
+.nav-link{
     color: #ECEFF4 !important;
 }
 
@@ -62,34 +73,16 @@ body {
     color: #00C7A8 !important;
 }
 
-.regist-button{
+.regist-button, .login-button, .cart-button{
     background-color: #00C7A8;
+    color: #1F2A32;
     border-radius: 8px;
     padding: 8px 16px;
 }
 
-.regist-button:hover{
+.regist-button:hover, .login-button:hover, .cart-button:hover{
     background-color: #00B293;
-}
-
-.login-button{
-    background-color: #4b4b4b;
-    border-radius: 8px;
-    padding: 8px 16px;
-}
-
-.login-button:hover{
-    background-color: #7c7c7c;
-}
-
-.cart-button {
-    background-color: #00C7A8;
-    border-radius: 8px;
-    padding: 8px 16px;
-}
-
-.cart-button:hover {
-    background-color: #00B293;
+    color: #1F2A32;
 }
 
 .main-container {
