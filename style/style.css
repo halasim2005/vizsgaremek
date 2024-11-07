@@ -22,6 +22,15 @@ body {
     border: 1px solid #ECEFF4;
 }
 
+.form-control:focus {
+    background-color: #1F2A32;
+    color: #ECEFF4;
+}
+
+.form-control::placeholder{
+    color: lightgrey;
+}
+
 .btn-primary {
     background-color: #00C7A8;
     border: none;

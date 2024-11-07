@@ -46,10 +46,14 @@
         <form action="">
             <div class="mb-3">
                 <label for="kerNev" class="form-label">Kérem írja be a vezeték (egyirányú) hosszát méter-ben megadva!</label>
-                <input type="text" class="form-control" name="vezHossz" id="vezHossz" placeholder="20 (méter)" required>
+                <input type="number" class="form-control" name="vezHossz" id="vezHossz" placeholder="20 (méter)" required>
             </div>
             <div class="mb-3">
                 <label for="vezKereszt" class="form-label">Kérem válassza ki a vezeték keresztmetszetét (egy ér)!</label><br>
+                <select name="vezKereszt" id="vezKereszt" class="form-control">
+                    <option class="form-control" value=""></option>
+                    <option class="form-control" value="1">1 mm</option>
+                </select>
                 <label id="vezKeresztId">(1 mm<sup>2</sup>, 1.5 mm<sup>2</sup>, 2.5 mm<sup>2</sup>, 4 mm<sup>2</sup>, 6 mm<sup>2</sup>, 10 mm<sup>2</sup>, 16 mm<sup>2</sup>, 25 mm<sup>2</sup>, 35 mm<sup>2</sup>)</label><br><br>
                 <input type="number" class="form-control" name="vezKereszt" id="vezKereszt" required>
             </div>
