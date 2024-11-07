@@ -9,12 +9,37 @@
     <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
-    <div class="topnav">
-        <a class="active" href="fooldal.html">Kezdőlap</a>
-        <a href="termekek.html">Termékek</a>
-        <a href="kalkulator.html">Kalkulátor</a>
-        <a href="kapcsolat.html">Kapcsolat</a>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Haláli Villszer Kft.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./fooldal.html">Kezdőlap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./termekek.html">Termékek</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./kalkulator.html">Kalkulátor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./kapcsolat.html">Kapcsolat</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Keresés" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Keresés</button>
+                </form>
+                <a href="./kosar.html" class="btn cart-button ms-3">Kosár</a>
+                <a href="./regisztracio.html" class="btn regist-button ms-3">Regisztráció</a>
+                <a href="./bejelentkezes.html" class="btn login-button ms-3">Bejelentkezés</a>
+            </div>
+        </div>
+    </nav>
 
     <div class="container form-container">
         <h2 class="text-center">Feszültségesés kalkulátor</h2>
