@@ -1,5 +1,6 @@
 body {
-    background-color: #12181B;
+    background-image: url('../képek/hatter.jpg');
+    /*background-color: #12181B;*/
     color: #ECEFF4;
     font-family: 'Roboto', sans-serif;
 }
@@ -71,6 +72,7 @@ body {
 }
 .navbar {
     background-color: #1F2A32;
+    opacity: 90%;
 }
 
 .navbar-brand,
