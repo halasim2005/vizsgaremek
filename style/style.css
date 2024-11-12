@@ -67,6 +67,7 @@ body {
 
 #eredmeny{
     font-size: 30px;
+    text-align: right;
 }
 .navbar {
     background-color: #1F2A32;
@@ -81,14 +82,14 @@ body {
     color: #00C7A8 !important;
 }
 
-.regist-button, .login-button, .cart-button{
+.regist-button, .login-button, .cart-button, .kalk-button{
     background-color: #00C7A8;
     color: #1F2A32;
     border-radius: 8px;
     padding: 6px 12px;
 }
 
-.regist-button:hover, .login-button:hover, .cart-button:hover{
+.regist-button:hover, .login-button:hover, .cart-button:hover, .kalk-button:hover{
     background-color: #00B293;
     color: #1F2A32;
 }
