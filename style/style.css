@@ -1,8 +1,9 @@
 body {
     background-image: url('../képek/hatter.jpg');
+    background-size: cover;
     /*background-color: #12181B;*/
     color: #ECEFF4;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Quicksand';
 }
 
 .form-container {
@@ -71,8 +72,8 @@ body {
     text-align: right;
 }
 .navbar {
-    background-color: #1F2A32;
-    opacity: 90%;
+    background-color: #12181B;
+    /*background-color: #1F2A32;*/
 }
 
 .navbar-brand,
@@ -140,6 +141,7 @@ body {
 }
 
 .checkout-button:hover {
+    background-color: #CD7F32;
     background-color: #00B293;
 }
 
@@ -147,4 +149,19 @@ body {
     height: 160px;
     width: 160px;
     
+}
+
+#fooldal_kezdo{
+    margin: 100px;
+    padding: 100px;
+}
+
+#button{
+    background-color: black;
+    border: solid 3px #CD7F32;
+    padding: 10px;
+    border-radius: 5px;
+    color: #CD7F32;
+    font-weight: bold;
+    font-size: large;
 }
