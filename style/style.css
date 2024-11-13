@@ -4,6 +4,7 @@ body {
     /*background-color: #12181B;*/
     color: #ECEFF4;
     font-family: 'Quicksand';
+    padding-top: 70px;
 }
 
 .form-container {
@@ -149,9 +150,97 @@ body {
     width: 160px;
     
 }
+/* Fixáljuk a navbar-t a képernyő tetején */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Biztosítja, hogy mindig a tetején legyen */
+}
 
 
+/* Hamburger menü megjelenítése kicsi képernyőkön */
+@media (max-width: 767px) {
+    .navbar-collapse {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%; /* A menü szélessége */
+        background-color: #333;
+        z-index: 1000;
+        border-radius: 10px;
+        padding: 10px 0;
+    }
 
+    .navbar-collapse.show {
+        transform: translateX(-50%) translateY(0);
+    }
 
+    /* A hamburger menü elemei egy oszlopba rendezkednek */
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
 
+    .navbar-nav .nav-item {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 
+    .navbar-nav .nav-link {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Keresőmező középre igazítása */
+    .d-flex {
+        display: flex;
+        justify-content: center;  /* Középre igazítás */
+        align-items: center;  /* Középre igazítás */
+        width: 100%;
+    }
+
+    .form-control {
+        width: 90%; /* A keresőmező 90%-ban kitölti a menüt */
+        margin: 10px 0;
+    }
+
+    /* Kosár és gombok szélessége */
+    .cart-button, .regist-button, .login-button {
+        width: 90%;
+        text-align: center;
+        margin-bottom: 10px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Nagyobb képernyők esetén is megfelelő elrendezés */
+@media (min-width: 768px) {
+    .navbar-collapse {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-left: auto;
+    }
+
+    .navbar-nav .nav-item {
+        margin-right: 20px;
+    }
+
+    .form-control {
+        width: auto;
+        margin: 0;
+    }
+}
