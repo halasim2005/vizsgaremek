@@ -26,7 +26,9 @@ if (!isset($_SESSION['felhasznalo'])) {
     <?php
         include './navbar.php';
     ?>
+    <div id="profilDolog">
 
+    </div>
     <h2>Üdvözöljük, <?php echo htmlspecialchars($_SESSION['felhasznalo']); ?>!</h2>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
