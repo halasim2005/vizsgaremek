@@ -57,24 +57,6 @@
         </form>
     </div>
 
-
-    <!--<h3>Feszültségesés / Energiaveszteség Kalkulátor</h3>
-    <label for="vezHosszNev">Kérem írja be a vezeték (egyirányú) hosszát méterben megadva!</label>
-    <br>
-    <input type="number" min="0.1" name="vezHossz" id="vezHossz" placeholder="20"><label> méter</label>
-    <br><br>
-    <input type="number" id="vezKereszt"> (1 mm<sup>2</sup>, 1.5 mm<sup>2</sup>, 2.5 mm<sup>2</sup>, 4 mm<sup>2</sup>, 6 mm<sup>2</sup>, 10 mm<sup>2</sup>, 16 mm<sup>2</sup>, 25 mm<sup>2</sup>, 35 mm<sup>2</sup>)<br>
-    <label for="vezKereszt">Kérem válassza ki a vezeték keresztmetszetét (egy ér)!</label><br>
-    <br>
-    <label for="teljNev">Kérem írja be a maximális áramerősséget amper-ben megadva!</label> 
-    <br>
-    <input type="number" name="aram" id="aram" placeholder="200"><label> A</label><br><br>
-    <input type="radio" id="230" name="KalkulatorKategoriak"> 1 fázis (230V)<br><br>
-    <input type="radio" id="400" name="KalkulatorKategoriak"> 3 fázis (400V)<br><br>
-    <input type="submit" id="szamitas" value="Számolás">
-    <br><br>
-    <div id="eredmeny"></div>-->
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./js/kalkulator.js"></script>
 </body>
