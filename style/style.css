@@ -10,7 +10,7 @@ body {
 .form-container {
     max-width: 600px;
     margin: 50px auto;
-    background-color: #1F2A32;
+    background-color:  #12181B;
     padding: 30px;
     border-radius: 10px;
 }
@@ -21,7 +21,7 @@ body {
 }
 
 .form-control {
-    background-color: #1F2A32;
+    background-color:  #12181B;
     border: 1px solid #ECEFF4;
 }
 
@@ -244,3 +244,4 @@ body {
         margin: 0;
     }
 }
+
