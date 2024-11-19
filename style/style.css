@@ -3,40 +3,7 @@ body {
     background-size: cover;
     /*background-color: #12181B;*/
     color: #ECEFF4;
-    font-family: 'Quicksand';
     padding-top: 70px;
-}
-
-.form-container {
-    max-width: 600px;
-    margin: 50px auto;
-    background-color:  #12181B;
-    padding: 30px;
-    border-radius: 10px;
-}
-
-.form-label,
-.form-control {
-    color: #ECEFF4;
-}
-
-.form-control {
-    background-color:  #12181B;
-    border: 1px solid #ECEFF4;
-}
-
-/*.search_input{
-    background-image: image('search_icon.png');
-    background-position: right center 5px;
-}*/
-
-.form-control:focus {
-    background-color: #1F2A32;
-    color: #ECEFF4;
-}
-
-.form-control::placeholder{
-    color: lightgrey;
 }
 
 .btn-primary {
@@ -245,3 +212,31 @@ body {
     }
 }
 
+
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color:  #12181B;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.form-label,
+.form-control {
+    color: #ECEFF4;
+}
+
+.form-control {
+    background-color:  #12181B;
+    border: 1px solid #ECEFF4;
+    width: 100%;
+}
+
+.form-control:focus {
+    background-color: #1F2A32;
+    color: #ECEFF4;
+}
+
+.form-control::placeholder{
+    color: lightgrey;
+}
