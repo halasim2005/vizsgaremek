@@ -1,7 +1,12 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 session_unset();
 session_destroy();
-header("Location: fooldal.php"); // Átirányítás a főoldalra
+
+// Kijelentkezés utáni visszairányítás üzenettel
+header("Location: bejelentkezes.php?logout=1");
 exit();
 ?>

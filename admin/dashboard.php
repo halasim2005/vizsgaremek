@@ -1,25 +1,21 @@
 <?php
-session_start();
-if (!isset($_SESSION['admin_logged_in'])) {
-    header("Location: login.php");
-    exit();
-}
+include './admin_navbar.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Főoldal</title>
-    <link rel="stylesheet" href="../style/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
-    <h2>Üdvözöljük az admin felületen!</h2>
-    <nav>
-        <a href="users.php">Felhasználók kezelése</a>
-        <a href="products.php">Termékek kezelése</a>
-        <a href="orders.php">Megrendelések kezelése</a>
-        <a href="settings.php">Beállítások</a>
-        <a href="logout.php">Kijelentkezés</a>
-    </nav>
+    <div class="container mt-5 pt-5">
+        <h1>Admin Felület</h1>
+        <p>Itt érheted el az adminisztrációs funkciókat.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
