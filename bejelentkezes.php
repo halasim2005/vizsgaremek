@@ -2,6 +2,10 @@
 session_start();
 include 'db.php';
 
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $felhasznalonev = $_POST['felhasznalonev'];
     $password = $_POST['password'];
@@ -10,15 +14,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':fh_name', $felhasznalonev);
     $stmt->execute();
 
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user && password_verify($password, $user['jelszo'])) {
-        $_SESSION['felhasznalo'] = $felhasznalonev;
-        header("Location: fooldal.php"); // Sikeres bejelentkezés után
-        exit();
+    if ($stmt->rowCount() > 0) {
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if (password_verify($password, $user['jelszo'])) {
+            $_SESSION['felhasznalo'] = $user['fh_nev'];
+            $_SESSION['jogosultsag'] = $user['jogosultsag']; // Pl.: "admin" vagy "user"
+            if($_SESSION['jogosultsag'] == 'admin') $_SESSION['admin_logged_in'] = true;
+            // Átirányítás főoldalra vagy admin oldalra
+            header("Location: fooldal.php");
+            exit();
+        } else {
+            $error = "Hibás jelszó.";
+        }
     } else {
-        $error = "Hibás felhasználónév vagy jelszó.";
+        $error = "Nem létező felhasználó.";
     }
+    
+
+
 }
 ?>
 
@@ -39,6 +53,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php if (!empty($error)) { echo "<div class='alert alert-danger text-center'>$error</div>"; } ?>
 
         <form action="bejelentkezes.php" method="post" autocomplete="off">
+            <?php
+                if (isset($_GET['logout']) && $_GET['logout'] == 1) {
+                    echo "<div class='alert alert-success'>Sikeresen kijelentkeztél!</div>";
+                }
+            ?>
             <div class="mb-3">
                 <label for="felhasznalonev" class="form-label">Felhasználónév</label>
                 <input type="text" class="form-control" name="felhasznalonev" id="felhasznalonev" required>

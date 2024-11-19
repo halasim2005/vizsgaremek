@@ -1,7 +1,5 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark">
@@ -31,6 +29,9 @@ if (session_status() == PHP_SESSION_NONE) {
             <a href="./kosar.php" class="btn cart-button ms-3">Kosár</a>
 
             <?php if (isset($_SESSION['felhasznalo'])): ?>
+                <?php if ($_SESSION['jogosultsag'] === 'admin'): ?>
+                    <a href="./admin/dashboard.php" class="btn btn-warning ms-3">Admin</a>
+                <?php endif; ?>
                 <a href="./profil.php" class="btn regist-button ms-3">Profil</a>
                 <a href="./kijelentkezes.php" class="btn login-button ms-3">Kijelentkezés</a>
             <?php else: ?>
