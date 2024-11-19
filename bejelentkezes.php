@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="bejelentkezes.php" method="post" autocomplete="off">
             <?php
                 if (isset($_GET['logout']) && $_GET['logout'] == 1) {
-                    echo "<div class='alert alert-success'>Sikeresen kijelentkeztél!</div>";
+                    echo "<div class='alert alert-success'>Sikeres kijelentkezés!</div>";
                 }
             ?>
             <div class="mb-3">

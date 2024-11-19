@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Nov 05. 09:23
+-- Létrehozás ideje: 2024. Nov 19. 18:27
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `felhasznalo` (
   `fh_nev` varchar(25) NOT NULL,
-  `jelszo` varchar(100) NOT NULL,
+  `jelszo` varchar(10000) NOT NULL,
   `vezeteknev` text NOT NULL,
   `keresztnev` text NOT NULL,
   `szamlazasi_iranyitoszam` int(4) NOT NULL,
@@ -43,8 +43,17 @@ CREATE TABLE `felhasznalo` (
   `kezbesitesi_utca` varchar(50) NOT NULL,
   `kezbesitesi_hazszam` varchar(20) NOT NULL,
   `telefonszam` int(15) NOT NULL,
-  `email` varchar(50) NOT NULL
+  `email` varchar(50) NOT NULL,
+  `jogosultsag` varchar(20) DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- A tábla adatainak kiíratása `felhasznalo`
+--
+
+INSERT INTO `felhasznalo` (`fh_nev`, `jelszo`, `vezeteknev`, `keresztnev`, `szamlazasi_iranyitoszam`, `szamlazasi_telepules`, `szamlazasi_utca`, `szamlazasi_hazszam`, `szamlazasi_cegnev`, `szamlazasi_adoszam`, `kezbesitesi_iranyitoszam`, `kezbesitesi_telepules`, `kezbesitesi_utca`, `kezbesitesi_hazszam`, `telefonszam`, `email`, `jogosultsag`) VALUES
+('admin', '$2y$10$ZV5/kz0Yn1IB687p5eqfAuMCureJAlRueIJwPNtionjFT/mh8lUGK', 'a', 'a', 0, '', '', '', '', 0, 0, '', '', '', 0, 'a@gmail.com', 'admin'),
+('b', '$2y$10$/jo.zuoSmbDGDUS6O.4QBuGIcEg5q5uuV/ZrbauzPM18rZvnIube2', 'b', 'b', 0, '', '', '', '', 0, 0, '', '', '', 0, 'b@gmailcom', 'user');
 
 -- --------------------------------------------------------
 
