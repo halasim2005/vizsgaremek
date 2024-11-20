@@ -242,7 +242,7 @@ body {
 }
 
 .bemutatkozasDiv{
-    max-width: 1250px;
+    max-width: 1450px;
     margin: 50px auto;
     background-color:  #cfddfa;
     padding: 30px;
@@ -252,8 +252,12 @@ body {
     width: 60%;
 }
 
-#bemutatkozasDivSzoveg{
+.bemutatkozasDivSzoveg{
     color: black;
     text-align: justify;
+}
+
+.bemutatkozoTableTd{
+    padding-right: 30px;
 }
 
