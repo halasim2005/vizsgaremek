@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $felhasznalonev = $_POST['felhasznalonev'];
     $password = $_POST['password'];
 
-    $stmt = $conn->prepare("SELECT * FROM felhasznalo WHERE fh_nev = :fh_name");
+    $stmt = $pdo->prepare("SELECT * FROM felhasznalo WHERE fh_nev = :fh_name");
     $stmt->bindParam(':fh_name', $felhasznalonev);
     $stmt->execute();
 
