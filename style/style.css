@@ -242,22 +242,58 @@ body {
 }
 
 .bemutatkozasDiv{
-    max-width: 1450px;
+    max-width: 1250px;
     margin: 50px auto;
     background-color:  #cfddfa;
     padding: 30px;
+    font-family: 'Montserrat';
 }
 
 #logoKepBemutatkozasDiv{
     width: 60%;
 }
 
-.bemutatkozasDivSzoveg{
+.fooldalDivSzoveg{
     color: black;
     text-align: justify;
 }
 
-.bemutatkozoTableTd{
-    padding-right: 30px;
+.fooldalDivSzovegCim{
+    color: black;
+    text-align: justify;
+    font-weight: bold;
+}
+
+.fooldalTableTd{
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.termekekDiv{
+    max-width: 1250px;
+    margin: 50px auto;
+    background-color:  #faedcf;
+    padding: 30px;
+    font-family: 'Montserrat';
+}
+
+.fooldalDivButton{
+    border: 1px solid black;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: black;
+    text-decoration: none;
+}
+
+.fooldalDivButton:hover{
+    border: 1px solid rgb(250, 146, 71);
+    background-color: rgb(250, 146, 71);
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 }
 
