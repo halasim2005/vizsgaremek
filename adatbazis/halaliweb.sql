@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Nov 19. 18:27
+-- Létrehozás ideje: 2024. Nov 25. 18:49
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -67,6 +67,15 @@ CREATE TABLE `kategoria` (
   `leiras` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- A tábla adatainak kiíratása `kategoria`
+--
+
+INSERT INTO `kategoria` (`id`, `nev`, `leiras`) VALUES
+(1, 'Kapcsoló', 'Villanykapcsoló, stb.'),
+(2, 'Teszt kategória', 'teszt'),
+(3, 'asd', 'asd');
+
 -- --------------------------------------------------------
 
 --
@@ -90,11 +99,23 @@ CREATE TABLE `termek` (
   `nev` varchar(100) NOT NULL,
   `egysegar` int(8) NOT NULL,
   `leiras` varchar(1000) NOT NULL,
-  `gyarto` int(11) NOT NULL,
-  `tipus` int(11) NOT NULL,
+  `gyarto` varchar(100) NOT NULL,
+  `tipus` varchar(100) NOT NULL,
   `kategoria_id` int(3) NOT NULL,
-  `elerheto_darab` int(5) NOT NULL
+  `elerheto_darab` int(5) NOT NULL,
+  `kep` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- A tábla adatainak kiíratása `termek`
+--
+
+INSERT INTO `termek` (`id`, `nev`, `egysegar`, `leiras`, `gyarto`, `tipus`, `kategoria_id`, `elerheto_darab`, `kep`) VALUES
+(1, 'Fehér villanykapcsoló', 1000, 'a', '0', '0', 1, 0, 'képek/HaLálip.png'),
+(3, 'Fehér villanykapcsoló', 1000, 'a', '0', '0', 1, 10, 'képek/HaLálip.png'),
+(4, 'teszt', 1, 'teszt', '0', '0', 1, 1, 'képek/fokapcsolo_20a_eaton.webp'),
+(5, 'asd', 1000, 'asd', '0', '0', 3, 100000, 'képek/HaLálip.png'),
+(7, 'Fehér villanykapcsoló00', 1000, 'aaaaaaaaaaa', 'gíysewttooooo', 'aasdtipussssssssss', 1, 10000, 'képek/HaLálip.png');
 
 -- --------------------------------------------------------
 
@@ -155,7 +176,7 @@ ALTER TABLE `tetelek`
 -- AUTO_INCREMENT a táblához `kategoria`
 --
 ALTER TABLE `kategoria`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT a táblához `megrendeles`
@@ -167,7 +188,7 @@ ALTER TABLE `megrendeles`
 -- AUTO_INCREMENT a táblához `termek`
 --
 ALTER TABLE `termek`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT a táblához `tetelek`
