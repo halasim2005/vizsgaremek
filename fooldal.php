@@ -44,13 +44,29 @@ header("Pragma: no-cache");
     <div class="termekekDiv">
         <table>
             <tr>
-                <td width="50%">
-                    <img width="85%" src="./képek/izzok.jpg" alt="Izzók">
-                </td>
+                
                 <td width="50%" class="fooldalTableTd">
                     <h1 class="fooldalDivSzovegCim">Kínálatunk</h1>
                     <h5 class="fooldalDivSzoveg">Fedezze fel webáruházunk gazdag választékát, ahol minden villanyszerelési eszközt és anyagot könnyedén megtalál! Nézze meg a Termékek részt, és kattintson a számos kategória egyikére, hogy gyorsan rátaláljon a szükséges eszközökre és alapanyagokra. Akár szakember, akár háztartást vezet, nálunk mindent megtalál, amire szüksége lehet a villanyszereléshez. Vásároljon egyszerűen, kényelmesen, közvetlenül online!</h5>
                     <br><a href="./termekek.php" class="fooldalDivButton">TERMÉKEK</a>
+                </td>
+                <td width="50%">
+                    <img width="85%" src="./képek/izzok.jpg" alt="Izzók">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="kalkulatorDiv">
+        <table>
+            <tr>
+                <td width="50%">
+                    <img width="85%" src="./képek/kalkulator.jpeg" alt="Izzók">
+                </td>
+                <td width="50%" class="fooldalTableTd">
+                    <h1 class="fooldalDivSzovegCim">Kalkulátor</h1>
+                    <h5 class="fooldalDivSzoveg">Ez az elektromos kalkulátor a feszültségveszteség gyors és pontos kiszámítására szolgál, figyelembe véve a vezeték hosszát, keresztmetszetét és az áramerősséget. A felhasználóbarát online eszköz segítségével könnyedén meghatározhatja a megfelelő vezetékeket, hogy minimalizálja a feszültségcsökkenést és biztosítsa a rendszer hatékonyságát. Ideális választás villanyszerelők, mérnökök és bárki számára, aki pontos tervezést végez az elektromos rendszerekben.</h5>
+                    <br><a href="./kalkulator.php" class="kalkDivButton">KALKULÁTOR</a>
                 </td>
             </tr>
         </table>
