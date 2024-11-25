@@ -72,6 +72,20 @@ header("Pragma: no-cache");
         </table>
     </div>
 
+    <div class="ugyfelszolgalatDiv">
+        <table>
+            <tr>
+                <td width="50%" class="fooldalTableTd">
+                    <h1 class="fooldalDivSzovegCim">Ügyfélszolgálat</h1>
+                    <h5 class="fooldalDivSzoveg">Üdvözlünk a HaLáli Kft. ügyfélszolgálatán! Ha kérdésed van rendeléseddel, termékeinkkel vagy bármilyen más témával kapcsolatban, itt tudsz kapcsolatba lépni velünk. A cég alapítói, Halasi Martin és Lálity Dominik készséggel áll rendelkezésedre, hogy gyors és segítőkész válaszokkal támogassunk. Ne habozz írni, bármilyen problémával vagy kérdéssel kereshetsz minket! Köszönjük, hogy minket választottál!</h5>
+                    <br><a href="./kapcsolat.php" class="ugyfelszDivButton">KAPCSOLAT</a>
+                </td>
+                <td width="50%">
+                    <img width="85%" src="./képek/ugyfelszolg.jpeg" alt="Izzók">
+                </td>
+            </tr>
+        </table>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
