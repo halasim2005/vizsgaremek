@@ -8,7 +8,7 @@ body {
 
 .btn-primary {
     background-color: #00C7A8;
-    border: none;
+    border: 1px solid black;
     color: #1F2A32;
 }
 
@@ -40,16 +40,41 @@ body {
     text-align: right;
 }
 .navbar {
-    background-color: #12181B;
+    background-color: #f5f5f2;
+    font-family: 'Montserrat';
+}
+
+#navbarLogo{
+    width: 70px;
 }
 
 .navbar-brand,
 .nav-link{
-    color: #ECEFF4 !important;
+    /*color: #ECEFF4 !important;*/
+    color: rgb(106, 106, 106) !important;
+    font-weight: 900;
+    font-size: medium;
 }
 
 .nav-link:hover {
-    color: #00C7A8 !important;
+    /*color: #00C7A8 !important;*/
+    color: black !important;
+    font-weight: 900;
+}
+
+.nav-link:after{
+    content: '';
+    margin: auto;
+    display: block;
+    height: 2px;
+    width: 0%;
+    background-color: transparent;
+    /* transition: width 0.5s ease,background-color 0.5s ease; */
+    transition: all 0.5s ease;
+}
+.nav-link:hover:after{
+    width: 100%;
+    background-color: rgb(0, 0, 0);
 }
 
 .regist-button, .login-button, .cart-button, .kalk-button{
@@ -352,4 +377,47 @@ body {
     color: rgb(255, 255, 255);
     text-decoration: none;
 }
+
+#navbarKereses{
+    background-color: #f5f5f2;
+    border: 1px solid black;
+    color: black;
+    border-radius: 5px;
+    visibility:hidden;
+}
+
+#navbarGomb{
+    background-color: #f5f5f2;
+    border: 1px solid black;
+    color:black;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#navbarGomb:hover{
+    background-color: rgb(61, 61, 61);
+    border: 1px solid rgb(61, 61, 61);
+    color:white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#navbarIcons{
+    width: 35px;
+}
+
+#keresesIkonNavbar{
+    width: 35px;
+}
+
+#keresesIkonPadding{
+    padding-right: 10px;
+}
+
+#kosarIkonPadding{
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+
 

@@ -4,29 +4,31 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">HaLáli Villszer Kft.</a>
+<!--<a class="navbar-brand" href="#">HaLáli Villszer Kft.</a>-->
+        <img id="navbarLogo" href="fooldal.php" src="./képek/HaLálip.png" alt="HaLáli Kft. logo">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="./fooldal.php">Kezdőlap</a>
+                    <a class="nav-link" href="./fooldal.php">KEZDŐLAP</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./termekek.php">Termékek</a>
+                    <a class="nav-link" href="./termekek.php">TERMÉKEK</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./kalkulator.php">Kalkulátor</a>
+                    <a class="nav-link" href="./kalkulator.php">KALKULÁTOR</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./kapcsolat.php">Kapcsolat</a>
+                    <a class="nav-link" href="./kapcsolat.php">KAPCSOLAT</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control btn-outline-primary me-2" type="search" placeholder="Keresés" aria-label="Keresés">
+            <form id="keresesIkonPadding" class="d-flex" role="search">
+                <input id="navbarKereses" class="form-control btn-outline-primary me-2" type="search" placeholder="Keresés" aria-label="Keresés">
+                <img id="keresesIkonNavbar"  onclick="keresesMegj()" src="./képek/keresesIkon.png" alt="Keresés ikon">
             </form>
-            <a href="./kosar.php" class="btn cart-button ms-3">Kosár</a>
+            <a id="kosarIkonPadding" href="./kosar.php"><img id="navbarIcons" src="./képek/kosarIkon.png" alt="Kosár ikon"></a>
 
             <?php if (isset($_SESSION['felhasznalo'])): ?>
                 <?php if ($_SESSION['jogosultsag'] === 'admin'): ?>
@@ -35,8 +37,8 @@
                 <a href="./profil.php" class="btn regist-button ms-3">Profil</a>
                 <a href="./kijelentkezes.php" class="btn login-button ms-3">Kijelentkezés</a>
             <?php else: ?>
-                <a href="./regisztracio.php" class="btn regist-button ms-3">Regisztráció</a>
-                <a href="./bejelentkezes.php" class="btn login-button ms-3">Bejelentkezés</a>
+                <a id="navbarGomb" href="./regisztracio.php" class="btn regist-button ms-3">Regisztráció</a>
+                <a id="navbarGomb" href="./bejelentkezes.php" class="btn login-button ms-3">Bejelentkezés</a>
             <?php endif; ?>
         </div>
     </div>
@@ -50,4 +52,10 @@
         navbarCollapse.classList.remove('show'); // Bezárjuk a menüt
         });
     });
+
+    function keresesMegj(){
+        let kereses = document.getElementById("navbarKereses");
+        let keresesIkon = document.getElementById("keresesIkonNavbar");
+        kereses.style.visibility = "visible";
+    }
 </script>
