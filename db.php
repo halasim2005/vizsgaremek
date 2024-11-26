@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost'; // A helyi hoszt
-$dbname = 'halaliweb'; // Az adatbázis neve
-$username = 'root'; // Az adatbázis felhasználó
-$password = ''; // Az adatbázis jelszó (ha van)
+$host = 'localhost';
+$dbname = 'halaliweb';
+$username = 'root';
+$password = '';
 
 try {
     // PDO adatbázis kapcsolat létrehozása
