@@ -4,10 +4,8 @@ if (!isset($_SESSION['jogosultsag']) || $_SESSION['jogosultsag'] !== 'admin') {
     header("Location: ../fooldal.php");
     exit();
 }
-
 include './admin_navbar.php';
 
-// Csatlakozás az adatbázishoz
 $conn = new mysqli('localhost', 'root', '', 'halaliweb');
 if ($conn->connect_error) {
     die("Adatbázis hiba: " . $conn->connect_error);

@@ -4,7 +4,6 @@ if (!isset($_SESSION['jogosultsag']) || $_SESSION['jogosultsag'] !== 'admin') {
     header("Location: ../fooldal.php");
     exit();
 }
-
 include './admin_navbar.php';
 ?>
 

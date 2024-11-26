@@ -1,9 +1,7 @@
 <?php
 session_start();
 
-// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
 if (!isset($_SESSION['felhasznalo'])) {
-    // Ha nincs bejelentkezve, irányítson át a bejelentkezési oldalra
     header("Location: bejelentkezes.php");
     exit();
 }

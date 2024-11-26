@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <nav class="navbar navbar-expand-lg navbar-dark shadow p-3 mb-5 bg-white rounded">
     <div class="container-fluid">
 <!--<a class="navbar-brand" href="#">HaLáli Villszer Kft.</a>-->
