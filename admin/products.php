@@ -59,7 +59,10 @@ if ($conn->connect_error) {
                         <td>{$row['tipus']}</td>
                         <td>
                             <a href='edit_product.php?id={$row['id']}' class='btn btn-primary btn-sm'>Szerkesztés</a>
-                            <a href='delete_product.php?id={$row['id']}' class='btn btn-danger btn-sm'>Törlés</a>
+                            <form action='delete_product.php' method='POST' style='display:inline;'>
+                            <input type='hidden' name='product_id' value='{$row['id']}'>
+                            <button type='submit' class='btn btn-danger btn-sm delete-product'>Törlés</button>
+                            </form>
                         </td>
                     </tr>";
                 }
@@ -71,6 +74,16 @@ if ($conn->connect_error) {
     </table>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.querySelectorAll('.delete-product').forEach(btn => {
+    btn.addEventListener('click', function(event) {
+        if (!confirm("Biztosan törölni szeretnéd a terméket?")) {
+            event.preventDefault();
+        }
+    });
+});
+</script>
+
 </body>
 </html>
 <?php $conn->close(); ?>

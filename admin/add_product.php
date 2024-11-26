@@ -1,6 +1,6 @@
 <?php
 // PDO adatbázis kapcsolat
-require_once '../db.php';  // A konfigurációs fájl, ami tartalmazza a PDO kapcsolatot
+require_once '../db.php';
 
 // Kategória hozzáadás
 if (isset($_POST['add_category'])) {
@@ -27,8 +27,8 @@ if (isset($_POST['add_product'])) {
     $product_price = $_POST['product_price'];
     $category_id = $_POST['category_id'];
     $available_quantity = $_POST['available_quantity'];
-    $manufacturer = $_POST['manufacturer'];  // Új mező: gyártó
-    $type = $_POST['type'];  // Új mező: típus
+    $manufacturer = $_POST['manufacturer'];
+    $type = $_POST['type'];
 
     // Kép feltöltés
     $target_dir = "képek/";
@@ -38,31 +38,38 @@ if (isset($_POST['add_product'])) {
 
     // Ellenőrzés, hogy a fájl tényleg kép
     if (getimagesize($_FILES["product_image"]["tmp_name"]) === false) {
-        echo "Hiba: A fájl nem egy kép.";
+        echo "Hiba: A fájl nem egy kép.\n";
     } else {
         // Kép feltöltése
         if (move_uploaded_file($_FILES["product_image"]["tmp_name"], $image_path)) {
-            echo "A kép sikeresen feltöltődött.";
+            echo "A kép sikeresen feltöltődött.\n";
         } else {
-            echo "Hiba történt a fájl feltöltése közben.";
+            echo "Hiba történt a fájl feltöltése közben.\n";
             $image_path = null;  // Ha hiba történt, ne adjuk hozzá a képet
         }
 
-        // Új termék hozzáadása az adatbázishoz
-        $stmt = $pdo->prepare("INSERT INTO termek (nev, leiras, egysegar, kategoria_id, elerheto_darab, gyarto, tipus, kep) 
-                               VALUES (:nev, :leiras, :egysegar, :kategoria_id, :elerheto_darab, :gyarto, :tipus, :kep)");
-        $stmt->execute([
-            'nev' => $product_name,
-            'leiras' => $product_description,
-            'egysegar' => $product_price,
-            'kategoria_id' => $category_id,
-            'elerheto_darab' => $available_quantity,
-            'gyarto' => $manufacturer,  // Hozzáadva gyártó mező
-            'tipus' => $type,  // Hozzáadva típus mező
-            'kep' => $image_path
-        ]);
+        $stmt = $pdo->prepare("SELECT * FROM termek WHERE nev = :nev AND kategoria_id = :kategoria_id");
+        $stmt->execute(['nev' => $product_name, 'kategoria_id' => $category_id]);
+        if ($stmt->rowCount() > 0) {
+            die("Hiba: Ez a termék már létezik az adott kategóriában.\n");
+        }
+        else{
+            // Új termék hozzáadása az adatbázishoz
+            $stmt = $pdo->prepare("INSERT INTO termek (nev, leiras, egysegar, kategoria_id, elerheto_darab, gyarto, tipus, kep) 
+                                VALUES (:nev, :leiras, :egysegar, :kategoria_id, :elerheto_darab, :gyarto, :tipus, :kep)");
+            $stmt->execute([
+                'nev' => $product_name,
+                'leiras' => $product_description,
+                'egysegar' => $product_price,
+                'kategoria_id' => $category_id,
+                'elerheto_darab' => $available_quantity,
+                'gyarto' => $manufacturer,
+                'tipus' => $type,
+                'kep' => $image_path
+            ]);
 
-        echo "Termék sikeresen hozzáadva.";
+            echo "Termék sikeresen hozzáadva.";
+        }
     }
 }
 include './admin_navbar.php';

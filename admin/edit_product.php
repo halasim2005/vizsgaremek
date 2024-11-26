@@ -2,23 +2,21 @@
 // PDO adatbázis kapcsolat
 require_once '../db.php';  // Adatbázis kapcsolódás
 
-// Termék ID lekérése az URL-ből
-$product_id = $_GET['id'] ?? null;
-var_dump($product_id);
+// Termék ID lekérése az URL-ből vagy a POST-ból
+$product_id = $_POST['product_id'] ?? $_GET['id'] ?? null;
 
-/*if (!$product_id) {
-    die("Hiba: A termék ID hiányzik.");  // Ha nincs termék ID, hiba
-    }*/
-    
+if (!$product_id) {
+    die("Hiba: A termék ID hiányzik.");
+}
 
 // Termék adatok lekérdezése
 $stmt = $pdo->prepare("SELECT * FROM termek WHERE id = :id");
 $stmt->execute(['id' => $product_id]);
 $product = $stmt->fetch(PDO::FETCH_ASSOC);
-//var_dump($product);
-/*if (!$product) {
-    die("Hiba: A termék nem található.");  // Ha nem található a termék
-}*/
+
+if (!$product) {
+    die("Hiba: A termék nem található az adatbázisban.");
+}
 
 // Adatok mentése
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -30,12 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $available_quantity = $_POST['available_quantity'];
     $manufacturer = $_POST['manufacturer'];
     $type = $_POST['type'];
-    $product_id = $_POST['id'];
 
     // Kép frissítése, ha van új feltöltés
     $image_path = $product['kep'];
     if (!empty($_FILES["product_image"]["name"])) {
-        $target_dir = "képek/";  // Módosítsd a képek könyvtár elérési útját
+        $target_dir = "képek/"; 
         $target_file = $target_dir . basename($_FILES["product_image"]["name"]);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
@@ -63,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
 
     echo "Termék sikeresen frissítve.";
-    header("Location: admin_dashboard.php");  // Itt átirányítjuk a sikeres mentés után
+    header("Location: products.php");  // Itt átirányítjuk a sikeres mentés után
     exit;
 }
 ?>
@@ -126,7 +123,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <img src="<?= htmlspecialchars($product['kep']) ?>" alt="Jelenlegi kép" style="max-width: 100px; margin-top: 10px;">
         </div>
         <!-- Termék ID hozzáadása rejtett mezőben -->
-        <input type="hidden" name="product_id" id="product_id" value="<?= $product_id ?>">
+        <input type="hidden" name="product_id" id="product_id" value="<?= htmlspecialchars($product_id) ?>">
+
         <button type="submit" class="btn btn-primary">Mentés</button>
     </form>
 </div>
