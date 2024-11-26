@@ -420,5 +420,12 @@ body {
     padding-left: 10px;
 }
 
+footer {
+    text-align: left;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    color: black;
+  }
+
 
 
