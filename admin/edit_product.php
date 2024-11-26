@@ -3,21 +3,22 @@
 require_once '../db.php';  // Adatbázis kapcsolódás
 
 // Termék ID lekérése az URL-ből
-$product_id = $_GET['id'] ?? null;  // Ha nincs, null-t adunk vissza
+$product_id = $_GET['id'] ?? null;
 var_dump($product_id);
 
 /*if (!$product_id) {
     die("Hiba: A termék ID hiányzik.");  // Ha nincs termék ID, hiba
-}*/
+    }*/
+    
 
 // Termék adatok lekérdezése
 $stmt = $pdo->prepare("SELECT * FROM termek WHERE id = :id");
 $stmt->execute(['id' => $product_id]);
 $product = $stmt->fetch(PDO::FETCH_ASSOC);
-var_dump($product);
-if (!$product) {
+//var_dump($product);
+/*if (!$product) {
     die("Hiba: A termék nem található.");  // Ha nem található a termék
-}
+}*/
 
 // Adatok mentése
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -29,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $available_quantity = $_POST['available_quantity'];
     $manufacturer = $_POST['manufacturer'];
     $type = $_POST['type'];
+    $product_id = $_POST['id'];
 
     // Kép frissítése, ha van új feltöltés
     $image_path = $product['kep'];
