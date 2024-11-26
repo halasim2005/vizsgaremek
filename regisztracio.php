@@ -2,10 +2,6 @@
 session_start();
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Pragma: no-cache");
-?>
-
-<?php
-session_start();
 include 'db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -20,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $error = "";
 
     // Felhasználónév és email ellenőrzése az adatbázisban
-    $stmt = $conn->prepare("SELECT * FROM felhasznalo WHERE fh_nev = :fh_name OR email = :email");
+    $stmt = $pdo->prepare("SELECT * FROM felhasznalo WHERE fh_nev = :fh_name OR email = :email");
     $stmt->bindParam(':fh_name', $felhasznalonev);
     $stmt->bindParam(':email', $email);
     $stmt->execute();
@@ -36,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Új felhasználó mentése az adatbázisba
         $sql = "INSERT INTO felhasznalo (vezeteknev, keresztnev, fh_nev, email, jelszo) 
                 VALUES (:vezeteknev, :keresztnev, :fh_nev, :email, :jelszo)";
-        $stmt = $conn->prepare($sql);
+        $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':vezeteknev', $vezeteknev);
         $stmt->bindParam(':keresztnev', $keresztnev);
         $stmt->bindParam(':fh_nev', $felhasznalonev);
