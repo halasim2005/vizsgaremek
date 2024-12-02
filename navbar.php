@@ -39,7 +39,7 @@
         </div>
     </div>
 </nav>
-
+<link rel="stylesheet" href="./style/style.css">
 <script>
     // Kattintáskor bezárjuk a menüt, ha egy linket választunk
     document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
