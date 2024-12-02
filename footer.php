@@ -2,16 +2,25 @@
 
 ?>
 
+<br><br>
 <footer>
-    <p>2024 HaLáli Kft. minden jog fenttartva! ©</p>
-    <p>Alkotók: Halasi Martin és Lálity Dominik</p>
-    <p>Email cím: <a href="halali@gmail.com">halali@gmail.com</a></p>
-    <p><a href="./fooldal.php">Kezdőlap</a></p>
-    <p><a href="./termekek.php">Termékek</a></p>
-    <p><a href="./kalkulator.php">Kalkulátor</a></p>
-    <p><a href="./kapcsolat.php">Kapcsolat</a></p>
-    Együttműködő partnerek
-    Impresszum
-    Adatkezelési tájékoztató
-    Hírlevél
+    <table class="footerTable">
+        <tr>
+            <td class="footerTableTd">
+                <img width="40%" src="./képek/HaLálip.png" alt="HaLáli Kft. Halasi Martin & Lálity Dominik logo">
+            </td>
+            <td class="footerTableTd">
+                Alkotók: Halasi Martin és Lálity Dominik<br><br>
+                Email cím: <a id="footerLinkek" href="halali@gmail.com">halali@gmail.com</a><br><br>
+                Együttműködő partnerek<br>
+            </td>
+            <td class="footerTableTd">
+                Impresszum<br><br>
+                Adatkezelési tájékoztató<br><br>
+                Hírlevél<br>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <div id="kozepre"><p>2025 © HaLáli Kft. minden jog fenttartva! </p><div>
 </footer>

@@ -420,8 +420,9 @@ body {
 footer {
     text-align: left;
     padding: 20px;
-    background-color: rgb(255, 255, 255);
-    color: black;
+    background-color:  rgb(61, 61, 61);
+    color: white;
+    font-family: 'Montserrat';
 }
 
 #termekekKartyaGomb{
@@ -483,4 +484,23 @@ footer {
     padding-bottom: 8px;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+#footerLinkek{
+    text-decoration: none;
+    color: white;
+}
+
+#footerLinkek:hover{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.footerTableTd{
+    padding-left: 30px;
+}
+
+#kozepre{
+    text-align: center;
 }
