@@ -8,33 +8,33 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="./fooldal.php">KEZDŐLAP</a>
+                    <a class="nav-link" href="./fooldal">KEZDŐLAP</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./termekek.php">TERMÉKEK</a>
+                    <a class="nav-link" href="./termekek">TERMÉKEK</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./kalkulator.php">KALKULÁTOR</a>
+                    <a class="nav-link" href="./kalkulator">KALKULÁTOR</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./kapcsolat.php">KAPCSOLAT</a>
+                    <a class="nav-link" href="./kapcsolat">KAPCSOLAT</a>
                 </li>
             </ul>
             <form id="keresesIkonPadding" class="d-flex" role="search">
                 <input id="navbarKereses" class="form-control btn-outline-primary me-2" type="search" placeholder="Keresés" aria-label="Keresés">
                 <img id="keresesIkonNavbar"  onclick="keresesMegj()" src="./képek/keresesIkon.png" alt="Keresés ikon">
             </form>
-            <a id="kosarIkonPadding" href="./kosar.php"><img id="navbarIcons" src="./képek/kosarIkon.png" alt="Kosár ikon"></a>
+            <a id="kosarIkonPadding" href="./kosar"><img id="navbarIcons" src="./képek/kosarIkon.png" alt="Kosár ikon"></a>
 
             <?php if (isset($_SESSION['felhasznalo'])): ?>
                 <?php if ($_SESSION['jogosultsag'] === 'admin'): ?>
                     <a href="./admin/dashboard.php" class="btn btn-warning ms-3">Admin</a>
                 <?php endif; ?>
-                <a href="./profil.php" class="btn regist-button ms-3">Profil</a>
-                <a href="./kijelentkezes.php" class="btn login-button ms-3">Kijelentkezés</a>
+                <a  href="./profil.php" class="btn regist-button ms-3">Profil</a>
+                <a id="navbarGomb" href="./kijelentkezes.php" class="btn login-button ms-3">Kijelentkezés</a>
             <?php else: ?>
-                <a id="navbarGomb" href="./regisztracio.php" class="btn regist-button ms-3">Regisztráció</a>
-                <a id="navbarGomb" href="./bejelentkezes.php" class="btn login-button ms-3">Bejelentkezés</a>
+                <a id="navbarGomb" href="./regisztracio" class="btn regist-button ms-3">Regisztráció</a>
+                <a id="navbarGomb" href="./bejelentkezes" class="btn login-button ms-3">Bejelentkezés</a>
             <?php endif; ?>
         </div>
     </div>
