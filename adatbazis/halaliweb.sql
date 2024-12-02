@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Nov 25. 18:49
+-- Létrehozás ideje: 2024. Dec 02. 17:19
 -- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.2.12
+-- PHP verzió: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -111,11 +111,9 @@ CREATE TABLE `termek` (
 --
 
 INSERT INTO `termek` (`id`, `nev`, `egysegar`, `leiras`, `gyarto`, `tipus`, `kategoria_id`, `elerheto_darab`, `kep`) VALUES
-(1, 'Fehér villanykapcsoló', 1000, 'a', '0', '0', 1, 0, 'képek/HaLálip.png'),
-(3, 'Fehér villanykapcsoló', 1000, 'a', '0', '0', 1, 10, 'képek/HaLálip.png'),
-(4, 'teszt', 1, 'teszt', '0', '0', 1, 1, 'képek/fokapcsolo_20a_eaton.webp'),
-(5, 'asd', 1000, 'asd', '0', '0', 3, 100000, 'képek/HaLálip.png'),
-(7, 'Fehér villanykapcsoló00', 1000, 'aaaaaaaaaaa', 'gíysewttooooo', 'aasdtipussssssssss', 1, 10000, 'képek/HaLálip.png');
+(1, 'Figyelmeztető Matrica 400V', 420, 'Figyelmeztető Matrica Öntapadós \"Vigyázz! 400V\" 160x100mm.\r\n\r\n1 db, 160x100mm méretű matrica \"Vigyázz! 400V!\" felirattal!\r\nA feltüntetett ár 1db matricát tartalmaz!\r\n\r\n\r\n\r\nAz öntapadós matricák rendkívül hasznosak a villanyszerelés területén, amikor pontos és jól látható jelölésekre van szükség. Ezek a matricák a következőképpen használhatók:\r\n\r\nVálassza ki a Megfelelő Matricát: Mindig válassza ki azon matricákat, amelyek a kívánt információval rendelkeznek. Például, címkézze fel a konnektorokat a feszültség, áramlás vagy egyéb releváns adatokkal.\r\n\r\nAlapos Tisztítás: A felragasztás előtt biztosítsa, hogy a felület tiszta és száraz legyen. A por és szennyeződések befolyásolhatják az öntapadós matrica tapadását.\r\n\r\nPontos Helymeghatározás: Helyezze a matricát olyan helyre, amely könnyen látható és olvasható. A kapcsolók, konnektorok és egyéb elektromos berendezések közelében alkalmazva segít az azonnali azonosításban.\r\n\r\nJól Rögzített Tapadás: Győződjön meg róla, hogy a matrica jól tapa', 'HaLáli Kft.', 'Matrica', 2, 150, 'képek/400voltvigyazzmatrica.webp'),
+(3, 'MCU 0,75 vezeték tömör', 55, 'MCU 0,75 vezeték (H05V-U) tömör réz kábel elektromos villanyvezeték fekete (200m).\r\n\r\nMCu 0,75 mm2 vezeték egyerű műanyag érszigetelésű, köpeny nélküli tömör rézvezeték.\r\nA villanyvezeték alkalmazása védőcsőbe vezetve vakolat alatt vagy falon szerelve.\r\n\r\nVezeték keresztmetszet: 0,75 mm2\r\nSzín: fekete\r\nSzigetelés: 500V\r\nKiszerelés: 200m/tekercs\r\nKülső átmérő : ~ 2,1mm\r\n\r\nAz MCU vezeték kiváló választás lehet a lakásban történő villanyszereléshez. Az MCU vezeték egy eres, merev szerkezetű és szigetelt elektromos vezeték, amely többféle színben elérhető a könnyebb azonosítás érdekében.\r\n\r\nMire jó az MCU vezeték?\r\nAz MCU vezeték alkalmas a háztartási villanyszerelési feladatokhoz. Kiválóan használható konnektorok, kapcsolók, világítás és egyéb elektromos berendezések csatlakoztatására. Az MCU vezeték lehetővé teszi az elektromos áram biztonságos és hatékony átvitelét a lakásban.\r\n\r\nMilyen vezetéket válasszak a lakásba? (Milyen villanyvezeték kell a lakásba?)\r\nA lakásban való felhasználásr', 'Prysmian Kft.', 'Vezeték', 2, 100, 'képek/0,75tomor_fekete_rezvezetek.webp'),
+(4, 'Multiméter Somogyi', 4980, 'Somogyi digitális multiméter VC 830L.', 'Somogyi', 'Műszer', 2, 25, 'képek/dig_multimeter_somogyi.webp');
 
 -- --------------------------------------------------------
 
