@@ -20,7 +20,7 @@
                 Hírlevél<br>
             </td>
         </tr>
-    </table>
+    </table> 
     <hr>
-    <div id="kozepre"><p>2025 © HaLáli Kft. minden jog fenttartva! </p><div>
+    <div id="kozepre"><p><?= date("Y"); ?> © HaLáli Kft. minden jog fenttartva! </p><div>
 </footer>
