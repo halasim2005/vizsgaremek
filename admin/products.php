@@ -17,8 +17,9 @@ if ($conn->connect_error) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Termékek Kezelése</title>
-    <link rel="stylesheet" href="admin_style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin_style.css">
 </head>
 <body>
 <div class="container mt-5">
@@ -72,15 +73,41 @@ if ($conn->connect_error) {
         </tbody>
     </table>
 </div>
+<!-- Modal HTML -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteLabel">Megerősítés</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Bezárás"></button>
+      </div>
+      <div class="modal-body">
+        Biztosan törölni szeretnéd ezt a terméket?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+        <form id="deleteForm" method="POST" action="delete_product.php" style="display: inline;">
+          <input type="hidden" name="product_id" id="modalProductId" value="">
+          <button type="submit" class="btn btn-danger">Törlés</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
 document.querySelectorAll('.delete-product').forEach(btn => {
     btn.addEventListener('click', function(event) {
-        if (!confirm("Biztosan törölni szeretnéd a terméket?")) {
-            event.preventDefault();
-        }
+        event.preventDefault(); // Megakadályozza az alapértelmezett űrlapbeküldést
+        const productId = this.previousElementSibling.value; // A termék ID-jének lekérése
+        document.getElementById('modalProductId').value = productId; // Átadja a modálnak
+        const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+        modal.show(); // Megjeleníti a modált
     });
 });
+
 </script>
 
 </body>
