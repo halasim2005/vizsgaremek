@@ -17,13 +17,14 @@ if ($conn->connect_error) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Termékek Kezelése</title>
+    <link rel="stylesheet" href="admin_style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container mt-5">
     <h1 class="text-center">Termékek Kezelése</h1>
-    <div class="text-end mb-3">
-        <a href="add_product.php" class="btn btn-success">Új Termék Hozzáadása</a>
+    <div class="text-center mb-3">
+        <a href="add_product.php" class="btn btn-success termek_add_button">Új Termék Hozzáadása</a>
     </div>
     <table class="table table-bordered">
         <thead>
