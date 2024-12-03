@@ -10,11 +10,7 @@ include './db.php'; // Az adatbázis kapcsolat betöltése
 $osszesTermek = "SELECT t.id AS termek_id, t.nev AS nev, t.leiras AS leiras, t.egysegar AS egysegar, t.elerheto_darab AS elerheto_mennyiseg, t.kep AS kep, t.tipus AS tipus, t.gyarto AS gyarto, k.nev AS kategoria_nev FROM termek t JOIN kategoria k ON t.kategoria_id = k.id";
 
 /////////////////////////////////
-//$kategoria = $_POST['kategoria'];
 
-//$kategoriaAlapu_termek_sql = "SELECT termek.nev AS nev, termek.egysegar AS egysegar, termek.leiras AS leiras, termek.gyarto AS gyarto, termek.tipus AS tipus, termek.elerheto_darab AS darabszam, termek.kep AS kep FROM `termek` INNER JOIN kategoria ON kategoria.id = termek.kategoria_id WHERE kategoria.nev = '{$kategoria}';";
-
-$stmt = $pdo->query($osszesTermek);
 
 ?>
 
@@ -43,6 +39,7 @@ $stmt = $pdo->query($osszesTermek);
             <hr>
             <label>Kategória</label>
             <select name="kategoria">
+                <option value="összes">Összes termék</option>
                 <?php
                 include './sql_fuggvenyek.php';
                 $kategoriak_sql = "SELECT kategoria.id AS id, kategoria.nev AS nev FROM kategoria;";
@@ -54,12 +51,30 @@ $stmt = $pdo->query($osszesTermek);
                 }
                 ?>
             </select>
+            <br><br><input type="submit" id="modalKartyaGomb" value="Keresés" name="kereses">
         </form>
     </div>
 
     <div id="kozepre">
-        <h3 id="fekete">Termékek</h3>
+        <h2 id="fekete">Termékek</h2>
     </div>
+
+    <?php
+    $kategoria = $_POST['kategoria'];
+
+    $kategoriaAlapu_termek_sql = "SELECT kategoria.nev AS kategoria_nev, termek.id AS termek_id, termek.nev AS nev, termek.egysegar AS egysegar, termek.leiras AS leiras, termek.gyarto AS gyarto, termek.tipus AS tipus, termek.elerheto_darab AS elerheto_mennyiseg, termek.kep AS kep FROM `termek` INNER JOIN kategoria ON kategoria.id = termek.kategoria_id WHERE kategoria.id = '{$kategoria}';";
+    
+    if(isset($_POST['kereses'])){
+        if($kategoria == "összes"){
+            $stmt = $pdo->query($osszesTermek);
+        }
+        else{
+            $stmt = $pdo->query($kategoriaAlapu_termek_sql);
+        }
+    }else{
+        $stmt = $pdo->query($kategoriaAlapu_termek_sql);
+    }
+    ?>
 
     <div class="container mt-5">
         <div class="row">

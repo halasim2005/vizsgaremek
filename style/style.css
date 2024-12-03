@@ -507,12 +507,13 @@ footer {
 }
 
 #szuresDiv{
-    max-width: 1250px;
+    max-width: 550px;
     margin: 50px auto;
     background-color:  white;
     padding: 30px;
     font-family: 'Montserrat';
     color: black;
+    text-align: center;
 }
 
 #fekete{
