@@ -505,3 +505,12 @@ footer {
 #kozepre{
     text-align: center;
 }
+
+#szuresDiv{
+    max-width: 1250px;
+    margin: 50px auto;
+    background-color:  white;
+    padding: 30px;
+    font-family: 'Montserrat';
+    color: black;
+}

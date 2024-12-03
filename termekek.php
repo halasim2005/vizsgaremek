@@ -10,9 +10,9 @@ include './db.php'; // Az adatbázis kapcsolat betöltése
 $osszesTermek = "SELECT t.id AS termek_id, t.nev AS nev, t.leiras AS leiras, t.egysegar AS egysegar, t.elerheto_darab AS elerheto_mennyiseg, t.kep AS kep, t.tipus AS tipus, t.gyarto AS gyarto, k.nev AS kategoria_nev FROM termek t JOIN kategoria k ON t.kategoria_id = k.id";
 
 /////////////////////////////////
-$kategoria = $_POST['kategoria'];
+//$kategoria = $_POST['kategoria'];
 
-$kategoriaAlapu_termek_sql = "SELECT termek.nev AS nev, termek.egysegar AS egysegar, termek.leiras AS leiras, termek.gyarto AS gyarto, termek.tipus AS tipus, termek.elerheto_darab AS darabszam, termek.kep AS kep FROM `termek` INNER JOIN kategoria ON kategoria.id = termek.kategoria_id WHERE kategoria.nev = '{$kategoria}';";
+//$kategoriaAlapu_termek_sql = "SELECT termek.nev AS nev, termek.egysegar AS egysegar, termek.leiras AS leiras, termek.gyarto AS gyarto, termek.tipus AS tipus, termek.elerheto_darab AS darabszam, termek.kep AS kep FROM `termek` INNER JOIN kategoria ON kategoria.id = termek.kategoria_id WHERE kategoria.nev = '{$kategoria}';";
 
 $stmt = $pdo->query($osszesTermek);
 
@@ -36,6 +36,16 @@ $stmt = $pdo->query($osszesTermek);
     <?php
         include './navbar.php'; // A navigációs sáv betöltése
     ?>
+
+    <div id="szuresDiv" class="shadow">
+        <p>Szűrés alapú keresés</p>
+        <hr>
+        <label>Kategória</label>
+        <select name="kategoria">
+            
+        </select>
+    </div>
+
 
     <div class="container mt-5">
         <div class="row">
