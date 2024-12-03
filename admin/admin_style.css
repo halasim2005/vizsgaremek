@@ -1,7 +1,70 @@
-body{
-    padding-top: 70px;
+.termek_add_button {
+    margin: auto;
 }
 
-.termek_add_button{
-    margin: auto;
+:root {
+    --navbar-height: 70px;
+}
+
+body {
+    padding-top: var(--navbar-height);
+    background-color: #1F2A32;
+    color: white;
+}
+
+.table{
+    color: white;
+}
+
+.row {
+    overflow-x: auto;
+    word-wrap: break-word;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.card-title {
+    font-size: 1.5rem;
+    padding: 2px;
+}
+
+.btn-primary{
+    background-color: white;
+    color: #1F2A32;
+    border: 1px solid #1F2A32;
+    border-radius: 5px;
+}
+
+.btn-primary:hover{
+    color: white;
+    background-color: #1F2A32;
+    border: 1px solid #1F2A32;
+    border-radius: 5px;
+}
+
+.btn-danger{
+    background-color: #fcbdbd;
+    color: #1F2A32;
+    border: 1px solid #1F2A32;
+    border-radius: 5px;
+}
+
+.btn-success{
+    background-color: white;
+    color: #1F2A32;
+    border: 1px solid #1F2A32;
+    border-radius: 5px;
+}
+
+.btn-success:hover{
+    background-color: #1F2A32;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
 }

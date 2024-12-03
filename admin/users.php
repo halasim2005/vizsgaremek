@@ -33,7 +33,11 @@ $users = $userQuery->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Felhasználók kezelése</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./style/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Kanit:wght@300&family=Montserrat&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin_style.css">
 </head>
 <body>
     <?php include './admin_navbar.php';?>
@@ -44,7 +48,7 @@ $users = $userQuery->fetchAll(PDO::FETCH_ASSOC);
             <div class="col-md-4">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <h5 class="card-title">
+                        <h5 class="card-title text-center">
                             <?php echo htmlspecialchars($user['fh_nev']); ?>
                         </h5>
                     </div>

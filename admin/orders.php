@@ -14,22 +14,8 @@ include './admin_navbar.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="admin_style.css">
 </head>
-<style>
-    :root {
-    --navbar-height: 70px;
-    }   
-    body {
-        padding-top: var(--navbar-height);
-    }
-    .row {
-    overflow-x: auto; /* Ha az adatok túl szélesek, görgetést biztosít */
-    word-wrap: break-word; /* Szöveg tördelése túl hosszú sorok esetén */
-    max-width: 100%; /* A konténer szélességének korlátozása */
-    margin: 0 auto; /* Középre igazítás */
-}
-</style>
 <body>
 <div class="mt-4 text-center">
     <h2>Üdvözlünk, <?php echo htmlspecialchars($_SESSION['felhasznalo']); ?>!</h2>
