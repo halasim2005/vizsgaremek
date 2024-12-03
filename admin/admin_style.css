@@ -10,6 +10,7 @@ body {
     padding-top: var(--navbar-height);
     background-color: #1F2A32;
     color: white;
+    font-family: 'Montserrat';
 }
 
 .table{
