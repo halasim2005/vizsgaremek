@@ -6,20 +6,15 @@ header("Pragma: no-cache");
 include './db.php'; // Az adatbázis kapcsolat betöltése
 
 // Lekérdezés végrehajtása
-$stmt = $pdo->query("SELECT 
-    t.id AS termek_id,
-    t.nev AS nev,
-    t.leiras AS leiras,
-    t.egysegar AS egysegar,
-    t.elerheto_darab AS elerheto_mennyiseg,
-    t.kep AS kep,
-    t.tipus AS tipus,
-    t.gyarto AS gyarto,
-    k.nev AS kategoria_nev
-FROM 
-    termek t
-JOIN 
-    kategoria k ON t.kategoria_id = k.id");
+
+$osszesTermek = "SELECT t.id AS termek_id, t.nev AS nev, t.leiras AS leiras, t.egysegar AS egysegar, t.elerheto_darab AS elerheto_mennyiseg, t.kep AS kep, t.tipus AS tipus, t.gyarto AS gyarto, k.nev AS kategoria_nev FROM termek t JOIN kategoria k ON t.kategoria_id = k.id";
+
+/////////////////////////////////
+$kategoria = $_POST['kategoria'];
+
+$kategoriaAlapu_termek_sql = "SELECT termek.nev AS nev, termek.egysegar AS egysegar, termek.leiras AS leiras, termek.gyarto AS gyarto, termek.tipus AS tipus, termek.elerheto_darab AS darabszam, termek.kep AS kep FROM `termek` INNER JOIN kategoria ON kategoria.id = termek.kategoria_id WHERE kategoria.nev = '{$kategoria}';";
+
+$stmt = $pdo->query($osszesTermek);
 
 ?>
 
@@ -48,7 +43,7 @@ JOIN
             // Adatok megjelenítése kártyákban
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             ?>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
                     <div class="card shadow">
                         <div id="termekekKartyaKepKozep"><img id="termekekKartyaKep" src="<?= $row['kep'] ?>" class="card-img-top" alt="<?= htmlspecialchars($row['nev']) ?>"></div>
                         <div class="card-body">
