@@ -38,14 +38,28 @@ $stmt = $pdo->query($osszesTermek);
     ?>
 
     <div id="szuresDiv" class="shadow">
-        <p>Szűrés alapú keresés</p>
-        <hr>
-        <label>Kategória</label>
-        <select name="kategoria">
-            
-        </select>
+        <form method="post">
+            <p>Szűrés alapú keresés</p>
+            <hr>
+            <label>Kategória</label>
+            <select name="kategoria">
+                <?php
+                include './sql_fuggvenyek.php';
+                $kategoriak_sql = "SELECT kategoria.id AS id, kategoria.nev AS nev FROM kategoria;";
+                $kategoriak = adatokLekerdezese($kategoriak_sql);
+                if(is_array($kategoriak)){
+                    foreach($kategoriak as $kategoria){
+                        echo '<option value="'. $kategoria["id"] . '">' . $kategoria["nev"] . '</option>';
+                    }
+                }
+                ?>
+            </select>
+        </form>
     </div>
 
+    <div id="kozepre">
+        <h3 id="fekete">Termékek</h3>
+    </div>
 
     <div class="container mt-5">
         <div class="row">
