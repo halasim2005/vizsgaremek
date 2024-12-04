@@ -25,7 +25,7 @@ header("Pragma: no-cache");
         include './navbar.php';
     ?>
 
-    <div class="bemutatkozasDiv">
+    <div id="rolunk" class="bemutatkozasDiv">
         <table>
             <tr>
                 <td width="50%">
@@ -39,7 +39,7 @@ header("Pragma: no-cache");
         </table>
     </div>
 
-    <div class="termekekDiv">
+    <div id="kinalatunk" class="termekekDiv">
         <table>
             <tr>
                 
@@ -55,7 +55,7 @@ header("Pragma: no-cache");
         </table>
     </div>
 
-    <div class="kalkulatorDiv">
+    <div id="kalkulator" class="kalkulatorDiv">
         <table>
             <tr>
                 <td width="50%">
@@ -70,7 +70,7 @@ header("Pragma: no-cache");
         </table>
     </div>
 
-    <div class="ugyfelszolgalatDiv">
+    <div id="ugyfel" class="ugyfelszolgalatDiv">
         <table>
             <tr>
                 <td width="50%" class="fooldalTableTd">

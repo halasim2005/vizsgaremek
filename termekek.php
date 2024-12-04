@@ -27,7 +27,7 @@ $osszesTermek = "SELECT t.id AS termek_id, t.nev AS nev, t.leiras AS leiras, t.e
     <link rel="stylesheet" href="./style/style.css">
     <title>Termékek</title>
 </head>
-<body>
+<body onclick="keresesEltunik()">
 
     <?php
         include './navbar.php'; // A navigációs sáv betöltése

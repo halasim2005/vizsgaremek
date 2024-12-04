@@ -383,6 +383,17 @@ body {
     color: black;
     border-radius: 5px;
     visibility:hidden;
+    opacity: 0; /* Teljesen átlátszó */
+    max-height: 100px; /* Teljesen rejtett */
+    transition: opacity 0.1s ease, height 0.1s ease, visibility 0s linear 0.1s; /* Animációk */
+    overflow: hidden; /* Biztosítja, hogy ne legyen görgethető */
+}
+
+#navbarKereses.megjelenik {
+    opacity: 1; /* Megjelenéskor teljesen látható */
+    max-height: 100px; /* A magasságot annyira állítjuk, hogy elférjen */
+    visibility: visible; /* Láthatóvá válik */
+    transition: opacity 0.1s ease, height 0.1s ease; /* Csak az animációt alkalmazzuk itt */
 }
 
 #navbarGomb{
@@ -405,16 +416,16 @@ body {
     width: 35px;
 }
 
+#profilIconPadding{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 #keresesIkonNavbar{
     width: 35px;
 }
 
-#keresesIkonPadding{
-    padding-right: 10px;
-}
-
 #kosarIkonPadding{
-    padding-right: 10px;
     padding-left: 10px;
 }
 
