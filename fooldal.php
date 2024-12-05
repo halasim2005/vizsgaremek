@@ -17,9 +17,7 @@ header("Pragma: no-cache");
     <link rel="stylesheet" href="./style/style.css">
     <title>HaLáli Webshop</title>
 </head>
-<style>
 
-</style>
 <body>
     <?php
         include './navbar.php';
