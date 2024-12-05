@@ -27,56 +27,86 @@ $osszesTermek = "SELECT t.id AS termek_id, t.nev AS nev, t.leiras AS leiras, t.e
     <link rel="stylesheet" href="./style/style.css">
     <title>Termékek</title>
 </head>
-<body onclick="keresesEltunik()">
+<body>
 
     <?php
         include './navbar.php'; // A navigációs sáv betöltése
     ?>
 
     <div id="szuresDiv" class="shadow">
-        <form method="post">
-            <p>Szűrés alapú keresés</p>
-            <hr>
-            <label>Kategória</label>
-            <select name="kategoria">
-                <option value="összes">Összes termék</option>
+        <form id="szuresForm" method="post" class="row g-3">
+            <h4 class="text-center mb-4">Szűrés alapú keresés</h4>
+        
+            <!-- Kategória szűrés -->
+            <div class="col-md-6">
+                <label for="kategoriaSzures" class="form-label">Kategória</label>
+                <select name="kategoria" id="kategoriaSzures" class="form-select">
+                    <option value="összes">Összes termék</option>
+                    <?php
+                        include './sql_fuggvenyek.php';
+                        $kategoriak_sql = "SELECT kategoria.id AS id, kategoria.nev AS nev FROM kategoria;";
+                        $kategoriak = adatokLekerdezese($kategoriak_sql);
+                        if (is_array($kategoriak)) {
+                        foreach ($kategoriak as $kategoria) {
+                            echo '<option value="'. $kategoria["id"] . '">' . $kategoria["nev"] . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+
+            <!-- Ár szűrés -->
+            <div class="col-md-6">
+                <label for="arSzures" class="form-label">Ár szűrés (Ft)</label>
+                <div class="d-flex align-items-center">
+                    <input type="range" id="arSzures" name="ar" class="form-range" min="0" max="100000" step="1000" 
+                       style="background: linear-gradient(to right, #007bff, #d1e9ff); height: 10px; border-radius: 5px;"
+                       oninput="document.getElementById('arErtek').innerText = this.value + ' Ft';">
+                    <span id="arErtek" class="ms-3">50 000 Ft</span>
+                </div>
+            </div>
+
+        <!-- Gyártó szűrés -->
+        <div class="col-md-6">
+            <label for="gyartoSzures" class="form-label">Gyártó</label>
+            <select name="gyarto" id="gyartoSzures" class="form-select">
+                <option value="összes">Összes gyártó</option>
                 <?php
-                include './sql_fuggvenyek.php';
-                $kategoriak_sql = "SELECT kategoria.id AS id, kategoria.nev AS nev FROM kategoria;";
-                $kategoriak = adatokLekerdezese($kategoriak_sql);
-                if(is_array($kategoriak)){
-                    foreach($kategoriak as $kategoria){
-                        echo '<option value="'. $kategoria["id"] . '">' . $kategoria["nev"] . '</option>';
+                $gyartok_sql = "SELECT DISTINCT gyarto FROM termek;";
+                $gyartok = adatokLekerdezese($gyartok_sql);
+                if (is_array($gyartok)) {
+                    foreach ($gyartok as $gyarto) {
+                        echo '<option value="'. htmlspecialchars($gyarto["gyarto"]) . '">' . htmlspecialchars($gyarto["gyarto"]) . '</option>';
                     }
                 }
                 ?>
             </select>
-            <br><br><input type="submit" id="modalKartyaGomb" value="Keresés" name="kereses">
-        </form>
-    </div>
+        </div>
 
-    <div id="kozepre">
+        <!-- Termék kereső -->
+        <div class="col-md-6">
+            <label for="termekKereses" class="form-label">Termék keresés</label>
+            <input type="text" id="termekKereses" name="kereses" class="form-control" placeholder="Írd be a keresett terméket">
+        </div>
+
+        <!-- Keresés gomb -->
+        <div class="col-12 text-center">
+            <button type="submit" id="modalKartyaGomb" name="keresesGomb" class="btn btn-primary px-4">Keresés</button>
+        </div>
+    </form>
+</div>
+
+
+    <div class="text-center">
         <h2 id="fekete">Termékek</h2>
     </div>
 
     <?php
-    if(isset($_POST['kategoria'])){
-        $kategoria = $_POST['kategoria'];
-    }
 
-    $kategoriaAlapu_termek_sql = "SELECT kategoria.nev AS kategoria_nev, termek.id AS termek_id, termek.nev AS nev, termek.egysegar AS egysegar, termek.leiras AS leiras, termek.gyarto AS gyarto, termek.tipus AS tipus, termek.elerheto_darab AS elerheto_mennyiseg, termek.kep AS kep FROM `termek` INNER JOIN kategoria ON kategoria.id = termek.kategoria_id WHERE kategoria.id = '{$kategoria}';";
-    
-    if(isset($_POST['kereses'])){
-        if($kategoria == "összes"){
-            $stmt = $pdo->query($osszesTermek);
-        }
-        else{
-            $stmt = $pdo->query($kategoriaAlapu_termek_sql);
-        }
-    }else{
-        $stmt = $pdo->query($kategoriaAlapu_termek_sql);
-    }
+    include './szures.php';
+
     ?>
+    
 
     <div class="container mt-5">
         <div class="row">
@@ -126,6 +156,7 @@ $osszesTermek = "SELECT t.id AS termek_id, t.nev AS nev, t.leiras AS leiras, t.e
         </div>
     </div>
 
+    <script src="./szures.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
