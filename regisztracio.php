@@ -72,38 +72,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php if (!empty($error)) { echo "<div class='alert alert-danger text-center'>$error</div>"; } ?>
 
         <form action="regisztracio.php" method="post" autocomplete="off">
-            <div class="mb-3">
-                <label for="vezNev" class="form-label">Vezetéknév</label>
-                <input type="text" class="form-control" name="vezNev" id="vezNev" placeholder="Gipsz" required>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="vezNev" class="form-label">Vezetéknév</label>
+                    <input type="text" class="form-control w-100" name="vezNev" id="vezNev" placeholder="Gipsz" required>
+                </div>
+    
+                <div class="col-md-6 mb-3">
+                    <label for="kerNev" class="form-label">Keresztnév</label>
+                    <input type="text" class="form-control w-100" name="kerNev" id="kerNev" placeholder="Jakab" required>
+                </div>
             </div>
-
-            <div class="mb-3">
-                <label for="kerNev" class="form-label">Keresztnév</label>
-                <input type="text" class="form-control" name="kerNev" id="kerNev" placeholder="Jakab" required>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="felhasznalonev" class="form-label">Felhasználónév</label>
+                    <input type="text" class="form-control w-100" name="felhasznalonev" id="felhasznalonev" placeholder="gipszjakab22" required autocomplete="off">
+                </div>
+    
+                <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">E-mail cím</label>
+                    <input type="email" class="form-control w-100" name="email" id="email" placeholder="minta@gmail.com" required>
+                </div>
             </div>
-
-            <div class="mb-3">
-                <label for="felhasznalonev" class="form-label">Felhasználónév</label>
-                <input type="text" class="form-control" name="felhasznalonev" id="felhasznalonev" placeholder="gipszjakab22" required autocomplete="off">
-            </div>
-
-            <div class="mb-3">
-                <label for="email" class="form-label">E-mail cím</label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="minta@gmail.com" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="password" class="form-label">Jelszó</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="*********" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="passwordAgain" class="form-label">Jelszó megerősítése</label>
-                <input type="password" class="form-control" name="passwordAgain" id="passwordAgain" placeholder="*********" required>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="password" class="form-label">Jelszó</label>
+                    <input type="password" class="form-control w-100" name="password" id="password" placeholder="*********" required>
+                </div>
+    
+                <div class="col-md-6 mb-3">
+                    <label for="passwordAgain" class="form-label">Jelszó megerősítése</label>
+                    <input type="password" class="form-control w-100" name="passwordAgain" id="passwordAgain" placeholder="*********" required>
+                </div>
             </div>
 
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">Regisztráció</button>
+                <button id="navbarGomb" type="submit" class="btn regist-button ms-3">Regisztráció</button>
             </div>
         </form>
     </div>

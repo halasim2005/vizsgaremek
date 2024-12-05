@@ -62,18 +62,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "<div class='alert alert-success'>Sikeres kijelentkezés!</div>";
                 }
             ?>
-            <div class="mb-3">
-                <label for="felhasznalonev" class="form-label">Felhasználónév</label>
-                <input type="text" class="form-control" name="felhasznalonev" id="felhasznalonev" required>
+            <div class="row">
+                <div class="mb-3">
+                    <label for="felhasznalonev" class="text-center form-label">Felhasználónév</label>
+                    <input type="text" class="form-control w-100" name="felhasznalonev" id="felhasznalonev" required>
+                </div>
             </div>
-
-            <div class="mb-3">
-                <label for="password" class="form-label">Jelszó</label>
-                <input type="password" class="form-control" name="password" id="password" required>
+            <div class="row">
+                <div class="mb-3">
+                    <label for="password" class="form-label text-center">Jelszó</label>
+                    <input type="password" class="form-control w-100" name="password" id="password" required>
+                </div>
             </div>
 
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">Bejelentkezés</button>
+                <button id="navbarGomb" type="submit" class="btn">Bejelentkezés</button>
             </div>
         </form>
     </div>

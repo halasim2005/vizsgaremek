@@ -30,11 +30,11 @@ header("Pragma: no-cache");
         <form action="">
             <div class="mb-3">
                 <label for="kerNev" class="form-label">Kérem írja be a vezeték (egyirányú) hosszát méter-ben megadva!</label>
-                <input type="number" class="form-control" name="vezHossz" id="vezHossz" placeholder="20 (méter)" required>
+                <input type="number" class="form-control w-100" name="vezHossz" id="vezHossz" placeholder="20 (méter)" required>
             </div>
             <div class="mb-3">
                 <label for="vezKereszt" class="form-label">Kérem válassza ki a vezeték keresztmetszetét (egy ér - mm<sup>2</sup>)!</label><br>
-                <select name="vezKereszt" id="vezKereszt" class="form-control">
+                <select name="vezKereszt" id="vezKereszt" class="form-control w-100">
                     <option class="form-control" value="1" selected>1mm&sup2;</option>
                     <option class="form-control" value="1.5">1.5 mm&sup2;</option>
                     <option class="form-control" value="2.5">2.5 mm&sup2;</option>
@@ -48,19 +48,24 @@ header("Pragma: no-cache");
             </div>
             <div class="mb-3">
                 <label for="teljNev" class="form-label">Kérem írja be a maximális áramerősséget amper-ben megadva!</label>
-                <input type="number" class="form-control" name="aram" id="aram" placeholder="200 (A)" required>
+                <input type="number" class="form-control w-100" name="aram" id="aram" placeholder="200 (A)" required>
             </div>
-            <div class="mb-3">
-                <label><input type="radio" id="230" name="KalkulatorKategoriak"> 1 fázis (230V)</label><br><br>
-                <label><input type="radio" id="400" name="KalkulatorKategoriak"> 3 fázis (400V)</label><br><br>
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label><input type="radio" id="230" name="KalkulatorKategoriak"> 1 fázis (230V)</label><br><br>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label><input type="radio" id="400" name="KalkulatorKategoriak" class="text-end"> 3 fázis (400V)</label><br><br>
+                </div>
             </div>
-            <div class="mb-3" id="hiba">
-                
-            </div>
+            
             <div>
-                <input type="button" class="btn kalk-button" id="szamitas" value="Számolás">
+                <div class="mb-3" id="hiba">
+                    
+                </div>
+                <input type="button" class="btn kalk-button w-100" id="szamitas" value="Számolás">
                 <div id="eredmeny">
-
+                    
                 </div>
             </div>
         </form>

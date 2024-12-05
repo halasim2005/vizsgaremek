@@ -1,7 +1,7 @@
 body {
     background-size: cover;
     background-color: white;
-    color: #ECEFF4;
+    color: black;
     padding-top: 70px;
     font-family: 'Montserrat';
 }
@@ -224,20 +224,18 @@ body {
     }
 }
 
-
-/*.form-container {
-    max-width: 600px;
-    margin: 50px auto;
-    background-color:  #12181B;
-    padding: 30px;
-    border-radius: 10px;
-}
-
 .form-label,
 .form-control {
     color: black;
 }
 
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+}
+
+/*
 .form-control {
     background-color:  #12181B;
     border: 1px solid #ECEFF4;
@@ -510,4 +508,11 @@ footer {
 
 #fekete{
     color: black;
+}
+
+/* Az input mező fókuszálásakor */
+input:focus, select:focus, textarea:focus {
+    border-color: rgb(61, 61, 61) !important; /* Narancssárga színű keret */
+    box-shadow: 0 0 8px rgb(61, 61, 61) !important; /* Narancs árnyék */
+    outline: none !important;
 }

@@ -189,21 +189,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="kezbesitesi_iranyitoszam" class="form-label">Irányítószám</label>
-                            <input type="text" id="kezbesitesi_iranyitoszam" name="kezbesitesi_iranyitoszam" class="form-control" value="<?= htmlspecialchars($userData['kezbesitesi_iranyitoszam']) ?>">
+                            <input type="text" id="kezbesitesi_iranyitoszam" name="kezbesitesi_iranyitoszam" class="form-control w-100" value="<?= htmlspecialchars($userData['kezbesitesi_iranyitoszam']) ?>">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="kezbesitesi_telepules" class="form-label">Település</label>
-                            <input type="text" id="kezbesitesi_telepules" name="kezbesitesi_telepules" class="form-control" value="<?= htmlspecialchars($userData['kezbesitesi_telepules']) ?>">
+                            <input type="text" id="kezbesitesi_telepules" name="kezbesitesi_telepules" class="form-control w-100" value="<?= htmlspecialchars($userData['kezbesitesi_telepules']) ?>">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="kezbesitesi_utca" class="form-label">Utca</label>
-                            <input type="text" id="kezbesitesi_utca" name="kezbesitesi_utca" class="form-control" value="<?= htmlspecialchars($userData['kezbesitesi_utca']) ?>">
+                            <input type="text" id="kezbesitesi_utca" name="kezbesitesi_utca" class="form-control w-100" value="<?= htmlspecialchars($userData['kezbesitesi_utca']) ?>">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="kezbesitesi_hazszam" class="form-label">Házszám</label>
-                            <input type="text" id="kezbesitesi_hazszam" name="kezbesitesi_hazszam" class="form-control" value="<?= htmlspecialchars($userData['kezbesitesi_hazszam']) ?>">
+                            <input type="text" id="kezbesitesi_hazszam" name="kezbesitesi_hazszam" class="form-control w-100" value="<?= htmlspecialchars($userData['kezbesitesi_hazszam']) ?>">
                         </div>
                     </div>
                 </div>
@@ -213,17 +213,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="card mb-4 company-info">
                 <div class="card-header text-white bg-warning">Céges vásárlás (opcionális)</div>
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label for="szamlazasi_cegnev" class="form-label">Cég neve</label>
-                        <input type="text" id="szamlazasi_cegnev" name="szamlazasi_cegnev" class="form-control" value="<?= htmlspecialchars($userData['szamlazasi_cegnev']) ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="szamlazasi_adoszam" class="form-label">Cég adószáma</label>
-                        <input type="text" id="szamlazasi_adoszam" name="szamlazasi_adoszam" class="form-control" value="<?= htmlspecialchars($userData['szamlazasi_adoszam']) ?>">
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ceg" name="ceg" <?= $userData['szamlazasi_cegnev'] ? 'checked' : '' ?>>
-                        <label class="form-check-label" for="ceg">Céges vásárlás</label>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="szamlazasi_cegnev" class="form-label">Cég neve</label>
+                            <input type="text" id="szamlazasi_cegnev" name="szamlazasi_cegnev" class="form-control" value="<?= htmlspecialchars($userData['szamlazasi_cegnev']) ?>">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="szamlazasi_adoszam" class="form-label">Cég adószáma</label>
+                            <input type="text" id="szamlazasi_adoszam" name="szamlazasi_adoszam" class="form-control" value="<?= htmlspecialchars($userData['szamlazasi_adoszam']) ?>">
+                        </div>
+                        <div class="col-md-4 form-check">
+                            <input class="form-check-input" type="checkbox" id="ceg" name="ceg" <?= $userData['szamlazasi_cegnev'] ? 'checked' : '' ?>>
+                            <label class="form-check-label" for="ceg">Céges vásárlás</label>
+                        </div>
                     </div>
                 </div>
             </div>
