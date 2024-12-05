@@ -60,7 +60,9 @@ $osszesTermek = "SELECT t.id AS termek_id, t.nev AS nev, t.leiras AS leiras, t.e
     </div>
 
     <?php
-    $kategoria = $_POST['kategoria'];
+    if(isset($_POST['kategoria'])){
+        $kategoria = $_POST['kategoria'];
+    }
 
     $kategoriaAlapu_termek_sql = "SELECT kategoria.nev AS kategoria_nev, termek.id AS termek_id, termek.nev AS nev, termek.egysegar AS egysegar, termek.leiras AS leiras, termek.gyarto AS gyarto, termek.tipus AS tipus, termek.elerheto_darab AS elerheto_mennyiseg, termek.kep AS kep FROM `termek` INNER JOIN kategoria ON kategoria.id = termek.kategoria_id WHERE kategoria.id = '{$kategoria}';";
     
