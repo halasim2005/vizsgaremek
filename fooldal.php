@@ -18,7 +18,7 @@ header("Pragma: no-cache");
     <title>HaLáli Webshop</title>
 </head>
 <style>
-    
+
 </style>
 <body>
     <?php
