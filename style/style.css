@@ -140,7 +140,7 @@ body {
 
 
 /* Hamburger menü megjelenítése kicsi képernyőkön */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .navbar-collapse {
         position: absolute;
         top: 0;
@@ -210,8 +210,8 @@ body {
     .navbar-nav {
         display: flex;
         flex-direction: row;
-        align-items: center;
-        margin-left: auto;
+        align-items: flex-start;
+        margin-left: 95px;
     }
 
     .navbar-nav .nav-item {
@@ -234,22 +234,6 @@ body {
     margin: 50px auto;
     padding: 30px;
 }
-
-/*
-.form-control {
-    background-color:  #12181B;
-    border: 1px solid #ECEFF4;
-    width: 100%;
-}
-
-.form-control:focus {
-    background-color: #1F2A32;
-    color: #ECEFF4;
-}
-
-.form-control::placeholder{
-    color: lightgrey;
-}*/
 
 .bemutatkozasDiv{
     max-width: 1250px;
@@ -405,6 +389,7 @@ body {
 
 #keresesIkonNavbar{
     width: 35px;
+    cursor: pointer;
 }
 
 #kosarIkonPadding{
