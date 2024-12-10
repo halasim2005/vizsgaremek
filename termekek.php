@@ -5,13 +5,6 @@ header("Pragma: no-cache");
 
 include './db.php'; // Az adatbázis kapcsolat betöltése
 
-// Lekérdezés végrehajtása
-
-$osszesTermek = "SELECT t.id AS termek_id, t.nev AS nev, t.leiras AS leiras, t.egysegar AS egysegar, t.elerheto_darab AS elerheto_mennyiseg, t.kep AS kep, t.tipus AS tipus, t.gyarto AS gyarto, k.nev AS kategoria_nev FROM termek t JOIN kategoria k ON t.kategoria_id = k.id";
-
-/////////////////////////////////
-
-
 ?>
 
 <!DOCTYPE html>
@@ -33,38 +26,39 @@ $osszesTermek = "SELECT t.id AS termek_id, t.nev AS nev, t.leiras AS leiras, t.e
         include './navbar.php'; // A navigációs sáv betöltése
     ?>
 
-    <div id="szuresDiv" class="shadow">
-        <form id="szuresForm" method="post" class="row g-3">
-            <h4 class="text-center mb-4">Szűrés alapú keresés</h4>
-        
-            <!-- Kategória szűrés -->
-            <div class="col-md-6">
-                <label for="kategoriaSzures" class="form-label">Kategória</label>
-                <select name="kategoria" id="kategoriaSzures" class="form-select">
-                    <option value="összes">Összes termék</option>
-                    <?php
-                        include './sql_fuggvenyek.php';
-                        $kategoriak_sql = "SELECT kategoria.id AS id, kategoria.nev AS nev FROM kategoria;";
-                        $kategoriak = adatokLekerdezese($kategoriak_sql);
-                        if (is_array($kategoriak)) {
-                        foreach ($kategoriak as $kategoria) {
-                            echo '<option value="'. $kategoria["id"] . '">' . $kategoria["nev"] . '</option>';
-                        }
-                    }
-                    ?>
-                </select>
-            </div>
+<div id="szuresDiv" class="shadow">
+    <form id="szuresForm" method="post" class="row g-3">
+        <h4 class="text-center mb-4">Szűrés alapú keresés</h4>
+    
+        <!-- Kategória szűrés -->
+        <div class="col-md-6">
+            <label for="kategoriaSzures" class="form-label">Kategória</label>
+            <select name="kategoria" id="kategoriaSzures" class="form-select">
+                <option value="összes">Összes termék</option>
+                
+            </select>
+        </div>
 
-            <!-- Ár szűrés -->
-            <div class="col-md-6">
-                <label for="arSzures" class="form-label">Ár szűrés (Ft)</label>
-                <div class="d-flex align-items-center">
-                    <input type="range" id="arSzures" name="ar" class="form-range" min="0" max="100000" step="1000" 
-                       style="background: linear-gradient(to right, #007bff, #d1e9ff); height: 10px; border-radius: 5px;"
-                       oninput="document.getElementById('arErtek').innerText = this.value + ' Ft';">
-                    <span id="arErtek" class="ms-3">50 000 Ft</span>
+        <!-- Ár szűrés -->
+        <div class="col-md-6">
+            <label for="arSzuresMin" class="form-label">Ár szűrés (Ft)</label>
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <label for="arSzuresMin" class="form-label">Minimum ár:</label>
+                    <input type="range" id="arSzuresMin" name="min_ar" class="form-range" min="0" max="100000" step="1000" 
+                        style="background: linear-gradient(to right, #007bff, #d1e9ff); height: 10px; border-radius: 5px;"
+                        oninput="document.getElementById('arErtekMin').innerText = this.value + ' Ft';">
+                    <span id="arErtekMin" class="d-block text-center">0 Ft</span>
+                </div>
+                <div>
+                    <label for="arSzuresMax" class="form-label">Maximum ár:</label>
+                    <input type="range" id="arSzuresMax" name="max_ar" class="form-range" min="0" max="100000" step="1000" 
+                        style="background: linear-gradient(to right, #007bff, #d1e9ff); height: 10px; border-radius: 5px;"
+                        oninput="document.getElementById('arErtekMax').innerText = this.value + ' Ft';">
+                    <span id="arErtekMax" class="d-block text-center">100 000 Ft</span>
                 </div>
             </div>
+        </div>
 
         <!-- Gyártó szűrés -->
         <div class="col-md-6">
@@ -97,6 +91,7 @@ $osszesTermek = "SELECT t.id AS termek_id, t.nev AS nev, t.leiras AS leiras, t.e
 </div>
 
 
+
     <div class="text-center">
         <h2 id="fekete">Termékek</h2>
     </div>
@@ -122,13 +117,7 @@ $osszesTermek = "SELECT t.id AS termek_id, t.nev AS nev, t.leiras AS leiras, t.e
                             <h6><strong><?= number_format($row['egysegar'], 0, '', ' ') ?> Ft</strong></h6>
                             <!--<button class="btn btn-primary">Kosárba</button>-->
                             <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_<?= $row['termek_id'] ?>">Részletek</button>
-                            <form method="POST" action="kosar_muveletek.php">
-                                <input type="hidden" name="termek_id" value="<?= $row['termek_id'] ?>">
-                                <input type="hidden" name="termek_nev" value="<?= htmlspecialchars($row['nev']) ?>">
-                                <input type="hidden" name="ar" value="<?= $row['egysegar'] ?>">
-                                <input type="hidden" name="mennyiseg" value="1"> <!-- Alapértelmezett mennyiség -->
-                                <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary">Kosárba</button>
-                            </form>
+                            <button type="button" id="termekekKartyaGomb" class="btn btn-primary">Kosárba</button>
                         </div>
                     </div>
                 </div>
@@ -150,13 +139,7 @@ $osszesTermek = "SELECT t.id AS termek_id, t.nev AS nev, t.leiras AS leiras, t.e
                                 <p><strong>Egységár:</strong> <?= number_format($row['egysegar'], 0, '', ' ') ?> Ft</p>
                             </div>
                             <div class="modal-footer">
-                            <form method="POST" action="kosar_muveletek.php">
-                                <input type="hidden" name="termek_id" value="<?= $row['termek_id'] ?>">
-                                <input type="hidden" name="termek_nev" value="<?= htmlspecialchars($row['nev']) ?>">
-                                <input type="hidden" name="ar" value="<?= $row['egysegar'] ?>">
-                                <input type="hidden" name="mennyiseg" value="1"> <!-- Alapértelmezett mennyiség -->
-                                <button type="submit" id="modalKartyaGomb" name="add_to_cart" class="btn btn-primary">Kosárba</button>
-                            </form>
+                                <button type="button" id="modalKartyaGomb">Kosárba</button>
                                 <button type="button" id="modalKartyaGomb" data-bs-dismiss="modal">Bezárás</button>
                             </div>
                         </div>
