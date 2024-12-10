@@ -1,6 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark shadow p-3 mb-5 bg-white rounded">
     <div class="container-fluid">
-<!--<a class="navbar-brand" href="#">HaLáli Villszer Kft.</a>-->
         <a href="#"><img id="navbarLogo" src="./képek/HaLálip.png" alt="HaLáli Kft. logo"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -20,25 +19,43 @@
                     <a class="nav-link" href="./kapcsolat">KAPCSOLAT</a>
                 </li>
             </ul>
-            <form id="keresesIkonPadding" class="d-flex" role="search">
-                <input id="navbarKereses" class="form-control btn-outline-primary me-2" type="search" placeholder="Keresés" aria-label="Keresés">
-                <img id="keresesIkonNavbar"  onclick="keresesMegj()" src="./képek/keresesIkon.png" alt="Keresés ikon">
-            </form>
-            <a id="kosarIkonPadding" href="./kosar"><img id="navbarIcons" src="./képek/kosarIkon.png" alt="Kosár ikon"></a>
-
-            <?php if (isset($_SESSION['felhasznalo'])): ?>
-                <a id="profilIconPadding"  href="./profil.php"><img src='./képek/profilikon.png' alt="Profil" id="navbarIcons"></a>
-                <?php if ($_SESSION['jogosultsag'] === 'admin'): ?>
-                    <a href="./admin/dashboard.php"><img src='./képek/adminIkon.png' alt="Profil" id="navbarIcons"></a>
+            <!-- Gombok és ikonok a jobb oldalon -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <form id="keresesIkonPadding" class="d-flex" role="search">
+                        <input id="navbarKereses" class="form-control btn-outline-primary me-2" type="search" placeholder="Keresés" aria-label="Keresés">
+                        <img id="keresesIkonNavbar" onclick="keresesMegj()" src="./képek/keresesIkon.png" alt="Keresés ikon">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <a id="kosarIkonPadding" href="./kosar"><img id="navbarIcons" src="./képek/kosarIkon.png" alt="Kosár ikon"></a>
+                </li>
+                <?php if (isset($_SESSION['felhasznalo'])): ?>
+                    <li class="nav-item">
+                        <a id="profilIconPadding" href="./profil.php"><img src='./képek/profilikon.png' alt="Profil" id="navbarIcons"></a>
+                    </li>
+                    <?php if ($_SESSION['jogosultsag'] === 'admin'): ?>
+                        <li class="nav-item">
+                            <a href="./admin/dashboard.php"><img src='./képek/adminIkon.png' alt="Profil" id="navbarIcons"></a>
+                        </li>
+                    <?php endif; ?>
+                    <li class="nav-item">
+                        <a id="navbarGomb" href="./kijelentkezes.php" class="btn login-button ms-3">Kijelentkezés</a>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a id="navbarGomb" href="./regisztracio" class="btn regist-button ms-3">Regisztráció</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="navbarGomb" href="./bejelentkezes" class="btn login-button ms-3">Bejelentkezés</a>
+                    </li>
                 <?php endif; ?>
-                <a id="navbarGomb" href="./kijelentkezes.php" class="btn login-button ms-3">Kijelentkezés</a>
-            <?php else: ?>
-                <a id="navbarGomb" href="./regisztracio" class="btn regist-button ms-3">Regisztráció</a>
-                <a id="navbarGomb" href="./bejelentkezes" class="btn login-button ms-3">Bejelentkezés</a>
-            <?php endif; ?>
+            </ul>
         </div>
     </div>
 </nav>
+
+
 <link rel="stylesheet" href="./style/style.css">
 
 <!-- Modal -->
