@@ -63,7 +63,7 @@ header("Pragma: no-cache");
                 <div class="mb-3" id="hiba">
                     
                 </div>
-                <input type="button" class="btn kalk-button w-100" id="szamitas" value="Számolás">
+                <input type="button" class="btn kalk-button w-100" id="navbarGomb" value="Számolás">
                 <div id="eredmeny">
                     
                 </div>
