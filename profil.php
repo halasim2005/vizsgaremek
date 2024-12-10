@@ -87,12 +87,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $updateQuery->bindParam(':szamlazasi_adoszam', $ceg_adoszam, PDO::PARAM_STR);
     $updateQuery->bindParam(':fh_nev', $fh_nev, PDO::PARAM_STR);
 
+    header("Location: profil");
     if ($updateQuery->execute()) {
         $message = "Adatok sikeresen frissítve!";
     } else {
         $message = "Hiba történt az adatok frissítésekor.";
     }
-    header("Location: profil");
 }
 ?>
 
@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="col-md-6 mb-3">
                             <label for="telefonszam" class="form-label">Telefonszám</label>
                             <div class="input-group">
-                                <input type="text" id="telefonszam" name="telefonszam" class="form-control w-100" placeholder="+36 20 123 4567" pattern="[0-9]{2} [0-9]{3} [0-9]{4}" required>
+                                <input type="text" id="telefonszam" name="telefonszam" class="form-control w-100" placeholder="+36 20 123 4567" value="<?= htmlspecialchars($userData['telefonszam']) ?>" required>
                             </div>
                         </div>
                     </div>
