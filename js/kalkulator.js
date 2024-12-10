@@ -1,4 +1,5 @@
 function Szamolas(){
+    let eredmenyModal = document.getElementById("eredmenyModal");
     let A = document.getElementById("vezKereszt").value; //keresztmetszet
     let I = document.getElementById("aram").value; //áramerősség
     let L = document.getElementById("vezHossz").value; //vezeték hossz

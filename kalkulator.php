@@ -63,32 +63,12 @@ header("Pragma: no-cache");
                 <div class="mb-3" id="hiba">
                     
                 </div>
-                <input type="button" class="btn kalk-button w-100 szamitasBtn" id="szamitas" data-bs-toggle="modal" data-bs-target="#eredmenyModal" value="Számolás">
-                <div id="eredmeny">
-                    
+                <input type="button" class="btn kalk-button w-100 szamitasBtn" id="szamitas" value="Számolás">
+                <div class="text-center" id="eredmeny">
+
                 </div>
             </div>
         </form>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="eredmenyModal" tabindex="-1" aria-labelledby="eredmenyModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="eredmenyModal">Modal Title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    This is a simple modal example. You can add your content here.
-                    <p>For example, a product description, alert message, or form can be placed here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
