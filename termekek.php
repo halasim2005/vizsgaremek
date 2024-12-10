@@ -117,7 +117,13 @@ include './db.php'; // Az adatbázis kapcsolat betöltése
                             <h6><strong><?= number_format($row['egysegar'], 0, '', ' ') ?> Ft</strong></h6>
                             <!--<button class="btn btn-primary">Kosárba</button>-->
                             <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_<?= $row['termek_id'] ?>">Részletek</button>
-                            <button type="button" id="termekekKartyaGomb" class="btn btn-primary">Kosárba</button>
+                            <form method="POST" action="kosar_muveletek.php">
+                                <input type="hidden" name="termek_id" value="<?= $row['termek_id'] ?>">
+                                <input type="hidden" name="termek_nev" value="<?= htmlspecialchars($row['nev']) ?>">
+                                <input type="hidden" name="ar" value="<?= $row['egysegar'] ?>">
+                                <input type="hidden" name="mennyiseg" value="1"> <!-- Alapértelmezett mennyiség -->
+                                <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary">Kosárba</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -139,7 +145,13 @@ include './db.php'; // Az adatbázis kapcsolat betöltése
                                 <p><strong>Egységár:</strong> <?= number_format($row['egysegar'], 0, '', ' ') ?> Ft</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" id="modalKartyaGomb">Kosárba</button>
+                            <form method="POST" action="kosar_muveletek.php">
+                                <input type="hidden" name="termek_id" value="<?= $row['termek_id'] ?>">
+                                <input type="hidden" name="termek_nev" value="<?= htmlspecialchars($row['nev']) ?>">
+                                <input type="hidden" name="ar" value="<?= $row['egysegar'] ?>">
+                                <input type="hidden" name="mennyiseg" value="1"> <!-- Alapértelmezett mennyiség -->
+                                <button type="submit" id="modalKartyaGomb" name="add_to_cart" class="btn btn-primary">Kosárba</button>
+                            </form>
                                 <button type="button" id="modalKartyaGomb" data-bs-dismiss="modal">Bezárás</button>
                             </div>
                         </div>
