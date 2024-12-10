@@ -122,6 +122,7 @@ $osszesTermek = "SELECT t.id AS termek_id, t.nev AS nev, t.leiras AS leiras, t.e
                             <h6><strong><?= number_format($row['egysegar'], 0, '', ' ') ?> Ft</strong></h6>
                             <!--<button class="btn btn-primary">Kosárba</button>-->
                             <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_<?= $row['termek_id'] ?>">Részletek</button>
+                            <button type="button" id="termekekKartyaGomb" class="btn btn-primary">Kosárba</button>
                         </div>
                     </div>
                 </div>
