@@ -378,6 +378,22 @@ body {
     border-radius: 5px;
 }
 
+.szamitasBtn{
+    background-color: white;
+    border: 1px solid black;
+    color:black;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.szamitasBtn:hover{
+    background-color: rgb(61, 61, 61);
+    border: 1px solid rgb(61, 61, 61);
+    color:white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
 #navbarIcons{
     width: 35px;
 }

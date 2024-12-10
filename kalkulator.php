@@ -35,7 +35,7 @@ header("Pragma: no-cache");
             <div class="mb-3">
                 <label for="vezKereszt" class="form-label">Kérem válassza ki a vezeték keresztmetszetét (egy ér - mm<sup>2</sup>)!</label><br>
                 <select name="vezKereszt" id="vezKereszt" class="form-control w-100">
-                    <option class="form-control" value="1" selected>1mm&sup2;</option>
+                    <option class="form-control" value="1" selected>1 mm&sup2;</option>
                     <option class="form-control" value="1.5">1.5 mm&sup2;</option>
                     <option class="form-control" value="2.5">2.5 mm&sup2;</option>
                     <option class="form-control" value="4">4 mm&sup2;</option>
@@ -63,9 +63,9 @@ header("Pragma: no-cache");
                 <div class="mb-3" id="hiba">
                     
                 </div>
-                <input type="button" class="btn kalk-button w-100" id="navbarGomb" value="Számolás">
-                <div id="eredmeny">
-                    
+                <input type="button" class="btn kalk-button w-100 szamitasBtn" id="szamitas" value="Számolás">
+                <div class="text-center" id="eredmeny">
+
                 </div>
             </div>
         </form>
