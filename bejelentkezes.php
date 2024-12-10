@@ -19,16 +19,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         if (password_verify($password, $user['jelszo'])) {
             $_SESSION['felhasznalo'] = $user['fh_nev'];
-            $_SESSION['jogosultsag'] = $user['jogosultsag']; // Pl.: "admin" vagy "user"
+            $_SESSION['jogosultsag'] = $user['jogosultsag'];
             if($_SESSION['jogosultsag'] == 'admin') $_SESSION['admin_logged_in'] = true;
-            // Átirányítás főoldalra vagy admin oldalra
-            header("Location: fooldal.php");
+            header("Location: fooldal");
             exit();
         } else {
-            $error = "Hibás jelszó.";
+            $error = "Hibás felhasználónév vagy jelszó.";
         }
     } else {
-        $error = "Nem létező felhasználó.";
+        $error = "Hibás felhasználónév vagy jelszó."; //nemlétező felhasználó
     }
     
 
@@ -54,14 +53,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container form-container">
         <h2 class="text-center">Bejelentkezés</h2>
         
-        <?php if (!empty($error)) { echo "<div class='alert alert-danger text-center'>$error</div>"; } ?>
-
+        
         <form action="bejelentkezes.php" method="post" autocomplete="off">
             <?php
                 if (isset($_GET['logout']) && $_GET['logout'] == 1) {
                     echo "<div class='alert alert-success'>Sikeres kijelentkezés!</div>";
                 }
-            ?>
+                if (!empty($error)) { echo "<div class='alert alert-danger text-center'>$error</div>"; } ?>
             <div class="row">
                 <div class="mb-3">
                     <label for="felhasznalonev" class="text-center form-label">Felhasználónév</label>
