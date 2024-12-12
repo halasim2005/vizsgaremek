@@ -32,11 +32,11 @@ function teljes_e_a_profil($userData) {
     }
 
     // Céges adatok ellenőrzése
-    if (!empty($userData['szamlazasi_cegnev']) || !empty($userData['szamlazasi_adoszam'])) {
+    /*if (!empty($userData['szamlazasi_cegnev']) || !empty($userData['szamlazasi_adoszam'])) {
         if (empty($userData['szamlazasi_cegnev']) || empty($userData['szamlazasi_adoszam'])) {
             return false;
         }
-    }
+    }*/
 
     return true;
 }
@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $termek_nev = $_POST['termek_nev'];
         $ar = $_POST['ar'];
         $mennyiseg = $_POST['mennyiseg'];
+        $kep = $_POST['termek_kep'];
 
         $van_mar = false;
         foreach ($_SESSION['kosar'] as &$termek) {
@@ -64,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'termek_nev' => $termek_nev,
                 'ar' => $ar,
                 'mennyiseg' => $mennyiseg,
+                'termek_kep'=> $kep
             ];
         }
     } elseif (isset($_POST['update_cart'])) {
@@ -78,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (isset($_POST['empty_cart'])) {
         $_SESSION['kosar'] = [];
     }
-    header("Location: kosar.php");
+    header("Location: kosar");
     exit();
 }
 
@@ -123,24 +125,26 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                 <?php else: ?>
                     <form method="POST" action="kosar.php">
                         <?php foreach ($_SESSION['kosar'] as $index => $termek): ?>
-                            <div class="card mb-3">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="images/default.png" class="img-fluid rounded-start" alt="<?= htmlspecialchars($termek['termek_nev']) ?>">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title"><?= htmlspecialchars($termek['termek_nev']) ?></h5>
-                                            <p class="card-text"><?= $termek['ar'] ?> Ft / db</p>
-                                            <div class="d-flex align-items-center">
-                                                <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['mennyiseg'] ?>" min="1" class="form-control me-2" style="width: 80px;">
-                                            </div>
-                                            <p class="card-text"><strong><?= $termek['ar'] * $termek['mennyiseg'] ?> Ft</strong></p>
+                       
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="<?htmlspecialchars($termek['termek_kep'])?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($termek['termek_nev']) ?>">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= htmlspecialchars($termek['termek_nev']) ?></h5>
+                                        <p class="card-text"><?= $termek['ar'] ?> Ft / db</p>
+                                        <div class="d-flex align-items-center">
+                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['mennyiseg'] ?>" min="1" class="form-control me-2" style="width: 80px;">
                                         </div>
+                                        <p class="card-text"><strong><?= $termek['ar'] * $termek['mennyiseg'] ?> Ft</strong></p>
                                     </div>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
+                        </div>
+                    <?php endforeach; ?>
+
                         <button type="submit" name="update_cart" class="btn btn-primary">Kosár frissítése</button>
                         <button type="submit" name="empty_cart" class="btn btn-danger">Kosár ürítése</button>
                     </form>
