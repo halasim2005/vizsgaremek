@@ -6,6 +6,12 @@ body {
     font-family: 'Montserrat';
 }
 
+
+::selection {
+    color: white;
+    background: rgb(61, 61, 61);;
+}
+
 .btn-primary {
     background-color: #00C7A8;
     border: 1px solid black;
