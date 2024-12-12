@@ -1,11 +1,18 @@
+function kategoriakFeltolt(adatok){
+    let kategoriakTartalom = document.getElementById("kategoriaSzures");
+    for (let adat of adatok) {
+        kategoriakTartalom.innerHTML += 
+        `
+            <option value="${adat.id}">${adat.nev}</option>
+        `;
+    }
+}
+
 async function kategoriakLeker() {
-    
     try {
-        console.log("teszt");
         let eredmeny = await fetch('./termekek_adatok.php/kategoriakleker');
-        let szoveg = await eredmeny.json();
-        console.log(szoveg);
-        
+        let adatok = await eredmeny.json();
+        kategoriakFeltolt(adatok);
     } catch (error) {
         console.error(error);
     }
