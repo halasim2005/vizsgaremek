@@ -44,7 +44,7 @@ JOIN
 
 <div class="container mt-5">
     
-        <div class="grid-container" id="szures_">
+        <div class="grid-container align-middle" id="szures_">
             <div>Kategória
                 <div>
                     <select id="kategoriaSzures" style="width: 150px">
@@ -67,6 +67,9 @@ JOIN
                 <div>
                     <input type="text" style="width: 150px" placeholder="Írja be a termék nevét!">
                 </div>
+            </div>
+            <div>
+                <button type="submit" id="szuresBtn" class="btn btn-primary px-4 keresesGomb">Szűrés</button>
             </div>
         </div>
 

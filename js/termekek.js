@@ -24,15 +24,15 @@ function arakFeltolt(arak){
 
     for (let adat of arak) {
         rangeEgy.innerHTML = `
-            <input type="range" id="minRangeAr" style="width: 150px" 
-                min="${adat.arMin}" max="${adat.arMax}" step="1000" value="${adat.arMin}" 
+            <input type="range" id="minRangeAr" style="width: 150px; accent-color: rgb(61, 61, 61)" 
+                min="${adat.arMin}" max="${adat.arMax}" step="10" value="${adat.arMin}" 
                 oninput="document.getElementById('minArValue').textContent = this.value;">
             <span id="minArValue">${adat.arMin}</span> Ft
         `;
 
         rangeKetto.innerHTML = `
-            <input type="range" id="maxRangeAr" style="width: 150px" 
-                min="${adat.arMin}" max="${adat.arMax}" step="1000" value="${adat.arMax}" 
+            <input type="range" id="maxRangeAr" style="width: 150px; accent-color: rgb(61, 61, 61)" 
+                min="${adat.arMin}" max="${adat.arMax}" step="10" value="${adat.arMax}" 
                 oninput="document.getElementById('maxArValue').textContent = this.value;">
             <span id="maxArValue">${adat.arMax}</span> Ft
         `;
@@ -72,6 +72,8 @@ async function arakLeker() {
 async function szures() {
     try {
         //folyt.kov
+        console.log(1);
+        
     } catch (error) {
         console.error(error);
     }
@@ -80,4 +82,4 @@ async function szures() {
 window.addEventListener("load", kategoriakLeker);
 window.addEventListener("load", gyartokLeker);
 window.addEventListener("load", arakLeker);
-document.getElementById("szures_").addEventListener("onload", szures)
+document.getElementById("szuresBtn").addEventListener("click", szures)
