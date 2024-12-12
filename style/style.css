@@ -504,15 +504,6 @@ footer {
     text-align: center;
 }
 
-#szuresDiv{
-    max-width: 550px;
-    margin: 50px auto;
-    background-color:  white;
-    padding: 30px;
-    color: black;
-    text-align: center;
-}
-
 #fekete{
     color: black;
 }
@@ -522,4 +513,18 @@ input:focus, select:focus, textarea:focus {
     border-color: rgb(61, 61, 61) !important; /* Narancssárga színű keret */
     box-shadow: 0 0 8px rgb(61, 61, 61) !important; /* Narancs árnyék */
     outline: none !important;
+}
+
+/*SZURES CSS:*/
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 10px;
+  padding: 10px;
+  margin-bottom: 25px;
+}
+
+.grid-container > div {
+  text-align: center;
+  font-size: 17px;
 }

@@ -43,16 +43,32 @@ JOIN
     ?>
 
 <div class="container mt-5">
-
-        <!-- Kategória szűrés -->
-        <div class="col-md-6">
-                <label for="kategoriaSzures" class="form-label">Kategória</label>
-                <select name="kategoria" id="kategoriaSzures" class="form-select">
-                    <option value="összes">Összes termék</option>
-                    
-                </select>
+    
+        <div class="grid-container" id="szures_">
+            <div>Kategória
+                <div>
+                    <select id="kategoriaSzures" style="width: 150px">
+                        <option value="osszes">Összes termék</option>
+                    </select>
+                </div>
             </div>
-
+            <div>Gyártó
+                <div>
+                    <select id="gyartoSzures" style="width: 150px">
+                        <option value="osszesGyarto">Összes gyártó</option>
+                    </select>
+                </div>
+            </div>
+            <div>Ár (Min - Max)
+                <div id="rangeEgy"></div>
+                <div id="rangeKetto"></div>
+            </div>
+            <div>Keresés
+                <div>
+                    <input type="text" style="width: 150px" placeholder="Írja be a termék nevét!">
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <?php
