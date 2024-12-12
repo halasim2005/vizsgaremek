@@ -68,7 +68,7 @@ JOIN
                             <!--<button class="btn btn-primary">Kosárba</button>-->
                             <form method="POST" action="kosar_muveletek.php">
                                 <input type="hidden" name="termek_id" value="<?= $row['termek_id'] ?>">
-                                <input type="hidden" name="termek_nev" value="<?= htmlspecialchars($row['nev']) ?>">
+                                <input type="hidden" name="termek_kep" value="<?= $row['kep'] ?>">
                                 <input type="hidden" name="ar" value="<?= $row['egysegar'] ?>">
                                 <input type="hidden" name="mennyiseg" value="1"> <!-- Alapértelmezett mennyiség -->
                                 <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_<?= $row['termek_id'] ?>">Részletek</button>

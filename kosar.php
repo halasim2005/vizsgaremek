@@ -49,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ar = $_POST['ar'];
         $mennyiseg = $_POST['mennyiseg'];
         $kep = $_POST['termek_kep'];
+        var_dump($kep);
 
         $van_mar = false;
         foreach ($_SESSION['kosar'] as &$termek) {
@@ -129,7 +130,7 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                         <div class="card mb-3">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="<?htmlspecialchars($termek['termek_kep'])?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($termek['termek_nev']) ?>">
+                                    <img src="<?php echo $termek['termek_kep']?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($termek['termek_nev']) ?>">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
