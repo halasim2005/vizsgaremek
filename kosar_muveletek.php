@@ -11,6 +11,7 @@ if (isset($_POST['add_to_cart'])) {
     $termek_nev = $_POST['termek_nev'];
     $ar = $_POST['ar'];
     $mennyiseg = $_POST['mennyiseg'];
+    $kep = $_POST['termek_kep'];
 
     $van_mar = false;
     foreach ($_SESSION['kosar'] as &$termek) {
@@ -27,6 +28,7 @@ if (isset($_POST['add_to_cart'])) {
             'termek_nev' => $termek_nev,
             'ar' => $ar,
             'mennyiseg' => $mennyiseg,
+            'termek_kep' => $kep,
         ];
     }
     header("Location: termekek"); // Vissza a termékoldalra
