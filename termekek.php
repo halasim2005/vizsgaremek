@@ -68,9 +68,6 @@ JOIN
                     <input type="text" style="width: 150px" placeholder="Írja be a termék nevét!">
                 </div>
             </div>
-            <div>
-                <button type="submit" id="szuresBtn" class="btn btn-primary px-4 keresesGomb">Szűrés</button>
-            </div>
         </div>
 
         <div class="row">

@@ -71,8 +71,6 @@ async function arakLeker() {
 
 async function szures() {
     try {
-        //folyt.kov
-        console.log(1);
         
     } catch (error) {
         console.error(error);
@@ -82,4 +80,4 @@ async function szures() {
 window.addEventListener("load", kategoriakLeker);
 window.addEventListener("load", gyartokLeker);
 window.addEventListener("load", arakLeker);
-document.getElementById("szuresBtn").addEventListener("click", szures)
+document.getElementById("szures_").addEventListener("input", szures)
