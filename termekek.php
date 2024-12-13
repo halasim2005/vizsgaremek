@@ -65,7 +65,7 @@ JOIN
             </div>
             <div>Keresés
                 <div>
-                    <input type="text" style="width: 150px" placeholder="Írja be a termék nevét!">
+                    <input type="text" id="keresesSzures" style="width: 150px" placeholder="Írja be a termék nevét!">
                 </div>
             </div>
         </div>

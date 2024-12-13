@@ -71,9 +71,35 @@ async function arakLeker() {
 
 async function szures() {
     try {
+        let kategoria = document.getElementById("kategoriaSzures").value;
+        let gyarto = document.getElementById("gyartoSzures").value;
+        let minRangeAr = document.getElementById("minRangeAr").value;
+        let maxRangeAr = document.getElementById("maxRangeAr").value;
+        let kereses = document.getElementById("keresesSzures").value;
         
+        let bodyAdatok = {
+            'kategoria': kategoria,
+            'gyarto': gyarto,
+            'minRangeAr': minRangeAr,
+            'maxRangeAr': maxRangeAr,
+            'kereses' : kereses
+        }
+
+        let eredmeny = await fetch(`./termekek_adatok.php/szures`, {
+            method : 'post',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify(bodyAdatok)
+        })
+        if(eredmeny.ok){
+            let valasz = await eredmeny.json();
+            console.log(valasz);
+        }else{
+            throw eredmeny.status;
+        }
     } catch (error) {
-        console.error(error);
+        console.log(error);
     }
 }
 
