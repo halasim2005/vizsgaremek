@@ -204,6 +204,8 @@ async function osszesTermekekLeker() {
         // Válasz feldolgozása
         let termekek = await eredmeny.json();
 
+        console.log(termekek)
+
         // Termékek megjelenítése
         let termekekTartalom = document.getElementById("termekekTartalom");
         termekekTartalom.innerHTML = ""; // Előző tartalom törlése
@@ -233,7 +235,7 @@ async function osszesTermekekLeker() {
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
-                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.t_id}">Részletek</button>
+                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
                                     <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary">Kosárba</button>
                                 </form>
                             </div>
@@ -241,15 +243,15 @@ async function osszesTermekekLeker() {
                     </div>
     
                     <!-- Modal -->
-                    <div class="modal fade" id="modal_${termek.t_id}" tabindex="-1" aria-labelledby="modalLabel_${termek.t_id}" aria-hidden="true">
+                    <div class="modal fade" id="modal_${termek.id}" tabindex="-1" aria-labelledby="modalLabel_${termek.id}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="modalLabel_${termek.t_id}">${termek.nev}</h5>
+                                    <h5 class="modal-title" id="modalLabel_${termek.id}">${termek.nev}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <img src="${termek.kep}" alt="${termek.t_nev}" class="img-fluid mb-3">
+                                    <img src="${termek.kep}" alt="${termek.nev}" class="img-fluid mb-3">
                                     <p>${termek.leiras}</p>
                                     <h6><strong>Ár: ${parseInt(termek.egysegar).toLocaleString()} Ft</strong></h6>
                                     <p><strong>Gyártó:</strong> ${termek.gyarto}</p>
