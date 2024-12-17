@@ -55,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regisztráció</title>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -107,6 +108,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="text-center">
+                <!-- secret: 6LcSMZ4qAAAAAKoFX-gDaOa9eOgWBqM8CNVkHKuK-->
+                <div class="g-recaptcha" data-sitekey="6LcSMZ4qAAAAAItO8O736KNKGWr5zHMteqreuDqs"></div>
+                <br/>
+                <input type="submit" value="Submit">
                 <button id="navbarGomb" type="submit" class="btn regist-button ms-3">Regisztráció</button>
             </div>
         </form>
@@ -115,5 +120,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         include './footer.php';
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+   function onSubmit(token) {
+     document.getElementById("demo-form").submit();
+   }
+ </script>
 </body>
 </html>

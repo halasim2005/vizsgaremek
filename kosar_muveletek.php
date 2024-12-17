@@ -6,6 +6,9 @@ if (!isset($_SESSION['kosar'])) {
 }
 
 // Kosárba adás
+
+
+
 if (isset($_POST['add_to_cart'])) {
     $termek_id = $_POST['termek_id'];
     $termek_nev = $_POST['termek_nev'];
@@ -34,6 +37,18 @@ if (isset($_POST['add_to_cart'])) {
     header("Location: termekek"); // Vissza a termékoldalra
     exit();
 }
+// Felhasználó kosarába tett termék mentése
+$user_id = $_SESSION['user_id'];  // A felhasználó ID-ja
+$termek_id = $_POST['termek_id'];  // A termék ID-ja
+$mennyiseg = $_POST['mennyiseg'];  // A mennyiség
+
+// Új rendelés ID generálása (például: automatikusan hozzárendelhetjük a felhasználóhoz)
+$rendeles_id = uniqid($user_id . '_');  // Egyedi rendelés ID generálása
+
+// Lekérdezés a kosárba történő mentéshez
+$query = "INSERT INTO tetelek (rendeles_id, termek_id, tetelek_mennyiseg) VALUES (?, ?, ?)";
+$stmt = $pdo->prepare($query);
+$stmt->execute([$rendeles_id, $termek_id, $mennyiseg]);
 
 // Eltávolítás
 if (isset($_POST['remove_from_cart'])) {
