@@ -95,6 +95,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             
             <div class="row">
                 <div class="mb-3">
+                    <!--secret: 6LfhrZ4qAAAAAJob4H4DXTYik72YDWwalvPX83N0-->
                     <div class="g-recaptcha text-center" data-sitekey="6LfhrZ4qAAAAAKM6FWwbkxfS3zjnRCgE3e_3JmI6"></div>
                 </div>
             </div>
