@@ -124,7 +124,7 @@ async function termekekLeker() {
                     continue; // Ha hibás adat, akkor nem jelenítjük meg
                     
                 }
-
+                document.getElementById("valaszSzoveg").innerHTML = ""
                 termekekTartalom.innerHTML += `
                     <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
                         <div class="card shadow">
@@ -136,6 +136,7 @@ async function termekekLeker() {
                                 <h6><strong>${parseInt(termek.egysegar).toLocaleString()} Ft</strong></h6>
                                 <form method="POST" action="kosar_muveletek.php">
                                     <input type="hidden" name="termek_id" value="${termek.id}">
+                                    <input type="hidden" name="termek_nev" value="${termek.nev}">
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
@@ -166,6 +167,7 @@ async function termekekLeker() {
                                     <form method="POST" action="kosar_muveletek.php">
                                         <input type="hidden" name="termek_id" value="${termek.t_id}">
                                         <input type="hidden" name="termek_kep" value="${termek.kep}">
+                                        <input type="hidden" name="termek_nev" value="${termek.nev}">
                                         <input type="hidden" name="ar" value="${termek.egysegar}">
                                         <input type="hidden" name="mennyiseg" value="1">
                                         <button type="submit" id="modalKartyaGomb" class="btn btn-primary" name="add_to_cart">Kosárba</button>

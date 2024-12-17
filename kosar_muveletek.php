@@ -13,11 +13,10 @@ if (!isset($_SESSION['kosar'])) {
 
 if (isset($_POST['add_to_cart'])) {
     $termek_id = $_POST['termek_id'];
-    $termek_nev = $_POST['termek_nev'];
+    $termek_nev = $_POST['termek_nev'] ?? null;
     $ar = $_POST['ar'];
     $mennyiseg = $_POST['mennyiseg'];
     $kep = $_POST['termek_kep'];
-
     $van_mar = false;
     foreach ($_SESSION['kosar'] as &$termek) {
         if ($termek['termek_id'] == $termek_id) {
@@ -26,7 +25,7 @@ if (isset($_POST['add_to_cart'])) {
             break;
         }
     }
-
+    
     if (!$van_mar) {
         $_SESSION['kosar'][] = [
             'termek_id' => $termek_id,
@@ -36,18 +35,19 @@ if (isset($_POST['add_to_cart'])) {
             'termek_kep' => $kep,
         ];
     }
+    //var_dump($_SESSION['kosar']);
     // Felhasználó kosarába tett termék mentése
     $user_id = $_SESSION['felhasznalo']['fh_nev'];  // A felhasználó ID-ja
     $termek_id = $_POST['termek_id'];  // A termék ID-ja
     $mennyiseg = $_POST['mennyiseg'];  // A mennyiség
     
     // Új rendelés ID generálása (például: automatikusan hozzárendelhetjük a felhasználóhoz)
-    $rendeles_id = uniqid($user_id . '_');  // Egyedi rendelés ID generálása
+    //$rendeles_id = uniqid($user_id . '_');  // Egyedi rendelés ID generálása
     
     // Lekérdezés a kosárba történő mentéshez
     $query = "INSERT INTO tetelek (rendeles_id, termek_id, tetelek_mennyiseg) VALUES (?, ?, ?)";
     $stmt = $pdo->prepare($query);
-    $stmt->execute('sii', [$rendeles_id, $termek_id, $mennyiseg]);
+    $stmt->execute("ii", [$user_id, $termek_id, $mennyiseg]);
     header("Location: termekek"); // Vissza a termékoldalra
     exit();
 }
