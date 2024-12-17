@@ -47,7 +47,7 @@ if (isset($_POST['add_to_cart'])) {
     // Lekérdezés a kosárba történő mentéshez
     $query = "INSERT INTO tetelek (rendeles_id, termek_id, tetelek_mennyiseg) VALUES (?, ?, ?)";
     $stmt = $pdo->prepare($query);
-    $stmt->execute("ii", [$user_id, $termek_id, $mennyiseg]);
+    $stmt->execute([$user_id, $termek_id, $mennyiseg]);
     header("Location: termekek"); // Vissza a termékoldalra
     exit();
 }

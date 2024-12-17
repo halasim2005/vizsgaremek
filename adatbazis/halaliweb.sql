@@ -141,7 +141,7 @@ INSERT INTO `termek` (`id`, `nev`, `egysegar`, `leiras`, `gyarto`, `tipus`, `kat
 
 CREATE TABLE `tetelek` (
   `id` int(10) NOT NULL,
-  `rendeles_id` int(100) NOT NULL,
+  `rendeles_id` varchar(100) NOT NULL,
   `termek_id` int(10) NOT NULL,
   `tetelek_mennyiseg` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
