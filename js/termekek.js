@@ -110,6 +110,9 @@ async function termekekLeker() {
         // Válasz feldolgozása
         let termekek = await eredmeny.json();
 
+        console.log(termekek);
+        
+
         // Termékek megjelenítése
         let termekekTartalom = document.getElementById("termekekTartalom");
         termekekTartalom.innerHTML = ""; // Előző tartalom törlése
