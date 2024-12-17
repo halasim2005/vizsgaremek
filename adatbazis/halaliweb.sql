@@ -42,7 +42,7 @@ CREATE TABLE `felhasznalo` (
   `kezbesitesi_telepules` text NOT NULL,
   `kezbesitesi_utca` varchar(50) NOT NULL,
   `kezbesitesi_hazszam` varchar(20) NOT NULL,
-  `telefonszam` int(15) NOT NULL,
+  `telefonszam` varchar(15) NOT NULL,
   `email` varchar(50) NOT NULL,
   `jogosultsag` varchar(20) DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
