@@ -25,6 +25,8 @@ function arakFeltolt(arak){
     let rangeKetto = document.getElementById("rangeKetto");
 
     for (let adat of arak) {
+        console.log(adat.arMax);
+        
         rangeEgy.innerHTML = `
             <input type="range" id="minRangeAr" style="width: 150px; accent-color: rgb(61, 61, 61)" 
                 min="${adat.arMin}" max="${adat.arMax}" step="10" value="${adat.arMin}" 
@@ -91,7 +93,6 @@ async function termekekLeker() {
             'minRangeAr': minRangeAr,
             'maxRangeAr': maxRangeAr,
             'kereses': kereses
-
         };
 
         console.log(bodyAdatok);
