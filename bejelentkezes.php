@@ -8,17 +8,17 @@ header("Pragma: no-cache");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $felhasznalonev = $_POST['felhasznalonev'];
-    $password = $_POST['password'];
-
+    $password = $_POST['password'];    
+    
     $stmt = $pdo->prepare("SELECT * FROM felhasznalo WHERE fh_nev = :fh_name");
     $stmt->bindParam(':fh_name', $felhasznalonev);
     $stmt->execute();
-
+    
     if ($stmt->rowCount() > 0) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
         if (password_verify($password, $user['jelszo'])) {
-            $_SESSION['felhasznalo'] = $user['fh_nev'];
+            $_SESSION['felhasznalo'] = $user;
             $_SESSION['jogosultsag'] = $user['jogosultsag'];
             if($_SESSION['jogosultsag'] == 'admin') $_SESSION['admin_logged_in'] = true;
             header("Location: fooldal");

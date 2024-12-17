@@ -8,38 +8,57 @@ if (!isset($_SESSION['kosar'])) {
     $_SESSION['kosar'] = [];
 }
 
+// Session frissítése adatbázisból (opcionális)
+function frissit_session_adatbazisbol($conn) {
+    if (isset($_SESSION['felhasznalo']['id'])) {
+        $query = "SELECT * FROM felhasznalok WHERE id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->execute([$_SESSION['felhasznalo']['id']]);
+        $_SESSION['felhasznalo'] = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+}
+
+// Profil teljesség ellenőrzés
 function teljes_e_a_profil($userData) {
     $requiredFields = ['vezeteknev', 'keresztnev', 'email', 'telefonszam', 
                        'szamlazasi_iranyitoszam', 'szamlazasi_telepules', 
                        'szamlazasi_utca', 'szamlazasi_hazszam'];
     
-    // Ellenőrizd az alapadatokat
+    // Ellenőrzés: Alap mezők
     foreach ($requiredFields as $field) {
         if (empty($userData[$field])) {
-            return false;
+            error_log("Hiányzó mező: $field");
+            return false; 
         }
     }
     
-    // Ha különböző a kézbesítési cím, ellenőrizd azt is
-    if ($userData['kezbesitesi_iranyitoszam'] !== $userData['szamlazasi_iranyitoszam']) {
+    // Szállítási cím eltér? Ellenőrzés csak akkor
+    if (!empty($userData['kezbesitesi_iranyitoszam']) && 
+        $userData['kezbesitesi_iranyitoszam'] != $userData['szamlazasi_iranyitoszam']) {
+
         $shippingFields = ['kezbesitesi_iranyitoszam', 'kezbesitesi_telepules', 
                            'kezbesitesi_utca', 'kezbesitesi_hazszam'];
+        
         foreach ($shippingFields as $field) {
             if (empty($userData[$field])) {
-                return false;
+                error_log("Hiányzó szállítási mező: $field");
+                return false; 
             }
         }
     }
 
-    // Céges adatok ellenőrzése
-    /*if (!empty($userData['szamlazasi_cegnev']) || !empty($userData['szamlazasi_adoszam'])) {
+    // Céges mezők kezelése
+    if (!empty($userData['szamlazasi_cegnev']) || !empty($userData['szamlazasi_adoszam'])) {
         if (empty($userData['szamlazasi_cegnev']) || empty($userData['szamlazasi_adoszam'])) {
-            return false;
+            error_log("Hiányzó céges mező: szamlazasi_cegnev vagy szamlazasi_adoszam");
+            return false; 
         }
-    }*/
+    }
 
-    return true;
+    return true; // Profil teljes
 }
+
+
 
 // Kosár kezelése
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -49,7 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ar = $_POST['ar'];
         $mennyiseg = $_POST['mennyiseg'];
         $kep = $_POST['termek_kep'];
-        var_dump($kep);
 
         $van_mar = false;
         foreach ($_SESSION['kosar'] as &$termek) {
@@ -66,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'termek_nev' => $termek_nev,
                 'ar' => $ar,
                 'mennyiseg' => $mennyiseg,
-                'termek_kep'=> $kep
+                'termek_kep' => $kep
             ];
         }
     } elseif (isset($_POST['update_cart'])) {
@@ -81,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (isset($_POST['empty_cart'])) {
         $_SESSION['kosar'] = [];
     }
-    header("Location: kosar");
+    header("Location: kosar.php");
     exit();
 }
 
@@ -97,7 +115,6 @@ function osszegzo($kosar) {
 // Bejelentkezési állapot ellenőrzése
 $bejelentkezve = isset($_SESSION['felhasznalo']);
 $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : false;
-
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -118,7 +135,6 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
 
     <div class="container main-container mt-5">
         <div class="row">
-            <!-- Cart Items -->
             <div class="col-lg-8">
                 <h2>Kosár</h2>
                 <?php if (empty($_SESSION['kosar'])): ?>
@@ -126,69 +142,43 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                 <?php else: ?>
                     <form method="POST" action="kosar.php">
                         <?php foreach ($_SESSION['kosar'] as $index => $termek): ?>
-                       
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="<?php echo $termek['termek_kep']?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($termek['termek_nev']) ?>">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?= htmlspecialchars($termek['termek_nev']) ?></h5>
-                                        <p class="card-text"><?= $termek['ar'] ?> Ft / db</p>
-                                        <div class="d-flex align-items-center">
-                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['mennyiseg'] ?>" min="1" class="form-control me-2" style="width: 80px;">
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="<?= htmlspecialchars($termek['termek_kep']) ?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($termek['termek_nev']) ?>">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?= htmlspecialchars($termek['termek_nev']) ?></h5>
+                                            <p class="card-text"><?= $termek['ar'] ?> Ft / db</p>
+                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['mennyiseg'] ?>" min="1" class="form-control w-25">
+                                            <p class="card-text"><strong><?= $termek['ar'] * $termek['mennyiseg'] ?> Ft</strong></p>
                                         </div>
-                                        <p class="card-text"><strong><?= $termek['ar'] * $termek['mennyiseg'] ?> Ft</strong></p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
-
+                        <?php endforeach; ?>
                         <button type="submit" name="update_cart" class="btn btn-primary">Kosár frissítése</button>
                         <button type="submit" name="empty_cart" class="btn btn-danger">Kosár ürítése</button>
                     </form>
                 <?php endif; ?>
             </div>
-
-            <!-- Order Summary -->
             <div class="col-lg-4">
-                <div class="order-summary p-4 bg-light rounded">
-                    <h3>Rendelés összesítő</h3>
-                    <p>Összesen: <strong><?= osszegzo($_SESSION['kosar']) ?> Ft</strong></p>
-                    <p>Szállítás: <strong>1690 Ft</strong></p>
-                    <p>ÁFA (27%): <strong><?= round(osszegzo($_SESSION['kosar']) * 0.27, 2) ?> Ft</strong></p>
-                    <h4>Végösszeg: <strong><?= osszegzo($_SESSION['kosar']) + 1690 ?> Ft</strong></h4>
-                    <?php if (!$bejelentkezve): ?>
-                        <button class="btn btn-warning w-100" data-bs-toggle="modal" data-bs-target="#loginModal">Tovább a fizetéshez</button>
-                    <?php elseif (!$profil_teljes): ?>
-                        <div class="alert alert-danger">Kérjük, töltsd ki a szállítási és számlázási adatokat a <a href="profil.php">profilodban</a>.</div>
-                    <?php else: ?>
-                        <button class="btn btn-success w-100">Tovább a fizetéshez</button>
-                    <?php endif; ?>
-                </div>
+                <h3>Rendelés összesítő</h3>
+                <p>Összesen: <strong><?= osszegzo($_SESSION['kosar']) ?> Ft</strong></p>
+                <p>Szállítás: <strong>1690 Ft</strong></p>
+                <p>ÁFA: <strong><?= round(osszegzo($_SESSION['kosar']) * 0.27, 2) ?> Ft</strong></p>
+                <h4>Végösszeg: <strong><?= osszegzo($_SESSION['kosar']) + 1690 ?> Ft</strong></h4>
+                <?php if (!$bejelentkezve): ?>
+                    <div class="alert alert-danger">Vásárlás folytatásához kérjük, jelentkezzen be! <a href="profil.php">Bejelentkezés</a></div>
+                <?php elseif (!$profil_teljes): ?>
+                    <div class="alert alert-danger">Vásárlás folytatásához kérjük, töltse ki a profilját! <a href="profil.php">Profil szerkesztése</a></div>
+                <?php else: ?>
+                    <button class="btn btn-success w-100">Tovább a fizetéshez</button>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 
-    <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Bejelentkezés szükséges</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Bezárás"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Kérjük, jelentkezz be, vagy regisztrálj, hogy folytathasd a rendelést.</p>
-                    <a href="bejelentkezes.php" class="btn btn-primary">Bejelentkezés</a>
-                    <a href="regisztracio.php" class="btn btn-secondary">Regisztráció</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
