@@ -56,7 +56,7 @@ switch (mb_strtolower($url[0])) {
                 $feltetelek[] = "kategoria.id = " . intval($bodyAdatok['kategoria']);
             }
             if (!empty($bodyAdatok['gyarto']) && $bodyAdatok['gyarto'] != 'osszesGyarto') {
-                 $feltetelek[] = "termek.gyarto = '" . htmlspecialchars($bodyAdatok['gyarto']) . "'";
+                $feltetelek[] = "termek.gyarto = '" . htmlspecialchars($bodyAdatok['gyarto']) . "'";
             }
             if (!empty($bodyAdatok['minRangeAr']) && !empty($bodyAdatok['maxRangeAr'])) {
                 $feltetelek[] = "termek.egysegar BETWEEN " . intval($bodyAdatok['minRangeAr']) . " AND " . intval($bodyAdatok['maxRangeAr']);

@@ -42,7 +42,7 @@ CREATE TABLE `felhasznalo` (
   `kezbesitesi_telepules` text NOT NULL,
   `kezbesitesi_utca` varchar(50) NOT NULL,
   `kezbesitesi_hazszam` varchar(20) NOT NULL,
-  `telefonszam` int(15) NOT NULL,
+  `telefonszam` varchar(15) NOT NULL,
   `email` varchar(50) NOT NULL,
   `jogosultsag` varchar(20) DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -141,7 +141,7 @@ INSERT INTO `termek` (`id`, `nev`, `egysegar`, `leiras`, `gyarto`, `tipus`, `kat
 
 CREATE TABLE `tetelek` (
   `id` int(10) NOT NULL,
-  `rendeles_id` int(100) NOT NULL,
+  `rendeles_id` varchar(100) NOT NULL,
   `termek_id` int(10) NOT NULL,
   `tetelek_mennyiseg` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

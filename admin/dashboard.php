@@ -37,7 +37,7 @@ include './admin_navbar.php';
 </style>
 <body>
 <div class="mt-4 text-center">
-    <h2>Üdvözlünk, <?php echo htmlspecialchars($_SESSION['felhasznalo']); ?>!</h2>
+    <h2>Üdvözlünk, <?php echo htmlspecialchars($_SESSION['felhasznalo']['fh_nev']); ?>!</h2>
     <p>Használd az admin navbar-t a funkciók eléréséhez.</p>
 </div>
     <div class="row">

@@ -7,7 +7,7 @@ if (!isset($_SESSION['felhasznalo'])) {
     exit;
 }
 
-$fh_nev = $_SESSION['felhasznalo'];
+$fh_nev = $_SESSION['felhasznalo']['fh_nev'];
 
 // Felhasználó adatok lekérdezése
 $query = $pdo->prepare("SELECT * FROM felhasznalo WHERE fh_nev = :fh_nev");

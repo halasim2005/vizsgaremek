@@ -25,6 +25,8 @@ function arakFeltolt(arak){
     let rangeKetto = document.getElementById("rangeKetto");
 
     for (let adat of arak) {
+        console.log(adat.arMax);
+        
         rangeEgy.innerHTML = `
             <input type="range" id="minRangeAr" style="width: 150px; accent-color: rgb(61, 61, 61)" 
                 min="${(adat.arMin)}" max="${(adat.arMax)}" step="10" value="${(adat.arMin)}" 
@@ -84,14 +86,13 @@ async function termekekLeker() {
         let minRangeAr = document.getElementById("minRangeAr").value;
         let maxRangeAr = document.getElementById("maxRangeAr").value;
         let kereses = document.getElementById("keresesSzures").value;
-
+        
         let bodyAdatok = {
             'kategoria': kategoria,
             'gyarto': gyarto,
             'minRangeAr': minRangeAr,
             'maxRangeAr': maxRangeAr,
             'kereses': kereses
-
         };
 
         console.log(bodyAdatok);
@@ -109,6 +110,9 @@ async function termekekLeker() {
         // Válasz feldolgozása
         let termekek = await eredmeny.json();
 
+        console.log(termekek);
+        
+
         // Termékek megjelenítése
         let termekekTartalom = document.getElementById("termekekTartalom");
         termekekTartalom.innerHTML = ""; // Előző tartalom törlése
@@ -123,22 +127,23 @@ async function termekekLeker() {
                     continue; // Ha hibás adat, akkor nem jelenítjük meg
                     
                 }
-
+                document.getElementById("valaszSzoveg").innerHTML = ""
                 termekekTartalom.innerHTML += `
                     <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
                         <div class="card shadow">
                             <div id="termekekKartyaKepKozep">
-                                <img id="termekekKartyaKep" src="${termek.kep}" class="card-img-top" alt="${termek.t_nev}">
+                                <img id="termekekKartyaKep" src="${termek.kep}" class="card-img-top" alt="${termek.nev}">
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title">${termek.nev}</h6>
                                 <h6><strong>${parseInt(termek.egysegar).toLocaleString()} Ft</strong></h6>
                                 <form method="POST" action="kosar_muveletek.php">
                                     <input type="hidden" name="termek_id" value="${termek.id}">
+                                    <input type="hidden" name="termek_nev" value="${termek.nev}">
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
-                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.t_id}">Részletek</button>
+                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
                                     <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary">Kosárba</button>
                                 </form>
                             </div>
@@ -146,15 +151,15 @@ async function termekekLeker() {
                     </div>
     
                     <!-- Modal -->
-                    <div class="modal fade" id="modal_${termek.t_id}" tabindex="-1" aria-labelledby="modalLabel_${termek.t_id}" aria-hidden="true">
+                    <div class="modal fade" id="modal_${termek.id}" tabindex="-1" aria-labelledby="modalLabel_${termek.id}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="modalLabel_${termek.t_id}">${termek.nev}</h5>
+                                    <h5 class="modal-title" id="modalLabel_${termek.id}">${termek.nev}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <img src="${termek.kep}" alt="${termek.t_nev}" class="img-fluid mb-3">
+                                    <img src="${termek.kep}" alt="${termek.nev}" class="img-fluid mb-3">
                                     <p>${termek.leiras}</p>
                                     <h6><strong>Ár: ${parseInt(termek.egysegar).toLocaleString()} Ft</strong></h6>
                                     <p><strong>Gyártó:</strong> ${termek.gyarto}</p>
@@ -165,6 +170,7 @@ async function termekekLeker() {
                                     <form method="POST" action="kosar_muveletek.php">
                                         <input type="hidden" name="termek_id" value="${termek.t_id}">
                                         <input type="hidden" name="termek_kep" value="${termek.kep}">
+                                        <input type="hidden" name="termek_nev" value="${termek.nev}">
                                         <input type="hidden" name="ar" value="${termek.egysegar}">
                                         <input type="hidden" name="mennyiseg" value="1">
                                         <button type="submit" id="modalKartyaGomb" class="btn btn-primary" name="add_to_cart">Kosárba</button>
@@ -203,6 +209,8 @@ async function osszesTermekekLeker() {
         // Válasz feldolgozása
         let termekek = await eredmeny.json();
 
+        console.log(termekek)
+
         // Termékek megjelenítése
         let termekekTartalom = document.getElementById("termekekTartalom");
         termekekTartalom.innerHTML = ""; // Előző tartalom törlése
@@ -232,7 +240,7 @@ async function osszesTermekekLeker() {
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
-                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.t_id}">Részletek</button>
+                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
                                     <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary">Kosárba</button>
                                 </form>
                             </div>
@@ -240,15 +248,15 @@ async function osszesTermekekLeker() {
                     </div>
     
                     <!-- Modal -->
-                    <div class="modal fade" id="modal_${termek.t_id}" tabindex="-1" aria-labelledby="modalLabel_${termek.t_id}" aria-hidden="true">
+                    <div class="modal fade" id="modal_${termek.id}" tabindex="-1" aria-labelledby="modalLabel_${termek.id}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="modalLabel_${termek.t_id}">${termek.nev}</h5>
+                                    <h5 class="modal-title" id="modalLabel_${termek.id}">${termek.nev}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <img src="${termek.kep}" alt="${termek.t_nev}" class="img-fluid mb-3">
+                                    <img src="${termek.kep}" alt="${termek.nev}" class="img-fluid mb-3">
                                     <p>${termek.leiras}</p>
                                     <h6><strong>Ár: ${parseInt(termek.egysegar).toLocaleString()} Ft</strong></h6>
                                     <p><strong>Gyártó:</strong> ${termek.gyarto}</p>

@@ -8,17 +8,17 @@ header("Pragma: no-cache");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $felhasznalonev = $_POST['felhasznalonev'];
-    $password = $_POST['password'];
-
+    $password = $_POST['password'];    
+    
     $stmt = $pdo->prepare("SELECT * FROM felhasznalo WHERE fh_nev = :fh_name");
     $stmt->bindParam(':fh_name', $felhasznalonev);
     $stmt->execute();
-
+    
     if ($stmt->rowCount() > 0) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
         if (password_verify($password, $user['jelszo'])) {
-            $_SESSION['felhasznalo'] = $user['fh_nev'];
+            $_SESSION['felhasznalo'] = $user;
             $_SESSION['jogosultsag'] = $user['jogosultsag'];
             if($_SESSION['jogosultsag'] == 'admin') $_SESSION['admin_logged_in'] = true;
             header("Location: fooldal");
@@ -30,6 +30,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Hibás felhasználónév vagy jelszó."; //nemlétező felhasználó
     }
     
+    // Bejelentkezés után, felhasználó kosarának visszaállítása
+$user_id = $_SESSION['user_id'];  // A felhasználó ID-ja
+
+// Lekérjük a felhasználó rendelését
+$query = "SELECT t.termek_id, t.tetelek_mennyiseg, p.nev, p.ar 
+          FROM tetelek t 
+          JOIN termekek p ON t.termek_id = p.id 
+          WHERE t.rendeles_id LIKE ?";
+$stmt = $pdo->prepare($query);
+$stmt->execute([$user_id . '%']);  // A rendelés ID-ja a felhasználóhoz van kötve
+
+$kosar = [];
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    // Kosárba tesszük az összes tételt
+    $kosar[] = $row;
+}
+
+// Most a $kosar változó tartalmazza a felhasználó kosárját
+
 
 
 }
