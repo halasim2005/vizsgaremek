@@ -64,6 +64,18 @@ include './db.php'; // Az adatbázis kapcsolat betöltése
 
         </div>
 
+        <!-- Modal 
+        <div id="sikerkosarModal" class="modal fade" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="max-width: 400px;">
+                <div class="modal-content" style="background-color: green; color: white; border-radius: 8px;">
+                    <div class="modal-body" style="padding: 20px; text-align: center;">
+                        A termék a kosárba került!
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
