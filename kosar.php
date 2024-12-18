@@ -59,26 +59,38 @@ function teljes_e_a_profil($userData) {
 }
 
 // Kosár betöltése adatbázisból
-function betolt_kosar($conn, $felhasznalo_id) {
-    $query = "SELECT t.termek_id, t.nev AS termek_nev, t.ar, tk.mennyiseg, t.kep AS termek_kep 
-              FROM tetelek tk 
-              INNER JOIN termekek t ON tk.termek_id = t.id 
-              WHERE tk.fh_nev = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->execute([$felhasznalo_id]);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Kosár tartalmának betöltése az adatbázisból
+function betolt_kosar_adatbazisbol($pdo) {
+    if (isset($_SESSION['felhasznalo']['fh_nev'])) {
+        $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
+        $query = "SELECT tetelek.termek_id, tetelek.tetelek_mennyiseg, termek.nev as termek_nev, 
+                         termek.egysegar, termek.kep as termek_kep
+                  FROM tetelek
+                  INNER JOIN termek ON tetelek.termek_id = termek.id
+                  WHERE tetelek.fh_nev = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$fh_nev]);
+        $_SESSION['kosar'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        $_SESSION['kosar'] = [];
+    }
 }
+
+// Betöltés az oldal elején
+require_once './db.php';
+betolt_kosar_adatbazisbol($pdo);
+
 
 if (isset($_SESSION['felhasznalo']['id'])) {
     $felhasznalo_id = $_SESSION['felhasznalo']['id'];
-    $_SESSION['kosar'] = betolt_kosar($pdo, $felhasznalo_id);
+    $_SESSION['kosar'] = betolt_kosar_adatbazisbol($pdo, $felhasznalo_id);
 }
 
 // Kosár összesítő számítás
 function osszegzo($kosar) {
     $osszesen = 0;
     foreach ($kosar as $termek) {
-        $osszesen += $termek['ar'] * $termek['mennyiseg'];
+        $osszesen += $termek['egysegar'] * $termek['tetelek_mennyiseg'];
     }
     return $osszesen;
 }
@@ -121,9 +133,9 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                                     <div class="col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title"><?= htmlspecialchars($termek['termek_nev']) ?></h5>
-                                            <p class="card-text"><?= $termek['ar'] ?> Ft / db</p>
-                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['mennyiseg'] ?>" min="1" class="form-control w-25">
-                                            <p class="card-text"><strong><?= $termek['ar'] * $termek['mennyiseg'] ?> Ft</strong></p>
+                                            <p class="card-text"><?= $termek['egysegar'] ?> Ft / db</p>
+                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['tetelek_mennyiseg'] ?>" min="1" class="form-control w-25">
+                                            <p class="card-text"><strong><?= $termek['egysegar'] * $termek['tetelek_mennyiseg'] ?> Ft</strong></p>
                                         </div>
                                     </div>
                                 </div>
