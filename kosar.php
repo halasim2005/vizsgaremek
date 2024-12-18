@@ -95,6 +95,67 @@ function osszegzo($kosar) {
     return $osszesen;
 }
 
+if (isset($_POST['delete_item'])) {
+    $termek_id = $_POST['termek_id'];
+    $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
+
+    // Törlés a Session-ből
+    foreach ($_SESSION['kosar'] as $index => $termek) {
+        if ($termek['termek_id'] == $termek_id) {
+            unset($_SESSION['kosar'][$index]);
+            break;
+        }
+    }
+
+    // Törlés az adatbázisból
+    $query = "DELETE FROM tetelek WHERE fh_nev = ? AND termek_id = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$fh_nev, $termek_id]);
+
+    // Újrendezés a Session-ben
+    $_SESSION['kosar'] = array_values($_SESSION['kosar']);
+
+    header("Location: kosar.php");
+    exit();
+}
+
+
+if (isset($_POST['update_cart'])) {
+    foreach ($_POST['mennyisegek'] as $index => $uj_mennyiseg) {
+        $termek_id = $_SESSION['kosar'][$index]['termek_id'];
+        
+        // Ha az új mennyiség 0 vagy kisebb, akkor töröljük az elemet
+        if ($uj_mennyiseg <= 0) {
+            unset($_SESSION['kosar'][$index]);
+
+            // Törlés az adatbázisból
+            $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
+            $query = "DELETE FROM tetelek WHERE fh_nev = ? AND termek_id = ?";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$fh_nev, $termek_id]);
+        } else {
+            // Session frissítése
+            $_SESSION['kosar'][$index]['mennyiseg'] = $uj_mennyiseg;
+
+            // Adatbázis frissítése
+            $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
+            $query = "UPDATE tetelek SET tetelek_mennyiseg = ? WHERE fh_nev = ? AND termek_id = ?";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$uj_mennyiseg, $fh_nev, $termek_id]);
+        }
+    }
+
+    // Újrendezés a Session-ben
+    $_SESSION['kosar'] = array_values($_SESSION['kosar']);
+
+    // Adatok frissítése adatbázisból
+    betolt_kosar_adatbazisbol($pdo);
+
+    header("Location: kosar.php");
+    exit();
+}
+
+
 // Bejelentkezési állapot ellenőrzése
 $bejelentkezve = isset($_SESSION['felhasznalo']);
 $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : false;
@@ -134,8 +195,10 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                                         <div class="card-body">
                                             <h5 class="card-title"><?= htmlspecialchars($termek['termek_nev']) ?></h5>
                                             <p class="card-text"><?= $termek['egysegar'] ?> Ft / db</p>
-                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['tetelek_mennyiseg'] ?>" min="1" class="form-control w-25">
+                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['tetelek_mennyiseg'] ?>" min="0" class="form-control w-25">
                                             <p class="card-text"><strong><?= $termek['egysegar'] * $termek['tetelek_mennyiseg'] ?> Ft</strong></p>
+                                            <input type="hidden" name="termek_id" value="<?= htmlspecialchars($termek['termek_id']) ?>">
+                                            <button type="submit" name="delete_item" class="btn btn-danger btn-sm">Törlés</button>
                                         </div>
                                     </div>
                                 </div>
