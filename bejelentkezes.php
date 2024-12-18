@@ -66,6 +66,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Kanit:wght@300&family=Montserrat&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style/style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <?php include './navbar.php'; ?>
@@ -89,6 +90,13 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 <div class="mb-3">
                     <label for="password" class="form-label text-center">Jelszó</label>
                     <input type="password" class="form-control w-100" name="password" id="password" required>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="mb-3">
+                    <!--secret: 6LfhrZ4qAAAAAJob4H4DXTYik72YDWwalvPX83N0-->
+                    <div class="g-recaptcha text-center" data-sitekey="6LfhrZ4qAAAAAKM6FWwbkxfS3zjnRCgE3e_3JmI6"></div>
                 </div>
             </div>
 

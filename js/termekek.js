@@ -29,14 +29,14 @@ function arakFeltolt(arak){
         
         rangeEgy.innerHTML = `
             <input type="range" id="minRangeAr" style="width: 150px; accent-color: rgb(61, 61, 61)" 
-                min="${adat.arMin}" max="${adat.arMax}" step="5" value="${adat.arMin}" 
+                min="${(adat.arMin)}" max="${(adat.arMax)}" step="5" value="${(adat.arMin)}" 
                 oninput="document.getElementById('minArValue').textContent = this.value;">
             <span id="minArValue">${adat.arMin}</span> Ft
         `;
 
         rangeKetto.innerHTML = `
             <input type="range" id="maxRangeAr" style="width: 150px; accent-color: rgb(61, 61, 61)" 
-                min="${adat.arMin}" max="${adat.arMax}" step="5" value="${adat.arMax}" 
+                min="${(adat.arMin)}" max="${(adat.arMax)}" step="5" value="${(adat.arMax)}" 
                 oninput="document.getElementById('maxArValue').textContent = this.value;">
             <span id="maxArValue">${adat.arMax}</span> Ft
         `;
