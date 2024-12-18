@@ -8,6 +8,9 @@ if (!isset($_SESSION['kosar'])) {
     $_SESSION['kosar'] = [];
 }
 
+// Adatbázis kapcsolat (feltételezve, hogy van egy $pdo változó)
+require_once './db.php';
+
 // Session frissítése adatbázisból (opcionális)
 function frissit_session_adatbazisbol($conn) {
     if (isset($_SESSION['felhasznalo']['id'])) {
@@ -24,7 +27,6 @@ function teljes_e_a_profil($userData) {
                        'szamlazasi_iranyitoszam', 'szamlazasi_telepules', 
                        'szamlazasi_utca', 'szamlazasi_hazszam'];
     
-    // Ellenőrzés: Alap mezők
     foreach ($requiredFields as $field) {
         if (empty($userData[$field])) {
             error_log("Hiányzó mező: $field");
@@ -32,7 +34,6 @@ function teljes_e_a_profil($userData) {
         }
     }
     
-    // Szállítási cím eltér? Ellenőrzés csak akkor
     if (!empty($userData['kezbesitesi_iranyitoszam']) && 
         $userData['kezbesitesi_iranyitoszam'] != $userData['szamlazasi_iranyitoszam']) {
 
@@ -47,7 +48,6 @@ function teljes_e_a_profil($userData) {
         }
     }
 
-    // Céges mezők kezelése
     if (!empty($userData['szamlazasi_cegnev']) || !empty($userData['szamlazasi_adoszam'])) {
         if (empty($userData['szamlazasi_cegnev']) || empty($userData['szamlazasi_adoszam'])) {
             error_log("Hiányzó céges mező: szamlazasi_cegnev vagy szamlazasi_adoszam");
@@ -55,52 +55,23 @@ function teljes_e_a_profil($userData) {
         }
     }
 
-    return true; // Profil teljes
+    return true; 
 }
 
+// Kosár betöltése adatbázisból
+function betolt_kosar($conn, $felhasznalo_id) {
+    $query = "SELECT t.termek_id, t.nev AS termek_nev, t.ar, tk.mennyiseg, t.kep AS termek_kep 
+              FROM tetelek tk 
+              INNER JOIN termekek t ON tk.termek_id = t.id 
+              WHERE tk.fh_nev = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->execute([$felhasznalo_id]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
-
-// Kosár kezelése
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['add_to_cart'])) {
-        $termek_id = $_POST['termek_id'];
-        $termek_nev = $_POST['termek_nev'];
-        $ar = $_POST['ar'];
-        $mennyiseg = $_POST['mennyiseg'];
-        $kep = $_POST['termek_kep'];
-
-        $van_mar = false;
-        foreach ($_SESSION['kosar'] as &$termek) {
-            if ($termek['termek_id'] === $termek_id) {
-                $termek['mennyiseg'] += $mennyiseg;
-                $van_mar = true;
-                break;
-            }
-        }
-
-        if (!$van_mar) {
-            $_SESSION['kosar'][] = [
-                'termek_id' => $termek_id,
-                'termek_nev' => $termek_nev,
-                'ar' => $ar,
-                'mennyiseg' => $mennyiseg,
-                'termek_kep' => $kep
-            ];
-        }
-    } elseif (isset($_POST['update_cart'])) {
-        foreach ($_POST['mennyisegek'] as $index => $uj_mennyiseg) {
-            if ($uj_mennyiseg > 0) {
-                $_SESSION['kosar'][$index]['mennyiseg'] = (int)$uj_mennyiseg;
-            } else {
-                unset($_SESSION['kosar'][$index]);
-            }
-        }
-        $_SESSION['kosar'] = array_values($_SESSION['kosar']); // Újrendezés
-    } elseif (isset($_POST['empty_cart'])) {
-        $_SESSION['kosar'] = [];
-    }
-    header("Location: kosar.php");
-    exit();
+if (isset($_SESSION['felhasznalo']['id'])) {
+    $felhasznalo_id = $_SESSION['felhasznalo']['id'];
+    $_SESSION['kosar'] = betolt_kosar($pdo, $felhasznalo_id);
 }
 
 // Kosár összesítő számítás

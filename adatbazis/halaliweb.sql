@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Dec 03. 18:54
+-- Létrehozás ideje: 2024. Dec 18. 11:13
 -- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.0.30
+-- PHP verzió: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -52,8 +52,8 @@ CREATE TABLE `felhasznalo` (
 --
 
 INSERT INTO `felhasznalo` (`fh_nev`, `jelszo`, `vezeteknev`, `keresztnev`, `szamlazasi_iranyitoszam`, `szamlazasi_telepules`, `szamlazasi_utca`, `szamlazasi_hazszam`, `szamlazasi_cegnev`, `szamlazasi_adoszam`, `kezbesitesi_iranyitoszam`, `kezbesitesi_telepules`, `kezbesitesi_utca`, `kezbesitesi_hazszam`, `telefonszam`, `email`, `jogosultsag`) VALUES
-('admin', '$2y$10$ZV5/kz0Yn1IB687p5eqfAuMCureJAlRueIJwPNtionjFT/mh8lUGK', 'a', 'a', 0, '', '', '', '', 0, 0, '', '', '', 0, 'a@gmail.com', 'admin'),
-('b', '$2y$10$/jo.zuoSmbDGDUS6O.4QBuGIcEg5q5uuV/ZrbauzPM18rZvnIube2', 'b', 'b', 0, '', '', '', '', 0, 0, '', '', '', 0, 'b@gmailcom', 'user');
+('admin', '$2y$10$ZV5/kz0Yn1IB687p5eqfAuMCureJAlRueIJwPNtionjFT/mh8lUGK', 'a', 'a', 8181, 'Berhida', 'Fő', '99', 'asd', 2147483647, 8181, 'Berhida', 'Fő', '99', '+36 36 242 3423', 'a@gmail.com', 'admin'),
+('b', '$2y$10$/jo.zuoSmbDGDUS6O.4QBuGIcEg5q5uuV/ZrbauzPM18rZvnIube2', 'b', 'b', 0, '', '', '', '', 0, 0, '', '', '', '0', 'b@gmailcom', 'user');
 
 -- --------------------------------------------------------
 
@@ -101,6 +101,13 @@ CREATE TABLE `megrendeles` (
   `leadas_datum` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- A tábla adatainak kiíratása `megrendeles`
+--
+
+INSERT INTO `megrendeles` (`id`, `fh_nev`, `leadas_datum`) VALUES
+(1, 'admin', '2024-12-18');
+
 -- --------------------------------------------------------
 
 --
@@ -141,10 +148,20 @@ INSERT INTO `termek` (`id`, `nev`, `egysegar`, `leiras`, `gyarto`, `tipus`, `kat
 
 CREATE TABLE `tetelek` (
   `id` int(10) NOT NULL,
-  `rendeles_id` varchar(100) NOT NULL,
+  `rendeles_id` int(100) NOT NULL,
   `termek_id` int(10) NOT NULL,
-  `tetelek_mennyiseg` int(5) NOT NULL
+  `tetelek_mennyiseg` int(5) NOT NULL,
+  `fh_nev` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- A tábla adatainak kiíratása `tetelek`
+--
+
+INSERT INTO `tetelek` (`id`, `rendeles_id`, `termek_id`, `tetelek_mennyiseg`, `fh_nev`) VALUES
+(5, 1, 9, 5, 'admin'),
+(10, 1, 10, 2, 'admin'),
+(12, 1, 11, 1, 'admin');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -198,7 +215,7 @@ ALTER TABLE `kategoria`
 -- AUTO_INCREMENT a táblához `megrendeles`
 --
 ALTER TABLE `megrendeles`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT a táblához `termek`
@@ -210,7 +227,7 @@ ALTER TABLE `termek`
 -- AUTO_INCREMENT a táblához `tetelek`
 --
 ALTER TABLE `tetelek`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Megkötések a kiírt táblákhoz
