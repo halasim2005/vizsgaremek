@@ -111,14 +111,7 @@ if (isset($_POST['delete_item'])) {
     $query = "DELETE FROM tetelek WHERE fh_nev = ? AND termek_id = ?";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$fh_nev, $termek_id]);
-
-    // Újrendezés a Session-ben
-    $_SESSION['kosar'] = array_values($_SESSION['kosar']);
-
-    header("Location: kosar.php");
-    exit();
 }
-
 
 if (isset($_POST['update_cart'])) {
     foreach ($_POST['mennyisegek'] as $index => $uj_mennyiseg) {
@@ -151,7 +144,7 @@ if (isset($_POST['update_cart'])) {
     // Adatok frissítése adatbázisból
     betolt_kosar_adatbazisbol($pdo);
 
-    header("Location: kosar.php");
+    header("Location: kosar");
     exit();
 }
 
