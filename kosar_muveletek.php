@@ -40,26 +40,5 @@ if (isset($_POST['add_to_cart'])) {
 }
 
 
-// Eltávolítás
-if (isset($_POST['remove_from_cart'])) {
-    $index = $_POST['index'];
-    unset($_SESSION['kosar'][$index]);
-    $_SESSION['kosar'] = array_values($_SESSION['kosar']); // Újrendezés
-    header("Location: kosar");
-    exit();
-}
 
-// Kosár ürítése
-if (isset($_POST['empty_cart'])) {
-    // Adatok törlése az adatbázisból
-    $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
-    $query = "DELETE FROM tetelek WHERE fh_nev = ?";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$fh_nev]);
-
-    // Session kosár ürítése
-    $_SESSION['kosar'] = [];
-    header("Location: kosar");
-    exit();
-}
 ?>
