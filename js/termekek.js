@@ -25,8 +25,6 @@ function arakFeltolt(arak){
     let rangeKetto = document.getElementById("rangeKetto");
 
     for (let adat of arak) {
-        console.log(adat.arMax);
-        
         rangeEgy.innerHTML = `
             <input type="range" id="minRangeAr" style="width: 150px; accent-color: rgb(61, 61, 61)" 
                 min="${(adat.arMin)}" max="${(adat.arMax)}" step="5" value="${(adat.arMin)}" 
@@ -73,14 +71,8 @@ async function arakLeker() {
     }
 }
 
-function szuresEgy(osszesTermek_eredm){
-    console.log(osszesTermek_eredm);
-    
-}
-
 async function termekekLeker() {
     try {
-        // Szűrőfeltételek begyűjtése
         let kategoria = document.getElementById("kategoriaSzures").value;
         let gyarto = document.getElementById("gyartoSzures").value;
         let minRangeAr = document.getElementById("minRangeAr").value;
@@ -95,10 +87,6 @@ async function termekekLeker() {
             'kereses': kereses
         };
 
-        console.log(bodyAdatok);
-        
-
-        // AJAX kérés
         let eredmeny = await fetch('./termekek_adatok.php/szures', {
             method: 'POST',
             headers: {
@@ -107,11 +95,7 @@ async function termekekLeker() {
             body: JSON.stringify(bodyAdatok)
         });
 
-        // Válasz feldolgozása
         let termekek = await eredmeny.json();
-
-        console.log(termekek);
-        
 
         // Termékek megjelenítése
         let termekekTartalom = document.getElementById("termekekTartalom");
@@ -201,11 +185,10 @@ async function osszesTermekekLeker() {
             'kategoria': 'osszes',
             'gyarto': 'osszesGyarto',
             'minRangeAr': 0,
-            'maxRangeAr': 9999999,
+            'maxRangeAr': 9999999999999,
             'kereses': ''
         };
 
-        // AJAX kérés
         let eredmeny = await fetch('./termekek_adatok.php/szures', {
             method: 'POST',
             headers: {
@@ -214,14 +197,10 @@ async function osszesTermekekLeker() {
             body: JSON.stringify(bodyAdatok)
         });
 
-        // Válasz feldolgozása
         let termekek = await eredmeny.json();
 
-        console.log(termekek)
-
-        // Termékek megjelenítése
         let termekekTartalom = document.getElementById("termekekTartalom");
-        termekekTartalom.innerHTML = ""; // Előző tartalom törlése
+        termekekTartalom.innerHTML = "";
 
         if(termekek.length === 0){
             termekekTartalom.innerHTML = "Nincs termék a szűrőfeltételeknek megfelelően!";
@@ -308,9 +287,9 @@ function mutasdKosarbaModal() {
     modal.style.display = "flex";
 
     // Automatikus bezárás 2 másodperc után
-    setTimeout(() => {
+    /*setTimeout(() => {
         modal.style.display = "none";
-    }, 2000);
+    }, 2000);*/
 
     // Manuális bezárás gombbal
     closeButton.addEventListener("click", () => {
@@ -318,12 +297,7 @@ function mutasdKosarbaModal() {
     });
 }
 
-
-
 window.addEventListener("load", kategoriakLeker);
 window.addEventListener("load", gyartokLeker);
 window.addEventListener("load", arakLeker);
 window.addEventListener("load", osszesTermekekLeker)
-
-
-
