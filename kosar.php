@@ -193,19 +193,19 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title"><?= htmlspecialchars($termek['termek_nev']) ?></h5>
+                                            <h5 class="card-title kosarFelirat"><?= htmlspecialchars($termek['termek_nev']) ?></h5>
                                             <p class="card-text"><?= $termek['egysegar'] ?> Ft / db</p>
-                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['tetelek_mennyiseg'] ?>" min="0" class="form-control w-25">
-                                            <p class="card-text"><strong><?= $termek['egysegar'] * $termek['tetelek_mennyiseg'] ?> Ft</strong></p>
+                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['tetelek_mennyiseg'] ?>" min="0" class="form-control w-25"><br>
+                                            <p class="card-text kosarAr"><strong><?= $termek['egysegar'] * $termek['tetelek_mennyiseg'] ?> Ft</strong></p>
                                             <input type="hidden" name="termek_id" value="<?= htmlspecialchars($termek['termek_id']) ?>">
-                                            <button type="submit" name="delete_item" class="btn btn-danger btn-sm">Törlés</button>
+                                            <button type="submit" name="delete_item" class="torlesBtn"><img src="./képek/torlesikon.svg" class="torlesIcon" href="Törlés"></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                        <button type="submit" name="update_cart" class="btn btn-primary">Kosár frissítése</button>
-                        <button type="submit" name="empty_cart" class="btn btn-danger">Kosár ürítése</button>
+                        <button type="submit" id="termekekKartyaGomb" name="update_cart" class="btn btn-primary">Kosár frissítése</button>
+                        <button type="submit" id="termekekKartyaGomb" name="empty_cart" class="btn btn-danger">Kosár ürítése</button>
                     </form>
                 <?php endif; ?>
             </div>
@@ -220,7 +220,7 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                 <?php elseif (!$profil_teljes): ?>
                     <div class="alert alert-danger">Vásárlás folytatásához kérjük, töltse ki a profilját! <a href="profil.php">Profil szerkesztése</a></div>
                 <?php else: ?>
-                    <button class="btn btn-success w-100">Tovább a fizetéshez</button>
+                    <button id="termekekKartyaGomb" class="btn btn-success w-100">Tovább a fizetéshez</button>
                 <?php endif; ?>
             </div>
         </div>
