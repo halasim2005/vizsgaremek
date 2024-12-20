@@ -25,8 +25,6 @@ function arakFeltolt(arak){
     let rangeKetto = document.getElementById("rangeKetto");
 
     for (let adat of arak) {
-        console.log(adat.arMax);
-        
         rangeEgy.innerHTML = `
             <input type="range" id="minRangeAr" style="width: 150px; accent-color: rgb(61, 61, 61)" 
                 min="${(adat.arMin)}" max="${(adat.arMax)}" step="5" value="${(adat.arMin)}" 
@@ -73,14 +71,8 @@ async function arakLeker() {
     }
 }
 
-function szuresEgy(osszesTermek_eredm){
-    console.log(osszesTermek_eredm);
-    
-}
-
 async function termekekLeker() {
     try {
-        // Szűrőfeltételek begyűjtése
         let kategoria = document.getElementById("kategoriaSzures").value;
         let gyarto = document.getElementById("gyartoSzures").value;
         let minRangeAr = document.getElementById("minRangeAr").value;
@@ -95,10 +87,6 @@ async function termekekLeker() {
             'kereses': kereses
         };
 
-        console.log(bodyAdatok);
-        
-
-        // AJAX kérés
         let eredmeny = await fetch('./termekek_adatok.php/szures', {
             method: 'POST',
             headers: {
@@ -107,11 +95,7 @@ async function termekekLeker() {
             body: JSON.stringify(bodyAdatok)
         });
 
-        // Válasz feldolgozása
         let termekek = await eredmeny.json();
-
-        console.log(termekek);
-        
 
         // Termékek megjelenítése
         let termekekTartalom = document.getElementById("termekekTartalom");
@@ -143,10 +127,18 @@ async function termekekLeker() {
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
-                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
-                                    <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary">Kosárba</button>
+                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}" >Részletek</button>
+                                    <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary" onclick="mutasdKosarbaModal()">Kosárba</button>
                                 </form>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Kosárba sikeresen hozzáadás modal -->
+                    <div id="kosarbaModal" class="modal" tabindex="-1" style="display: none; position: fixed; z-index: 1050; background-color: rgba(0,0,0,0.5); width: 100%; height: 100%; top: 0; left: 0; justify-content: center; align-items: center;">
+                        <div class="modal-dialog" style="background-color: #d4edda; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); text-align: center;">
+                            <p style="color: #155724; font-weight: bold;">A termék a kosárba került!</p>
+                            <button type="button" id="closeKosarbaModal" style="background-color: #155724; color: white; border: none; padding: 5px 10px; border-radius: 5px;">Bezár</button>
                         </div>
                     </div>
     
@@ -173,7 +165,7 @@ async function termekekLeker() {
                                         <input type="hidden" name="termek_nev" value="${termek.nev}">
                                         <input type="hidden" name="ar" value="${termek.egysegar}">
                                         <input type="hidden" name="mennyiseg" value="1">
-                                        <button type="submit" id="modalKartyaGomb" class="btn btn-primary" name="add_to_cart">Kosárba</button>
+                                        <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary" onclick="mutasdKosarbaModal()">Kosárba</button>
                                     </form>
                                 </div>
                             </div>
@@ -193,11 +185,10 @@ async function osszesTermekekLeker() {
             'kategoria': 'osszes',
             'gyarto': 'osszesGyarto',
             'minRangeAr': 0,
-            'maxRangeAr': 9999999,
+            'maxRangeAr': 9999999999999,
             'kereses': ''
         };
 
-        // AJAX kérés
         let eredmeny = await fetch('./termekek_adatok.php/szures', {
             method: 'POST',
             headers: {
@@ -206,14 +197,10 @@ async function osszesTermekekLeker() {
             body: JSON.stringify(bodyAdatok)
         });
 
-        // Válasz feldolgozása
         let termekek = await eredmeny.json();
 
-        console.log(termekek)
-
-        // Termékek megjelenítése
         let termekekTartalom = document.getElementById("termekekTartalom");
-        termekekTartalom.innerHTML = ""; // Előző tartalom törlése
+        termekekTartalom.innerHTML = "";
 
         if(termekek.length === 0){
             termekekTartalom.innerHTML = "Nincs termék a szűrőfeltételeknek megfelelően!";
@@ -241,11 +228,20 @@ async function osszesTermekekLeker() {
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
                                     <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
-                                    <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary">Kosárba</button>
+                                    <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary" onclick="mutasdKosarbaModal()">Kosárba</button>
                                 </form>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Kosárba sikeresen hozzáadás modal -->
+                    <div id="kosarbaModal" class="modal" tabindex="-1" style="display: none; position: fixed; z-index: 1050; background-color: rgba(0,0,0,0.5); width: 100%; height: 100%; top: 0; left: 0; justify-content: center; align-items: center;">
+                        <div class="modal-dialog" style="background-color: #d4edda; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); text-align: center;">
+                            <p style="color: #155724; font-weight: bold;">A termék a kosárba került!</p>
+                            <button type="button" id="closeKosarbaModal" style="background-color: #155724; color: white; border: none; padding: 5px 10px; border-radius: 5px;">Bezár</button>
+                        </div>
+                    </div>
+
     
                     <!-- Modal -->
                     <div class="modal fade" id="modal_${termek.id}" tabindex="-1" aria-labelledby="modalLabel_${termek.id}" aria-hidden="true">
@@ -269,7 +265,7 @@ async function osszesTermekekLeker() {
                                         <input type="hidden" name="termek_kep" value="${termek.kep}">
                                         <input type="hidden" name="ar" value="${termek.egysegar}">
                                         <input type="hidden" name="mennyiseg" value="1">
-                                        <button type="submit" id="modalKartyaGomb" class="btn btn-primary" name="add_to_cart">Kosárba</button>
+                                        <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary" onclick="mutasdKosarbaModal()">Kosárba</button>
                                     </form>
                                 </div>
                             </div>
@@ -283,11 +279,25 @@ async function osszesTermekekLeker() {
     }
 }
 
+function mutasdKosarbaModal() {
+    const modal = document.getElementById("kosarbaModal");
+    const closeButton = document.getElementById("closeKosarbaModal");
+
+    // Mutatjuk a modalt
+    modal.style.display = "flex";
+
+    // Automatikus bezárás 2 másodperc után
+    /*setTimeout(() => {
+        modal.style.display = "none";
+    }, 2000);*/
+
+    // Manuális bezárás gombbal
+    closeButton.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+}
 
 window.addEventListener("load", kategoriakLeker);
 window.addEventListener("load", gyartokLeker);
 window.addEventListener("load", arakLeker);
 window.addEventListener("load", osszesTermekekLeker)
-
-
-

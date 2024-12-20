@@ -22,5 +22,5 @@
         </tr>
     </table> 
     <hr>
-    <div id="kozepre"><p><?= date("Y"); ?> © HaLáli Kft. minden jog fenttartva! </p><div>
+    <div class="text-center"><p><?= date("Y"); ?> © HaLáli Kft. minden jog fenttartva! </p><div>
 </footer>
