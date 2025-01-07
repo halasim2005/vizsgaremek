@@ -97,23 +97,35 @@ function osszegzo($kosar) {
 
 if (isset($_POST['delete_item'])) {
     $termek_id = $_POST['termek_id'];
-    $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
 
-    // Törlés a Session-ből
-    foreach ($_SESSION['kosar'] as $index => $termek) {
-        if ($termek['termek_id'] == $termek_id) {
-            unset($_SESSION['kosar'][$index]);
-            break;
+    if (!empty($termek_id) && isset($_SESSION['felhasznalo']['fh_nev'])) {
+        $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
+
+        // Törlés a Session-ből
+        foreach ($_SESSION['kosar'] as $index => $termek) {
+            if ($termek['termek_id'] == $termek_id) {
+                unset($_SESSION['kosar'][$index]);
+                break;
+            }
         }
+
+        // Törlés az adatbázisból
+        $query = "DELETE FROM tetelek WHERE fh_nev = ? AND termek_id = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$fh_nev, $termek_id]);
+
+        // Újrendezés a Session-ben
+        $_SESSION['kosar'] = array_values($_SESSION['kosar']);
     }
 
-    // Törlés az adatbázisból
-    $query = "DELETE FROM tetelek WHERE fh_nev = ? AND termek_id = ?";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$fh_nev, $termek_id]);
+    // Újratöltés a tiszta kérésekhez
+    header("Location: kosar");
+    exit();
 }
 
+
 if (isset($_POST['update_cart'])) {
+    var_dump($_POST['mennyisegek']);
     foreach ($_POST['mennyisegek'] as $index => $uj_mennyiseg) {
         $termek_id = $_SESSION['kosar'][$index]['termek_id'];
         
@@ -137,22 +149,46 @@ if (isset($_POST['update_cart'])) {
             $stmt->execute([$uj_mennyiseg, $fh_nev, $termek_id]);
         }
     }
+     // Újrendezés a Session-ben
+     $_SESSION['kosar'] = array_values($_SESSION['kosar']);
 
-    // Újrendezés a Session-ben
-    $_SESSION['kosar'] = array_values($_SESSION['kosar']);
-
-    // Adatok frissítése adatbázisból
-    betolt_kosar_adatbazisbol($pdo);
-
-    header("Location: kosar");
-    exit();
+     // Adatok frissítése adatbázisból
+     betolt_kosar_adatbazisbol($pdo);
+ 
+     header("Location: kosar");
+     exit();
 }
 
+if (isset($_POST['empty_cart'])) {
+    if (isset($_SESSION['felhasznalo']['fh_nev'])) {
+        $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
 
+        // Törlés az adatbázisból
+        $query = "DELETE FROM tetelek WHERE fh_nev = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$fh_nev]);
+    }
+
+    // Törlés a Session-ből
+    $_SESSION['kosar'] = [];
+
+    // Újratöltés a tiszta kérésekhez
+    header("Location: kosar.php");
+    exit();
+}
+   
+function szallitas_dij($kosar) {
+    $osszesen = osszegzo($kosar);
+    return $osszesen >= 25000 ? 0 : 1690;
+}
+
+$szallitas = szallitas_dij($_SESSION['kosar']);
+$vegosszeg = osszegzo($_SESSION['kosar']) + $szallitas;
 // Bejelentkezési állapot ellenőrzése
 $bejelentkezve = isset($_SESSION['felhasznalo']);
 $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : false;
 ?>
+
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -190,32 +226,43 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                                             <p class="card-text"><?= $termek['egysegar'] ?> Ft / db</p>
                                             <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['tetelek_mennyiseg'] ?>" min="0" class="form-control w-25"><br>
                                             <p class="card-text kosarAr"><strong><?= $termek['egysegar'] * $termek['tetelek_mennyiseg'] ?> Ft</strong></p>
-                                            <input type="hidden" name="termek_id" value="<?= htmlspecialchars($termek['termek_id']) ?>">
-                                            <button type="submit" name="delete_item" class="torlesBtn"><img src="./képek/torlesikon.svg" class="torlesIcon" href="Törlés"></button>
+                                            <form method="POST" action="kosar.php">
+                                                <input type="hidden" name="termek_id" value="<?= htmlspecialchars($termek['termek_id']) ?>">
+                                                <button type="submit" name="delete_item" class="torlesBtn"><img src="./képek/torlesikon.svg" class="torlesIcon" href="Törlés"></button>
+                                            </form>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                        <button type="submit" id="termekekKartyaGomb" name="update_cart" class="btn btn-primary">Kosár frissítése</button>
-                        <button type="submit" id="termekekKartyaGomb" name="empty_cart" class="btn btn-danger">Kosár ürítése</button>
+                        <form method="POST" action="kosar.php">
+                            <button type="submit" id="termekekKartyaGomb" name="update_cart" class="btn btn-primary">Kosár frissítése</button>
+                            <button type="submit" id="termekekKartyaGomb" name="empty_cart" class="btn btn-danger">Kosár ürítése</button>
+                        </form>
                     </form>
                 <?php endif; ?>
             </div>
             <div class="col-lg-4">
-                <h3>Rendelés összesítő</h3>
-                <p>Összesen: <strong><?= osszegzo($_SESSION['kosar']) ?> Ft</strong></p>
-                <p>Szállítás: <strong>1690 Ft</strong></p>
-                <p>ÁFA: <strong><?= round(osszegzo($_SESSION['kosar']) * 0.27, 2) ?> Ft</strong></p>
-                <h4>Végösszeg: <strong><?= osszegzo($_SESSION['kosar']) + 1690 ?> Ft</strong></h4>
-                <?php if (!$bejelentkezve): ?>
-                    <div class="alert alert-danger">Vásárlás folytatásához kérjük, jelentkezzen be! <a href="profil.php">Bejelentkezés</a></div>
-                <?php elseif (!$profil_teljes): ?>
-                    <div class="alert alert-danger">Vásárlás folytatásához kérjük, töltse ki a profilját! <a href="profil.php">Profil szerkesztése</a></div>
-                <?php else: ?>
-                    <button id="termekekKartyaGomb" class="btn btn-success w-100">Tovább a fizetéshez</button>
+            <h3>Rendelés összesítő</h3>
+            <p>Összesen: <strong><?= osszegzo($_SESSION['kosar']) ?> Ft</strong></p>
+            <p>Szállítás: <strong><?= $szallitas ?> Ft</strong></p>
+            <p>ÁFA: <strong><?= round(osszegzo($_SESSION['kosar']) * 0.27, 2) ?> Ft</strong></p>
+            <h4>Végösszeg: <strong><?= $vegosszeg ?> Ft</strong></h4>
+            <?php if (!$bejelentkezve): ?>
+                <div class="alert alert-danger">Vásárlás folytatásához kérjük, jelentkezzen be! <a href="profil.php">Bejelentkezés</a></div>
+            <?php elseif (!$profil_teljes): ?>
+                <div class="alert alert-danger">Vásárlás folytatásához kérjük, töltse ki a profilját! <a href="profil.php">Profil szerkesztése</a></div>
+            <?php elseif (empty($_SESSION['kosar'])): ?>
+                <div class="alert alert-warning">A kosár üres. Kérjük, adjon hozzá termékeket a vásárláshoz!</div>
+            <?php else: ?>
+                <?php if ($szallitas == 0): ?>
+                    <div class="alert alert-success">Gratulálunk! A szállítás ingyenes, mert meghaladta a 25 000 Ft-ot.</div>
                 <?php endif; ?>
-            </div>
+                <button id="termekekKartyaGomb" class="btn btn-success w-100">Tovább a fizetéshez</button>
+            <?php endif; ?>
+        </div>
+
         </div>
     </div>
 
