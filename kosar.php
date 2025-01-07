@@ -230,7 +230,6 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                                                 <input type="hidden" name="termek_id" value="<?= htmlspecialchars($termek['termek_id']) ?>">
                                                 <button type="submit" name="delete_item" class="torlesBtn"><img src="./képek/torlesikon.svg" class="torlesIcon" href="Törlés"></button>
                                             </form>
-
                                         </div>
                                     </div>
                                 </div>
