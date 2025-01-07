@@ -78,13 +78,16 @@ async function termekekLeker() {
         let minRangeAr = document.getElementById("minRangeAr").value;
         let maxRangeAr = document.getElementById("maxRangeAr").value;
         let kereses = document.getElementById("keresesSzures").value;
+        let rendez = document.getElementById("rendez").value;
+        console.log(rendez)
         
         let bodyAdatok = {
             'kategoria': kategoria,
             'gyarto': gyarto,
             'minRangeAr': minRangeAr,
             'maxRangeAr': maxRangeAr,
-            'kereses': kereses
+            'kereses': kereses,
+            'rendez' : rendez
         };
 
         let eredmeny = await fetch('./termekek_adatok.php/szures', {
@@ -186,7 +189,8 @@ async function osszesTermekekLeker() {
             'gyarto': 'osszesGyarto',
             'minRangeAr': 0,
             'maxRangeAr': 9999999999999,
-            'kereses': ''
+            'kereses': '',
+            'rendez' : 'nevAz'
         };
 
         let eredmeny = await fetch('./termekek_adatok.php/szures', {
@@ -245,7 +249,7 @@ async function osszesTermekekLeker() {
     
                     <!-- Modal -->
                     <div class="modal fade" id="modal_${termek.id}" tabindex="-1" aria-labelledby="modalLabel_${termek.id}" aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="modalLabel_${termek.id}">${termek.nev}</h5>

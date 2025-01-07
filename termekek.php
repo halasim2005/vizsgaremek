@@ -53,6 +53,16 @@ include './db.php'; // Az adatbázis kapcsolat betöltése
                     <input type="text" id="keresesSzures" style="width: 150px" placeholder="Írja be a termék nevét!">
                 </div>
             </div>
+            <div>Rendezés
+                <div>
+                    <select id="rendez">
+                        <option value="nevAz" selected>Név szerint (A-Z)</option>
+                        <option value="nevZa">Név szerint (Z-A)</option>
+                        <option value="arCsokk">Ár szerint növekvő</option>
+                        <option value="arNov">Ár szerint csökkenő</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
         <!-- Termékek listája -->

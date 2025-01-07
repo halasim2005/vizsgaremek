@@ -565,3 +565,9 @@ input:focus, select:focus, textarea:focus {
 .kosarFelirat{
     font-size: 25px;
 }
+
+select option:hover {
+    background-color: red; /* Hover szín piros */
+    color: white; /* Szöveg színe fehér */
+}
+  
