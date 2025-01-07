@@ -96,7 +96,7 @@ function osszegzo($kosar) {
 }
 
 if (isset($_POST['delete_item'])) {
-    $termek_id = $_POST['termek_id'];
+    $termek_id = $_POST['delete_item']; // Az adott termék id-ját kapjuk meg
 
     if (!empty($termek_id) && isset($_SESSION['felhasznalo']['fh_nev'])) {
         $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
@@ -114,18 +114,18 @@ if (isset($_POST['delete_item'])) {
         $stmt = $pdo->prepare($query);
         $stmt->execute([$fh_nev, $termek_id]);
 
-        // Újrendezés a Session-ben
+        // Újrendezés a Session-ben, hogy az indexek sorban legyenek
         $_SESSION['kosar'] = array_values($_SESSION['kosar']);
     }
 
     // Újratöltés a tiszta kérésekhez
-    header("Location: kosar");
+    header("Location: kosar.php");
     exit();
 }
 
 
+
 if (isset($_POST['update_cart'])) {
-    var_dump($_POST['mennyisegek']);
     foreach ($_POST['mennyisegek'] as $index => $uj_mennyiseg) {
         $termek_id = $_SESSION['kosar'][$index]['termek_id'];
         
@@ -149,14 +149,14 @@ if (isset($_POST['update_cart'])) {
             $stmt->execute([$uj_mennyiseg, $fh_nev, $termek_id]);
         }
     }
-     // Újrendezés a Session-ben
-     $_SESSION['kosar'] = array_values($_SESSION['kosar']);
+    // Újrendezés a Session-ben
+    $_SESSION['kosar'] = array_values($_SESSION['kosar']);
 
-     // Adatok frissítése adatbázisból
-     betolt_kosar_adatbazisbol($pdo);
+    // Adatok frissítése adatbázisból
+    betolt_kosar_adatbazisbol($pdo);
  
-     header("Location: kosar");
-     exit();
+    header("Location: kosar");
+    exit();
 }
 
 if (isset($_POST['empty_cart'])) {
@@ -199,6 +199,7 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Kanit:wght@300&family=Montserrat&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="./style/style.css">
     <title>Kosár</title>
 </head>
@@ -226,20 +227,16 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                                             <p class="card-text"><?= $termek['egysegar'] ?> Ft / db</p>
                                             <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['tetelek_mennyiseg'] ?>" min="0" class="form-control w-25"><br>
                                             <p class="card-text kosarAr"><strong><?= $termek['egysegar'] * $termek['tetelek_mennyiseg'] ?> Ft</strong></p>
-                                            <form method="POST" action="kosar.php">
                                                 <input type="hidden" name="termek_id" value="<?= htmlspecialchars($termek['termek_id']) ?>">
-                                                <button type="submit" name="delete_item" class="torlesBtn"><img src="./képek/torlesikon.svg" class="torlesIcon" href="Törlés"></button>
-                                            </form>
+                                                <button type="submit" name="delete_item" value="<?= $termek['termek_id'] ?>" class="kukaGomb" ><img class="kukaKep" src="./képek/torlesikon.svg" href="Törlés"></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                        <form method="POST" action="kosar.php">
                             <button type="submit" id="termekekKartyaGomb" name="update_cart" class="btn btn-primary">Kosár frissítése</button>
                             <button type="submit" id="termekekKartyaGomb" name="empty_cart" class="btn btn-danger">Kosár ürítése</button>
                         </form>
-                    </form>
                 <?php endif; ?>
             </div>
             <div class="col-lg-4">

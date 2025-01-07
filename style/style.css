@@ -570,4 +570,13 @@ select option:hover {
     background-color: red; /* Hover szín piros */
     color: white; /* Szöveg színe fehér */
 }
+
+.kukaGomb{
+    border: none;
+    background-color: transparent;
+}
+
+.kukaKep{
+    width: 40px;
+}
   
