@@ -203,6 +203,32 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
     <link rel="stylesheet" href="./style/style.css">
     <title>Kosár</title>
 </head>
+<style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7f7f7;
+        }
+        .main-container {
+            margin-top: 50px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .summary {
+            font-size: 1.2rem;
+        }
+        .form-check-label {
+            margin-left: 10px;
+        }
+        #payment-button {
+            background-color: #28a745;
+            border: none;
+            color: white;
+        }
+        #payment-button:hover {
+            background-color: #218838;
+        }
+    </style>
 <body>
 
     <?php include './navbar.php'; ?>
@@ -252,10 +278,53 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
             <?php elseif (empty($_SESSION['kosar'])): ?>
                 <div class="alert alert-warning">A kosár üres. Kérjük, adjon hozzá termékeket a vásárláshoz!</div>
             <?php else: ?>
-                <?php if ($szallitas == 0): ?>
-                    <div class="alert alert-success">Gratulálunk! A szállítás ingyenes, mert meghaladta a 25 000 Ft-ot.</div>
-                <?php endif; ?>
-                <button id="termekekKartyaGomb" class="btn btn-success w-100">Tovább a fizetéshez</button>
+                
+        
+            <form action="fizetesfeldolgozas.php" method="POST">
+                <div class="card">
+                    <div class="card-header">Szállítási mód</div>
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="szallitasi_mod" id="standard" value="standard" checked>
+                            <label class="form-check-label" for="standard">Standard szállítás (1690 Ft)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="szallitasi_mod" id="express" value="express">
+                            <label class="form-check-label" for="express">Expressz szállítás (2990 Ft)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Fizetési mód</div>
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="fizetesi_mod" id="kartya" value="kartya" checked>
+                            <label class="form-check-label" for="kartya">Bankkártyás fizetés</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="fizetesi_mod" id="utanvet" value="utanvet">
+                            <label class="form-check-label" for="utanvet">Utánvét</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="fizetesi_mod" id="paypal" value="paypal">
+                            <label class="form-check-label" for="paypal">PayPal</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Rendelés összesítő</div>
+                    <div class="card-body">
+                        <p class="summary">Összesen: <strong><?= number_format(osszegzo($_SESSION['kosar']), 0, '.', ' ') ?> Ft</strong></p>
+                        <p class="summary">Szállítási díj: <strong><?= number_format($szallitas, 0, '.', ' ') ?> Ft</strong></p>
+                        <p class="summary">Végösszeg: <strong><?= number_format($vegosszeg, 0, '.', ' ') ?> Ft</strong></p>
+                    </div>
+                </div>
+
+                <button type="submit" id="payment-button" class="btn btn-success w-100">Fizetés</button>
+            </form>
+
             <?php endif; ?>
         </div>
 
