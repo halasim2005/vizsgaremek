@@ -125,14 +125,14 @@ async function termekekLeker() {
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title">${termek.nev}</h6>
-                                <h6><strong>${parseInt(termek.egysegar).toLocaleString()} Ft</strong></h6>
+                                <h6><strong><span style="color: red">A termék nincs készleten!<span></strong></h6>
                                 <form method="POST" action="kosar_muveletek.php">
                                     <input type="hidden" name="termek_id" value="${termek.id}">
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
                                     <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
-                                    <span style="color: red; font-weight: bold">A termék nincs készleten!<span>
+                                    <button type="submit" disabled id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary" onclick="mutasdKosarbaModal()">Kosárba</button>
                                 </form>
                             </div>
                         </div>
@@ -280,14 +280,14 @@ async function osszesTermekekLeker() {
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title">${termek.nev}</h6>
-                                <h6><strong>${parseInt(termek.egysegar).toLocaleString()} Ft</strong></h6>
+                                <h6><strong> <span style="color: red">A termék nincs készleten!<span></strong></h6>
                                 <form method="POST" action="kosar_muveletek.php">
                                     <input type="hidden" name="termek_id" value="${termek.id}">
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
                                     <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
-                                    <span style="color: red; font-weight: bold">A termék nincs készleten!<span>
+                                    <button type="submit" disabled id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary" onclick="mutasdKosarbaModal()">Kosárba</button>
                                 </form>
                             </div>
                         </div>
