@@ -13,6 +13,33 @@ if (isset($_POST['add_to_cart'])) {
     $mennyiseg = $_POST['mennyiseg'];
     $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
 
+    // Ellenőrizd a készletet
+    $keszlet_query = "SELECT elerheto_darab FROM termek WHERE id = ?";
+    $keszlet_stmt = $pdo->prepare($keszlet_query);
+    $keszlet_stmt->execute([$termek_id]);
+    $termek = $keszlet_stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$termek) {
+        $_SESSION['uzenet'] = "A termék nem található.";
+        header("Location: termekek");
+        exit();
+    }
+
+    $keszlet = $termek['elerheto_darab'];
+
+    if ($keszlet <= 0) {
+        $_SESSION['uzenet'] = "Ez a termék jelenleg nincs készleten.";
+        header("Location: termekek");
+        exit();
+    }
+
+    // Ellenőrizd, hogy van-e elég készlet
+    if ($mennyiseg > $keszlet) {
+        $_SESSION['uzenet'] = "Nem adhat a kosárhoz több terméket, mint amennyi készleten van. Elérhető mennyiség: $keszlet.";
+        header("Location: termekek");
+        exit();
+    }
+
     // Ellenőrizd vagy hozz létre rendelést
     $rendeles_query = "SELECT id FROM megrendeles WHERE fh_nev = ? LIMIT 1";
     $rendeles_stmt = $pdo->prepare($rendeles_query);
@@ -35,10 +62,13 @@ if (isset($_POST['add_to_cart'])) {
     $stmt = $pdo->prepare($query);
     $stmt->execute([$rendeles_id, $termek_id, $mennyiseg, $fh_nev]);
 
+    // Készlet frissítése
+    $keszlet_update_query = "UPDATE termek SET elerheto_darab = elerheto_darab - ? WHERE id = ?";
+    $keszlet_update_stmt = $pdo->prepare($keszlet_update_query);
+    $keszlet_update_stmt->execute([$mennyiseg, $termek_id]);
+
+    $_SESSION['uzenet'] = "Termék sikeresen hozzáadva a kosárhoz.";
     header("Location: termekek");
     exit();
 }
-
-
-
 ?>
