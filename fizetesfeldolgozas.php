@@ -11,9 +11,9 @@ $szallitasi_mod = isset($_POST['szallitasi_mod']) ? $_POST['szallitasi_mod'] : '
 $fizetesi_mod = isset($_POST['fizetesi_mod']) ? $_POST['fizetesi_mod'] : 'kartya';
 
 // Kosár összegzés
-//$osszesen = osszegzo($_SESSION['kosar']);
-//$szallitas = szallitas_dij($_SESSION['kosar']);
-//$vegosszeg = $osszesen + $szallitas;
+$osszesen = osszegzo($_SESSION['kosar']);
+$szallitas = szallitas_dij($_SESSION['kosar']);
+$vegosszeg = $osszesen + $szallitas;
 
 // Rendelés rögzítése az adatbázisba
 $felhasznalo_id = $_SESSION['felhasznalo']['fh_nev'];
