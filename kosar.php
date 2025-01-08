@@ -204,10 +204,6 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
     <title>Kosár</title>
 </head>
 <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f7f7f7;
-        }
         .main-container {
             margin-top: 50px;
         }
