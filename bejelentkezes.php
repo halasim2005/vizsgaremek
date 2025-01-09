@@ -94,13 +94,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
 
-            <div class="row">
-                <div class="mb-3">
-                    <label><input type="checkbox" required>
-                    Elolvastam és elfogadom az adatkezelési tájékoztatót!</label>
-                </div>
-            </div>
-
             <div class="text-center">
                 <button id="navbarGomb" type="submit" class="btn">Bejelentkezés</button>
             </div>
