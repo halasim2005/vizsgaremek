@@ -252,6 +252,10 @@ body {
     width: 60%;
 }
 
+#kapcsolatLogo{
+    width: 90%;
+}
+
 .fooldalDivSzoveg{
     color: black;
     text-align: left;
@@ -393,6 +397,22 @@ body {
 }
 
 .szamitasBtn:hover{
+    background-color: rgb(61, 61, 61);
+    border: 1px solid rgb(61, 61, 61);
+    color:white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.kapcsolatBtn{
+    background-color: white;
+    border: 1px solid black;
+    color:black;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.kapcsolatBtn:hover{
     background-color: rgb(61, 61, 61);
     border: 1px solid rgb(61, 61, 61);
     color:white;
@@ -578,6 +598,10 @@ select option:hover {
 
 .kukaKep{
     width: 40px;
+}
+
+.kovessIkon{
+    color: rgb(61, 61, 61)
 }
 
   
