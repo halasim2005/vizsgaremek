@@ -123,8 +123,6 @@ if (isset($_POST['delete_item'])) {
     exit();
 }
 
-
-
 if (isset($_POST['update_cart'])) {
     foreach ($_POST['mennyisegek'] as $index => $uj_mennyiseg) {
         $termek_id = $_SESSION['kosar'][$index]['termek_id'];
@@ -187,6 +185,9 @@ $vegosszeg = osszegzo($_SESSION['kosar']) + $szallitas;
 // Bejelentkezési állapot ellenőrzése
 $bejelentkezve = isset($_SESSION['felhasznalo']);
 $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : false;
+
+require_once './fizetesfeldolgozas.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -318,7 +319,7 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                     </div>
                 </div>
 
-                <button type="submit" id="payment-button" class="btn btn-success w-100">Fizetés</button>
+                <button type="submit" name="fizetes" id="payment-button" class="btn btn-success w-100">Fizetés</button>
             </form>
 
             <?php endif; ?>
@@ -329,3 +330,4 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
 
 </body>
 </html>
+
