@@ -58,26 +58,14 @@ function teljes_e_a_profil($userData) {
 function betolt_kosar_adatbazisbol($pdo) {
     if (isset($_SESSION['felhasznalo']['fh_nev'])) {
         $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
-        $kosarba_toltse_e_query = "SELECT statusz FROM tetelek WHERE tetelek.fh_nev = ?;";
-        $kosarba_toltse_e_stmt = $pdo->prepare($kosarba_toltse_e_query);
-        $kosarba_toltse_e_stmt->execute([$fh_nev]);
-        $kosarba_toltse_e = $kosarba_toltse_e_stmt->fetchAll(PDO::FETCH_ASSOC);
-        //var_dump($kosarba_toltse_e);
-        if(is_array($kosarba_toltse_e)){
-            foreach($kosarba_toltse_e as $k){
-                if($k['statusz'] != "leadva" || $k['statusz'] != "kész"){
-                    var_dump($k['statusz']);
-                    $query = "SELECT tetelek.termek_id, tetelek.tetelek_mennyiseg, termek.nev as termek_nev, 
-                                     termek.egysegar, termek.kep as termek_kep
-                              FROM tetelek
-                              INNER JOIN termek ON tetelek.termek_id = termek.id
-                              WHERE tetelek.fh_nev = ?";
-                    $stmt = $pdo->prepare($query);
-                    $stmt->execute([$fh_nev]);
-                    $_SESSION['kosar'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                }
-            }
-        }
+        $query = "SELECT tetelek.termek_id, tetelek.tetelek_mennyiseg, termek.nev as termek_nev, 
+                            termek.egysegar, termek.kep as termek_kep
+                    FROM tetelek
+                    INNER JOIN termek ON tetelek.termek_id = termek.id
+                    WHERE tetelek.fh_nev = ? AND tetelek.statusz = 'kosárban'";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$fh_nev]);
+        $_SESSION['kosar'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } else {
         $_SESSION['kosar'] = [];
     }
