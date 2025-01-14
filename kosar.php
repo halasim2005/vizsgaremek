@@ -194,17 +194,6 @@ if(isset($_POST['fizetes'])){
     $stmt = $pdo->prepare($query);
     $stmt->execute([$fh_nev, $szallitasi_mod, $fizetesi_mod, $osszeg, $szallitas, $vegosszeg]);
 
-    // Rendelési tételek beszúrása
-    /*$rendeles_id = $pdo->lastInsertId();
-    foreach ($_SESSION['kosar'] as $termek) {
-        $termek_id = $termek['termek_id'];
-        $mennyiseg = $termek['tetelek_mennyiseg'];
-        $query = "INSERT INTO rendeles_tetelek (rendeles_id, termek_id, mennyiseg, ar)
-                VALUES (?, ?, ?, ?)";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([$rendeles_id, $termek_id, $mennyiseg, $termek['egysegar']]);
-    }*/
-
     // Kosár ürítése a session-ben
     $_SESSION['kosar'] = [];
 
