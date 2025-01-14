@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Jan 13. 19:18
+-- Létrehozás ideje: 2025. Jan 14. 10:46
 -- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.0.30
+-- PHP verzió: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -106,6 +106,18 @@ CREATE TABLE `megrendeles` (
   `leadas_datum` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- A tábla adatainak kiíratása `megrendeles`
+--
+
+INSERT INTO `megrendeles` (`id`, `fh_nev`, `szallitasi_mod`, `fizetesi_mod`, `osszeg`, `szallitas`, `vegosszeg`, `leadas_datum`) VALUES
+(6, 'admin', 'standard', 'kartya', 0, '1690', 1690, '0000-00-00'),
+(8, 'admin', 'te', 'te', 10, 't', 100, '2025-01-14'),
+(9, 'admin', 'standard', 'kartya', 30305, '0', 30305, '0000-00-00'),
+(10, 'admin', 'standard', 'kartya', 30305, '0', 30305, '0000-00-00'),
+(11, 'admin', 'standard', 'kartya', 30305, '0', 0, '2025-01-14'),
+(12, 'admin', 'standard', 'utanvet', 100, '1690', 1690, '2025-01-14');
+
 -- --------------------------------------------------------
 
 --
@@ -129,11 +141,11 @@ CREATE TABLE `termek` (
 --
 
 INSERT INTO `termek` (`id`, `nev`, `egysegar`, `leiras`, `gyarto`, `tipus`, `kategoria_id`, `elerheto_darab`, `kep`) VALUES
-(9, 'Figyelmeztető Matrica 400V', 100, 'Figyelmeztető Matrica Öntapadós \"Vigyázz! 400V\" 160x100mm.\r\n\r\n1 db, 160x100mm méretű matrica \"Vigyázz! 400V!\" felirattal!\r\nA feltüntetett ár 1db matricát tartalmaz!\r\n\r\nAz öntapadós matricák rendkívül hasznosak a villanyszerelés területén, amikor pontos és jól látható jelölésekre van szükség. Ezek a matricák a következőképpen használhatók:\r\n\r\nVálassza ki a Megfelelő Matricát: Mindig válassza ki azon matricákat, amelyek a kívánt információval rendelkeznek. Például, címkézze fel a konnektorokat a feszültség, áramlás vagy egyéb releváns adatokkal.\r\n\r\nAlapos Tisztítás: A felragasztás előtt biztosítsa, hogy a felület tiszta és száraz legyen. A por és szennyeződések befolyásolhatják az öntapadós matrica tapadását.\r\n\r\nPontos Helymeghatározás: Helyezze a matricát olyan helyre, amely könnyen látható és olvasható. A kapcsolók, konnektorok és egyéb elektromos berendezések közelében alkalmazva segít az azonnali azonosításban.\r\n\r\nJól Rögzített Tapadás: Győződjön meg róla, hogy a matrica jól tapad. Ü', 'HaLáli Kft.', 'Öntapadós', 4, 19, 'képek/400voltvigyazzmatrica.webp'),
-(10, 'MCU 0,75 vezeték', 55, 'MCU 0,75 vezeték (H05V-U) tömör réz kábel elektromos villanyvezeték fekete (200m).\r\n\r\nMCu 0,75 mm2 vezeték egyerű műanyag érszigetelésű, köpeny nélküli tömör rézvezeték.\r\nA villanyvezeték alkalmazása védőcsőbe vezetve vakolat alatt vagy falon szerelve.\r\n\r\nVezeték keresztmetszet: 0,75 mm2\r\nSzín: fekete\r\nSzigetelés: 500V\r\nKiszerelés: 200m/tekercs\r\nKülső átmérő : ~ 2,1mm\r\n\r\nAz MCU vezeték kiváló választás lehet a lakásban történő villanyszereléshez. Az MCU vezeték egy eres, merev szerkezetű és szigetelt elektromos vezeték, amely többféle színben elérhető a könnyebb azonosítás érdekében.\r\n\r\nMire jó az MCU vezeték?\r\nAz MCU vezeték alkalmas a háztartási villanyszerelési feladatokhoz. Kiválóan használható konnektorok, kapcsolók, világítás és egyéb elektromos berendezések csatlakoztatására. Az MCU vezeték lehetővé teszi az elektromos áram biztonságos és hatékony átvitelét a lakásban.\r\n\r\nMilyen vezetéket válasszak a lakásba? (Milyen villanyvezeték kell a lakásba?)\r\nA lakásban való felhasználásr', 'Prysmian Kft.', 'tömör ', 5, 238, 'képek/0,75tomor_fekete_rezvezetek.webp'),
+(9, 'Figyelmeztető Matrica 400V', 100, 'Figyelmeztető Matrica Öntapadós \"Vigyázz! 400V\" 160x100mm.\r\n\r\n1 db, 160x100mm méretű matrica \"Vigyázz! 400V!\" felirattal!\r\nA feltüntetett ár 1db matricát tartalmaz!\r\n\r\nAz öntapadós matricák rendkívül hasznosak a villanyszerelés területén, amikor pontos és jól látható jelölésekre van szükség. Ezek a matricák a következőképpen használhatók:\r\n\r\nVálassza ki a Megfelelő Matricát: Mindig válassza ki azon matricákat, amelyek a kívánt információval rendelkeznek. Például, címkézze fel a konnektorokat a feszültség, áramlás vagy egyéb releváns adatokkal.\r\n\r\nAlapos Tisztítás: A felragasztás előtt biztosítsa, hogy a felület tiszta és száraz legyen. A por és szennyeződések befolyásolhatják az öntapadós matrica tapadását.\r\n\r\nPontos Helymeghatározás: Helyezze a matricát olyan helyre, amely könnyen látható és olvasható. A kapcsolók, konnektorok és egyéb elektromos berendezések közelében alkalmazva segít az azonnali azonosításban.\r\n\r\nJól Rögzített Tapadás: Győződjön meg róla, hogy a matrica jól tapad. Ü', 'HaLáli Kft.', 'Öntapadós', 4, 17, 'képek/400voltvigyazzmatrica.webp'),
+(10, 'MCU 0,75 vezeték', 55, 'MCU 0,75 vezeték (H05V-U) tömör réz kábel elektromos villanyvezeték fekete (200m).\r\n\r\nMCu 0,75 mm2 vezeték egyerű műanyag érszigetelésű, köpeny nélküli tömör rézvezeték.\r\nA villanyvezeték alkalmazása védőcsőbe vezetve vakolat alatt vagy falon szerelve.\r\n\r\nVezeték keresztmetszet: 0,75 mm2\r\nSzín: fekete\r\nSzigetelés: 500V\r\nKiszerelés: 200m/tekercs\r\nKülső átmérő : ~ 2,1mm\r\n\r\nAz MCU vezeték kiváló választás lehet a lakásban történő villanyszereléshez. Az MCU vezeték egy eres, merev szerkezetű és szigetelt elektromos vezeték, amely többféle színben elérhető a könnyebb azonosítás érdekében.\r\n\r\nMire jó az MCU vezeték?\r\nAz MCU vezeték alkalmas a háztartási villanyszerelési feladatokhoz. Kiválóan használható konnektorok, kapcsolók, világítás és egyéb elektromos berendezések csatlakoztatására. Az MCU vezeték lehetővé teszi az elektromos áram biztonságos és hatékony átvitelét a lakásban.\r\n\r\nMilyen vezetéket válasszak a lakásba? (Milyen villanyvezeték kell a lakásba?)\r\nA lakásban való felhasználásr', 'Prysmian Kft.', 'tömör ', 5, 237, 'képek/0,75tomor_fekete_rezvezetek.webp'),
 (11, 'Tűzálló kábel', 240, 'Tűzálló kábel 1x2x0,8 JB-H(St)H E90 (JE-H(St)H BD E90) árnyékolt tömör réz vezeték.\r\nA tűzálló kábel halogénmentes, csillámszalag érszigetelésű, halogénmentes műanyag fólia szigeteléssel, műanyag kasírozású fémfólia árnyékolás, halogénmentes tűzálló köpenyű, 2 egymástól külön elszigetelt tömör rézeret tartalmazó kábel. Igény esetén egyedi méretre vágjuk vásárláskor.\r\nAlkalmazása belső terekben tűzjelző készülékek számára rögzített elhelyezéssel, ahol előírás a 180 perces szigetelőképesség és a 90 perces funkciómegtartás a tűzterhelés kezdetétől.\r\n\r\nKeresztmetszet: 1x2x0,8 mm2\r\nKülső átmérő: ~7 mm\r\nSzín: vörös\r\nNévleges Feszültség: 225V\r\nKiszerelés: 500m/dob', 'HaLáli Kft.', 'tömör ', 6, 509, 'képek/tuzallo_kabel_0,8.webp'),
-(12, 'Lakáselosztó falon kívüli', 2950, 'Lakáselosztó falon kívüli 8 modulos elosztó szekrény Kanlux DB108S.\r\n20/Karton\r\n\r\n8 modulos, falon kívül szerelhető lakáselosztó\r\nkalapsínnel és föld, nulla (PE,N) sínekkel szerelve\r\nIp40, beltéri használatra ajánlott\r\nMéretek: 189x205x101mm (szé-ma-mé)', 'Kanlux', 'falon kívűli', 7, 20, 'képek/lakaseloszto_8modul_kanlux.webp'),
-(13, 'Fi relé', 5990, 'Fi relé 2P 25A 30mA 6kA (AC) áramvédő kapcsoló ÁVK ÉV relé TRACON TFV2-25030.\r\n\r\nTracon áramvédő-kapcsoló ÁVK (fi-relé). A készülék előlapján lévő teszt gomb segítségével ellenőrizhető a készülék működőképessége, amit szabvány szerint havonta egyszer ellenőrizni kell. A készülék villás vagy csapos fázissínnel sorolható, TS35-ös kalapsinre pattintható.\r\n\r\nNévleges áramerősség: 25A\r\nÉrzékenység: 30mA\r\nMegszakítóképesség: 6kA\r\nHálózati feszültség: 230V AC-váltakozó áram\r\nPólusok száma: 2\r\nBeköthető vezeték keresztmetszete: 1.5-25mm2\r\nKészülék szélessége: 2 modul\r\nKörnyezeti hőmérséklet üzem közben: - 25 - 55 °C', 'Tracon Electric', 'ÁVK', 8, 8, 'képek/fi_relé_2p_25a_30ma.webp'),
+(12, 'Lakáselosztó falon kívüli', 2950, 'Lakáselosztó falon kívüli 8 modulos elosztó szekrény Kanlux DB108S.\r\n20/Karton\r\n\r\n8 modulos, falon kívül szerelhető lakáselosztó\r\nkalapsínnel és föld, nulla (PE,N) sínekkel szerelve\r\nIp40, beltéri használatra ajánlott\r\nMéretek: 189x205x101mm (szé-ma-mé)', 'Kanlux', 'falon kívűli', 7, 19, 'képek/lakaseloszto_8modul_kanlux.webp'),
+(13, 'Fi relé', 5990, 'Fi relé 2P 25A 30mA 6kA (AC) áramvédő kapcsoló ÁVK ÉV relé TRACON TFV2-25030.\r\n\r\nTracon áramvédő-kapcsoló ÁVK (fi-relé). A készülék előlapján lévő teszt gomb segítségével ellenőrizhető a készülék működőképessége, amit szabvány szerint havonta egyszer ellenőrizni kell. A készülék villás vagy csapos fázissínnel sorolható, TS35-ös kalapsinre pattintható.\r\n\r\nNévleges áramerősség: 25A\r\nÉrzékenység: 30mA\r\nMegszakítóképesség: 6kA\r\nHálózati feszültség: 230V AC-váltakozó áram\r\nPólusok száma: 2\r\nBeköthető vezeték keresztmetszete: 1.5-25mm2\r\nKészülék szélessége: 2 modul\r\nKörnyezeti hőmérséklet üzem közben: - 25 - 55 °C', 'Tracon Electric', 'ÁVK', 8, 7, 'képek/fi_relé_2p_25a_30ma.webp'),
 (14, 'Villanyóra szekrény', 48990, 'Csatári Plast PVT 3075 Fm-SZ 1/3 fázisú villanyóra szekrény 80A szabadvezetékes.\r\n\r\nSzabadvezetékes csatlakozás, illetve társasházakban egyedülálló mérés (nem csoportos mérőhely) esetén alkalmazandó, 1/3 fázisú mindennapszaki vagy H tarifa mérésre 80A-ig.\r\nFelhasználási helyek száma: 1\r\n\r\nBeszerelhető mérőórák:\r\nÁrszabás 1 és max. áramerőssége (Mindennapszaki): M63.80A (Mindennapszaki max.3x63A és 3x80A-es kialakítás)\r\nÁrszabás 3 és max. áramerőssége (H vagy GEO tarifa): H63.80A (H tarifa max.3x63A és 3x80A-es kialakítás)\r\nÁrszabás 5 és max. áramerőssége (Inverter): M63.80A (Mindennapszaki max.3x63A és 3x80A-es kialakítás)\r\n\r\nBeltéri és kültéri használatra is alkalmas (IP65 védelem)\r\nÜtésállóság: IK08\r\nCsatlakozás módja: szabadvezetékes - légvezetékes\r\nKivitel: felületre szerelhető\r\nFogadott méretlen vezeték keresztmetszete: 35 mm2\r\n\r\nElmenő mért vezeték keresztmetszete: 25 mm2\r\nMéretei: Magasság 750 mm x Szélesség 300 mm x Mélység 203 mm\r\nNévleges fesz.: 3 x 230 V / 400 V\r\nKörnyezeti ', 'Csatári Plast Kft.', 'falon kívűli', 10, 4, 'képek/villanyoraszekreny.webp'),
 (15, 'Kalapsín', 470, 'Kalapsín (TS35 sín, C sín, Din sín) 137mm Tracon.\r\n\r\nTS35 kalapsín, 137mm-es szélességben, csavarokkal rögzíthető.', 'Tracon Electric', 'szerelvény', 11, 56, 'képek/kalapsin.webp'),
 (16, 'WAGO', 45, 'WAGO 2 vezetékes összekötő (tömör 0,5-2,5mm2) 24A átlátszó fehér 2273-202, 100db/doboz\r\n\r\nA Compact Wago vezetékösszekötő 2 db tömör vezeték ( 0,5 - 2,5 mm2-ig ) összekötését oldja meg. A 2273-202 sorkapocs belsejében az érintkező lemezke azonnal rögzíti a csatlakoztatott réz vezetéket és megakadályozza a visszairányú mozgást. Az átlátszó ház segítségével pontosan látható a csatlakoztatott vezeték és ellenőrizhető a megfelelő hosszúságú csupaszolt vezetékvég csatlakozása. A kisebb méret miatt könnyebb a beépítése a szerelvény dobozba.\r\nAlumínium vezeték összekötéséhez Wago Alu Pasta (249-130) ajánlott, amit kedvező áron megtalál webáruházunkban.\r\n\r\nWago terhelhetősége: 24A\r\nKiszerelés: 100db/doboz.', 'Wago ', 'szerelvény', 11, 450, 'képek/wago.webp'),
@@ -174,7 +186,7 @@ ALTER TABLE `kategoria`
 --
 ALTER TABLE `megrendeles`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `fh_nev` (`fh_nev`);
+  ADD KEY `fh_nev` (`fh_nev`);
 
 --
 -- A tábla indexei `termek`
@@ -205,7 +217,7 @@ ALTER TABLE `kategoria`
 -- AUTO_INCREMENT a táblához `megrendeles`
 --
 ALTER TABLE `megrendeles`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT a táblához `termek`
@@ -217,7 +229,7 @@ ALTER TABLE `termek`
 -- AUTO_INCREMENT a táblához `tetelek`
 --
 ALTER TABLE `tetelek`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- Megkötések a kiírt táblákhoz
