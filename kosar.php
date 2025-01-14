@@ -174,7 +174,50 @@ if (isset($_POST['empty_cart'])) {
     header("Location: kosar.php");
     exit();
 }
-   
+
+if(isset($_POST['fizetes'])){
+    // Szállítási mód és fizetési mód ellenőrzés
+    $szallitasi_mod = isset($_POST['szallitasi_mod']) ? $_POST['szallitasi_mod'] : 'standard';
+    $fizetesi_mod = isset($_POST['fizetesi_mod']) ? $_POST['fizetesi_mod'] : 'kartya';
+
+    // Kosár összegzés
+    $osszeg = osszegzo($_SESSION['kosar']);
+    $szallitas = szallitas_dij($_SESSION['kosar']);
+    $vegosszeg = $osszesen + $szallitas;
+
+    // Rendelés rögzítése az adatbázisba
+    $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
+
+    // Rendelés adatainak beszúrása
+    $query = "INSERT INTO megrendeles (fh_nev, szallitasi_mod, fizetesi_mod, osszeg, szallitas, vegosszeg, leadas_datum)
+              VALUES (?, ?, ?, ?, ?, ?, NOW())";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$fh_nev, $szallitasi_mod, $fizetesi_mod, $osszeg, $szallitas, $vegosszeg]);
+
+    // Rendelési tételek beszúrása
+    /*$rendeles_id = $pdo->lastInsertId();
+    foreach ($_SESSION['kosar'] as $termek) {
+        $termek_id = $termek['termek_id'];
+        $mennyiseg = $termek['tetelek_mennyiseg'];
+        $query = "INSERT INTO rendeles_tetelek (rendeles_id, termek_id, mennyiseg, ar)
+                VALUES (?, ?, ?, ?)";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$rendeles_id, $termek_id, $mennyiseg, $termek['egysegar']]);
+    }*/
+
+    // Kosár ürítése a session-ben
+    $_SESSION['kosar'] = [];
+
+    // Kosár adatbázisból történő törlése
+    $query = "DELETE FROM tetelek WHERE fh_nev = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$fh_nev]);
+
+    // Rendelés sikeres feldolgozása
+    header("Location: rendeles_sikeres.php");
+    exit();
+}
+
 function szallitas_dij($kosar) {
     $osszesen = osszegzo($kosar);
     return $osszesen >= 25000 ? 0 : 1690;
@@ -186,7 +229,7 @@ $vegosszeg = osszegzo($_SESSION['kosar']) + $szallitas;
 $bejelentkezve = isset($_SESSION['felhasznalo']);
 $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : false;
 
-require_once './fizetesfeldolgozas.php';
+//require_once './fizetesfeldolgozas.php';
 
 ?>
 
@@ -277,7 +320,7 @@ require_once './fizetesfeldolgozas.php';
             <?php else: ?>
                 
         
-            <form action="fizetesfeldolgozas.php" method="POST">
+            <form action="kosar.php" method="POST">
                 <div class="card">
                     <div class="card-header">Szállítási mód</div>
                     <div class="card-body">

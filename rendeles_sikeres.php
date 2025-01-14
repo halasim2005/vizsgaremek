@@ -1,5 +1,5 @@
 <?php
-session_start();
+/*session_start();
 
 // Adatbázis kapcsolat betöltése
 require_once './db.php';
@@ -39,7 +39,7 @@ foreach ($kosar as $termek) {
 // Kosár ürítése és session törlése
 $_SESSION['kosar'] = [];
 
-// Vásárlás visszaigazolása
+// Vásárlás visszaigazolása*/
 ?>
 
 <!DOCTYPE html>
@@ -61,11 +61,7 @@ $_SESSION['kosar'] = [];
                     <h3>Rendelés sikeres!</h3>
                     <p>Köszönjük, hogy vásárolt nálunk! A rendelése <strong>felfüggesztve</strong> státuszban van, és hamarosan feldolgozásra kerül.</p>
                     <p>A rendelés összegzése:</p>
-                    <ul>
-                        <li>Összesen: <strong><?= number_format($osszesen, 0, '.', ' ') ?> Ft</strong></li>
-                        <li>Szállítás: <strong><?= number_format($szallitas_dij, 0, '.', ' ') ?> Ft</strong></li>
-                        <li>Végösszeg: <strong><?= number_format($vegosszeg, 0, '.', ' ') ?> Ft</strong></li>
-                    </ul>
+                    
                     <p>Ha bármilyen kérdése van, kérjük lépjen kapcsolatba velünk!</p>
                     <a href="index.php" class="btn btn-primary">Vissza a főoldalra</a>
                 </div>

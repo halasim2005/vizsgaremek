@@ -1,4 +1,4 @@
-<?php
+<?php/*
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Pragma: no-cache");
 
@@ -39,5 +39,5 @@ $stmt->execute([$fh_nev]);
 
 // Rendelés sikeres feldolgozása
 header("Location: rendeles_sikeres.php");
-exit();
+exit();*/
 ?>
