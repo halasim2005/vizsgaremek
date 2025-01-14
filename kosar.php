@@ -188,6 +188,21 @@ if(isset($_POST['fizetes'])){
 
     
     // Kosár adatbázisból történő törlése
+
+    //ELKEZDETT MODOSITASOK, AT KELL NEZNI NAGYON, VAN AMI JO LEHET ES VALAMI NINCS MEG BEFEJEZVE
+    /*$query = "UPDATE tetelek SET statusz = 'leadva' WHERE fh_nev = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$fh_nev]);
+
+    $id_query = "SELECT id FROM megrendeles order by id asc limit 1";
+    $id_stmt = $pdo->prepare($id_query);
+    $uj_id = $id_stmt->execute();
+
+    $ezis_uj_idquery = "UPDATE tetelek SET megrendeles.id = ? WHERE fh_nev = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$uj_id, $fh_nev]);*/
+
+
     $query = "UPDATE tetelek SET statusz = 'leadva' WHERE fh_nev = ?";
     //$query = "DELETE FROM tetelek WHERE fh_nev = ?";
     $stmt = $pdo->prepare($query);
