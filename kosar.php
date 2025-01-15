@@ -7,6 +7,7 @@ if (!isset($_SESSION['kosar'])) {
     $_SESSION['kosar'] = [];
 }
 require_once './db.php';
+include './sql_fuggvenyek.php';
 
 // Session frissítése adatbázisból (opcionális)
 function frissit_session_adatbazisbol($conn) {
@@ -175,38 +176,41 @@ if(isset($_POST['fizetes'])){
     // Kosár összegzés
     $osszeg = osszegzo($_SESSION['kosar']);
     $szallitas = szallitas_dij($_SESSION['kosar']);
-    $vegosszeg = $osszesen + $szallitas;
+    $vegosszeg = $osszeg + $szallitas;
 
-    // Rendelés rögzítése az adatbázisba
+    // Felhasználónév lekérése
     $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
 
-    // Rendelés adatainak beszúrása
-    $query = "INSERT INTO megrendeles (fh_nev, szallitasi_mod, fizetesi_mod, osszeg, szallitas, vegosszeg, leadas_datum)
-              VALUES (?, ?, ?, ?, ?, ?, NOW())";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$fh_nev, $szallitasi_mod, $fizetesi_mod, $osszeg, $szallitas, $vegosszeg]);
+    // Megrendelés DÁTUM lekérése
+    $DATE_query = "SELECT megrendeles.leadas_datum FROM megrendeles ORDER BY megrendeles.id DESC LIMIT 1;";
+    $DATE_megrendeles_array = adatokLekerdezese($DATE_query);
+    if(is_array($DATE_megrendeles_array)){
+        foreach($DATE_megrendeles_array as $D){
+            $DATE_megrendeles = $D["leadas_datum"];
+        }
+    }
 
-    
-    // Kosár adatbázisból történő törlése
+    // Megrendelés ID lekérése
+    $ID_query = "SELECT megrendeles.id FROM megrendeles WHERE megrendeles.fh_nev = '{$fh_nev}' ORDER BY megrendeles.id DESC LIMIT 1;";
+    $ID_megrendeles_array = adatokLekerdezese($ID_query);
+    if(is_array($ID_megrendeles_array)){
+        foreach($ID_megrendeles_array as $I){
+            $ID_megrendeles = $I["id"];
+        }
+    }
 
-    //ELKEZDETT MODOSITASOK, AT KELL NEZNI NAGYON, VAN AMI JO LEHET ES VALAMI NINCS MEG BEFEJEZVE
-    /*$query = "UPDATE tetelek SET statusz = 'leadva' WHERE fh_nev = ?";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$fh_nev]);
+    // Rendelés adatainak módosítása
+    $RENDELES_query = "UPDATE megrendeles SET megrendeles.szallitasi_mod = ?, megrendeles.fizetesi_mod = ?, megrendeles.osszeg = ?, megrendeles.szallitas = ?, megrendeles.vegosszeg = ? WHERE megrendeles.fh_nev = ? AND megrendeles.leadas_datum = ? AND megrendeles.id = ?;";
+    $RENDELES_stmt = $pdo->prepare($RENDELES_query);
+    $RENDELES = $RENDELES_stmt->execute([$szallitasi_mod, $fizetesi_mod, $osszeg, $szallitas, $vegosszeg, $fh_nev, $DATE_megrendeles, $ID_megrendeles]);
 
-    $id_query = "SELECT id FROM megrendeles order by id asc limit 1";
-    $id_stmt = $pdo->prepare($id_query);
-    $uj_id = $id_stmt->execute();
-
-    $ezis_uj_idquery = "UPDATE tetelek SET megrendeles.id = ? WHERE fh_nev = ?";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$uj_id, $fh_nev]);*/
-
-
-    $query = "UPDATE tetelek SET statusz = 'leadva' WHERE fh_nev = ?";
-    //$query = "DELETE FROM tetelek WHERE fh_nev = ?";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$fh_nev]);
+    //Ellenőrzés, hogy sikeres volt-e a módosítás
+    if($RENDELES == true){
+        // Tételek tábla rendeles_id, státusz módosítás
+        $UPDATE_query = "UPDATE tetelek SET tetelek.rendeles_id = ?, tetelek.statusz = 'leadva' WHERE tetelek.statusz = 'kosárban' AND tetelek.fh_nev = ?;";
+        $UPDATE_stmt = $pdo->prepare($UPDATE_query);
+        $UPDATE_stmt->execute([$ID_megrendeles, $fh_nev]);
+    }
 
     // Kosár ürítése a session-ben
     $_SESSION['kosar'] = [];
