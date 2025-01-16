@@ -1,0 +1,3 @@
+termek/rendeles torlese eseten visszarakjuk a raktarkeszletbe a dolgokat
+reszponzivitas mindenhol
+termekek oldalon reszleteknel (modal) atrendezes hogy szebb legyen.
