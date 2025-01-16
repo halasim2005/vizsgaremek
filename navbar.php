@@ -70,6 +70,7 @@
 </div>
 
 
+
 <script>
     // Kattintáskor bezárjuk a menüt, ha egy linket választunk
     document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {

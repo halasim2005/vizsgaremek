@@ -2,6 +2,7 @@
 session_start();
 
 require_once './db.php';
+include './sql_fuggvenyek.php';
 
 if (!isset($_SESSION['kosar'])) {
     $_SESSION['kosar'] = [];
@@ -53,6 +54,25 @@ if (isset($_POST['add_to_cart'])) {
         $rendeles_id = $pdo->lastInsertId();
     } else {
         $rendeles_id = $rendeles['id'];
+    }
+
+    /////////////////////////////////////////////////////////////
+    //Rendelés ID lekérése
+    $ID_query = "SELECT megrendeles.id FROM megrendeles WHERE megrendeles.fh_nev = '{$fh_nev}' ORDER BY megrendeles.id DESC LIMIT 1;";
+    $ID_megrendeles_array = adatokLekerdezese($ID_query);
+    if(is_array($ID_megrendeles_array)){
+        foreach($ID_megrendeles_array as $I){
+            $ID_megrendeles = $I["id"];
+        }
+    }
+
+    //Kosárszámláló
+    $KOSAR_SZAMLALO_sql = "SELECT COUNT(tetelek.id) AS kosarSzamlalo FROM `tetelek` WHERE tetelek.statusz = 'kosárban' AND tetelek.fh_nev = '{$fh_nev}' AND tetelek.rendeles_id = {$ID_megrendeles} ORDER BY tetelek.id DESC;";
+    $KOSAR_SZAMLALO_Array = adatokLekerdezese($KOSAR_SZAMLALO_sql);
+    if(is_array($KOSAR_SZAMLALO_Array)){
+        foreach($KOSAR_SZAMLALO_Array as $K){
+            $kosar_szamlalo = $K["kosarSzamlalo"];
+        }
     }
 
     // Tétel hozzáadása a tetelek táblához
