@@ -41,7 +41,7 @@ if (isset($_POST['add_to_cart'])) {
     }
 
     // Ellenőrizd vagy hozz létre rendelést
-    $rendeles_query = "SELECT id FROM megrendeles WHERE fh_nev = ? LIMIT 1";
+    $rendeles_query = "SELECT megrendeles.id FROM megrendeles WHERE megrendeles.fh_nev = ? AND megrendeles.szallitasi_mod = '' LIMIT 1;";
     $rendeles_stmt = $pdo->prepare($rendeles_query);
     $rendeles_stmt->execute([$fh_nev]);
     $rendeles = $rendeles_stmt->fetch(PDO::FETCH_ASSOC);

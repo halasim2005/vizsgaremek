@@ -74,10 +74,10 @@ function betolt_kosar_adatbazisbol($pdo) {
 
 betolt_kosar_adatbazisbol($pdo);
 
-if (isset($_SESSION['felhasznalo']['id'])) {
+/*if (isset($_SESSION['felhasznalo']['id'])) {
     $felhasznalo_id = $_SESSION['felhasznalo']['id'];
     $_SESSION['kosar'] = betolt_kosar_adatbazisbol($pdo, $felhasznalo_id);
-}
+}*/
 
 // Kosár összesítő számítás
 function osszegzo($kosar) {
