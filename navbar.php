@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark shadow p-3 mb-5 bg-white rounded">
+<nav class="navbar navbar-expand-lg navbar-light shadow p-3 mb-5 bg-white rounded">
     <div class="container-fluid">
         <a href="#"><img id="navbarLogo" src="./képek/HaLálip.png" alt="HaLáli Kft. logo"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,7 +56,7 @@
 </nav>
 
 
-<link rel="stylesheet" href="./style/style.css">
+
 
 <!-- Modal -->
 <div id="errorModal" class="modal fade" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
