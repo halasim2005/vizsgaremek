@@ -30,31 +30,33 @@ include './db.php'; // Az adatbázis kapcsolat betöltése
     <div class="container mt-5">
         <!-- Szűrők -->
         <div class="grid-container align-middle" id="szures_" oninput="termekekLeker()">
-            <div>Kategória
-                <div>
+            <div class="row">Kategória
+                <div class="col-lg-2 col-sm-12">
                     <select id="kategoriaSzures" style="width: 150px">
                         <option value="osszes" selected>Összes termék</option>
                     </select>
                 </div>
             </div>
-            <div>Gyártó
-                <div>
+            <div class="row">Gyártó
+                <div class="col-lg-2 col-sm-12">
                     <select id="gyartoSzures" style="width: 150px">
                         <option value="osszesGyarto" selected>Összes gyártó</option>
                     </select>
                 </div>
             </div>
-            <div>Ár (Min - Max)
-                <div id="rangeEgy"></div>
-                <div id="rangeKetto"></div>
+            <div class="row">Ár (Min - Max)
+                <div class="col-lg-2 col-sm-12">
+                    <div id="rangeEgy"></div>
+                    <div id="rangeKetto"></div>
+                </div>
             </div>
-            <div>Keresés
-                <div>
+            <div class="row">Keresés
+                <div class="col-lg-2 col-sm-12">
                     <input type="text" id="keresesSzures" style="width: 150px" placeholder="Írja be a termék nevét!">
                 </div>
             </div>
-            <div>Rendezés
-                <div>
+            <div class="row">Rendezés
+                <div class="col-lg-2 col-sm-12">
                     <select id="rendez">
                         <option value="nevAz" selected>Név szerint (A-Z)</option>
                         <option value="nevZa">Név szerint (Z-A)</option>
