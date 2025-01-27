@@ -1,10 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light shadow p-3 mb-5 bg-white rounded">
+<!--<nav class="navbar navbar-expand-lg navbar-light shadow p-3 mb-5 bg-white rounded">
     <div class="container-fluid">
-        <a href="#"><img id="navbarLogo" src="./képek/HaLálip.png" alt="HaLáli Kft. logo"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="hamburger" id="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
         <div class="collapse navbar-collapse" id="navbarNav">
+            <a href="#"><img id="navbarLogo" src="./képek/HaLálip.png" alt="HaLáli Kft. logo"></a>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="./fooldal">KEZDŐLAP</a>
@@ -19,7 +21,6 @@
                     <a class="nav-link" href="./kapcsolat">KAPCSOLAT</a>
                 </li>
             </ul>
-            <!-- Gombok és ikonok a jobb oldalon -->
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <form id="keresesIkonPadding" class="d-flex" role="search">
@@ -53,8 +54,65 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav>-->
 
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light shadow p-3 mb-5 bg-white rounded">
+        <div class="hamburger" id="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+                    
+        <a href="#" class="navbar-branding"><img id="navbarLogo" src="./képek/HaLálip.png" alt="HaLáli Kft. logo"></a>
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="./fooldal">KEZDŐLAP</a>   
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./termekek">TERMÉKEK</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./kalkulator">KALKULÁTOR</a>  
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./kapcsolat">KAPCSOLAT</a>  
+            </li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <form id="keresesIkonPadding" class="d-flex" role="search">
+                        <input id="navbarKereses" class="form-control btn-outline-primary me-2" type="search" placeholder="Keresés" aria-label="Keresés">
+                        <img id="keresesIkonNavbar" onclick="keresesMegj()" src="./képek/keresesIkon.png" alt="Keresés ikon">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <a id="kosarIkonPadding" href="./kosar"><img id="navbarIcons" src="./képek/kosarIkon.png" alt="Kosár ikon"></a>
+                </li>
+            <?php if (isset($_SESSION['felhasznalo'])): ?>
+                <li class="nav-item">
+                    <a id="profilIconPadding" href="./profil.php"><img src='./képek/profilikon.png' alt="Profil" id="navbarIcons"></a>
+                </li>
+            <?php if ($_SESSION['jogosultsag'] === 'admin'): ?>
+                <li class="nav-item">
+                    <a href="./admin/dashboard.php"><img src='./képek/adminIkon.png' alt="Profil" id="navbarIcons"></a>
+                </li>
+            <?php endif; ?>
+                <li class="nav-item">
+                    <a id="navbarGomb" href="./kijelentkezes.php" class="btn login-button ms-3">Kijelentkezés</a>
+                </li>
+            <?php else: ?>
+                <li class="nav-item">
+                    <a id="navbarGomb" href="./regisztracio" class="btn regist-button ms-3">Regisztráció</a>
+                </li>
+                <li class="nav-item">
+                    <a id="navbarGomb" href="./bejelentkezes" class="btn login-button ms-3">Bejelentkezés</a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+</header>
 
 
 
@@ -68,8 +126,6 @@
         </div>
     </div>
 </div>
-
-
 
 <script>
     // Kattintáskor bezárjuk a menüt, ha egy linket választunk
@@ -104,6 +160,19 @@
             event.stopPropagation(); // Megállítjuk az eseményt, hogy ne terjedjen tovább
         });
     });
+
+    ///////////////////HAMBURGER MENU
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".navbar-nav");
+
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        navMenu.classList.toggle("active");
+    })
+
+
+
+
 
 
     document.addEventListener('DOMContentLoaded', () => {

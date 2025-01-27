@@ -6,7 +6,6 @@ body {
     font-family: 'Montserrat';
 }
 
-
 ::selection {
     color: white;
     background: rgb(61, 61, 61);
@@ -57,6 +56,10 @@ body {
 .nav-link:hover {
     color: black !important;
     font-weight: 900;
+}
+
+*{
+    box-sizing: border-box;
 }
 
 .nav-link:after{
@@ -142,17 +145,19 @@ body {
     left: 0;
     width: 100%;
     z-index: 1000; /* Biztosítja, hogy mindig a tetején legyen */
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
 }
 
 
-/* Hamburger menü megjelenítése kicsi képernyőkön */
 @media (max-width: 768px) {
     .navbar-collapse {
         position: absolute;
         top: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: 80%; /* A menü szélessége */
+        width: 80%; 
         background-color: #fff;
         z-index: 1000;
         border-radius: 10px;
@@ -162,8 +167,6 @@ body {
     .navbar-collapse.show {
         transform: translateX(-50%) translateY(0);
     }
-
-    /* A hamburger menü elemei egy oszlopba rendezkednek */
     .navbar-nav {
         display: flex;
         flex-direction: column;
@@ -181,20 +184,18 @@ body {
         text-align: center;
     }
 
-    /* Keresőmező középre igazítása */
     .d-flex {
         display: flex;
-        justify-content: center;  /* Középre igazítás */
-        align-items: center;  /* Középre igazítás */
+        justify-content: center; 
+        align-items: center;  
         width: 100%;
     }
 
     .form-control {
-        width: 90%; /* A keresőmező 90%-ban kitölti a menüt */
+        width: 90%; 
         margin: 10px 0;
     }
 
-    /* Kosár és gombok szélessége */
     .cart-button, .regist-button, .login-button {
         width: 90%;
         text-align: center;
@@ -205,7 +206,7 @@ body {
     }
 }
 
-/* Nagyobb képernyők esetén is megfelelő elrendezés */
+
 @media (min-width: 768px) {
     .navbar-collapse {
         display: flex;
@@ -603,4 +604,63 @@ select option:hover {
 
 .kovessIkon{
     color: rgb(61, 61, 61)
+}
+
+.navbar-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hamburger{
+    display: none;
+    cursor: pointer;
+}
+
+.bar{
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: rgb(61, 61, 61);
+}
+
+@media (max-width: 991px) {
+    .hamburger{
+        display: block;
+    }
+
+    .hamburger.active .bar:nth-child(2){
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1){
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3){
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .navbar-nav{
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        gap: 0;
+        flex-direction: column;
+        background-color: rgb(61, 61, 61);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .nav-item{
+        margin: 16px 0;
+    }
+
+    .navbar-nav.active{
+        left: 0;
+    }
 }
