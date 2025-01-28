@@ -51,7 +51,17 @@ a{
     font-size: medium;
 }
 
+.nav-link_profil{
+    color: rgb(106, 106, 106) !important;
+    font-weight: 900;
+}
+
 .nav-link:hover {
+    color: black !important;
+    font-weight: 900;
+}
+
+.nav-link_profil:hover{
     color: black !important;
     font-weight: 900;
 }
@@ -66,6 +76,7 @@ a{
     /*transition: width 0.5s ease,background-color 0.5s ease; */
     transition: all 0.5s ease;
 }
+
 .nav-link:hover:after{
     width: 100%;
     background-color: rgb(0, 0, 0);
@@ -128,7 +139,6 @@ a{
     }
 }
 
-
 </style>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light shadow p-3 mb-5 bg-white rounded">
@@ -138,7 +148,9 @@ a{
             <span class="bar"></span>
         </div>
 
-        <a href="#" class="nav-branding"><img id="navbarLogo" style="width: 70px" src="./képek/HaLálip.png" alt="HaLáli Kft. logo"></a>
+        <a href="#" class="nav-branding">
+            <img id="navbarLogo" style="width: 70px" src="./képek/HaLálip.png" alt="HaLáli Kft. logo">
+        </a>
 
         <ul class="nav-menu me-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -164,5 +176,8 @@ a{
     hamburger.addEventListener("click", () => {
         hamburger.classList.toggle("active");
         navMenu.classList.toggle("active");
-    })
+    });
 </script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
