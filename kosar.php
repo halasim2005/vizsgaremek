@@ -119,7 +119,7 @@ if (isset($_POST['delete_item'])) {
 if (isset($_POST['update_cart'])) {
     foreach ($_POST['mennyisegek'] as $index => $uj_mennyiseg) {
         $termek_id = $_SESSION['kosar'][$index]['termek_id'];
-        //$mennyiseg = $_POST['mennyisegek'];
+        $mennyiseg = $_POST['mennyisegek'];
         
         // Ha az új mennyiség 0 vagy kisebb, akkor töröljük az elemet
         if ($uj_mennyiseg <= 0) {
@@ -143,7 +143,7 @@ if (isset($_POST['update_cart'])) {
             // Termék készlet frissítése
             //$keszlet_update_query = "UPDATE termek SET elerheto_darab = elerheto_darab - ? WHERE id = ?";
             //$keszlet_update_stmt = $pdo->prepare($keszlet_update_query);
-            //$keszlet_update_stmt->execute([$uj_mennyiseg, $termek_id]);
+            //$keszlet_update_stmt->execute([$mennyiseg, $termek_id]);
         }
     }
     // Újrendezés a Session-ben
@@ -289,7 +289,7 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                                         <div class="card-body">
                                             <h5 class="card-title kosarFelirat"><?= htmlspecialchars($termek['termek_nev']) ?></h5>
                                             <p class="card-text"><?= $termek['egysegar'] ?> Ft / db</p>
-                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['tetelek_mennyiseg'] ?>" min="0" max="<?= $termek['elerheto_darab'] ?>" class="form-control w-25"><br>
+                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['tetelek_mennyiseg'] ?>" min="0" max="<?= $termek['elerheto_darab'] + $termek['tetelek_mennyiseg'] ?>" class="form-control w-25"><br>
                                             <p class="card-text kosarAr"><strong><?= $termek['egysegar'] * $termek['tetelek_mennyiseg'] ?> Ft</strong></p>
                                                 <input type="hidden" name="termek_id" value="<?= htmlspecialchars($termek['termek_id']) ?>">
                                                 <button type="submit" name="delete_item" value="<?= $termek['termek_id'] ?>" class="kukaGomb" ><img class="kukaKep" src="./képek/torlesikon.svg" href="Törlés"></button>
