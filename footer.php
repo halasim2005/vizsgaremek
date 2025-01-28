@@ -1,8 +1,3 @@
-<?php
-
-?>
-
-<br><br>
 <footer>
     <table class="footerTable">
         <tr>

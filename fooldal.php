@@ -19,9 +19,7 @@ header("Pragma: no-cache");
 </head>
 
 <body>
-    <?php
-        include './navbar.php';
-    ?>
+    <?php include './navbar.php';?>
     <div>
         <div class="row bemutatkozasDiv mr-2" id="rolunk">
             <div class="col-sm-12 col-lg-6 text-center">
@@ -35,43 +33,40 @@ header("Pragma: no-cache");
 
         <div class="row termekekDiv" id="termekek">
             <div class="col-sm-12 col-lg-6 text-center">
-            <img width="100%" class="pb-2" src="./képek/izzok.jpg" alt="Izzók">
+                <img width="100%" class="pb-2" src="./képek/izzok.jpg" alt="Izzók">
             </div>
             <div class="col-sm-12 col-lg-6">
-            <h1 class="fooldalDivSzovegCim">Kínálatunk</h1>
-                            <h5 class="fooldalDivSzoveg text-wrap text-justify">Fedezze fel webáruházunk gazdag választékát, ahol minden villanyszerelési eszközt és anyagot könnyedén megtalál! Nézze meg a Termékek részt, és kattintson a számos kategória egyikére, hogy gyorsan rátaláljon a szükséges eszközökre és alapanyagokra. Akár szakember, akár háztartást vezet, nálunk mindent megtalál, amire szüksége lehet a villanyszereléshez. Vásároljon egyszerűen, kényelmesen, közvetlenül online!</h5>
-                            <br><a href="./termekek.php" class="fooldalDivButton">TERMÉKEK</a>
+                <h1 class="fooldalDivSzovegCim">Kínálatunk</h1>
+                <h5 class="fooldalDivSzoveg text-wrap text-justify">Fedezze fel webáruházunk gazdag választékát, ahol minden villanyszerelési eszközt és anyagot könnyedén megtalál! Nézze meg a Termékek részt, és kattintson a számos kategória egyikére, hogy gyorsan rátaláljon a szükséges eszközökre és alapanyagokra. Akár szakember, akár háztartást vezet, nálunk mindent megtalál, amire szüksége lehet a villanyszereléshez. Vásároljon egyszerűen, kényelmesen, közvetlenül online!</h5>
+                <br><a href="./termekek.php" class="fooldalDivButton">TERMÉKEK</a>
             </div>
         </div>
 
         <div class="row kalkulatorDiv" id="kalkulator">
             <div class="col-sm-12 col-lg-6 text-center">
-            <img width="100%" class="pb-2" src="./képek/kalkulator.jpeg" alt="Izzók">
+                <img width="100%" class="pb-2" src="./képek/kalkulator.jpeg" alt="Izzók">
             </div>
             <div class="col-sm-12 col-lg-6">
-            <h1 class="fooldalDivSzovegCim">Kalkulátor</h1>
-                            <h5 class="fooldalDivSzoveg text-wrap text-justify">Ez az elektromos kalkulátor a feszültségveszteség gyors és pontos kiszámítására szolgál, figyelembe véve a vezeték hosszát, keresztmetszetét és az áramerősséget. A felhasználóbarát online eszköz segítségével könnyedén meghatározhatja a megfelelő vezetékeket, hogy minimalizálja a feszültségcsökkenést és biztosítsa a rendszer hatékonyságát. Ideális választás villanyszerelők, mérnökök és bárki számára, aki pontos tervezést végez az elektromos rendszerekben.</h5>
-                            <br><a href="./kalkulator.php" class="kalkDivButton">KALKULÁTOR</a>
+                <h1 class="fooldalDivSzovegCim">Kalkulátor</h1>
+                <h5 class="fooldalDivSzoveg text-wrap text-justify">Ez az elektromos kalkulátor a feszültségveszteség gyors és pontos kiszámítására szolgál, figyelembe véve a vezeték hosszát, keresztmetszetét és az áramerősséget. A felhasználóbarát online eszköz segítségével könnyedén meghatározhatja a megfelelő vezetékeket, hogy minimalizálja a feszültségcsökkenést és biztosítsa a rendszer hatékonyságát. Ideális választás villanyszerelők, mérnökök és bárki számára, aki pontos tervezést végez az elektromos rendszerekben.</h5>
+                <br><a href="./kalkulator.php" class="kalkDivButton">KALKULÁTOR</a>
             </div>
         </div>
-
-
 
         <div class="row ugyfelszolgalatDiv" id="ugyfel">
             <div class="col-sm-12 col-lg-6 text-center">
-            <img width="100%" class="pb-2" src="./képek/ugyfelszolg.jpeg" alt="Izzók">
+                <img width="100%" class="pb-2" src="./képek/ugyfelszolg.jpeg" alt="Izzók">
             </div>
             <div class="col-sm-12 col-lg-6">
-                            <h1 class="fooldalDivSzovegCim">Ügyfélszolgálat</h1>
-                            <h5 class="fooldalDivSzoveg text-wrap text-justify">Üdvözlünk a HaLáli Kft. ügyfélszolgálatán! Ha kérdésed van rendeléseddel, termékeinkkel vagy bármilyen más témával kapcsolatban, itt tudsz kapcsolatba lépni velünk. A cég alapítói, Halasi Martin és Lálity Dominik készséggel áll rendelkezésedre, hogy gyors és segítőkész válaszokkal támogassunk. Ne habozz írni, bármilyen problémával vagy kérdéssel kereshetsz minket! Köszönjük, hogy minket választottál!</h5>
-                            <br><a href="./kapcsolat.php" class="ugyfelszDivButton">KAPCSOLAT</a>
+                <h1 class="fooldalDivSzovegCim">Ügyfélszolgálat</h1>
+                <h5 class="fooldalDivSzoveg text-wrap text-justify">Üdvözlünk a HaLáli Kft. ügyfélszolgálatán! Ha kérdésed van rendeléseddel, termékeinkkel vagy bármilyen más témával kapcsolatban, itt tudsz kapcsolatba lépni velünk. A cég alapítói, Halasi Martin és Lálity Dominik készséggel áll rendelkezésedre, hogy gyors és segítőkész válaszokkal támogassunk. Ne habozz írni, bármilyen problémával vagy kérdéssel kereshetsz minket! Köszönjük, hogy minket választottál!</h5>
+                <br><a href="./kapcsolat.php" class="ugyfelszDivButton">KAPCSOLAT</a>
             </div>
         </div>
-        </div>
 
-    <?php
-        include './footer.php';
-    ?>
+    </div>
+
+    <?php include './footer.php';?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

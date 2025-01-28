@@ -14,6 +14,10 @@ if (isset($_POST['add_to_cart'])) {
     $mennyiseg = $_POST['mennyiseg'];
     $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
 
+    if(!$fh_nev){
+        header("Location: kosar");
+    }
+
     // Ellenőrizd a készletet
     $keszlet_query = "SELECT elerheto_darab FROM termek WHERE id = ?";
     $keszlet_stmt = $pdo->prepare($keszlet_query);

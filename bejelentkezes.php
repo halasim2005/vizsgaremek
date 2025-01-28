@@ -5,7 +5,6 @@ include 'db.php';
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Pragma: no-cache");
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $felhasznalonev = $_POST['felhasznalonev'];
     $password = $_POST['password'];    
@@ -43,8 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $error = "Hibás felhasználónév vagy jelszó."; //nemlétező felhasználó
     }
-    
-
 }
 ?>
 
@@ -66,7 +63,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include './navbar.php'; ?>
     <div class="container form-container">
         <h2 class="text-center">Bejelentkezés</h2>
-        
         
         <form action="bejelentkezes.php" method="post" autocomplete="off">
             <?php
@@ -99,8 +95,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </form>
     </div>
-    <?php
-        include './footer.php';
-    ?>
+    <?php include './footer.php';?>
 </body>
 </html>

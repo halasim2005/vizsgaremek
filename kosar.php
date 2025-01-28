@@ -119,6 +119,7 @@ if (isset($_POST['delete_item'])) {
 if (isset($_POST['update_cart'])) {
     foreach ($_POST['mennyisegek'] as $index => $uj_mennyiseg) {
         $termek_id = $_SESSION['kosar'][$index]['termek_id'];
+        //$mennyiseg = $_POST['mennyisegek'];
         
         // Ha az új mennyiség 0 vagy kisebb, akkor töröljük az elemet
         if ($uj_mennyiseg <= 0) {
@@ -133,11 +134,16 @@ if (isset($_POST['update_cart'])) {
             // Session frissítése
             $_SESSION['kosar'][$index]['mennyiseg'] = $uj_mennyiseg;
 
-            // Adatbázis frissítése
+            // Tételek tábla frissítése
             $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
             $query = "UPDATE tetelek SET tetelek_mennyiseg = ? WHERE fh_nev = ? AND termek_id = ?";
             $stmt = $pdo->prepare($query);
             $stmt->execute([$uj_mennyiseg, $fh_nev, $termek_id]);
+
+            // Termék készlet frissítése
+            //$keszlet_update_query = "UPDATE termek SET elerheto_darab = elerheto_darab - ? WHERE id = ?";
+            //$keszlet_update_stmt = $pdo->prepare($keszlet_update_query);
+            //$keszlet_update_stmt->execute([$uj_mennyiseg, $termek_id]);
         }
     }
     // Újrendezés a Session-ben
@@ -260,14 +266,6 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
         .form-check-label {
             margin-left: 10px;
         }
-        #payment-button {
-            background-color: #28a745;
-            border: none;
-            color: white;
-        }
-        #payment-button:hover {
-            background-color: #218838;
-        }
     </style>
 <body>
 
@@ -313,57 +311,56 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                         <?php elseif (empty($_SESSION['kosar'])): ?>
                             <div class="alert alert-warning">A kosár üres. Kérjük, adjon hozzá termékeket a vásárláshoz!</div>
                             <?php else: ?>
-                                
-                                
-                                <h3>Rendelés összesítő</h3>
+                                <h3 class="mt-5">Rendelés összesítő</h3>
                                 <p>Összesen: <strong><?= osszegzo($_SESSION['kosar']) ?> Ft</strong></p>
                                 <p>Szállítás: <strong><?= $szallitas ?> Ft</strong></p>
                                 <p>ÁFA: <strong><?= round(osszegzo($_SESSION['kosar']) * 0.27, 2) ?> Ft</strong></p>
-                                <h4>Végösszeg: <strong><?= $vegosszeg ?> Ft</strong></h4>
-            <form action="kosar.php" method="POST">
-                <div class="card">
-                    <div class="card-header">Szállítási mód</div>
-                    <div class="card-body">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="szallitasi_mod" id="standard" value="standard" checked>
-                            <label class="form-check-label" for="standard">Standard szállítás (1690 Ft)</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="szallitasi_mod" id="express" value="express">
-                            <label class="form-check-label" for="express">Expressz szállítás (2990 Ft)</label>
-                        </div>
-                    </div>
-                </div>
+                                <!--<h4>Végösszeg: <strong>//$vegosszeg ?> Ft</strong></h4>-->
+                                    <form action="kosar.php" method="POST">
 
-                <div class="card">
-                    <div class="card-header">Fizetési mód</div>
-                    <div class="card-body">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="fizetesi_mod" id="kartya" value="kartya" checked>
-                            <label class="form-check-label" for="kartya">Bankkártyás fizetés</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="fizetesi_mod" id="utanvet" value="utanvet">
-                            <label class="form-check-label" for="utanvet">Utánvét</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="fizetesi_mod" id="paypal" value="paypal">
-                            <label class="form-check-label" for="paypal">PayPal</label>
-                        </div>
-                    </div>
-                </div>
+                                        <div class="card">
+                                            <div class="card-header">Szállítási mód</div>
+                                            <div class="card-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="szallitasi_mod" id="standard" value="standard" checked>
+                                                    <label class="form-check-label" for="standard">Standard szállítás (1690 Ft)</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="szallitasi_mod" id="express" value="express">
+                                                    <label class="form-check-label" for="express">Expressz szállítás (2990 Ft)</label>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                <div class="card">
-                    <div class="card-header">Rendelés összesítő</div>
-                    <div class="card-body">
-                        <p class="summary">Összesen: <strong><?= number_format(osszegzo($_SESSION['kosar']), 0, '.', ' ') ?> Ft</strong></p>
-                        <p class="summary">Szállítási díj: <strong><?= number_format($szallitas, 0, '.', ' ') ?> Ft</strong></p>
-                        <p class="summary">Végösszeg: <strong><?= number_format($vegosszeg, 0, '.', ' ') ?> Ft</strong></p>
-                    </div>
-                </div>
+                                        <div class="card">
+                                            <div class="card-header">Fizetési mód</div>
+                                            <div class="card-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="fizetesi_mod" id="kartya" value="kartya" checked>
+                                                    <label class="form-check-label" for="kartya">Bankkártyás fizetés</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="fizetesi_mod" id="utanvet" value="utanvet">
+                                                    <label class="form-check-label" for="utanvet">Utánvét</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="fizetesi_mod" id="paypal" value="paypal">
+                                                    <label class="form-check-label" for="paypal">PayPal</label>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                <button type="submit" name="fizetes" id="payment-button" class="btn btn-success w-100">Fizetés</button>
-            </form>
+                                        <div class="card">
+                                            <div class="card-header">Rendelés összesítő</div>
+                                            <div class="card-body">
+                                                <p class="summary">Összesen: <strong><?= number_format(osszegzo($_SESSION['kosar']), 0, '.', ' ') ?> Ft</strong></p>
+                                                <p class="summary">Szállítási díj: <strong><?= number_format($szallitas, 0, '.', ' ') ?> Ft</strong></p>
+                                                <p class="summary">Végösszeg: <strong><?= number_format($vegosszeg, 0, '.', ' ') ?> Ft</strong></p>
+                                                <button type="submit" name="fizetes" id="payment-button" class="btn btn-dark w-100">Fizetés</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
 
             <?php endif; ?>
         </div>
