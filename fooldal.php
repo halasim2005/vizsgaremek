@@ -23,9 +23,9 @@ header("Pragma: no-cache");
         include './navbar.php';
     ?>
     <div>
-        <div class="row bemutatkozasDiv" id="rolunk">
+        <div class="row bemutatkozasDiv mr-2" id="rolunk">
             <div class="col-sm-12 col-lg-6 text-center">
-                <img id="logoKepBemutatkozasDiv" class="p-3" src="./képek/HaLálip.png" alt="HaLáli Villszer Kft. logo">
+                <img id="logoKepBemutatkozasDiv" width="100%" class="pb-2" src="./képek/HaLálip.png" alt="HaLáli Villszer Kft. logo">
             </div>
             <div class="col-sm-12 col-lg-6">
                 <h1 class="fooldalDivSzovegCim">Rólunk</h1>
@@ -35,7 +35,7 @@ header("Pragma: no-cache");
 
         <div class="row termekekDiv" id="termekek">
             <div class="col-sm-12 col-lg-6 text-center">
-            <img width="95%" class="p-3" src="./képek/izzok.jpg" alt="Izzók">
+            <img width="100%" class="pb-2" src="./képek/izzok.jpg" alt="Izzók">
             </div>
             <div class="col-sm-12 col-lg-6">
             <h1 class="fooldalDivSzovegCim">Kínálatunk</h1>
@@ -46,7 +46,7 @@ header("Pragma: no-cache");
 
         <div class="row kalkulatorDiv" id="kalkulator">
             <div class="col-sm-12 col-lg-6 text-center">
-            <img width="95%" class="p-3" src="./képek/kalkulator.jpeg" alt="Izzók">
+            <img width="100%" class="pb-2" src="./képek/kalkulator.jpeg" alt="Izzók">
             </div>
             <div class="col-sm-12 col-lg-6">
             <h1 class="fooldalDivSzovegCim">Kalkulátor</h1>
@@ -59,7 +59,7 @@ header("Pragma: no-cache");
 
         <div class="row ugyfelszolgalatDiv" id="ugyfel">
             <div class="col-sm-12 col-lg-6 text-center">
-            <img width="95%" src="./képek/ugyfelszolg.jpeg" class="p-3" alt="Izzók">
+            <img width="100%" class="pb-2" src="./képek/ugyfelszolg.jpeg" alt="Izzók">
             </div>
             <div class="col-sm-12 col-lg-6">
                             <h1 class="fooldalDivSzovegCim">Ügyfélszolgálat</h1>
@@ -67,9 +67,7 @@ header("Pragma: no-cache");
                             <br><a href="./kapcsolat.php" class="ugyfelszDivButton">KAPCSOLAT</a>
             </div>
         </div>
-            
         </div>
-    
 
     <?php
         include './footer.php';
