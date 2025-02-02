@@ -19,7 +19,7 @@ header("Pragma: no-cache");
 </head>
 
 <body>
-    <?php include './navbar.php';?>
+    <?php include './nav.php';?>
     <div>
         <div class="row bemutatkozasDiv mr-2" id="rolunk">
             <div class="col-sm-12 col-lg-6 text-center">

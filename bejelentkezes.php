@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
-    <?php include './navbar.php'; ?>
+    <?php include './nav.php'; ?>
     <div class="container form-container">
         <h2 class="text-center">Bejelentkezés</h2>
         

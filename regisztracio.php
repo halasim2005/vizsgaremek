@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 
-    <?php include './navbar.php'; ?>
+    <?php include './nav.php'; ?>
 
     <div class="container form-container">
         <h2 class="text-center">Regisztráció</h2>

@@ -21,7 +21,7 @@ header("Pragma: no-cache");
 <body>
 
     <?php
-        include './navbar.php';
+        include './nav.php';
     ?>
 
 <div class="container form-container mt-5">

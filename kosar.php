@@ -269,7 +269,7 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
     </style>
 <body>
 
-    <?php include './navbar.php'; ?>
+    <?php include './nav.php'; ?>
 
     <div class="container main-container mt-5">
         <div class="row">

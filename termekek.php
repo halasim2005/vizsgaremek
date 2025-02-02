@@ -24,59 +24,59 @@ include './db.php'; // Az adatbázis kapcsolat betöltése
     <script src="./js/termekek.js"></script>
 
     <?php
-        include './navbar.php'; // A navigációs sáv betöltése
+        include './nav.php'; // A navigációs sáv betöltése
     ?>
 
     <div class="container mt-5">
         <!-- Szűrők -->
-        <div class="grid-container align-middle" id="szures_" oninput="termekekLeker()">
-            <div class="row">Kategória
-                <div class="col-lg-2 col-sm-12">
-                    <select id="kategoriaSzures" style="width: 150px">
-                        <option value="osszes" selected>Összes termék</option>
-                    </select>
-                </div>
+        <div class="d-flex flex-wrap gap-3 justify-content-between" id="szures_" oninput="termekekLeker()">
+            
+            <div class="flex-grow-1">
+                <label for="kategoriaSzures" class="form-label">Kategória</label>
+                <select id="kategoriaSzures" class="form-select">
+                    <option value="osszes" selected>Összes termék</option>
+                </select>
             </div>
-            <div class="row">Gyártó
-                <div class="col-lg-2 col-sm-12">
-                    <select id="gyartoSzures" style="width: 150px">
-                        <option value="osszesGyarto" selected>Összes gyártó</option>
-                    </select>
-                </div>
+
+            <div class="flex-grow-1">
+                <label for="gyartoSzures" class="form-label">Gyártó</label>
+                <select id="gyartoSzures" class="form-select">
+                    <option value="osszesGyarto" selected>Összes gyártó</option>
+                </select>
             </div>
-            <div class="row">Ár (Min - Max)
-                <div class="col-lg-2 col-sm-12">
-                    <div id="rangeEgy"></div>
-                    <div id="rangeKetto"></div>
-                </div>
+
+            <div class="flex-grow-1">
+                <label class="form-label">Ár (Min - Max)</label>
+                <div id="rangeEgy"></div>
+                <div id="rangeKetto"></div>
             </div>
-            <div class="row">Keresés
-                <div class="col-lg-2 col-sm-12">
-                    <input type="text" id="keresesSzures" style="width: 150px" placeholder="Írja be a termék nevét!">
-                </div>
+
+            <div class="flex-grow-1">
+                <label for="keresesSzures" class="form-label">Keresés</label>
+                <input type="text" id="keresesSzures" class="form-control" placeholder="Írja be a termék nevét!">
             </div>
-            <div class="row">Rendezés
-                <div class="col-lg-2 col-sm-12">
-                    <select id="rendez">
-                        <option value="nevAz" selected>Név szerint (A-Z)</option>
-                        <option value="nevZa">Név szerint (Z-A)</option>
-                        <option value="arCsokk">Ár szerint növekvő</option>
-                        <option value="arNov">Ár szerint csökkenő</option>
-                    </select>
-                </div>
+
+            <div class="flex-grow-1">
+                <label for="rendez" class="form-label">Rendezés</label>
+                <select id="rendez" class="form-select">
+                    <option value="nevAz" selected>Név szerint (A-Z)</option>
+                    <option value="nevZa">Név szerint (Z-A)</option>
+                    <option value="arCsokk">Ár szerint növekvő</option>
+                    <option value="arNov">Ár szerint csökkenő</option>
+                </select>
             </div>
+
         </div>
 
         <!-- Termékek listája -->
-        <div id="termekekTartalom" class="row">
+        <div id="termekekTartalom" class="row mt-4">
             <!-- Ide töltődnek be dinamikusan a termékek -->
         </div>
 
-        <div id="valaszSzoveg">
-
-        </div>
-
+        <div id="valaszSzoveg" class="text-center mt-3"></div>
     </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 

@@ -19,7 +19,7 @@ header("Pragma: no-cache");
 </head>
 <body>
 
-    <?php include './navbar.php'; ?>
+    <?php include './nav.php'; ?>
 
     <div class="container form-container">
         <h2 class="text-center">Feszültségesés kalkulátor</h2>

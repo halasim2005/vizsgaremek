@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Profil</title>
 </head>
 <body>
-<?php include './navbar.php'; ?>
+<?php include './nav.php'; ?>
 
 <div class="container my-5">
         <h1 class="text-center form-label mb-4">Profil Szerkesztése</h1>
