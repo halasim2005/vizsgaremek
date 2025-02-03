@@ -52,7 +52,6 @@
                             <li><a class="dropdown-item" href="./regisztracio">Regisztráció</a></li>
                             <li><a class="dropdown-item" href="./bejelentkezes">Bejelentkezés</a></li>
                         <?php endif; ?>
-
                     </ul>
                 </li>       
             </ul>
