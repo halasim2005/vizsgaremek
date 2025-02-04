@@ -342,7 +342,8 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                                         <div class="card-body">
                                             <h5 class="card-title kosarFelirat"><?= htmlspecialchars($termek['termek_nev']) ?></h5>
                                             <p class="card-text"><?= $termek['egysegar'] ?> Ft / db</p>
-                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['tetelek_mennyiseg'] ?>" min="0" max="<?= $termek['elerheto_darab'] ?>" class="form-control w-25"><br>
+                                            <p class="card-text"><strong><?= $termek['elerheto_darab'] ?> db van raktáron.</strong></p>
+                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['tetelek_mennyiseg'] ?>" min="0" class="form-control w-25"><br>
                                             <p class="card-text kosarAr"><strong><?= $termek['egysegar'] * $termek['tetelek_mennyiseg'] ?> Ft</strong></p>
                                                 <input type="hidden" name="termek_id" value="<?= htmlspecialchars($termek['termek_id']) ?>">
                                                 <button type="submit" name="delete_item" value="<?= $termek['termek_id'] ?>" class="kukaGomb" ><img class="kukaKep" src="./képek/torlesikon.svg" href="Törlés"></button>

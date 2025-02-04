@@ -21,9 +21,8 @@
             <div class="col-md-12">
                 <div class="alert alert-danger">
                     <h3>Rendelés sikertelen!</h3>
-                    <p>Valami nem jó</p>
-                    <p>Ha bármilyen kérdése van, kérjük lépjen kapcsolatba velünk!</p>
-                    <a href="fooldal.php" class="btn btn-primary">Vissza a főoldalra</a>
+                    <p>Nincs elég termék a raktáron! Kérjük egy termékből csak annyit válasszon, amennyi raktáron van! Köszönjük!</p>
+                    <a href="kosar.php" class="btn btn-primary">Vissza a kosár oldalra</a>
                 </div>
             </div>
         </div>
