@@ -74,11 +74,6 @@ function betolt_kosar_adatbazisbol($pdo) {
 
 betolt_kosar_adatbazisbol($pdo);
 
-/*if (isset($_SESSION['felhasznalo']['id'])) {
-    $felhasznalo_id = $_SESSION['felhasznalo']['id'];
-    $_SESSION['kosar'] = betolt_kosar_adatbazisbol($pdo, $felhasznalo_id);
-}*/
-
 // Kosár összesítő számítás
 function osszegzo($kosar) {
     $osszesen = 0;
@@ -93,10 +88,16 @@ if (isset($_POST['delete_item'])) {
 
     if (!empty($termek_id) && isset($_SESSION['felhasznalo']['fh_nev'])) {
         $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
-
+        $termek_id_db = $_SESSION['kosar'][$index]['termek_id'];
+        
         // Törlés a Session-ből
         foreach ($_SESSION['kosar'] as $index => $termek) {
             if ($termek['termek_id'] == $termek_id) {
+                // Készlet frissítése
+                $mennyiseg = $_POST['mennyisegek'][$index];
+                $keszlet_update_query = "UPDATE termek SET elerheto_darab = elerheto_darab + ? WHERE id = ?";
+                $keszlet_update_stmt = $pdo->prepare($keszlet_update_query);
+                $keszlet_update_stmt->execute([$mennyiseg, $termek_id]);
                 unset($_SESSION['kosar'][$index]);
                 break;
             }
@@ -117,41 +118,66 @@ if (isset($_POST['delete_item'])) {
 }
 
 if (isset($_POST['update_cart'])) {
+    $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
+
     foreach ($_POST['mennyisegek'] as $index => $uj_mennyiseg) {
+        if (!isset($_SESSION['kosar'][$index])) {
+            continue; // Ha nincs ilyen index a kosárban, lépjünk tovább
+        }
+
         $termek_id = $_SESSION['kosar'][$index]['termek_id'];
-        $mennyiseg = $_POST['mennyisegek'];
+        $regi_mennyiseg = $_SESSION['kosar'][$index]['mennyiseg']; // Régi mennyiség
         
-        // Ha az új mennyiség 0 vagy kisebb, akkor töröljük az elemet
-        if ($uj_mennyiseg <= 0) {
-            unset($_SESSION['kosar'][$index]);
+        // 🔍 Debugging - Ellenőrizzük az értékeket
+        error_log("Termék ID: $termek_id | Régi mennyiség: $regi_mennyiseg | Új mennyiség: $uj_mennyiseg");
 
-            // Törlés az adatbázisból
-            $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
-            $query = "DELETE FROM tetelek WHERE fh_nev = ? AND termek_id = ?";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([$fh_nev, $termek_id]);
-        } else {
-            // Session frissítése
-            $_SESSION['kosar'][$index]['mennyiseg'] = $uj_mennyiseg;
+        if ($uj_mennyiseg != $regi_mennyiseg) {
+            // Ha az új mennyiség 0 vagy kisebb, töröljük az elemet
+            if ($uj_mennyiseg <= 0) {
+                unset($_SESSION['kosar'][$index]);
 
-            // Tételek tábla frissítése
-            $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
-            $query = "UPDATE tetelek SET tetelek_mennyiseg = ? WHERE fh_nev = ? AND termek_id = ?";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([$uj_mennyiseg, $fh_nev, $termek_id]);
+                // 🔍 Debugging
+                error_log("Termék törölve: $termek_id | Visszaadott készlet: $regi_mennyiseg");
 
-            // Termék készlet frissítése
-            //$keszlet_update_query = "UPDATE termek SET elerheto_darab = elerheto_darab - ? WHERE id = ?";
-            //$keszlet_update_stmt = $pdo->prepare($keszlet_update_query);
-            //$keszlet_update_stmt->execute([$mennyiseg, $termek_id]);
+                // Törlés az adatbázisból
+                $query = "DELETE FROM tetelek WHERE fh_nev = ? AND termek_id = ?";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([$fh_nev, $termek_id]);
+
+                // Készlet visszaállítása
+                $keszlet_update_query = "UPDATE termek SET elerheto_darab = elerheto_darab + ? WHERE id = ?";
+                $keszlet_update_stmt = $pdo->prepare($keszlet_update_query);
+                $keszlet_update_stmt->execute([$regi_mennyiseg, $termek_id]);
+            } else {
+                // **Csak a változást frissítsük!**
+                $keszlet_kulonbseg = $regi_mennyiseg - $uj_mennyiseg;
+
+                if ($keszlet_kulonbseg != 0) { // Csak ha ténylegesen változott
+                    error_log("Készlet változás: $keszlet_kulonbseg | Termék ID: $termek_id");
+
+                    $keszlet_update_query = "UPDATE termek SET elerheto_darab = elerheto_darab + ? WHERE id = ?";
+                    $keszlet_update_stmt = $pdo->prepare($keszlet_update_query);
+                    $keszlet_update_stmt->execute([$keszlet_kulonbseg, $termek_id]);
+                }
+
+                // **Session frissítése**
+                $_SESSION['kosar'][$index]['mennyiseg'] = $uj_mennyiseg;
+
+                // **Tételek tábla frissítése**
+                $query = "UPDATE tetelek SET tetelek_mennyiseg = ? WHERE fh_nev = ? AND termek_id = ?";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([$uj_mennyiseg, $fh_nev, $termek_id]);
+            }
         }
     }
-    // Újrendezés a Session-ben
+
+    // Újrendezés a Session-ben, hogy az indexek sorban legyenek
     $_SESSION['kosar'] = array_values($_SESSION['kosar']);
 
-    // Adatok frissítése adatbázisból
-    betolt_kosar_adatbazisbol($pdo);
- 
+    // 🔍 Debugging - Ellenőrizzük a végső kosár tartalmát
+    error_log("Kosár végső állapota: " . print_r($_SESSION['kosar'], true));
+
+    // Frissítés után irány vissza a kosár oldalra
     header("Location: kosar");
     exit();
 }
@@ -159,11 +185,18 @@ if (isset($_POST['update_cart'])) {
 if (isset($_POST['empty_cart'])) {
     if (isset($_SESSION['felhasznalo']['fh_nev'])) {
         $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
+        $termek_id = $_SESSION['kosar'][$index]['termek_id'];
+        $mennyiseg = $_POST['mennyisegek'];
 
         // Törlés az adatbázisból
         $query = "DELETE FROM tetelek WHERE fh_nev = ?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$fh_nev]);
+
+        // Készlet frissítése
+        $keszlet_update_query = "UPDATE termek SET elerheto_darab = elerheto_darab + ? WHERE id = ?";
+        $keszlet_update_stmt = $pdo->prepare($keszlet_update_query);
+        $keszlet_update_stmt->execute([$mennyiseg, $termek_id]);
     }
 
     // Törlés a Session-ből
@@ -211,7 +244,7 @@ if(isset($_POST['fizetes'])){
     $RENDELES = $RENDELES_stmt->execute([$szallitasi_mod, $fizetesi_mod, $osszeg, $szallitas, $vegosszeg, $fh_nev, $DATE_megrendeles, $ID_megrendeles]);
 
     //Ellenőrzés, hogy sikeres volt-e a módosítás
-    if($RENDELES == true){
+    if($RENDELES){
         // Tételek tábla rendeles_id, státusz módosítás
         $UPDATE_query = "UPDATE tetelek SET tetelek.rendeles_id = ?, tetelek.statusz = 'leadva' WHERE tetelek.statusz = 'kosárban' AND tetelek.fh_nev = ?;";
         $UPDATE_stmt = $pdo->prepare($UPDATE_query);
