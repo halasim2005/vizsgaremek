@@ -58,7 +58,7 @@ $_SESSION['kosar'] = [];
 </head>
 <body>
 
-    <?php include './navbar.php'; ?>
+    <?php include './nav.php'; ?>
 
     <div class="container mt-5">
         <div class="row">

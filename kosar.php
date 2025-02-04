@@ -274,7 +274,8 @@ if(isset($_POST['fizetes'])){
         header("Location: rendeles_sikeres");
         exit();
     }else{
-        //hibaüzenet
+        header("Location: rendeles_sikertelen");
+        exit();
     }
 }
 
