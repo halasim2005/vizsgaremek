@@ -5,7 +5,7 @@
             <a class="ms-auto">
                 <a class="nav-link" href="./kosar">
                     <img id="kosarIkon__3" src="./képek/kosarIkon.png" alt="Kosár ikon">
-                </a>
+                </a>    
                 <a class="nav-link" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src='./képek/profilikon.png' id="profilIkon__3" alt="Profil">
                 </a>
@@ -37,7 +37,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="./kosar"><img id="kosarIkon__2" src="./képek/kosarIkon.png" alt="Kosár ikon"></a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown dropstart">
                     <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src='./képek/profilikon.png' id="profilIkon__2" alt="Profil">
                     </a>

@@ -46,7 +46,7 @@ header("Pragma: no-cache");
         </div>
 
         <div class="row mt-4">
-            <div class="col-md-6">
+            <div class="col-md-6 w-90">
                 <h4>Térkép</h4>
                 <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10795.847019326195!2d17.914509599999997!3d47.0926767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4769dc589d4068ad%3A0x77bc6741cb716d94!2zVmVzenByw6ltLCBTemFiYWRzw6FneiB0w6lyIDYtMTAsIDgyMDA!5e0!3m2!1shu!2shu!4v1614000000000!5m2!1shu!2shu" 
