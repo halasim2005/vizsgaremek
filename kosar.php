@@ -183,57 +183,99 @@ if (isset($_POST['empty_cart'])) {
 }
 
 if(isset($_POST['fizetes'])){
-    $
-
-    // Szállítási mód és fizetési mód ellenőrzés
-    $szallitasi_mod = isset($_POST['szallitasi_mod']) ? $_POST['szallitasi_mod'] : 'standard';
-    $fizetesi_mod = isset($_POST['fizetesi_mod']) ? $_POST['fizetesi_mod'] : 'kartya';
-
-    // Kosár összegzés
-    $osszeg = osszegzo($_SESSION['kosar']);
-    $szallitas = szallitas_dij($_SESSION['kosar']);
-    $vegosszeg = $osszeg + $szallitas;
-
+    //Készlet, elérhető darab ellenőrzés, levonás
     // Felhasználónév lekérése
     $fh_nev = $_SESSION['felhasznalo']['fh_nev'];
 
-    // Megrendelés DÁTUM lekérése
-    $DATE_query = "SELECT megrendeles.leadas_datum FROM megrendeles ORDER BY megrendeles.id DESC LIMIT 1;";
-    $DATE_megrendeles_array = adatokLekerdezese($DATE_query);
-    if(is_array($DATE_megrendeles_array)){
-        foreach($DATE_megrendeles_array as $D){
-            $DATE_megrendeles = $D["leadas_datum"];
+    $TETELEK_OKE = 0;
+    $MINDEN_OKE = false;
+
+    $RENDELES_ADATOK_query = "SELECT (SELECT SUM(tetelek.tetelek_mennyiseg) 
+                            FROM tetelek WHERE tetelek.fh_nev = '{$fh_nev}' AND tetelek.statusz = 'kosárban') AS osszesTetel, tetelek.termek_id, termek.nev, termek.elerheto_darab, tetelek.tetelek_mennyiseg 
+                            FROM tetelek INNER JOIN termek ON tetelek.termek_id = termek.id WHERE tetelek.fh_nev = '{$fh_nev}' AND tetelek.statusz = 'kosárban';";
+    $RENDELES_ADATOK = adatokLekerdezese($RENDELES_ADATOK_query);
+
+    $tomb_hossz = 0;
+
+    if(is_array($RENDELES_ADATOK)){
+        foreach ($RENDELES_ADATOK as $adat) {
+            $tomb_hossz = $tomb_hossz + 1;
+            if($adat['elerheto_darab'] >= $adat['tetelek_mennyiseg']){
+                $TETELEK_OKE = $TETELEK_OKE + 1;
+            }else{
+                $TETELEK_OKE = $TETELEK_OKE - 1;
+            }
         }
     }
+    
+    if($TETELEK_OKE == $tomb_hossz){
+        foreach ($RENDELES_ADATOK as $modosit) {
+            $kulonbseg = $modosit['elerheto_darab'] - $modosit['tetelek_mennyiseg'];
+            $product_ID = $modosit['termek_id'];
 
-    // Megrendelés ID lekérése
-    $ID_query = "SELECT megrendeles.id FROM megrendeles WHERE megrendeles.fh_nev = '{$fh_nev}' ORDER BY megrendeles.id DESC LIMIT 1;";
-    $ID_megrendeles_array = adatokLekerdezese($ID_query);
-    if(is_array($ID_megrendeles_array)){
-        foreach($ID_megrendeles_array as $I){
-            $ID_megrendeles = $I["id"];
+            $TERMEK_DB_UPDATE_query = "UPDATE termek SET termek.elerheto_darab = ? WHERE termek.id = ?;";
+            $TERMEK_stmt = $pdo->prepare($TERMEK_DB_UPDATE_query);
+            $DB_jo = $TERMEK_stmt->execute([$kulonbseg, $product_ID]);
         }
+        if($DB_jo){
+            $MINDEN_OKE = true;
+        }else{
+            $MINDEN_OKE = false;
+        }  
+    }else{
+        $MINDEN_OKE = false;
     }
 
-    // Rendelés adatainak módosítása
-    $RENDELES_query = "UPDATE megrendeles SET megrendeles.szallitasi_mod = ?, megrendeles.fizetesi_mod = ?, megrendeles.osszeg = ?, megrendeles.szallitas = ?, megrendeles.vegosszeg = ? WHERE megrendeles.fh_nev = ? AND megrendeles.leadas_datum = ? AND megrendeles.id = ?;";
-    $RENDELES_stmt = $pdo->prepare($RENDELES_query);
-    $RENDELES = $RENDELES_stmt->execute([$szallitasi_mod, $fizetesi_mod, $osszeg, $szallitas, $vegosszeg, $fh_nev, $DATE_megrendeles, $ID_megrendeles]);
+    if($MINDEN_OKE == true){
+        // Szállítási mód és fizetési mód ellenőrzés
+        $szallitasi_mod = isset($_POST['szallitasi_mod']) ? $_POST['szallitasi_mod'] : 'standard';
+        $fizetesi_mod = isset($_POST['fizetesi_mod']) ? $_POST['fizetesi_mod'] : 'kartya';
 
-    //Ellenőrzés, hogy sikeres volt-e a módosítás
-    if($RENDELES){
-        // Tételek tábla rendeles_id, státusz módosítás
-        $UPDATE_query = "UPDATE tetelek SET tetelek.rendeles_id = ?, tetelek.statusz = 'leadva' WHERE tetelek.statusz = 'kosárban' AND tetelek.fh_nev = ?;";
-        $UPDATE_stmt = $pdo->prepare($UPDATE_query);
-        $UPDATE_stmt->execute([$ID_megrendeles, $fh_nev]);
+        // Kosár összegzés
+        $osszeg = osszegzo($_SESSION['kosar']);
+        $szallitas = szallitas_dij($_SESSION['kosar']);
+        $vegosszeg = $osszeg + $szallitas;
+
+        // Megrendelés DÁTUM lekérése
+        $DATE_query = "SELECT megrendeles.leadas_datum FROM megrendeles ORDER BY megrendeles.id DESC LIMIT 1;";
+        $DATE_megrendeles_array = adatokLekerdezese($DATE_query);
+        if(is_array($DATE_megrendeles_array)){
+            foreach($DATE_megrendeles_array as $D){
+                $DATE_megrendeles = $D["leadas_datum"];
+            }
+        }
+
+        // Megrendelés ID lekérése
+        $ID_query = "SELECT megrendeles.id FROM megrendeles WHERE megrendeles.fh_nev = '{$fh_nev}' ORDER BY megrendeles.id DESC LIMIT 1;";
+        $ID_megrendeles_array = adatokLekerdezese($ID_query);
+        if(is_array($ID_megrendeles_array)){
+            foreach($ID_megrendeles_array as $I){
+                $ID_megrendeles = $I["id"];
+            }
+        }
+
+        // Rendelés adatainak módosítása
+        $RENDELES_query = "UPDATE megrendeles SET megrendeles.szallitasi_mod = ?, megrendeles.fizetesi_mod = ?, megrendeles.osszeg = ?, megrendeles.szallitas = ?, megrendeles.vegosszeg = ? WHERE megrendeles.fh_nev = ? AND megrendeles.leadas_datum = ? AND megrendeles.id = ?;";
+        $RENDELES_stmt = $pdo->prepare($RENDELES_query);
+        $RENDELES = $RENDELES_stmt->execute([$szallitasi_mod, $fizetesi_mod, $osszeg, $szallitas, $vegosszeg, $fh_nev, $DATE_megrendeles, $ID_megrendeles]);
+
+        //Ellenőrzés, hogy sikeres volt-e a módosítás
+        if($RENDELES){
+            // Tételek tábla rendeles_id, státusz módosítás
+            $UPDATE_query = "UPDATE tetelek SET tetelek.rendeles_id = ?, tetelek.statusz = 'leadva' WHERE tetelek.statusz = 'kosárban' AND tetelek.fh_nev = ?;";
+            $UPDATE_stmt = $pdo->prepare($UPDATE_query);
+            $UPDATE_stmt->execute([$ID_megrendeles, $fh_nev]);
+        }
+
+        // Kosár ürítése a session-ben
+        $_SESSION['kosar'] = [];
+
+        // Rendelés sikeres feldolgozása
+        header("Location: rendeles_sikeres");
+        exit();
+    }else{
+        //hibaüzenet
     }
-
-    // Kosár ürítése a session-ben
-    $_SESSION['kosar'] = [];
-
-    // Rendelés sikeres feldolgozása
-    header("Location: rendeles_sikeres");
-    exit();
 }
 
 function szallitas_dij($kosar) {
