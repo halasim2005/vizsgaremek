@@ -335,7 +335,7 @@ async function osszesTermekekLeker() {
                         </div>
                     </div>
 
-    
+
                     <!-- Modal -->
                     <div class="modal fade" id="modal_${termek.id}" tabindex="-1" aria-labelledby="modalLabel_${termek.id}" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
@@ -345,11 +345,25 @@ async function osszesTermekekLeker() {
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <img src="${termek.kep}" alt="${termek.nev}" class="img-fluid mb-3">
-                                    <p>${termek.leiras}</p>
-                                    <h6><strong>Ár: ${parseInt(termek.egysegar).toLocaleString()} Ft</strong></h6>
-                                    <p><strong>Gyártó:</strong> ${termek.gyarto}</p>
-                                    <p><strong>Kategória:</strong> ${termek.kategoria_nev}</p>
+                                    <div class="container">
+                                        <!-- Első sor -->
+                                        <div class="row">
+                                            <div class="col-md-6 text-white">
+                                                <img src="${termek.kep}" alt="${termek.nev}" class="img-fluid mb-3" style="width: 65%">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h3><strong>Ár: ${parseInt(termek.egysegar).toLocaleString()} Ft</strong></h3>
+                                                <h4><strong>Gyártó:</strong> ${termek.gyarto}</h4>
+                                                <h4><strong>Kategória:</strong> ${termek.kategoria_nev}</h4>
+                                            </div>
+                                        </div>
+                                        <!-- Második sor -->
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <p>${termek.leiras}</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" id="modalKartyaGomb" class="btn btn-secondary" data-bs-dismiss="modal">Bezár</button>
@@ -364,6 +378,8 @@ async function osszesTermekekLeker() {
                             </div>
                         </div>
                     </div>
+    
+                    
                 `;
                 }
             }
