@@ -74,3 +74,7 @@ body {
     border: 1px solid white;
     border-radius: 5px;
 }
+
+.blue-bg { background-color: lightblue; }
+.green-bg { background-color: lightgreen; }
+.red-bg { background-color: lightcoral; }

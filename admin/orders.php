@@ -9,6 +9,11 @@ require_once '../db.php';
 include './admin_navbar.php';
 
 
+$statuszSzures = "";
+if (isset($_GET['statusz']) && !empty($_GET['statusz'])) {
+    $statuszSzures = " WHERE megrendeles.statusz = :statusz ";
+}
+
 // Rendelések lekérdezése
 $query = "SELECT megrendeles.id as rendeles_id, megrendeles.statusz, megrendeles.vegosszeg, 
                  felhasznalo.fh_nev, GROUP_CONCAT(termek.nev, ' (', tetelek.tetelek_mennyiseg, ' db)') as termekek
@@ -16,10 +21,19 @@ $query = "SELECT megrendeles.id as rendeles_id, megrendeles.statusz, megrendeles
           JOIN felhasznalo ON megrendeles.fh_nev = felhasznalo.fh_nev
           JOIN tetelek ON megrendeles.id = tetelek.rendeles_id
           JOIN termek ON tetelek.termek_id = termek.id
+          $statuszSzures
           GROUP BY megrendeles.id";
+
 $stmt = $pdo->prepare($query);
+
+// Ha van státusz szűrés, akkor értéket adunk át a lekérdezéshez
+if (!empty($statuszSzures)) {
+    $stmt->bindParam(':statusz', $_GET['statusz']);
+}
+
 $stmt->execute();
 $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
 
 ?>
@@ -40,6 +54,29 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
 <div class="container mt-5">
     <h2 class="text-center">Rendelések Kezelése</h2>
+    <form method="GET" action="" class="mb-3 justify-content-center d-flex">
+    <select name="statusz" id="statusz" class="form-select w-auto d-inline <?php if(isset($_GET['statusz'])) {
+                                                                                switch ($_GET['statusz']) {
+                                                                                    case "feldolgozás alatt":
+                                                                                        echo "blue-bg";
+                                                                                        break;
+                                                                                    case "kész":
+                                                                                        echo "green-bg";
+                                                                                        break;
+                                                                                    case "törölve":
+                                                                                        echo "red-bg";
+                                                                                        break;
+                                                                                    default:
+                                                                                        echo "";
+                                                                                }
+                                                                            }
+        ?>" onchange="this.form.submit()">
+        <option value="">Összes</option>
+        <option value="feldolgozás alatt" <?php if(isset($_GET['statusz']) && $_GET['statusz'] == 'feldolgozás alatt') echo 'selected'; ?>>Feldolgozás alatt</option>
+        <option value="kész" <?php if(isset($_GET['statusz']) && $_GET['statusz'] == 'kész') echo 'selected'; ?>>Kész</option>
+        <option value="törölve" <?php if(isset($_GET['statusz']) && $_GET['statusz'] == 'törölve') echo 'selected'; ?>>Törölve</option>
+    </select>
+</form>
     <div class="row">
         <?php foreach ($megrendeles as $rendeles): ?>
             <div class="col-md-4 mb-4">
