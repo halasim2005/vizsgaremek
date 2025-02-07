@@ -335,7 +335,6 @@ async function osszesTermekekLeker() {
                         </div>
                     </div>
 
-
                     <!-- Modal -->
                     <div class="modal fade" id="modal_${termek.id}" tabindex="-1" aria-labelledby="modalLabel_${termek.id}" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
@@ -378,8 +377,6 @@ async function osszesTermekekLeker() {
                             </div>
                         </div>
                     </div>
-    
-                    
                 `;
                 }
             }
