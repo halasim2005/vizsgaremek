@@ -567,3 +567,20 @@ select option:hover {
     color: rgb(61, 61, 61)
 }
 
+#cart-count {
+    position: absolute;
+    top: 22px;
+    right: 130px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 4px 8px;
+    min-width: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+

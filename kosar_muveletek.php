@@ -33,6 +33,13 @@ if (isset($_POST['add_to_cart'])) {
         $rendeles_id = $rendeles['id'];
     }
 
+    // Tétel hozzáadása a tetelek táblához
+    $query = "INSERT INTO tetelek (rendeles_id, termek_id, tetelek_mennyiseg, fh_nev) 
+              VALUES (?, ?, ?, ?) 
+              ON DUPLICATE KEY UPDATE tetelek_mennyiseg = tetelek_mennyiseg + VALUES(tetelek_mennyiseg)";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$rendeles_id, $termek_id, $mennyiseg, $fh_nev]);
+
     /////////////////////////////////////////////////////////////
     //Rendelés ID lekérése
     $ID_query = "SELECT megrendeles.id FROM megrendeles WHERE megrendeles.fh_nev = '{$fh_nev}' ORDER BY megrendeles.id DESC LIMIT 1;";
@@ -47,22 +54,20 @@ if (isset($_POST['add_to_cart'])) {
     $KOSAR_SZAMLALO_sql = "SELECT COUNT(tetelek.id) AS kosarSzamlalo FROM `tetelek` WHERE tetelek.statusz = 'kosárban' AND tetelek.fh_nev = '{$fh_nev}' AND tetelek.rendeles_id = {$ID_megrendeles} ORDER BY tetelek.id DESC;";
     $KOSAR_SZAMLALO_Array = adatokLekerdezese($KOSAR_SZAMLALO_sql);
     if(is_array($KOSAR_SZAMLALO_Array)){
+        $kosar_szamlalo = 0;
         foreach($KOSAR_SZAMLALO_Array as $K){
             $kosar_szamlalo = $K["kosarSzamlalo"];
         }
     }
 
-    // Tétel hozzáadása a tetelek táblához
-    $query = "INSERT INTO tetelek (rendeles_id, termek_id, tetelek_mennyiseg, fh_nev) 
-              VALUES (?, ?, ?, ?) 
-              ON DUPLICATE KEY UPDATE tetelek_mennyiseg = tetelek_mennyiseg + VALUES(tetelek_mennyiseg)";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$rendeles_id, $termek_id, $mennyiseg, $fh_nev]);
+    //KOSÁRSZÁMLÁLÓ
+    if($fh_nev == ""){
+        $szamlalo = 0;
+        file_put_contents("kosarszamlalo.txt", $szamlalo);
+    }else{
+        file_put_contents("kosarszamlalo.txt", $kosar_szamlalo);
+    }
 
-    // Készlet frissítése
-    //$keszlet_update_query = "UPDATE termek SET elerheto_darab = elerheto_darab - ? WHERE id = ?";
-    //$keszlet_update_stmt = $pdo->prepare($keszlet_update_query);
-    //$keszlet_update_stmt->execute([$mennyiseg, $termek_id]);
 
     $_SESSION['uzenet'] = "Termék sikeresen hozzáadva a kosárhoz.";
     header("Location: termekek");

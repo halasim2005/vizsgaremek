@@ -4,7 +4,13 @@
             <img id="navLogo" src="./képek/HaLálip.png" alt="HaLáli Kft. logo">
             <a class="ms-auto">
                 <a class="nav-link" href="./kosar">
-                    <img id="kosarIkon__3" src="./képek/kosarIkon.png" alt="Kosár ikon">
+                    <img id="kosarIkon__3" src="./képek/kosarIkon.png" alt="Kosár ikon"><span id="cart-count" class="badge">
+                        <?php
+                        
+                        include './kosarszamlalo.php';
+                        
+                        ?>
+                    </span>
                 </a>    
                 <a class="nav-link" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src='./képek/profilikon.png' id="profilIkon__3" alt="Profil">
@@ -35,7 +41,13 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="./kosar"><img id="kosarIkon__2" src="./képek/kosarIkon.png" alt="Kosár ikon"></a>
+                    <a class="nav-link" href="./kosar"><img id="kosarIkon__2" src="./képek/kosarIkon.png" alt="Kosár ikon"><span id="cart-count" class="badge">
+                    <?php
+                        
+                        include './kosarszamlalo.php';    
+                        
+                    ?>
+                    </span></a>
                 </li>
                 <li class="nav-item dropdown dropstart">
                     <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

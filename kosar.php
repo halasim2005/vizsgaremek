@@ -19,6 +19,7 @@ function frissit_session_adatbazisbol($conn) {
     }
 }
 
+
 // Profil teljesség ellenőrzés
 function teljes_e_a_profil($userData) {
     $requiredFields = ['vezeteknev', 'keresztnev', 'email', 'telefonszam', 
@@ -108,6 +109,34 @@ if (isset($_POST['delete_item'])) {
         $stmt = $pdo->prepare($query);
         $stmt->execute([$fh_nev, $termek_id]);
 
+        //Rendelés ID lekérése
+        $ID_query = "SELECT megrendeles.id FROM megrendeles WHERE megrendeles.fh_nev = '{$fh_nev}' ORDER BY megrendeles.id DESC LIMIT 1;";
+        $ID_megrendeles_array = adatokLekerdezese($ID_query);
+        if(is_array($ID_megrendeles_array)){
+            foreach($ID_megrendeles_array as $I){
+                $ID_megrendeles = $I["id"];
+            }
+        }
+
+        //Kosárszámláló
+        $KOSAR_SZAMLALO_sql = "SELECT COUNT(tetelek.id) AS kosarSzamlalo FROM `tetelek` WHERE tetelek.statusz = 'kosárban' AND tetelek.fh_nev = '{$fh_nev}' AND tetelek.rendeles_id = {$ID_megrendeles} ORDER BY tetelek.id DESC;";
+        $KOSAR_SZAMLALO_Array = adatokLekerdezese($KOSAR_SZAMLALO_sql);
+        if(is_array($KOSAR_SZAMLALO_Array)){
+            $kosar_szamlalo = 0;
+            foreach($KOSAR_SZAMLALO_Array as $K){
+                $kosar_szamlalo = $K["kosarSzamlalo"];
+            }
+        }
+
+        //KOSÁRSZÁMLÁLÓ
+        if($fh_nev == ""){
+            $szamlalo = 0;
+            file_put_contents("kosarszamlalo.txt", $szamlalo);
+        }else{
+            file_put_contents("kosarszamlalo.txt", $kosar_szamlalo);
+        }
+
+
         // Újrendezés a Session-ben, hogy az indexek sorban legyenek
         $_SESSION['kosar'] = array_values($_SESSION['kosar']);
     }
@@ -167,6 +196,36 @@ if (isset($_POST['empty_cart'])) {
         $query = "DELETE FROM tetelek WHERE fh_nev = ?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$fh_nev]);
+
+        //Rendelés ID lekérése
+        $ID_query = "SELECT megrendeles.id FROM megrendeles WHERE megrendeles.fh_nev = '{$fh_nev}' ORDER BY megrendeles.id DESC LIMIT 1;";
+        $ID_megrendeles_array = adatokLekerdezese($ID_query);
+        if(is_array($ID_megrendeles_array)){
+            foreach($ID_megrendeles_array as $I){
+                $ID_megrendeles = $I["id"];
+            }
+        }
+
+        //Kosárszámláló
+        $KOSAR_SZAMLALO_sql = "SELECT COUNT(tetelek.id) AS kosarSzamlalo FROM `tetelek` WHERE tetelek.statusz = 'kosárban' AND tetelek.fh_nev = '{$fh_nev}' AND tetelek.rendeles_id = {$ID_megrendeles} ORDER BY tetelek.id DESC;";
+        $KOSAR_SZAMLALO_Array = adatokLekerdezese($KOSAR_SZAMLALO_sql);
+        if(is_array($KOSAR_SZAMLALO_Array)){
+            $kosar_szamlalo = 0;
+            foreach($KOSAR_SZAMLALO_Array as $K){
+                $kosar_szamlalo = $K["kosarSzamlalo"];
+            }
+        }
+
+        $valami = count($_SESSION['kosar']);
+
+        //KOSÁRSZÁMLÁLÓ
+        if($fh_nev == ""){
+            $szamlalo = 0;
+            file_put_contents("kosarszamlalo.txt", $szamlalo);
+        }else{
+            file_put_contents("kosarszamlalo.txt", $kosar_szamlalo);
+        }
+
 
         // Készlet frissítése
         $keszlet_update_query = "UPDATE termek SET elerheto_darab = elerheto_darab + ? WHERE id = ?";
