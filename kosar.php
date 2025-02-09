@@ -160,6 +160,35 @@ if (isset($_POST['update_cart'])) {
             $query = "DELETE FROM tetelek WHERE fh_nev = ? AND termek_id = ?";
             $stmt = $pdo->prepare($query);
             $stmt->execute([$fh_nev, $termek_id]);
+
+            //Rendelés ID lekérése
+            $ID_query = "SELECT megrendeles.id FROM megrendeles WHERE megrendeles.fh_nev = '{$fh_nev}' ORDER BY megrendeles.id DESC LIMIT 1;";
+            $ID_megrendeles_array = adatokLekerdezese($ID_query);
+            if(is_array($ID_megrendeles_array)){
+                foreach($ID_megrendeles_array as $I){
+                    $ID_megrendeles = $I["id"];
+                }
+            }
+
+            //Kosárszámláló
+            $KOSAR_SZAMLALO_sql = "SELECT COUNT(tetelek.id) AS kosarSzamlalo FROM `tetelek` WHERE tetelek.statusz = 'kosárban' AND tetelek.fh_nev = '{$fh_nev}' AND tetelek.rendeles_id = {$ID_megrendeles} ORDER BY tetelek.id DESC;";
+            $KOSAR_SZAMLALO_Array = adatokLekerdezese($KOSAR_SZAMLALO_sql);
+            if(is_array($KOSAR_SZAMLALO_Array)){
+                $kosar_szamlalo = 0;
+                foreach($KOSAR_SZAMLALO_Array as $K){
+                    $kosar_szamlalo = $K["kosarSzamlalo"];
+                }
+            }
+
+            $valami = count($_SESSION['kosar']);
+
+            //KOSÁRSZÁMLÁLÓ
+            if($fh_nev == ""){
+                $szamlalo = 0;
+                file_put_contents("kosarszamlalo.txt", $szamlalo);
+            }else{
+                file_put_contents("kosarszamlalo.txt", $kosar_szamlalo);
+            }
         } else {
             // Session frissítése
             $_SESSION['kosar'][$index]['mennyiseg'] = $uj_mennyiseg;
@@ -174,6 +203,35 @@ if (isset($_POST['update_cart'])) {
             $keszlet_update_query = "UPDATE termek SET elerheto_darab = elerheto_darab + ? WHERE id = ?";
             $keszlet_update_stmt = $pdo->prepare($keszlet_update_query);
             $keszlet_update_stmt->execute([$mennyiseg, $termek_id]);
+
+            //Rendelés ID lekérése
+            $ID_query = "SELECT megrendeles.id FROM megrendeles WHERE megrendeles.fh_nev = '{$fh_nev}' ORDER BY megrendeles.id DESC LIMIT 1;";
+            $ID_megrendeles_array = adatokLekerdezese($ID_query);
+            if(is_array($ID_megrendeles_array)){
+                foreach($ID_megrendeles_array as $I){
+                    $ID_megrendeles = $I["id"];
+                }
+            }
+
+            //Kosárszámláló
+            $KOSAR_SZAMLALO_sql = "SELECT COUNT(tetelek.id) AS kosarSzamlalo FROM `tetelek` WHERE tetelek.statusz = 'kosárban' AND tetelek.fh_nev = '{$fh_nev}' AND tetelek.rendeles_id = {$ID_megrendeles} ORDER BY tetelek.id DESC;";
+            $KOSAR_SZAMLALO_Array = adatokLekerdezese($KOSAR_SZAMLALO_sql);
+            if(is_array($KOSAR_SZAMLALO_Array)){
+                $kosar_szamlalo = 0;
+                foreach($KOSAR_SZAMLALO_Array as $K){
+                    $kosar_szamlalo = $K["kosarSzamlalo"];
+                }
+            }
+
+            $valami = count($_SESSION['kosar']);
+
+            //KOSÁRSZÁMLÁLÓ
+            if($fh_nev == ""){
+                $szamlalo = 0;
+                file_put_contents("kosarszamlalo.txt", $szamlalo);
+            }else{
+                file_put_contents("kosarszamlalo.txt", $kosar_szamlalo);
+            }
         }
     }
     // Újrendezés a Session-ben
