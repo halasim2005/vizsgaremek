@@ -60,14 +60,12 @@ if (isset($_POST['add_to_cart'])) {
         }
     }
 
-    //KOSÁRSZÁMLÁLÓ
-    if($fh_nev == ""){
+    if (!isset($_SESSION['felhasznalo'])){
         $szamlalo = 0;
         file_put_contents("kosarszamlalo.txt", $szamlalo);
     }else{
         file_put_contents("kosarszamlalo.txt", $kosar_szamlalo);
     }
-
 
     $_SESSION['uzenet'] = "Termék sikeresen hozzáadva a kosárhoz.";
     header("Location: termekek");
