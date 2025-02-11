@@ -81,14 +81,14 @@ if ($conn->connect_error) {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteLabel">Megerősítés</h5>
+        <h5 class="modal-title text-black" id="confirmDeleteLabel">Megerősítés</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Bezárás"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body text-black">
         Biztosan törölni szeretnéd ezt a terméket?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Mégse</button>
         <form id="deleteForm" method="POST" action="delete_product.php" style="display: inline;">
           <input type="hidden" name="product_id" id="modalProductId" value="">
           <button type="submit" class="btn btn-danger">Törlés</button>
