@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['jogosultsag']) || $_SESSION['jogosultsag'] !== 'admin') {
-    header("Location: ../fooldal.php");
+    header("Location: ../fooldal");
     exit();
 }
 
@@ -95,14 +95,17 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </form>
                         <form method="POST" action="rendeles_torles.php" class="d-inline">
                             <input type="hidden" name="rendeles_id" value="<?php echo $rendeles['rendeles_id']; ?>">
-                            <button type="submit" name="torles" class="btn btn-danger btn-sm">Törlés</button>
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" 
+                                    data-rendelesid="<?php echo $rendeles['rendeles_id']; ?>">
+                                Törlés
+                            </button>
                         </form>
                         <form method="POST" action="rendeles_statusz.php" class="mt-2">
                             <input type="hidden" name="rendeles_id" value="<?php echo $rendeles['rendeles_id']; ?>">
                             <select name="statusz" class="form-select form-select-sm">
                                 <option value="feldolgozás alatt" <?php if ($rendeles['statusz'] === 'feldolgozás alatt') echo 'selected'; ?>>Feldolgozás alatt</option>
                                 <option value="kész" <?php if ($rendeles['statusz'] === 'kész') echo 'selected'; ?>>Kész</option>
-                                <option value="törölve" <?php if ($rendeles['statusz'] === 'törölve') echo 'selected'; ?>>Törölve</option>
+                                <!--<option value="törölve" <?//php if ($rendeles['statusz'] === 'törölve') echo 'selected'; ?>>Törölve</option>-->
                             </select>
                             <button type="submit" name="statusz_modositas" class="btn btn-success btn-sm mt-1">Mentés</button>
                         </form>
@@ -112,6 +115,38 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endforeach; ?>
     </div>
 </div>
+<!-- Törlés megerősítő Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-black" id="confirmDeleteLabel">Biztosan törölni szeretnéd?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Bezárás"></button>
+      </div>
+      <div class="modal-body text-black">
+        Ezt a rendelést nem lehet visszaállítani.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Mégse</button>
+        <form id="deleteForm" method="POST" action="rendeles_torles.php">
+            <input type="hidden" name="rendeles_id" id="deleteRendelesId">
+            <button type="submit" class="btn btn-danger">Igen, törlöm</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var confirmDeleteModal = document.getElementById('confirmDeleteModal');
+    confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var rendelesId = button.getAttribute('data-rendelesid');
+        document.getElementById('deleteRendelesId').value = rendelesId;
+    });
+});
+</script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
