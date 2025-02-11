@@ -109,7 +109,7 @@ include './admin_navbar.php';
                         <button type="submit" name="add_category" class="btn btn-success btn-block mt-3">Kategória hozzáadása</button>
                     </form>
                 </div>
-            </div>
+            </div>           
 
             <!-- Termék hozzáadása kártya -->
             <div class="col-md-6">
@@ -147,6 +147,15 @@ include './admin_navbar.php';
                         <div class="form-group">
                             <label for="manufacturer">Gyártó:</label>
                             <input type="text" class="form-control" name="manufacturer" id="manufacturer" required>
+                            <select class="form-control" name="manufacturer" id="manufacturer" required>
+                                <?php
+                                // Gyártók lekérése
+                                $stmt = $pdo->query("SELECT DISTINCT gyarto FROM termek");
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    echo "<option value='{$row['gyarto']}'>{$row['gyarto']}</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="type">Típus:</label>
