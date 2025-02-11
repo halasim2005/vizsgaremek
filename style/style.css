@@ -409,9 +409,9 @@ footer {
 }
 
 #termekekKartyaGomb{
-    background-color: white;
-    border: 1px solid black;
-    color:black;
+    background-color: rgb(61, 61, 61);
+    border: 1px solid rgb(61, 61, 61);
+    color:white;
     text-decoration: none;
     border-radius: 5px;
     padding-left: 10px;
@@ -419,8 +419,8 @@ footer {
 }
 
 #termekekKartyaGomb:hover{
-    background-color: rgb(61, 61, 61);
-    border: 1px solid rgb(61, 61, 61);
+    background-color: black;
+    border: 1px solid black;
     color:white;
     text-decoration: none;
     border-radius: 5px;
