@@ -23,6 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Bejelentkezés után, felhasználó kosarának visszaállítása
             header("Location: kosar");
             $user_id = $_SESSION['user_id'];  // A felhasználó ID-ja
+
+            // Kosár számláló beállítása
+            $_SESSION['kosar_szamlalo'] = count($_SESSION['kosar']);
     
             $kosarLeker_sql = "SELECT t.termek_id, t.tetelek_mennyiseg, p.nev, p.ar 
                     FROM tetelek t 
