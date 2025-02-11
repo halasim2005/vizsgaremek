@@ -24,12 +24,15 @@ header("Pragma: no-cache");
         include './nav.php';
     ?>
 
-<div class="container form-container mt-5">
+<div class="row m-5">
         <h2 class="">Kapcsolat</h2>
         
         <!-- Kapcsolati Információk -->
-        <div class="row mt-4">
-            <div class="col-md-6">
+         <!--<div class="row mt-4">-->
+             <div class="col-lg-4">
+                 <img id="kapcsolatLogo" width="90%" src="./képek/HaLálip.png" alt="HaLáli Villszer Kft. logo">
+             </div>
+            <div class="col-lg-3">
                 <h4>Elérhetőségeink</h4>
                 <ul class="list-unstyled">
                     <li><strong>Cégnév:</strong> HaLáli Kft.</li>
@@ -40,28 +43,14 @@ header("Pragma: no-cache");
                     <li><strong>Nyitva tartás:</strong> H-P: 9:00-17:00</li>
                 </ul>
             </div>
-            <div class="col-md-6">
-                <img id="kapcsolatLogo" src="./képek/HaLálip.png" alt="HaLáli Villszer Kft. logo">
-            </div>
-        </div>
+         <!--</div>-->
 
-        <div class="row mt-4">
-            <div class="col-md-6 w-90">
-                <h4>Térkép</h4>
-                <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10795.847019326195!2d17.914509599999997!3d47.0926767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4769dc589d4068ad%3A0x77bc6741cb716d94!2zVmVzenByw6ltLCBTemFiYWRzw6FneiB0w6lyIDYtMTAsIDgyMDA!5e0!3m2!1shu!2shu!4v1614000000000!5m2!1shu!2shu" 
-                    width="150%" 
-                    height="300" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy"></iframe>
-            </div>
-        </div>
+         
 
 
         <!-- Kapcsolati Űrlap -->
-        <div class="row mt-5">
-            <div class="col-md-12">
+         <!--<div class="row mt-5">-->
+            <div class="col-lg-5">
                 <h4>Küldjön nekünk üzenetet</h4>
                 <form action="kapcsolat_kuldes.php" method="POST" class="mt-3">
                     <div class="mb-3">
@@ -80,6 +69,21 @@ header("Pragma: no-cache");
                 </form>
             </div>
         </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6 mx-auto w-90">
+                <h4>Térkép</h4>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10795.847019326195!2d17.914509599999997!3d47.0926767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4769dc589d4068ad%3A0x77bc6741cb716d94!2zVmVzenByw6ltLCBTemFiYWRzw6FneiB0w6lyIDYtMTAsIDgyMDA!5e0!3m2!1shu!2shu!4v1614000000000!5m2!1shu!2shu" 
+                    width="100%" 
+                    height="500" 
+                    style="border:0;" 
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+            </div>
+         </div>
+
 
         <!-- Közösségi Média -->
         <div class="row mt-5 text-center">
