@@ -25,7 +25,7 @@ if (session_status() == PHP_SESSION_NONE) {
             <div class="d-flex">
                 <?php if (isset($_SESSION['felhasznalo']) && $_SESSION['jogosultsag'] === 'admin'): ?>
                     <span class="navbar-text me-3">Üdv, <?php echo htmlspecialchars($_SESSION['felhasznalo']['fh_nev']); ?>!</span>
-                    <a href="../kijelentkezes.php" class="btn btn-danger">Kijelentkezés</a>
+                    <a href="../fooldal.php" class="btn btn-danger">Főoldal</a>
                 <?php else: ?>
                     <a href="./bejelentkezes.php" class="btn btn-primary">Bejelentkezés</a>
                 <?php endif; ?>

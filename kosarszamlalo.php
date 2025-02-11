@@ -2,10 +2,7 @@
 
 $adat = file_get_contents("kosarszamlalo.txt");
 
-if(empty($adat) || $adat == 0){
-    echo 0;
-}else if($adat > 0){
-    echo nl2br(htmlspecialchars($adat));
-}
+if (!isset($_SESSION['felhasznalo']))echo 0;
+else echo nl2br(htmlspecialchars($adat));
 
 ?>
