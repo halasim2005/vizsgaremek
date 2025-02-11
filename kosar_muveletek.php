@@ -60,7 +60,8 @@ if (isset($_POST['add_to_cart'])) {
         }
     }
 
-    if (!isset($_SESSION['felhasznalo'])){
+    //KOSÁRSZÁMLÁLÓ
+    if($fh_nev == ""){
         $szamlalo = 0;
         file_put_contents("kosarszamlalo.txt", $szamlalo);
     }else{

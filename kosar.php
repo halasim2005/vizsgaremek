@@ -128,7 +128,8 @@ if (isset($_POST['delete_item'])) {
             }
         }
 
-        if (!isset($_SESSION['felhasznalo'])){
+        //KOSÁRSZÁMLÁLÓ
+        if($fh_nev == ""){
             $szamlalo = 0;
             file_put_contents("kosarszamlalo.txt", $szamlalo);
         }else{
@@ -179,7 +180,8 @@ if (isset($_POST['update_cart'])) {
                 }
             }
 
-            if (!isset($_SESSION['felhasznalo'])){
+            //KOSÁRSZÁMLÁLÓ
+            if($fh_nev == ""){
                 $szamlalo = 0;
                 file_put_contents("kosarszamlalo.txt", $szamlalo);
             }else{
@@ -219,7 +221,8 @@ if (isset($_POST['update_cart'])) {
                 }
             }
 
-            if (!isset($_SESSION['felhasznalo'])){
+            //KOSÁRSZÁMLÁLÓ
+            if($fh_nev == ""){
                 $szamlalo = 0;
                 file_put_contents("kosarszamlalo.txt", $szamlalo);
             }else{

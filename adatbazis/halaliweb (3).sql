@@ -1,3 +1,8 @@
+DROP DATABASE IF EXISTS `halaliweb`;
+CREATE DATABASE IF NOT EXISTS `halaliweb` DEFAULT CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
+USE `halaliweb`;
+
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
