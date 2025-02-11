@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['jogosultsag'] = $user['jogosultsag'];
             if($_SESSION['jogosultsag'] == 'admin') $_SESSION['admin_logged_in'] = true;
             // Bejelentkezés után, felhasználó kosarának visszaállítása
-            header("Location: fooldal");
+            header("Location: kosar");
             $user_id = $_SESSION['user_id'];  // A felhasználó ID-ja
     
             $kosarLeker_sql = "SELECT t.termek_id, t.tetelek_mennyiseg, p.nev, p.ar 
