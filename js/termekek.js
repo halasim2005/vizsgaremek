@@ -131,8 +131,8 @@ async function termekekLeker() {
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
-                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
-                                    <button type="submit" disabled id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary" onclick="Szamlalo()">Kosárba</button>
+                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
+                                    <button type="submit" disabled id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
                                 </form>
                             </div>
                         </div>
@@ -182,8 +182,8 @@ async function termekekLeker() {
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
-                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
-                                    <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary" onclick="Szamlalo()">Kosárba</button>
+                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
+                                    <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
                                 </form>
                             </div>
                         </div>
@@ -278,8 +278,8 @@ async function osszesTermekekLeker() {
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
-                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
-                                    <button type="submit" disabled id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary" onclick="Szamlalo()">Kosárba</button>
+                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
+                                    <button type="submit" disabled id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
                                 </form>
                             </div>
                         </div>
@@ -328,8 +328,8 @@ async function osszesTermekekLeker() {
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
-                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
-                                    <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary" onclick="Szamlalo()">Kosárba</button>
+                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
+                                    <button type="submit" id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
                                 </form>
                             </div>
                         </div>
