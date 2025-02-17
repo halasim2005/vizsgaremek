@@ -1,19 +1,7 @@
 <?php
-/*
-if (!isset($_SESSION['felhasznalo'])) {
-    echo 0; 
-} else {
-    if (!isset($_SESSION['kosar']) || empty($_SESSION['kosar'])) {
+    if(empty($_SESSION["cart_szamlalo"])){
         echo 0;
-    } else {
-        echo count($_SESSION['kosar']);
+    }else if($_SESSION["cart_szamlalo"] > 0){
+        echo nl2br(htmlspecialchars($_SESSION["cart_szamlalo"]));
     }
-}
-
-if(isset($_SESSION['kosar_szamlalo'])){
-    echo 
-}
-
-echo isset($_SESSION['kosar_szamlalo']) ? $_SESSION['kosar_szamlalo'] : 0;*/
-
 ?>

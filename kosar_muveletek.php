@@ -40,6 +40,34 @@ if (isset($_POST['add_to_cart'])) {
     $stmt = $pdo->prepare($query);
     $stmt->execute([$rendeles_id, $termek_id, $mennyiseg, $fh_nev]);
 
+    //Rendelés ID lekérése
+    $ID_query = "SELECT megrendeles.id FROM megrendeles WHERE megrendeles.fh_nev = '{$fh_nev}' ORDER BY megrendeles.id DESC LIMIT 1;";
+    $ID_megrendeles_array = adatokLekerdezese($ID_query);
+    if(is_array($ID_megrendeles_array)){
+        foreach($ID_megrendeles_array as $I){
+            $ID_megrendeles = $I["id"];
+        }
+    }
+    //Kosárszámláló
+    $KOSAR_SZAMLALO_sql = "SELECT COUNT(tetelek.id) AS kosarSzamlalo FROM `tetelek` WHERE tetelek.statusz = 'kosárban' AND tetelek.fh_nev = '{$fh_nev}' AND tetelek.rendeles_id = {$ID_megrendeles} ORDER BY tetelek.id DESC;";
+    $KOSAR_SZAMLALO_Array = adatokLekerdezese($KOSAR_SZAMLALO_sql);
+    if(is_array($KOSAR_SZAMLALO_Array)){
+        $kosar_szamlalo = 0;
+        foreach($KOSAR_SZAMLALO_Array as $K){
+            $kosar_szamlalo = $K["kosarSzamlalo"];
+        }
+    }
+    
+    $_SESSION["cart_szamlalo"] = 0;
+
+    //KOSÁRSZÁMLÁLÓ
+    if($fh_nev == ""){
+        $szamlalo = 0;
+        $_SESSION["cart_szamlalo"] = 0;
+    }else{
+        $_SESSION["cart_szamlalo"] = $kosar_szamlalo;
+    }
+
     $_SESSION['uzenet'] = "Termék sikeresen hozzáadva a kosárhoz.";
     header("Location: termekek");
     exit();
