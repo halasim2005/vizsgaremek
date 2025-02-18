@@ -572,3 +572,8 @@ select option:hover {
 .card-header{
     background-color: white;
 }
+
+iframe {
+    max-width: 100%;
+    display: block;
+}

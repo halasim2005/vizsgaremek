@@ -23,7 +23,7 @@ header("Pragma: no-cache");
     <?php
         include './nav.php';
     ?>
-
+<div class="container mb-3">
 <div class="row m-5">
         <h2 class="">Kapcsolat</h2>
         
@@ -96,6 +96,8 @@ header("Pragma: no-cache");
             </div>
         </div>
     </div>
+</div>
+
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
