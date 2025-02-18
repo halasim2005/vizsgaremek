@@ -577,3 +577,7 @@ iframe {
     max-width: 100%;
     display: block;
 }
+
+input[type="radio"] {
+    accent-color: black; 
+}
