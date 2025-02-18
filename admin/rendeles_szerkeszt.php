@@ -6,6 +6,10 @@ if (!isset($_SESSION['jogosultsag']) || $_SESSION['jogosultsag'] !== 'admin') {
 }
 
 require_once '../db.php';
+require_once '../sql_fuggvenyek.php';
+
+$rendeles_id = 0;
+$tetel_adatok;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rendeles_id'])) {
     $rendeles_id = $_POST['rendeles_id'];
@@ -16,11 +20,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rendeles_id'])) {
               JOIN termek ON tetelek.termek_id = termek.id
               WHERE tetelek.rendeles_id = ?";
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$rendeles_id]);
+    $stmt->execute([(int)$rendeles_id]);
     $tetel_adatok = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tetel_id'], $_POST['uj_mennyiseg'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tetel_id'], $_POST['uj_mennyiseg'], $_POST['modositBtn'])) {
     $tetel_id = $_POST['tetel_id'];
     $uj_mennyiseg = $_POST['uj_mennyiseg'];
 
@@ -59,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tetel_id'], $_POST['u
                 <label><?php echo htmlspecialchars($tetel['nev']); ?> (Egységár: <?php echo htmlspecialchars($tetel['egysegar']); ?> Ft)</label>
                 <input type="number" name="uj_mennyiseg" value="<?php echo htmlspecialchars($tetel['tetelek_mennyiseg']); ?>" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary">Módosítás</button>
+            <button type="submit" name="modositBtn" class="btn btn-primary">Módosítás</button>
         </form>
     <?php endforeach; ?>
     <a href="orders.php" class="btn btn-secondary mt-3">Vissza</a>

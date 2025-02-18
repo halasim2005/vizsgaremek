@@ -17,7 +17,7 @@ if (isset($_GET['statusz']) && !empty($_GET['statusz'])) {
 // Rendelések lekérdezése
 $query = "SELECT megrendeles.id as rendeles_id, megrendeles.statusz, megrendeles.vegosszeg, 
                 felhasznalo.fh_nev, felhasznalo.kezbesitesi_iranyitoszam, felhasznalo.kezbesitesi_telepules, 
-                felhasznalo.kezbesitesi_utca, felhasznalo.kezbesitesi_hazszam, felhasznalo.telefonszam, GROUP_CONCAT(termek.nev, ' (', tetelek.tetelek_mennyiseg, ' db)') as termekek
+                felhasznalo.kezbesitesi_utca, felhasznalo.kezbesitesi_hazszam, felhasznalo.telefonszam, GROUP_CONCAT(termek.nev, ' (' , tetelek.tetelek_mennyiseg, ' db)') as termekek
           FROM megrendeles
           JOIN felhasznalo ON megrendeles.fh_nev = felhasznalo.fh_nev
           JOIN tetelek ON megrendeles.id = tetelek.rendeles_id
@@ -83,10 +83,10 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title">Rendelés ID: <?php echo htmlspecialchars($rendeles['rendeles_id']); ?></h5>
+                        <h5 class="card-title" name="rendeles_id">Rendelés ID: <?php echo htmlspecialchars($rendeles['rendeles_id']); ?></h5>
                         <p class="card-text">
                             <strong>Felhasználó:</strong> <?php echo htmlspecialchars($rendeles['fh_nev']); ?><br>
-                            <strong>Termékek:</strong> <?php echo htmlspecialchars($rendeles['termekek']); ?><br>
+                            <strong>Termékek:</strong><br> <?php echo htmlspecialchars($rendeles['termekek']); ?><br>
                             <strong>Végösszeg:</strong> <?php echo htmlspecialchars($rendeles['vegosszeg']); ?> Ft<br>
                             <strong>Státusz:</strong> <?php echo htmlspecialchars($rendeles['statusz']); ?><br>
                             <strong>Cím:</strong> <?php echo htmlspecialchars($rendeles['kezbesitesi_iranyitoszam']) . " " . $rendeles['kezbesitesi_telepules'] . " " .
