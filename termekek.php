@@ -3,7 +3,7 @@ session_start();
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Pragma: no-cache");
 
-include './db.php'; // Az adatbázis kapcsolat betöltése
+include './db.php';
 ?>
 
 <!DOCTYPE html>
@@ -24,11 +24,10 @@ include './db.php'; // Az adatbázis kapcsolat betöltése
     <script src="./js/termekek.js"></script>
 
     <?php
-        include './nav.php'; // A navigációs sáv betöltése
+        include './nav.php';
     ?>
 
     <div class="container mt-5">
-        <!-- Szűrők -->
         <div class="d-flex flex-wrap gap-3 justify-content-between" id="szures_" oninput="termekekLeker()">
             
             <div class="flex-grow-1">

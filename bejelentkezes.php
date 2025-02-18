@@ -20,24 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['felhasznalo'] = $user;
             $_SESSION['jogosultsag'] = $user['jogosultsag'];
             if($_SESSION['jogosultsag'] == 'admin') $_SESSION['admin_logged_in'] = true;
-            // Bejelentkezés után, felhasználó kosarának visszaállítása
             header("Location: kosar");
-            $user_id = $_SESSION['user_id'];  // A felhasználó ID-ja
-
-            // Kosár számláló beállítása
-            $_SESSION['kosar_szamlalo'] = count($_SESSION['kosar']);
-    
-            $kosarLeker_sql = "SELECT t.termek_id, t.tetelek_mennyiseg, p.nev, p.ar 
-                    FROM tetelek t 
-                    JOIN termekek p ON t.termek_id = p.id 
-                    WHERE t.rendeles_id LIKE ?";
-            $stmt = $pdo->prepare($kosarLeker_sql);
-            $stmt->execute([$user_id . '%']);  // A rendelés ID-ja a felhasználóhoz van kötve
-    
-            $kosar = [];
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $kosar[] = $row;
-            }
+            
             exit();
         } else {
             $error = "Hibás felhasználónév vagy jelszó.";

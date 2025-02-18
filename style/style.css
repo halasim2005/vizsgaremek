@@ -31,7 +31,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Biztosítja, hogy mindig a tetején legyen */
+    z-index: 1000;
     justify-content: space-between;
     display: flex;
     align-items: center;
@@ -89,7 +89,6 @@ body {
     }
 }
 
-/* Hamburger ikon alapstílusok */
 .hamburger {
     display: flex;
     flex-direction: column;
@@ -108,7 +107,6 @@ body {
     transition: all 0.4s ease-in-out;
 }
 
-/* Ha a menü nyitva van */
 .navbar-toggler.open .bar:nth-child(1) {
     transform: translateY(10px) rotate(45deg);
 }
@@ -179,18 +177,6 @@ body {
     width: 160px;
     
 }
-/* Fixáljuk a navbar-t a képernyő tetején 
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Biztosítja, hogy mindig a tetején legyen 
-    justify-content: space-between;
-    display: flex;
-    align-items: center;
-}*/
-
 
 .form-label,
 .form-control {
@@ -322,17 +308,17 @@ body {
     color: black;
     border-radius: 5px;
     visibility:hidden;
-    opacity: 0; /* Teljesen átlátszó */
-    max-height: 100px; /* Teljesen rejtett */
-    transition: opacity 0.1s ease, height 0.1s ease, visibility 0s linear 0.1s; /* Animációk */
-    overflow: hidden; /* Biztosítja, hogy ne legyen görgethető */
+    opacity: 0;
+    max-height: 100px;
+    transition: opacity 0.1s ease, height 0.1s ease, visibility 0s linear 0.1s;
+    overflow: hidden; /* görgetés tiltása*/
 }
 
 #navbarKereses.megjelenik {
-    opacity: 1; /* Megjelenéskor teljesen látható */
-    max-height: 100px; /* A magasságot annyira állítjuk, hogy elférjen */
-    visibility: visible; /* Láthatóvá válik */
-    transition: opacity 0.1s ease, height 0.1s ease; /* Csak az animációt alkalmazzuk itt */
+    opacity: 1;
+    max-height: 100px;
+    visibility: visible;
+    transition: opacity 0.1s ease, height 0.1s ease;
 }
 
 #navbarGomb{
@@ -511,10 +497,9 @@ footer {
     color: black;
 }
 
-/* Az input mező fókuszálásakor */
 input:focus, select:focus, textarea:focus {
-    border-color: rgb(61, 61, 61) !important; /* Narancssárga színű keret */
-    box-shadow: 0 0 8px rgb(61, 61, 61) !important; /* Narancs árnyék */
+    border-color: rgb(61, 61, 61) !important;
+    box-shadow: 0 0 8px rgb(61, 61, 61) !important;
     outline: none !important;
 }
 
@@ -550,8 +535,8 @@ input:focus, select:focus, textarea:focus {
 }
 
 select option:hover {
-    background-color: red; /* Hover szín piros */
-    color: white; /* Szöveg színe fehér */
+    background-color: red;
+    color: white;
 }
 
 .kukaGomb{
@@ -584,3 +569,6 @@ select option:hover {
 }
 
 
+.card-header{
+    background-color: white;
+}
