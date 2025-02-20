@@ -110,6 +110,7 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <option value="feldolgozás alatt" <?php if ($rendeles['statusz'] === 'feldolgozás alatt') echo 'selected'; ?>>Feldolgozás alatt</option>
                                 <option value="kész" <?php if ($rendeles['statusz'] === 'kész') echo 'selected'; ?>>Kész</option>
                                 <!--<option value="törölve" <?//php if ($rendeles['statusz'] === 'törölve') echo 'selected'; ?>>Törölve</option>-->
+                                <option value="csomagolva" <?php if ($rendeles['statusz'] === 'csomagolva') echo 'selected'; ?>>Csomagolva</option>
                             </select>
                             <button type="submit" name="statusz_modositas" class="btn btn-success btn-sm mt-1">Mentés</button>
                         </form>
