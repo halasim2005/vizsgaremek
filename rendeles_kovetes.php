@@ -92,5 +92,11 @@ if(is_array($OSSZES_RENDELES)){
         }
         ?>
     </div>
+
+    <?php 
+    
+        include './footer.php';
+    
+    ?>
 </body>
 </html>
