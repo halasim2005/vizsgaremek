@@ -13,13 +13,16 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="collapse navbar-collapse" id="navbarAdmin">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="./users.php">Felhasználók kezelése</a>
+                    <a class="nav-link" href="./users.php">Felhasználók</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./orders.php">Rendelések kezelése</a>
+                    <a class="nav-link" href="./orders.php">Rendelések</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./products.php">Termékek kezelése</a>
+                    <a class="nav-link" href="./products.php">Termékek</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin_akciok.php">Akciók</a>
                 </li>
             </ul>
             <div class="d-flex">
