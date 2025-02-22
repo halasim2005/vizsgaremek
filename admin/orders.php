@@ -83,7 +83,7 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title" name="rendeles_id">Rendelés ID: <?php echo htmlspecialchars($rendeles['rendeles_id']); ?></h5>
+                        <h5 class="card-title text-center" name="rendeles_id">ID: <?php echo htmlspecialchars($rendeles['rendeles_id']); ?></h5>
                         <p class="card-text">
                             <strong>Felhasználó:</strong> <?php echo htmlspecialchars($rendeles['fh_nev']); ?><br>
                             <strong>Termékek:</strong><br> <?php echo htmlspecialchars($rendeles['termekek']); ?><br>
@@ -93,18 +93,8 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                                               $rendeles['kezbesitesi_utca'] . " " . $rendeles['kezbesitesi_hazszam'] ?><br>
                             <strong>Telefonszám:</strong> <?php echo htmlspecialchars($rendeles['telefonszam']); ?><br>
                         </p>
-                        <form method="POST" action="rendeles_szerkeszt.php" class="d-inline">
-                            <input type="hidden" name="rendeles_id" value="<?php echo $rendeles['rendeles_id']; ?>">
-                            <button type="submit" name="szerkeszt" class="btn btn-primary btn-sm">Szerkesztés</button>
-                        </form>
-                        <form method="POST" action="rendeles_torles.php" class="d-inline">
-                            <input type="hidden" name="rendeles_id" value="<?php echo $rendeles['rendeles_id']; ?>">
-                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" 
-                                    data-rendelesid="<?php echo $rendeles['rendeles_id']; ?>">
-                                Törlés
-                            </button>
-                        </form>
-                        <form method="POST" action="rendeles_statusz.php" class="mt-2">
+                       
+                        <form method="POST" action="rendeles_statusz.php" class="mt-1 d-inline">
                             <input type="hidden" name="rendeles_id" value="<?php echo $rendeles['rendeles_id']; ?>">
                             <select name="statusz" class="form-select form-select-sm">
                                 <option value="feldolgozás alatt" <?php if ($rendeles['statusz'] === 'feldolgozás alatt') echo 'selected'; ?>>Feldolgozás alatt</option>
@@ -112,7 +102,18 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <!--<option value="törölve" <?//php if ($rendeles['statusz'] === 'törölve') echo 'selected'; ?>>Törölve</option>-->
                                 <option value="csomagolva" <?php if ($rendeles['statusz'] === 'csomagolva') echo 'selected'; ?>>Csomagolva</option>
                             </select>
-                            <button type="submit" name="statusz_modositas" class="btn btn-success btn-sm mt-1">Mentés</button>
+                            <button type="submit" name="statusz_modositas" class="btn btn-success btn-sm mt-2">Mentés</button>
+                        </form>
+                        <form method="POST" action="rendeles_szerkeszt.php" class="mt-2 d-inline">
+                            <input type="hidden" name="rendeles_id" value="<?php echo $rendeles['rendeles_id']; ?>">
+                            <button type="submit" name="szerkeszt" class="btn btn-primary btn-sm mt-2">Szerkesztés</button>
+                        </form>
+                        <form method="POST" action="rendeles_torles.php" class="mt-2 d-inline">
+                            <input type="hidden" name="rendeles_id" value="<?php echo $rendeles['rendeles_id']; ?>">
+                            <button type="button" class="btn btn-danger btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" 
+                                    data-rendelesid="<?php echo $rendeles['rendeles_id']; ?>">
+                                Törlés
+                            </button>
                         </form>
                     </div>
                 </div>

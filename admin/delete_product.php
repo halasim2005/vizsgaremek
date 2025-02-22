@@ -1,6 +1,5 @@
 <?php
-// PDO adatbázis kapcsolat
-require_once '../db.php';  // Adatbázis kapcsolódás
+require_once '../db.php'; 
 
 // Termék ID lekérése az URL-ből vagy a POST-ból
 $product_id = $_POST['product_id'] ?? $_GET['id'] ?? null;
@@ -20,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute(['id' => $product_id]);
 
     echo "Termék sikeresen törölve.";
-    header("Location: products.php");  // Itt átirányítjuk a sikeres mentés után
+    header("Location: products.php"); 
     exit;
 }
 ?>

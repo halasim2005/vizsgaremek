@@ -90,7 +90,7 @@ include './admin_navbar.php';
 </head>
 <body>
     <div class="container mt-4">
-        <h1 class="text-center mb-4">Termék és Kategória Hozzáadása</h1>
+        <h2 class="text-center mb-4">Termék és Kategória Hozzáadása</h2>
 
         <div class="row">
             <!-- Kategória hozzáadása kártya -->

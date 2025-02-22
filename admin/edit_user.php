@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <?php include './admin_navbar.php';?>
 <div class="container mt-5">
-    <h1>Felhasználó szerkesztése: <?php echo htmlspecialchars($user['fh_nev']); ?></h1>
+    <h2>Felhasználó szerkesztése: <?php echo htmlspecialchars($user['fh_nev']); ?></h2>
     <form method="POST">
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>

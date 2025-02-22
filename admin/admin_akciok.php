@@ -29,7 +29,7 @@ $termekek = $query->fetchAll(PDO::FETCH_ASSOC);
     <?php include 'admin_navbar.php'; ?>
 
     <div class="container mt-5">
-        <h1 class="text-center">Akciók kezelése</h1>
+        <h2 class="text-center">Akciók kezelése</h2>
         <table class="table">
             <thead>
                 <tr>

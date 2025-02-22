@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <div class="container mt-4">
-    <h1 class="text-center">Termék szerkesztése</h1>
+    <h2 class="text-center">Termék szerkesztése</h2>
     <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="product_name" class="form-label">Termék neve:</label>

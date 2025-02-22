@@ -42,7 +42,7 @@ $users = $userQuery->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <?php include './admin_navbar.php';?>
 <div class="container mt-5">
-    <h1 class="text-center">Felhasználók kezelése</h1>
+    <h2 class="text-center">Felhasználók kezelése</h2>
     <div class="row">
         <?php foreach ($users as $user): ?>
             <div class="col-md-4">
