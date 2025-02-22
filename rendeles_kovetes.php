@@ -48,17 +48,21 @@ if(is_array($OSSZES_RENDELES)){
     <div class="row m-5 text-center justify-content-center">
         <?php
         if(is_array($OSSZES_RENDELES)){
-            echo "<h5 class='mb-3' style='font-weight:bold'>Rendelések száma: {$rendelesek_szama} db</h5>";
+            $thead_th = "style='border-bottom:none;padding-bottom:20px;padding-top:20px;color:white'";
+            $tbody_td = "style='padding-bottom:25px;padding-top:25px'";
+            $thead_style = "style='border:none;background-color:rgb(61, 61, 61);border-radius:15px'";
+
+            echo "<h5 class='mb-3 text-start'>Rendelések száma: {$rendelesek_szama} db</h5>";
             echo 
             "
                 <table class='table'>
-                    <thead>
+                    <thead {$thead_style}>
                         <tr>
-                            <th>Sorszám</th>
-                            <th>Végösszeg</th>
-                            <th>Dátum</th>
-                            <th>Tételek</th>
-                            <th>Állapot</th>
+                            <th {$thead_th}>Sorszám</th>
+                            <th {$thead_th}>Végösszeg</th>
+                            <th {$thead_th}>Dátum</th>
+                            <th {$thead_th}>Tételek</th>
+                            <th {$thead_th}>Állapot</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,11 +78,11 @@ if(is_array($OSSZES_RENDELES)){
 
                     echo "
                         <tr>
-                            <td>{$elem["id"]}</td>
-                            <td>{$elem["vegosszeg"]} Ft</td>
-                            <td>{$elem["leadas_datum"]}</td>
-                            <td>{$elem["osszesTetel"]} db</td>
-                            <td style='$statuszStyle'>$statuszSzoveg</td>
+                            <td {$tbody_td}>{$elem["id"]}</td>
+                            <td {$tbody_td}>{$elem["vegosszeg"]} Ft</td>
+                            <td {$tbody_td}>{$elem["leadas_datum"]}</td>
+                            <td {$tbody_td}>{$elem["osszesTetel"]} db</td>
+                            <td style='$statuszStyle;padding-bottom:25px;padding-top:25px'>$statuszSzoveg</td>
                         </tr>
                     ";
             }
