@@ -54,7 +54,7 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 <div class="container mt-5">
-    <h2 class="text-center">Rendelések Kezelése</h2>
+    <h2 class="text-center">Rendelések kezelése</h2>
     <form method="GET" action="" class="mb-3 justify-content-center d-flex">
     <select name="statusz" id="statusz" class="form-select w-auto d-inline <?php if(isset($_GET['statusz'])) {
                                                                                 switch ($_GET['statusz']) {

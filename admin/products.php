@@ -26,7 +26,7 @@ if ($conn->connect_error) {
 </head>
 <body>
 <div class="container mt-5">
-    <h2 class="text-center">Termékek Kezelése</h2>
+    <h2 class="text-center">Termékek kezelése</h2>
     <div class="text-center mb-3">
         <a href="add_product.php" class="btn btn-success termek_add_button">Új Termék Hozzáadása</a>
     </div>
