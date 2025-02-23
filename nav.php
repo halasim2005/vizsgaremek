@@ -57,6 +57,7 @@
                                 <?php if ($_SESSION['jogosultsag'] === 'admin'): ?>
                                     <li><a class="dropdown-item" href="./admin/dashboard.php">Admin dashboard</a></li>
                                 <?php endif; ?>
+                            <li><a class="dropdown-item" href="./rendeles_kovetes.php">Rendelések</a></li>
                             <li><a class="dropdown-item" href="./kijelentkezes.php">Kijelentkezés</a></li>
                         <?php else: ?>
                             <li><a class="dropdown-item" href="./regisztracio">Regisztráció</a></li>
