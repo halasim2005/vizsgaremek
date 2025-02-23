@@ -23,6 +23,21 @@ include './sql_fuggvenyek.php';
     <link rel="stylesheet" href="./style/style.css">
     <title>Rendelés állapota</title>
 </head>
+<style>
+    .cell {
+        flex: 1;
+        padding: 20px;
+        background: white;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        text-align: left;
+        font-size: 1.2rem;
+    }
+    
+    #rendelesTable{
+        display: flex;
+    }
+    </style>
 <body>
     <?php 
     
@@ -31,9 +46,12 @@ include './sql_fuggvenyek.php';
     ?>
 
     <div class="row m-5 text-center" id="rendeles">
+        <h5 id="rendelesCount" class="text-start"></h5>
+        <div id="rendelesTable">
 
+        </div>
     </div>
-    
+
     <?php 
     
         include './footer.php';
