@@ -13,7 +13,7 @@ async function rendelesek() {
 
 function print_(eredmeny){
     let rendeles_db = 0;
-    let inputStyle = `accent-color:rgb(91, 91, 91);background-color:rgb(91, 91, 91);height:20px;-webkit-appearance:none;appearance:none;`;
+    let inputStyle = `border:none;accent-color:rgb(91, 91, 91);background-color:rgb(91, 91, 91);height:20px;-webkit-appearance:none;appearance:none;`;
 
     rendelesTable.innerHTML = "";
     rendelesTable.innerHTML = 
@@ -44,7 +44,7 @@ function print_(eredmeny){
 
         rendelesek_.innerHTML += 
         `
-            <button title="Rendelés részletek" ${buttonStyle} onclick="rendeles_allapot('${elem.id}', '${elem.statusz}')">
+            <button title="Rendelés részletek" ${buttonStyle} onclick="rendeles_allapot('${elem.statusz}')">
                 <div class="col-md-3">
                     <div class='card my-2' ${statuszStyle};width: 18rem;font-family:Montserrat'>
                         <div class='card-body'>
@@ -78,12 +78,45 @@ function print_(eredmeny){
     document.getElementById("rendelesCount").innerHTML = `Rendeléseim (${rendeles_db})`;
 }
 
-function rendeles_allapot(rendeles_id, allapot){
-    console.log(1);
-    
-    rendelesTable.innerHTML = "";
-    console.log(1);
-    
+function rendeles_allapot(allapot){
+    let rendeles_table = document.getElementById("rendelesTable");
+    rendeles_table.innerHTML = "";
+    let allapotStyle_feldolgoz;
+    let allapotStyle_csom;
+    let allapotStyle_futar;
+    let colorStyle_feldolgoz;
+    let colorStyle_csom;
+    let colorStyle_futar;
+
+    if(allapot == "feldolgozás alatt"){
+        allapotStyle_feldolgoz = `border:none;accent-color:green;background-color:green;height:20px;-webkit-appearance:none;appearance:none;`;
+        allapotStyle_csom = `border:none;accent-color:orange;background-color:orange;height:20px;-webkit-appearance:none;appearance:none;`;
+        allapotStyle_futar = `border:none;accent-color:rgb(91, 91, 91);background-color:rgb(91, 91, 91);height:20px;-webkit-appearance:none;appearance:none;`;
+        colorStyle_feldolgoz = `style="color:green;font-weight:bold"`;
+        colorStyle_csom = `style="color:orange;font-weight:bold"`;
+        colorStyle_futar = `style="color:rgb(91, 91, 91);font-weight:bold"`;
+    }else if(allapot == "csomagolva"){
+        allapotStyle_feldolgoz = `border:none;accent-color:green;background-color:green;height:20px;-webkit-appearance:none;appearance:none;`;
+        allapotStyle_csom = `border:none;accent-color:green;background-color:green;height:20px;-webkit-appearance:none;appearance:none;`;
+        allapotStyle_futar = `border:none;accent-color:orange;background-color:orange;height:20px;-webkit-appearance:none;appearance:none;`;
+        colorStyle_feldolgoz = `style="color:green;font-weight:bold"`;
+        colorStyle_csom = `style="color:green;font-weight:bold"`;
+        colorStyle_futar = `style="color:orange;font-weight:bold"`;
+    }else{
+        allapotStyle_feldolgoz = `border:none;accent-color:green;background-color:green;height:20px;-webkit-appearance:none;appearance:none;`;
+        allapotStyle_csom = `border:none;accent-color:green;background-color:green;height:20px;-webkit-appearance:none;appearance:none;`;
+        allapotStyle_futar = `border:none;accent-color:green;background-color:green;height:20px;-webkit-appearance:none;appearance:none;`;
+        colorStyle_feldolgoz = `style="color:green;font-weight:bold"`;
+        colorStyle_csom = `style="color:green;font-weight:bold"`;
+        colorStyle_futar = `style="color:green;font-weight:bold"`;
+    }
+
+    rendeles_table.innerHTML = 
+    `
+        <div class="cell m-1"><img width="50" class="mb-2" src="./képek/feldolgoz.png"><br><span ${colorStyle_feldolgoz}>Feldolgozás alatt</span><br><input type="range" class="form-control mt-3" style="${allapotStyle_feldolgoz}"></div>
+        <div class="cell m-1"><img width="50" class="mb-2" src="./képek/csomagolva.png"><br><span ${colorStyle_csom}>Csomagolva</span><br><input type="range" class="form-control mt-3" style="${allapotStyle_csom}"></div>
+        <div class="cell m-1"><img width="50" class="mb-2" src="./képek/futar.png"><br><span ${colorStyle_futar}>Futárnak átadva</span><br><input type="range" class="form-control mt-3" style="${allapotStyle_futar}"></div>
+    `;
 }
 
 window.addEventListener("load", rendelesek);
