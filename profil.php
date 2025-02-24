@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <?php include './nav.php'; ?>
 
 <div class="container my-5">
-        <h1 class="text-center form-label mb-4">Profil Szerkesztése</h1>
+        <h2 class="text-center form-label mb-4">Profil Szerkesztése</h2>
         
         <?php if (isset($message)) : ?>
             <div class="alert alert-info text-center" role="alert">
@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form method="POST" class="profile-form">
             <!-- Személyes adatok -->
             <div class="card mb-4 personal-info">
-                <div class="card-header text-white bg-primary">Személyes adatok</div>
+                <div class="card-header text-white profilBG">Személyes adatok</div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <!-- Számlázási cím -->
             <div class="card mb-4 billing-info">
-                <div class="card-header text-white bg-secondary">Számlázási cím</div>
+                <div class="card-header text-white profilBG">Számlázási cím</div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -181,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <!-- Kézbesítési cím -->
             <div class="card mb-4 shipping-info">
-                <div class="card-header text-white bg-success">Kézbesítési cím</div>
+                <div class="card-header text-white profilBG">Kézbesítési cím</div>
                 <div class="card-body">
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" id="same_address" name="same_address" <?= $userData['kezbesitesi_iranyitoszam'] == $userData['szamlazasi_iranyitoszam'] ? 'checked' : '' ?>>
@@ -212,7 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <!-- Céges adatok -->
             <div class="card mb-4 company-info">
-                <div class="card-header text-white bg-warning">Céges vásárlás (opcionális)</div>
+                <div class="card-header text-white profilBG">Céges vásárlás (opcionális)</div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4 mb-3">
@@ -231,7 +231,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
 
-    <button type="submit" class="btn btn-primary w-100">Mentés</button>
+    <button type="submit" class="btn profilMentGomb w-100">Mentés</button>
 </form>
 
 <script src="./js/inputmask.min.js"></script>
