@@ -37,6 +37,34 @@ include './sql_fuggvenyek.php';
     #rendelesTable{
         display: flex;
     }
+
+    #rendelesReszletekBtn{
+        background-color: white;
+        border: 1px solid black;
+        color:black;
+        text-decoration: none;
+        border-radius: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: medium;
+        margin-left: 10px;
+    }
+
+    #rendelesReszletekBtn:hover{
+        background-color: rgb(61, 61, 61);
+        border: 1px solid rgb(61, 61, 61);
+        color:white;
+        text-decoration: none;
+        border-radius: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: medium;
+        margin-left: 10px;
+    }
     </style>
 <body>
     <?php 

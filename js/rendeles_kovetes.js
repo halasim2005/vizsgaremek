@@ -1,5 +1,6 @@
 let rendelesek_ = document.getElementById("rendeles");
 let rendelesTable = document.getElementById("rendelesTable");
+let rendeles_db = 0;
 
 async function rendelesek() {
     try {
@@ -12,7 +13,6 @@ async function rendelesek() {
 }
 
 function print_(eredmeny){
-    let rendeles_db = 0;
     let inputStyle = `border:none;accent-color:rgb(91, 91, 91);background-color:rgb(91, 91, 91);height:20px;-webkit-appearance:none;appearance:none;`;
 
     rendelesTable.innerHTML = "";
@@ -44,7 +44,7 @@ function print_(eredmeny){
 
         rendelesek_.innerHTML += 
         `
-            <button title="Rendelés részletek" ${buttonStyle} onclick="rendeles_allapot('${elem.statusz}')">
+            <button title="Rendelés részletek" ${buttonStyle} onclick="rendeles_allapot('${elem.id}', '${elem.statusz}')">
                 <div class="col-md-3">
                     <div class='card my-2' ${statuszStyle};width: 18rem;font-family:Montserrat'>
                         <div class='card-body'>
@@ -78,7 +78,7 @@ function print_(eredmeny){
     document.getElementById("rendelesCount").innerHTML = `Rendeléseim (${rendeles_db})`;
 }
 
-function rendeles_allapot(allapot){
+function rendeles_allapot(rend_id, allapot){
     let rendeles_table = document.getElementById("rendelesTable");
     rendeles_table.innerHTML = "";
     let allapotStyle_feldolgoz;
@@ -117,6 +117,32 @@ function rendeles_allapot(allapot){
         <div class="cell m-1"><img width="50" class="mb-2" src="./képek/csomagolva.png"><br><span ${colorStyle_csom}>Csomagolva</span><br><input type="range" class="form-control mt-3" style="${allapotStyle_csom}"></div>
         <div class="cell m-1"><img width="50" class="mb-2" src="./képek/futar.png"><br><span ${colorStyle_futar}>Futárnak átadva</span><br><input type="range" class="form-control mt-3" style="${allapotStyle_futar}"></div>
     `;
+
+    document.getElementById("rendelesCount").innerHTML = 
+    `
+        Rendeléseim (${rendeles_db}) <strong>Rendelés azonosító: ${rend_id}</strong>
+        <button id="rendelesReszletekBtn" onclick="rendeles_reszletek('${allapot}', '${rend_id}')">
+            Részletek
+        </button>
+    `;
+}
+
+async function rendeles_reszletek(rendeles_statusz, rendeles_id) {
+    try {
+        let adatok = await fetch(`./rendeles_kovetes_fetch.php/rendeles_reszletek`, {
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json"
+            },
+            body : JSON.stringify({
+                "id" : rendeles_id,
+                "statusz" : rendeles_statusz
+            })
+        })
+        let rendReszletek = await adatok.json();
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 window.addEventListener("load", rendelesek);
