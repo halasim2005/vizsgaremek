@@ -27,6 +27,25 @@ switch (mb_strtolower($url[0])) {
             header('BAD REQUEST', true, 400);
         }
         break;
+    case 'rendeles_reszletek':
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $RENDELES_ADATAI_SQL = "SELECT termek.nev, termek.kep, termek.egysegar, tetelek.tetelek_mennyiseg, megrendeles.szallitasi_mod, megrendeles.fizetesi_mod, megrendeles.vegosszeg, megrendeles.leadas_datum, megrendeles.statusz 
+                                    FROM termek INNER JOIN tetelek ON tetelek.termek_id = termek.id 
+                                    INNER JOIN megrendeles ON megrendeles.id = tetelek.rendeles_id 
+                                    WHERE megrendeles.fh_nev = ? AND megrendeles.id = ? AND megrendeles.statusz = ?;";
+            $RENDELES_ADATAI = $pdo->prepare($RENDELES_ADATAI_SQL);
+            $DB_jo = $RENDELES_ADATAI->execute([$fh_nev, $bodyAdatok["id"], $bodyAdatok["statusz"]]);
+            if($DB_jo){
+                $rendeles_adatok = $RENDELES_ADATAI->fetchAll(PDO::FETCH_ASSOC);
+                echo json_encode($rendeles_adatok, JSON_UNESCAPED_UNICODE);
+            }else{
+                echo json_encode(['valasz' => 'A rendelések adatainak lekérése sikertelen! Hiba!'], JSON_UNESCAPED_UNICODE);
+            }
+        }else{
+            echo json_encode(['valasz' => 'Hibás metódus!'], JSON_UNESCAPED_UNICODE);
+            header('BAD REQUEST', true, 400);
+        }
+        break;
     default:
         break;
 }
