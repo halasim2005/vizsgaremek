@@ -13,6 +13,7 @@ async function rendelesek() {
 }
 
 function print_(eredmeny){
+    rendeles_db = 0;
     let inputStyle = `border:none;accent-color:rgb(91, 91, 91);background-color:rgb(91, 91, 91);height:20px;-webkit-appearance:none;appearance:none;`;
 
     rendelesTable.innerHTML = "";
@@ -124,6 +125,9 @@ function rendeles_allapot(rend_id, allapot){
         <button id="rendelesReszletekBtn" onclick="rendeles_reszletek('${allapot}', '${rend_id}')">
             Részletek
         </button>
+        <button id="rendelesReszletekBtn" onclick="vissza()">
+            Vissza
+        </button>
     `;
 }
 
@@ -140,9 +144,48 @@ async function rendeles_reszletek(rendeles_statusz, rendeles_id) {
             })
         })
         let rendReszletek = await adatok.json();
+        Rendeles_adatok_megjelenit(rendReszletek);
     } catch (error) {
         console.log(error);
     }
+}
+
+function Rendeles_adatok_megjelenit(rendReszletek){
+    rendelesek_.innerHTML = `<h5 class="my-3">Rendelés tételei:</h5>`;
+    rendelesek_.innerHTML += 
+    `
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Kép</th>
+                    <th>Név</th>
+                    <th>Mennyiség</th>
+                    <th>Ár</th>
+                    <th>Összesen</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            
+            </tbody>
+        </table>
+    `;
+    for (let termek of rendReszletek) {
+        document.getElementById("tbody").innerHTML += 
+        `
+                <tr>
+                    <th><img style="width:20%" src="${termek.kep}"></th>
+                    <td style="vertical-align:middle">${termek.nev}</td>
+                    <td style="vertical-align:middle">${termek.tetelek_mennyiseg} db</td>
+                    <td style="vertical-align:middle">${termek.egysegar} Ft</td>
+                    <td style="vertical-align:middle">${termek.tetelek_mennyiseg * termek.egysegar} Ft</td>
+                </tr>
+        `;
+    }
+}
+
+function vissza(){
+    rendelesek_.innerHTML = "";
+    rendelesek();
 }
 
 window.addEventListener("load", rendelesek);

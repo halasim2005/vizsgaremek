@@ -73,9 +73,12 @@ include './sql_fuggvenyek.php';
     
     ?>
 
-    <div class="row m-5 text-center" id="rendeles">
+    <div class="row m-5">
         <h5 id="rendelesCount" class="text-start"></h5>
         <div id="rendelesTable" class="my-2">
+
+        </div>
+        <div id="rendeles">
 
         </div>
     </div>
