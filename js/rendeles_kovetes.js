@@ -187,6 +187,13 @@ function Rendeles_adatok_megjelenit(rendReszletek){
     rendelesek_.innerHTML += 
     `
         <table class="table">
+            <thead>
+                <th>Státusz</th>
+                <th>Leadás dátuma</th>
+                <th>Szállítási mód</th>
+                <th>Fizetési mód</th>
+                <th>Végösszeg</th>
+            </thead>
             <tbody id="adatokTbody">
 
             </tbody>
@@ -197,6 +204,13 @@ function Rendeles_adatok_megjelenit(rendReszletek){
 
     for (let adat of rendReszletek) {
         let td_style;
+        let fizmod;
+
+        if(adat.fizetesi_mod == "utanvet"){
+            fizmod = "utánvét"
+        }else{
+            fizmod = "kártya"
+        }
 
         if(adat.statusz == "csomagolva"){
             td_style = `style="color:orange;font-weight:bold"`;
@@ -209,23 +223,10 @@ function Rendeles_adatok_megjelenit(rendReszletek){
         adatokTbody.innerHTML = 
         `
             <tr>
-                <td>Státusz</td>
                 <td ${td_style}>${adat.statusz}</td>
-            </tr>
-            <tr>
-                <td>Leadás dátuma</td>
-                <td>${adat.leadas_datum}</td>
-            </tr>
-            <tr>
-                <td>Szállítási mód</td>
-                <td>${adat.szallitasi_mod}</td>
-            </tr>
-            <tr>
-                <td>Fizetési mód</td>
-                <td>${adat.fizetesi_mod}</td>
-            </tr>
-            <tr>
-                <td>Végösszeg</td>
+                <td>${adat.leadas_datum} </td>
+                <td>${adat.szallitasi_mod} </td>
+                <td>${fizmod} </td>
                 <td>${adat.vegosszeg} Ft</td>
             </tr>
         `;
