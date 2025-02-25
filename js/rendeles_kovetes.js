@@ -154,7 +154,7 @@ function Rendeles_adatok_megjelenit(rendReszletek){
     rendelesek_.innerHTML = `<h5 class="my-3">Rendelés tételei:</h5>`;
     rendelesek_.innerHTML += 
     `
-        <table class="table">
+        <table class="table m-4">
             <thead>
                 <tr>
                     <th>Kép</th>
@@ -179,6 +179,55 @@ function Rendeles_adatok_megjelenit(rendReszletek){
                     <td style="vertical-align:middle">${termek.egysegar} Ft</td>
                     <td style="vertical-align:middle">${termek.tetelek_mennyiseg * termek.egysegar} Ft</td>
                 </tr>
+        `;
+    }
+
+    rendelesek_.innerHTML += `<h5 class="my-3">Rendelés adatai: </h5>`;
+
+    rendelesek_.innerHTML += 
+    `
+        <table class="table">
+            <tbody id="adatokTbody">
+
+            </tbody>
+        </table>
+    `;
+
+    let adatokTbody = document.getElementById("adatokTbody");
+
+    for (let adat of rendReszletek) {
+        let td_style;
+
+        if(adat.statusz == "csomagolva"){
+            td_style = `style="color:orange;font-weight:bold"`;
+        }else if(adat.statusz == "kész"){
+            td_style = `style="color:green;font-weight:bold"`;
+            adat.statusz = "futárnak átadva"
+        }else{
+            td_style = `style="color:gray;font-weight:bold"`;
+        }
+        adatokTbody.innerHTML = 
+        `
+            <tr>
+                <td>Státusz</td>
+                <td ${td_style}>${adat.statusz}</td>
+            </tr>
+            <tr>
+                <td>Leadás dátuma</td>
+                <td>${adat.leadas_datum}</td>
+            </tr>
+            <tr>
+                <td>Szállítási mód</td>
+                <td>${adat.szallitasi_mod}</td>
+            </tr>
+            <tr>
+                <td>Fizetési mód</td>
+                <td>${adat.fizetesi_mod}</td>
+            </tr>
+            <tr>
+                <td>Végösszeg</td>
+                <td>${adat.vegosszeg} Ft</td>
+            </tr>
         `;
     }
 }
