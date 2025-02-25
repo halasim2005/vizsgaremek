@@ -7,7 +7,6 @@ if (!isset($_SESSION['jogosultsag']) || $_SESSION['jogosultsag'] !== 'admin') {
 
 include '../db.php'; // Az adatbázis-kapcsolatot tartalmazó fájl
 
-// Ellenőrzés, hogy van-e felhasználónév az URL-ben
 if (!isset($_GET['user']) || empty($_GET['user'])) {
     echo "Nincs kiválasztott felhasználó.";
     exit();
@@ -25,26 +24,48 @@ if (!$user) {
     exit();
 }
 
-// Adatok frissítése az űrlap beküldésekor
+// Adatok frissítése
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'] ?? $user['email'];
-    $telefonszam = $_POST['telefonszam'] ?? $user['telefonszam'];
-    $jogosultsag = $_POST['jogosultsag'] ?? $user['jogosultsag'];
+    $updateData = [
+        ':email' => $_POST['email'] ?? $user['email'],
+        ':telefonszam' => $_POST['telefonszam'] ?? $user['telefonszam'],
+        ':jogosultsag' => $_POST['jogosultsag'] ?? $user['jogosultsag'],
+        ':vezeteknev' => $_POST['vezeteknev'] ?? $user['vezeteknev'],
+        ':keresztnev' => $_POST['keresztnev'] ?? $user['keresztnev'],
+        ':szamlazasi_iranyitoszam' => $_POST['szamlazasi_iranyitoszam'] ?? $user['szamlazasi_iranyitoszam'],
+        ':szamlazasi_telepules' => $_POST['szamlazasi_telepules'] ?? $user['szamlazasi_telepules'],
+        ':szamlazasi_utca' => $_POST['szamlazasi_utca'] ?? $user['szamlazasi_utca'],
+        ':szamlazasi_hazszam' => $_POST['szamlazasi_hazszam'] ?? $user['szamlazasi_hazszam'],
+        ':szamlazasi_cegnev' => $_POST['szamlazasi_cegnev'] ?? $user['szamlazasi_cegnev'],
+        ':szamlazasi_adoszam' => $_POST['szamlazasi_adoszam'] ?? $user['szamlazasi_adoszam'],
+        ':kezbesitesi_iranyitoszam' => $_POST['kezbesitesi_iranyitoszam'] ?? $user['kezbesitesi_iranyitoszam'],
+        ':kezbesitesi_telepules' => $_POST['kezbesitesi_telepules'] ?? $user['kezbesitesi_telepules'],
+        ':kezbesitesi_utca' => $_POST['kezbesitesi_utca'] ?? $user['kezbesitesi_utca'],
+        ':kezbesitesi_hazszam' => $_POST['kezbesitesi_hazszam'] ?? $user['kezbesitesi_hazszam'],
+        ':fh_nev' => $fh_nev,
+    ];
 
-    // Frissítési lekérdezés
     $updateQuery = $pdo->prepare("
-        UPDATE felhasznalo 
-        SET email = :email, telefonszam = :telefonszam, jogosultsag = :jogosultsag 
+        UPDATE felhasznalo SET 
+            email = :email,
+            telefonszam = :telefonszam,
+            jogosultsag = :jogosultsag,
+            vezeteknev = :vezeteknev,
+            keresztnev = :keresztnev,
+            szamlazasi_iranyitoszam = :szamlazasi_iranyitoszam,
+            szamlazasi_telepules = :szamlazasi_telepules,
+            szamlazasi_utca = :szamlazasi_utca,
+            szamlazasi_hazszam = :szamlazasi_hazszam,
+            szamlazasi_cegnev = :szamlazasi_cegnev,
+            szamlazasi_adoszam = :szamlazasi_adoszam,
+            kezbesitesi_iranyitoszam = :kezbesitesi_iranyitoszam,
+            kezbesitesi_telepules = :kezbesitesi_telepules,
+            kezbesitesi_utca = :kezbesitesi_utca,
+            kezbesitesi_hazszam = :kezbesitesi_hazszam
         WHERE fh_nev = :fh_nev
     ");
-    $success = $updateQuery->execute([
-        ':email' => $email,
-        ':telefonszam' => $telefonszam,
-        ':jogosultsag' => $jogosultsag,
-        ':fh_nev' => $fh_nev,
-    ]);
-
-    if ($success) {
+    
+    if ($updateQuery->execute($updateData)) {
         header("Location: users.php?message=Sikeres frissítés");
         exit();
     } else {
@@ -71,6 +92,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container mt-5">
     <h2>Felhasználó szerkesztése: <?php echo htmlspecialchars($user['fh_nev']); ?></h2>
     <form method="POST">
+        <div class="mb-3"><label>Vezetéknév</label>
+            <input type="text" name="vezeteknev" class="form-control" value="<?php echo htmlspecialchars($user['vezeteknev']); ?>" required>
+        </div>
+        <div class="mb-3"><label>Keresztnév</label>
+            <input type="text" name="keresztnev" class="form-control" value="<?php echo htmlspecialchars($user['keresztnev']); ?>" required>
+        </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" name="email" id="email" class="form-control" value="<?php echo htmlspecialchars($user['email']); ?>" required>
@@ -86,8 +113,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <option value="admin" <?php echo $user['jogosultsag'] === 'admin' ? 'selected' : ''; ?>>Adminisztrátor</option>
             </select>
         </div>
+
+
+        <h4>Számlázási adatok</h4>
+        <div class="mb-3"><label>Irányítószám</label>
+            <input type="text" name="szamlazasi_iranyitoszam" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_iranyitoszam']); ?>" required>
+        </div>
+        <div class="mb-3"><label>Település</label>
+            <input type="text" name="szamlazasi_telepules" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_telepules']); ?>" required>
+        </div>
+        <div class="mb-3"><label>Utca</label>
+            <input type="text" name="szamlazasi_utca" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_utca']); ?>" required>
+        </div>
+        <div class="mb-3"><label>Házszám</label>
+            <input type="text" name="szamlazasi_hazszam" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_hazszam']); ?>" required>
+        </div>
+
+        
+        <h4>Kézbesítési adatok</h4>
+        <div class="mb-3"><label>Irányítószám</label>
+        <input type="text" name="kezbesitesi_iranyitoszam" class="form-control" value="<?php echo htmlspecialchars($user['kezbesitesi_iranyitoszam']); ?>" required>
+        </div>
+        <div class="mb-3"><label>Település</label>
+            <input type="text" name="kezbesitesi_telepules" class="form-control" value="<?php echo htmlspecialchars($user['kezbesitesi_telepules']); ?>" required>
+        </div>
+        <div class="mb-3"><label>Utca</label>
+            <input type="text" name="kezbesitesi_utca" class="form-control" value="<?php echo htmlspecialchars($user['kezbesitesi_utca']); ?>" required>
+        </div>
+        <div class="mb-3"><label>Házszám</label>
+            <input type="text" name="kezbesitesi_hazszam" class="form-control" value="<?php echo htmlspecialchars($user['kezbesitesi_hazszam']); ?>" required>
+        </div>
+
+        <h4>Cég adatok</h4>
+        <div class="mb-3"><label>Cégnév</label>
+            <input type="text" name="szamlazasi_cegnev" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_cegnev']); ?>">
+        </div>
+        <div class="mb-3"><label>Adószám</label>
+            <input type="text" name="szamlazasi_adoszam" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_adoszam']); ?>">
+        </div>
+
         <button type="submit" class="btn btn-success">Mentés</button>
-        <a href="users.php" class="btn btn-secondary">Vissza</a>
+        <a href="users.php" class="btn btn-danger">Vissza</a>
     </form>
 </div>
 
