@@ -62,6 +62,7 @@ include './db.php';
                     <option value="nevZa">Név szerint (Z-A)</option>
                     <option value="arCsokk">Ár szerint növekvő</option>
                     <option value="arNov">Ár szerint csökkenő</option>
+                    <option value="akcio">Akciós termékek</option>
                 </select>
             </div>
 

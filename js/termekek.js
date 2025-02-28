@@ -116,23 +116,56 @@ async function termekekLeker() {
 
                 document.getElementById("valaszSzoveg").innerHTML = ""
 
+                let kartyaArszoveg;
+                let akcioSzazalek;
+                /*let akcioIdo;
+
+                const date_kezd = new Date(termek.akcio_kezdete);
+                const date_vege = new Date(termek.akcio_vege);
+
+                let kezdIdoHonap = date_kezd.getMonth() + 1;
+                let kezdIdoNap = date_kezd.getDate();
+                let VegeIdoHonap = date_vege.getMonth() + 1;
+                let VegeIdoNap = date_vege.getDate();
+
+                let akcioKezd = `${String(kezdIdoHonap).padStart(2, '0')}.${String(kezdIdoNap).padStart(2, '0')}`;
+                let akcioVege = `${String(VegeIdoHonap).padStart(2, '0')}.${String(VegeIdoNap).padStart(2, '0')}`;*/
+                
+
+                if(termek.elerheto_darab == 0){
+                    kartyaArszoveg = `<span style="color: red">A termék nincs készleten!</span>`;
+                }else if(termek.elerheto_darab != 0){
+                    kartyaArszoveg = `${parseInt(termek.egysegar).toLocaleString()} Ft`;
+                }
+                
+                if(termek.akcios_ar != null && termek.akcio_kezdete != null && termek.akcio_vege != null){
+                    kartyaArszoveg = `<span style="text-decoration:line-through;color:gray;font-style:italic;margin-right:5px">${parseInt(termek.egysegar).toLocaleString()} Ft </span><span style="color:red;font-weight:bold"> ${parseInt(termek.akcios_ar).toLocaleString()} Ft</span>`;
+                    let akcio = Math.floor(Math.abs((termek.akcios_ar / termek.egysegar * 100)));
+                    let akcioRendes = 100 - akcio;
+                    akcioSzazalek = `<span style="position:absolute;left:20px;top:15px;color:white;background-color:red;border-radius:50%;font-size:25px" class="badge badge-secondary">-${akcioRendes}%</span>`;
+                    //akcioIdo = `<span style="color:red;margin-left:10px">${akcioKezd} - ${akcioVege}</span>`;
+                }else{
+                    akcioSzazalek = "";
+                    //akcioIdo = "";
+                }
+
                 termekekTartalom.innerHTML += 
                 `
                     <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
                         <div class="card shadow">
                             <div id="termekekKartyaKepKozep">
-                                <img id="termekekKartyaKep" src="${termek.kep}" class="card-img-top" alt="${termek.t_nev}">
+                                <img id="termekekKartyaKep" src="${termek.kep}" class="card-img-top" alt="${termek.t_nev}">${akcioSzazalek}
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title">${termek.nev}</h6>
-                                <h6><strong> ${(termek.elerheto_darab == 0) ? `<span style="color: red">A termék nincs készleten!</span>` : parseInt(termek.egysegar).toLocaleString() } </strong></h6>
+                                <h6><strong>${kartyaArszoveg} </strong></h6>
                                 <form method="POST" action="kosar_muveletek.php">
                                     <input type="hidden" name="termek_id" value="${termek.id}">
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
                                     <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
-                                    <button type="submit" disabled id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
+                                    <button type="submit" ${(termek.elerheto_darab == 0) ? `disabled` : ``} id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
                                 </form>
                             </div>
                         </div>
@@ -181,23 +214,56 @@ async function osszesTermekekLeker() {
 
                 }
 
+                let kartyaArszoveg;
+                let akcioSzazalek;
+                /*let akcioIdo;
+
+                const date_kezd = new Date(termek.akcio_kezdete);
+                const date_vege = new Date(termek.akcio_vege);
+
+                let kezdIdoHonap = date_kezd.getMonth() + 1;
+                let kezdIdoNap = date_kezd.getDate();
+                let VegeIdoHonap = date_vege.getMonth() + 1;
+                let VegeIdoNap = date_vege.getDate();
+
+                let akcioKezd = `${String(kezdIdoHonap).padStart(2, '0')}.${String(kezdIdoNap).padStart(2, '0')}`;
+                let akcioVege = `${String(VegeIdoHonap).padStart(2, '0')}.${String(VegeIdoNap).padStart(2, '0')}`;*/
+                
+
+                if(termek.elerheto_darab == 0){
+                    kartyaArszoveg = `<span style="color: red">A termék nincs készleten!</span>`;
+                }else if(termek.elerheto_darab != 0){
+                    kartyaArszoveg = `${parseInt(termek.egysegar).toLocaleString()} Ft`;
+                }
+                
+                if(termek.akcios_ar != null && termek.akcio_kezdete != null && termek.akcio_vege != null){
+                    kartyaArszoveg = `<span style="text-decoration:line-through;color:gray;font-style:italic;margin-right:5px">${parseInt(termek.egysegar).toLocaleString()} Ft </span><span style="color:red;font-weight:bold"> ${parseInt(termek.akcios_ar).toLocaleString()} Ft</span>`;
+                    let akcio = Math.floor(Math.abs((termek.akcios_ar / termek.egysegar * 100)));
+                    let akcioRendes = 100 - akcio;
+                    akcioSzazalek = `<span style="position:absolute;left:20px;top:15px;color:white;background-color:red;border-radius:50%;font-size:25px" class="badge badge-secondary">-${akcioRendes}%</span>`;
+                    //akcioIdo = `<span style="color:red;margin-left:10px">${akcioKezd} - ${akcioVege}</span>`;
+                }else{
+                    akcioSzazalek = "";
+                    //akcioIdo = "";
+                }
+
                 termekekTartalom.innerHTML += 
                 `
                     <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
                         <div class="card shadow">
                             <div id="termekekKartyaKepKozep">
-                                <img id="termekekKartyaKep" src="${termek.kep}" class="card-img-top" alt="${termek.t_nev}">
+                                <img id="termekekKartyaKep" src="${termek.kep}" class="card-img-top" alt="${termek.t_nev}">${akcioSzazalek}
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title">${termek.nev}</h6>
-                                <h6><strong> ${(termek.elerheto_darab == 0) ? `<span style="color: red">A termék nincs készleten!</span>` : parseInt(termek.egysegar).toLocaleString() } </strong></h6>
+                                <h6><strong>${kartyaArszoveg} </strong></h6>
                                 <form method="POST" action="kosar_muveletek.php">
                                     <input type="hidden" name="termek_id" value="${termek.id}">
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
                                     <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
-                                    <button type="submit" disabled id="termekekKartyaGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
+                                    <button type="submit" ${(termek.elerheto_darab == 0) ? `disabled` : ``} id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
                                 </form>
                             </div>
                         </div>
