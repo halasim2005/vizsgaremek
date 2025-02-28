@@ -164,7 +164,7 @@ async function termekekLeker() {
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
-                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
+                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" onclick="popupDiv('${termek.id}')">Részletek</button>
                                     <button type="submit" ${(termek.elerheto_darab == 0) ? `disabled` : ``} id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
                                 </form>
                             </div>
@@ -262,7 +262,7 @@ async function osszesTermekekLeker() {
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
-                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" data-bs-toggle="modal" data-bs-target="#modal_${termek.id}">Részletek</button>
+                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" onclick="popupDiv('${termek.id}')">Részletek</button>
                                     <button type="submit" ${(termek.elerheto_darab == 0) ? `disabled` : ``} id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
                                 </form>
                             </div>
@@ -274,6 +274,47 @@ async function osszesTermekekLeker() {
     } catch (error) {
         console.error("Hiba történt a termékek betöltésekor:", error);
     }
+}
+
+async function popupDiv(termekId){
+    let keres = await fetch(`./termekek_adatok.php/termek`, {
+        method : "POST",
+        headers : {
+            "Content-Type" : "application/json"
+        },
+        body : JSON.stringify({
+            "id" : termekId
+        })
+    });
+    let termekek_adatai = await keres.json();
+
+    let popupMegjelen = document.getElementById("popupMegjelen");
+
+    for (let adat of termekek_adatai) {
+        popupMegjelen.innerHTML = 
+        `
+        <div id="popup" class="popup">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h5 id="cim"><strong>${adat.nev}</strong></h5>
+            <img style="width: 60%;" src="./${adat.kep}">
+            <h5>Gyártó: ${adat.gyarto}</h5>
+            <h5>Ár: ${(adat.akcios_ar != null) ? parseInt(adat.akcios_ar).toLocaleString() : parseInt(adat.egysegar).toLocaleString() } Ft/db</h5>
+
+            <div class="popup-content">
+                <p>${adat.leiras}</p>
+            </div><br>
+            <button class="btn" onclick="closePopup()">Bezárás</button>
+        </div>
+        `;   
+    }
+
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("blur-background").style.display = "block";
+}
+
+function closePopup(){
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("blur-background").style.display = "none";
 }
 
 window.addEventListener("load", kategoriakLeker);

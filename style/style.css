@@ -623,9 +623,9 @@ input[type="radio"] {
 }
 
 #termekekKartyaKosarGomb:hover{
-    background-color: rgb(61, 61, 61);
-    border: 1px solid rgb(61, 61, 61);
-    color:white;
+    background-color: white;
+    border: 1px solid black;
+    color:black;
     text-decoration: none;
     border-radius: 5px;
     padding-top: 8px;
@@ -633,3 +633,5 @@ input[type="radio"] {
     padding-left: 10px;
     padding-right: 10px;
 }
+
+

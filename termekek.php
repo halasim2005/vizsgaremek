@@ -19,6 +19,57 @@ include './db.php';
     <link rel="stylesheet" href="./style/style.css">
     <title>Termékek</title>
 </head>
+<style>
+    /* Popup */
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        z-index: 1001;
+        width: 600px;
+        max-width: 90%;
+        text-align: center;
+        font-family: 'Montserrat';
+    }
+
+    /* Görgethető szöveg */
+    .popup-content {
+        max-height: 200px; /* Maximális magasság */
+        overflow-y: auto;  /* Görgethetővé teszi, ha a szöveg hosszabb */
+        text-align: left;
+        padding: 10px;
+        border: none;
+        margin-top: 10px;
+    }
+
+    /* Bezáró gomb */
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    /* Homályos háttér */
+    .blur-background {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(5px);
+        z-index: 1000;
+    }
+</style>
 <body>
 
     <script src="./js/termekek.js"></script>
@@ -74,6 +125,13 @@ include './db.php';
         </div>
 
         <div id="valaszSzoveg" class="text-center mt-3"></div>
+
+        <div id="popupMegjelen">
+
+        </div>
+
+        <!-- Homályos háttér -->
+        <div id="blur-background" class="blur-background"></div>
     </div>
 
     <?php
