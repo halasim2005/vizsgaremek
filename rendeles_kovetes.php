@@ -81,6 +81,9 @@ include './sql_fuggvenyek.php';
         <div id="rendeles">
 
         </div>
+        <div id="hibauzenet">
+
+        </div>
     </div>
 
     <?php 

@@ -21,6 +21,7 @@ switch (mb_strtolower($url[0])) {
                 echo json_encode($OSSZES_RENDELES, JSON_UNESCAPED_UNICODE);
             }else{
                 echo json_encode(['valasz' => 'A rendelések lekérése sikertelen! Hiba!'], JSON_UNESCAPED_UNICODE);
+                header('BAD REQUEST', true, 400);
             }
         }else{
             echo json_encode(['valasz' => 'Hibás metódus!'], JSON_UNESCAPED_UNICODE);
@@ -39,7 +40,8 @@ switch (mb_strtolower($url[0])) {
                 $rendeles_adatok = $RENDELES_ADATAI->fetchAll(PDO::FETCH_ASSOC);
                 echo json_encode($rendeles_adatok, JSON_UNESCAPED_UNICODE);
             }else{
-                echo json_encode(['valasz' => 'A rendelések adatainak lekérése sikertelen! Hiba!'], JSON_UNESCAPED_UNICODE);
+                echo json_encode(['valasz' => 'A rendelések adatainak lekérése sikertelen!'], JSON_UNESCAPED_UNICODE);
+                header('BAD REQUEST', true, 400);
             }
         }else{
             echo json_encode(['valasz' => 'Hibás metódus!'], JSON_UNESCAPED_UNICODE);
