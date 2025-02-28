@@ -98,7 +98,7 @@ switch (mb_strtolower($url[0])) {
                 SELECT termek.id, termek.nev, termek.egysegar, termek.kep, termek.leiras, termek.gyarto, termek.elerheto_darab, kategoria.nev AS kategoria_nev,
                 termek.akcios_ar, termek.akcio_kezdete, termek.akcio_vege FROM termek
                 INNER JOIN kategoria ON termek.kategoria_id = kategoria.id
-                " . (!empty($feltetelek) ? "WHERE " . implode(' AND ', $feltetelek) : "") . " AND termek.akcios_ar IS NOT NULL ORDER BY termek.egysegar DESC;";
+                " . (!empty($feltetelek) ? "WHERE " . implode(' AND ', $feltetelek) : "") . " AND termek.akcios_ar IS NOT NULL AND termek.elerheto_darab > 0 ORDER BY termek.egysegar DESC;";
             }
         
             $termekek = adatokLekerdezese($szures_sql);

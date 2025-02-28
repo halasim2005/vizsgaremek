@@ -138,7 +138,7 @@ async function termekekLeker() {
                     kartyaArszoveg = `${parseInt(termek.egysegar).toLocaleString()} Ft`;
                 }
                 
-                if(termek.akcios_ar != null){
+                if(termek.akcios_ar != null && termek.elerheto_darab != 0){
                     kartyaArszoveg = `<span style="text-decoration:line-through;color:gray;font-style:italic;margin-right:5px">${parseInt(termek.egysegar).toLocaleString()} Ft </span><span style="color:red;font-weight:bold"> ${parseInt(termek.akcios_ar).toLocaleString()} Ft</span>`;
                     let akcio = Math.floor(Math.abs((termek.akcios_ar / termek.egysegar * 100)));
                     let akcioRendes = 100 - akcio;
@@ -236,7 +236,7 @@ async function osszesTermekekLeker() {
                     kartyaArszoveg = `${parseInt(termek.egysegar).toLocaleString()} Ft`;
                 }
                 
-                if(termek.akcios_ar != null){
+                if(termek.akcios_ar != null && termek.elerheto_darab != 0){
                     kartyaArszoveg = `<span style="text-decoration:line-through;color:gray;font-style:italic;margin-right:5px">${parseInt(termek.egysegar).toLocaleString()} Ft </span><span style="color:red;font-weight:bold"> ${parseInt(termek.akcios_ar).toLocaleString()} Ft</span>`;
                     let akcio = Math.floor(Math.abs((termek.akcios_ar / termek.egysegar * 100)));
                     let akcioRendes = 100 - akcio;
