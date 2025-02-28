@@ -241,6 +241,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         const telefonszamInput = document.getElementById("telefonszam");
         Inputmask({ mask: "+36 99 999 9999" }).mask(telefonszamInput);
     });
+
+    document.getElementById('same_address').addEventListener('change', function() {
+    if (this.checked) {
+        document.getElementById('kezbesitesi_iranyitoszam').value = document.getElementById('szamlazasi_iranyitoszam').value;
+        document.getElementById('kezbesitesi_telepules').value = document.getElementById('szamlazasi_telepules').value;
+        document.getElementById('kezbesitesi_utca').value = document.getElementById('szamlazasi_utca').value;
+        document.getElementById('kezbesitesi_hazszam').value = document.getElementById('szamlazasi_hazszam').value;
+        document.getElementById('kezbesitesi_iranyitoszam').disabled = true
+        document.getElementById('kezbesitesi_telepules').disabled = true
+        document.getElementById('kezbesitesi_utca').disabled = true
+        document.getElementById('kezbesitesi_hazszam').disabled = true
+    } else {
+        document.getElementById('kezbesitesi_iranyitoszam').value = '';
+        document.getElementById('kezbesitesi_telepules').value = '';
+        document.getElementById('kezbesitesi_utca').value = '';
+        document.getElementById('kezbesitesi_hazszam').value = '';
+        document.getElementById('kezbesitesi_iranyitoszam').disabled = false
+        document.getElementById('kezbesitesi_telepules').disabled = false
+        document.getElementById('kezbesitesi_utca').disabled = false
+        document.getElementById('kezbesitesi_hazszam').disabled = false
+    }
+});
+</script>
+
 </script>
 </body>
 </html>
