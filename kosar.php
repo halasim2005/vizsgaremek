@@ -511,8 +511,30 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                                                     <label class="form-check-label" for="kartya">Bankkártyás fizetés</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="fizetesi_mod" id="utanvet" value="utanvet">
+                                                    <input class="form-check-input" type="radio" name="fizetesi_mod" id="utanvet" value="utanvet" >
                                                     <label class="form-check-label" for="utanvet">Utánvét</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card" id="bankkartyasfizetes">
+                                            <div class="card-header"><strong>Bankkártyás fizetés</strong></div>
+                                            <div class="card-body">
+                                                <div class="input-group mb-2">
+                                                    <span class="input-group-text" title="pl.: 1234 5678 1234 5678"><img style="margin-right:5px" width="17px" src="./képek/kartya.png">Kártyaszám</span>
+                                                    <input type="number" id="cardInput" pattern="[1-9]{16}" required title="pl.: 1234 5678 1234 5678" class="form-control">
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <span class="input-group-text" title="pl.: Kiss Mária"><img style="margin-right:5px" width="17px" src="./képek/user.png">Kártyanév</span>
+                                                    <input type="text" id="cardInput" title="pl.: Kiss Mária" required class="form-control">
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <span class="input-group-text" title="pl.: 09/26"><img style="margin-right:5px" width="17px" src="./képek/calendar.png">HH/ÉÉ</span>
+                                                    <input type="text" title="pl.: 09/26" pattern="[0-9]{2}/[0-9]{2}" required class="form-control">
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" title="pl.: 123"><img style="margin-right:5px" width="17px" src="./képek/lakat.png">CVC/CVV kód</span>
+                                                    <input type="number" required pattern="[1-9]{3}" title="pl.: 123" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -532,5 +554,19 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
         </div>
         </div>
     </div>
+
+    <script>
+        document.querySelectorAll('input[name="fizetesi_mod"]').forEach(radio => {
+            radio.addEventListener('change', function () {
+                if (this.value === "kartya") {
+                    let bankkartyasfizetes = document.getElementById("bankkartyasfizetes")
+                    bankkartyasfizetes.style.display = "block";
+                } else if (this.value === "utanvet") {
+                    let bankkartyasfizetes = document.getElementById("bankkartyasfizetes")
+                    bankkartyasfizetes.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
 </html>
