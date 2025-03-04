@@ -5,7 +5,6 @@ use Dotenv\Dotenv;
 
 require 'vendor/autoload.php';
 
-// Betöltjük a környezeti változókat
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
@@ -21,10 +20,10 @@ function sendOrderConfirmation($toEmail, $orderDetails) {
         $mail->Password = $_ENV['SMTP_PASS']; // Jelszó .env-ből
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
-        $mail->CharSet = 'UTF-8'; // Karakterkódolás
+        $mail->CharSet = 'UTF-8';
 
-        // Feladó és címzett
-        $mail->setFrom($_ENV['SMTP_USER'], 'Webshop');
+        // Címzett és feladó
+        $mail->setFrom($_ENV['SMTP_USER'], 'HaLáli Kft. Webshop');
         $mail->addAddress($toEmail);
 
         // Tárgy és tartalom
@@ -32,11 +31,13 @@ function sendOrderConfirmation($toEmail, $orderDetails) {
         $mail->isHTML(true);
         $mail->Body = "
             <h2>Kedves Vásárlónk!</h2>
-            <p>Köszönjük a rendelésed! Az alábbiakban találod a rendelés részleteit:</p>
-            <p><strong>Rendelés ID:</strong> {$orderDetails['id']}</p>
+            <p>Köszönjük megrendelését! Ez egy automatikus visszaigazóló e-mail. Az alábbiakban találod a rendelés részleteit:</p>
+            <p><strong>Rendelés azonosítója:</strong> {$orderDetails['id']}</p>
             <p><strong>Összeg:</strong> {$orderDetails['total']} Ft</p>
             <p><strong>Szállítási cím:</strong> {$orderDetails['address']}</p>
-            <p>Üdvözlettel,<br>Webshop Csapata</p>
+            <p><strong>Fizetési mód:</strong> {$orderDetails['fizmod']}</p>
+            <p><strong>Fizetési mód:</strong> {$orderDetails['szallitas']}</p><br>
+            <p>Üdvözlettel,<br>Halasi Martin, Lálity Dominik</p>
         ";
 
         if ($mail->send()) {
@@ -49,12 +50,14 @@ function sendOrderConfirmation($toEmail, $orderDetails) {
     }
 }
 
-// Teszt küldés
+//Adatok
 $orderDetails = [
-    'id' => 12345,
-    'total' => 9990,
-    'address' => 'Budapest, Petőfi S. utca 10.'
+    'id' =>  $ID_megrendeles,
+    'total' => $vegosszeg,
+    'address' => $_SESSION['felhasznalo']['kezbesitesi_iranyitoszam'] . ", " . $_SESSION['felhasznalo']['kezbesitesi_telepules']. ", " . $_SESSION['felhasznalo']['kezbesitesi_utca']. ", " . $_SESSION['felhasznalo']['kezbesitesi_hazszam'],
+    'szallitas' => $szallitasi_mod,
+    'fizmod' => $fizetesi_mod
 ];
 
-echo sendOrderConfirmation('13c-halasi@ipari.vein.hu', $orderDetails);
+/*echo*/ sendOrderConfirmation('13c-lality@ipari.vein.hu', $orderDetails);
 ?>

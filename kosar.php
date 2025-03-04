@@ -350,7 +350,7 @@ if(isset($_POST['fizetes'])){
     if($MINDEN_OKE == true){
         // Szállítási mód és fizetési mód ellenőrzés
         $szallitasi_mod = isset($_POST['szallitasi_mod']) ? $_POST['szallitasi_mod'] : 'standard';
-        $fizetesi_mod = isset($_POST['fizetesi_mod']) ? $_POST['fizetesi_mod'] : 'kartya';
+        $fizetesi_mod = isset($_POST['fizetesi_mod']) ? $_POST['fizetesi_mod'] : 'Bankkártya';
 
         // Kosár összegzés
         $osszeg = osszegzo($_SESSION['kosar']);
@@ -412,6 +412,7 @@ if(isset($_POST['fizetes'])){
         }
 
         // Rendelés sikeres feldolgozása
+        require_once './rendeles_visszaigazolo_mailer.php';
         header("Location: rendeles_sikeres");
         exit();
     }else{
