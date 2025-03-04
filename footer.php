@@ -6,7 +6,7 @@
             </td>
             <td class="footerTableTd">
                 Alkotók: Halasi Martin és Lálity Dominik<br><br>
-                Email cím: <a id="footerLinkek" href="mailto:halalikft@gmail.com">halalikft@gmail.com</a><br><br>
+                Email cím: <a id="footerLinkek" href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&to=%7B%7Bhalalikft@gmail.com%7D%7D&su=Subject&body=Body+Text">halalikft@gmail.com</a><br><br>
                 Együttműködő partnerek<br>
             </td>
             <td class="footerTableTd">
