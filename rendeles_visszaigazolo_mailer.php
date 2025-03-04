@@ -22,7 +22,7 @@ function sendOrderConfirmation($toEmail, $orderDetails) {
         $mail->Port = 587;
         $mail->CharSet = 'UTF-8';
 
-        // Feladó és címzett
+        // Címzett és feladó
         $mail->setFrom($_ENV['SMTP_USER'], 'HaLáli Kft. Webshop');
         $mail->addAddress($toEmail);
 
