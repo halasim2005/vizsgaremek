@@ -241,7 +241,7 @@ function Rendeles_adatok_megjelenit(rendReszletek){
                 <td>${adat.leadas_datum} </td>
                 <td>${adat.szallitasi_mod} </td>
                 <td>${fizmod} </td>
-                <th>${(adat.vegosszeg > 25000) ? "ingyenes" : "1690 Ft"}</th>
+                <td>${(adat.vegosszeg > 25000) ? "ingyenes" : "1690 Ft"}</td>
                 <td>${adat.vegosszeg} Ft</td>
             </tr>
         `;
