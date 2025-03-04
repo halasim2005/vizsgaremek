@@ -205,6 +205,7 @@ function Rendeles_adatok_megjelenit(rendReszletek){
                 <th>Leadás dátuma</th>
                 <th>Szállítási mód</th>
                 <th>Fizetési mód</th>
+                <th>Szállítás</th>
                 <th>Végösszeg</th>
             </thead>
             <tbody id="adatokTbody">
@@ -240,6 +241,7 @@ function Rendeles_adatok_megjelenit(rendReszletek){
                 <td>${adat.leadas_datum} </td>
                 <td>${adat.szallitasi_mod} </td>
                 <td>${fizmod} </td>
+                <th>${(adat.vegosszeg > 25000) ? "ingyenes" : "1690 Ft"}</th>
                 <td>${adat.vegosszeg} Ft</td>
             </tr>
         `;
