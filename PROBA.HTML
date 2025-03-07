@@ -226,3 +226,46 @@
     </div>
 </body>
 </html>
+
+
+/*
+async function popupDiv(termekId){
+    let keres = await fetch(`./termekek_adatok.php/termek`, {
+        method : "POST",
+        headers : {
+            "Content-Type" : "application/json"
+        },
+        body : JSON.stringify({
+            "id" : termekId
+        })
+    });
+    let termekek_adatai = await keres.json();
+
+    let popupMegjelen = document.getElementById("popupMegjelen");
+
+    for (let adat of termekek_adatai) {
+        popupMegjelen.innerHTML = 
+        `
+        <div id="popup" class="popup">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h5 id="cim"><strong>${adat.nev}</strong></h5>
+            <img style="width: 60%;" src="./${adat.kep}">
+            <h5>Gyártó: ${adat.gyarto}</h5>
+            <h5>Ár: ${(adat.akcios_ar != null) ? parseInt(adat.akcios_ar).toLocaleString() : parseInt(adat.egysegar).toLocaleString() } Ft/db</h5>
+
+            <div class="popup-content">
+                <p>${adat.leiras}</p>
+            </div><br>
+            <button class="btn" onclick="closePopup()">Bezárás</button>
+        </div>
+        `;   
+    }
+
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("blur-background").style.display = "block";
+}
+
+function closePopup(){
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("blur-background").style.display = "none";
+}*/
