@@ -73,7 +73,7 @@ async function termek_reszletei() {
                         <input type="hidden" name="termek_id" value="${adat.id}">
                         <input type="hidden" name="termek_kep" value="${adat.kep}">
                         <input type="hidden" name="ar" value="${adat.egysegar}">
-                        <input type="number" placeholder="Mennyiség" class="form-control w-25 my-1" name="mennyiseg" max="${adat.elerheto_darab}" min="1">
+                        <h5 style="font-weight:bold">Mennyiség: </h5><input type="number" placeholder="Mennyiség" class="form-control w-25 my-1" name="mennyiseg" max="${adat.elerheto_darab}" min="1">
                         <button type="submit" ${(adat.elerheto_darab == 0) ? `disabled` : ``}  id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary my-1 w-25" onclick="Szamlalo()">Kosárba</button>
                     </form>
                 </div>
