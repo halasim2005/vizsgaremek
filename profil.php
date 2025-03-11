@@ -16,6 +16,33 @@ $query->execute();
 $userData = $query->fetch(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['password_change'])) {
+        // Jelszó módosítási logika
+        $current_password = $_POST['current_password'];
+        $new_password = $_POST['new_password'];
+        $confirm_password = $_POST['confirm_password'];
+
+        if (!password_verify($current_password, $userData['jelszo'])) {
+            $message = "A jelenlegi jelszó hibás!";
+        } elseif ($new_password !== $confirm_password) {
+            $message = "Az új jelszavak nem egyeznek!";
+        } elseif (strlen($new_password) < 6) {
+            $message = "Az új jelszónak legalább 6 karakter hosszúnak kell lennie!";
+        } else {
+            // Jelszó frissítése
+            $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+            $updatePasswordQuery = $pdo->prepare("UPDATE felhasznalo SET jelszo = :jelszo WHERE fh_nev = :fh_nev");
+            $updatePasswordQuery->bindParam(':jelszo', $hashed_password, PDO::PARAM_STR);
+            $updatePasswordQuery->bindParam(':fh_nev', $fh_nev, PDO::PARAM_STR);
+
+            if ($updatePasswordQuery->execute()) {
+                $message = "Jelszó sikeresen módosítva!";
+            } else {
+                $message = "Hiba történt a jelszó módosítása közben!";
+            }
+        }
+    }
+    else{
     // Felhasználói adatok
     $vezeteknev = $_POST['vezeteknev'];
     $keresztnev = $_POST['keresztnev'];
@@ -87,12 +114,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $updateQuery->bindParam(':szamlazasi_adoszam', $ceg_adoszam, PDO::PARAM_STR);
     $updateQuery->bindParam(':fh_nev', $fh_nev, PDO::PARAM_STR);
 
+
+    
+
+
     header("Location: profil");
     if ($updateQuery->execute()) {
         $message = "Adatok sikeresen frissítve!";
     } else {
         $message = "Hiba történt az adatok frissítésekor.";
     }
+}
 }
 ?>
 
@@ -120,6 +152,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?= htmlspecialchars($message) ?>
             </div>
         <?php endif; ?>
+
+
+        <!-- Jelszó módosító űrlap -->
+        <div class="card mb-4 password-change">
+            <div class="card-header text-white bg-primary">Jelszó módosítása</div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="current_password" class="form-label">Jelenlegi jelszó</label>
+                        <input type="password" id="current_password" name="current_password" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="new_password" class="form-label">Új jelszó</label>
+                        <input type="password" id="new_password" name="new_password" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirm_password" class="form-label">Új jelszó megerősítése</label>
+                        <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+                    </div>
+                    <button type="submit" name="password_change" class="btn btn-success">Jelszó módosítása</button>
+                </form>
+            </div>
+        </div>
+        
 
         <form method="POST" class="profile-form">
             <!-- Személyes adatok -->

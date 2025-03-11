@@ -45,8 +45,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':fh_nev' => $fh_nev,
     ];
 
-    $updateQuery = $pdo->prepare("
-        UPDATE felhasznalo SET 
+    // Ha van új jelszó, akkor hash-eljük és frissítjük
+    if (!empty($_POST['jelszo'])) {
+        $updateData[':jelszo'] = password_hash($_POST['jelszo'], PASSWORD_BCRYPT);
+        $updateQuery = $pdo->prepare("UPDATE felhasznalo SET 
+            email = :email,
+            telefonszam = :telefonszam,
+            jogosultsag = :jogosultsag,
+            vezeteknev = :vezeteknev,
+            keresztnev = :keresztnev,
+            szamlazasi_iranyitoszam = :szamlazasi_iranyitoszam,
+            szamlazasi_telepules = :szamlazasi_telepules,
+            szamlazasi_utca = :szamlazasi_utca,
+            szamlazasi_hazszam = :szamlazasi_hazszam,
+            szamlazasi_cegnev = :szamlazasi_cegnev,
+            szamlazasi_adoszam = :szamlazasi_adoszam,
+            kezbesitesi_iranyitoszam = :kezbesitesi_iranyitoszam,
+            kezbesitesi_telepules = :kezbesitesi_telepules,
+            kezbesitesi_utca = :kezbesitesi_utca,
+            kezbesitesi_hazszam = :kezbesitesi_hazszam,
+            jelszo = :jelszo
+        WHERE fh_nev = :fh_nev");
+    } else {
+        $updateQuery = $pdo->prepare("UPDATE felhasznalo SET 
             email = :email,
             telefonszam = :telefonszam,
             jogosultsag = :jogosultsag,
@@ -62,8 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             kezbesitesi_telepules = :kezbesitesi_telepules,
             kezbesitesi_utca = :kezbesitesi_utca,
             kezbesitesi_hazszam = :kezbesitesi_hazszam
-        WHERE fh_nev = :fh_nev
-    ");
+        WHERE fh_nev = :fh_nev");
+    }
     
     if ($updateQuery->execute($updateData)) {
         header("Location: users.php?message=Sikeres frissítés");
@@ -73,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="hu">
@@ -92,6 +114,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container mt-5">
     <h2>Felhasználó szerkesztése: <?php echo htmlspecialchars($user['fh_nev']); ?></h2>
     <form method="POST">
+
+        <div class="mb-3"><label>Jelszó</label>
+            <input type="password" name="jelszo" class="form-control">
+        </div>
         <div class="mb-3"><label>Vezetéknév</label>
             <input type="text" name="vezeteknev" class="form-control" value="<?php echo htmlspecialchars($user['vezeteknev']); ?>" required>
         </div>
