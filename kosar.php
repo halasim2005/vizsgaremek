@@ -508,11 +508,11 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                                             <div class="card-header"><strong>Fizetési mód</strong></div>
                                             <div class="card-body">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="fizetesi_mod" id="kartya" value="kartya" checked>
+                                                    <input class="form-check-input" type="radio" name="fizetesi_mod" id="kartya" value="kartya">
                                                     <label class="form-check-label" for="kartya">Bankkártyás fizetés</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="fizetesi_mod" id="utanvet" value="utanvet" >
+                                                    <input class="form-check-input" type="radio" name="fizetesi_mod" id="utanvet" value="utanvet" checked>
                                                     <label class="form-check-label" for="utanvet">Utánvét</label>
                                                 </div>
                                             </div>
