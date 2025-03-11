@@ -31,7 +31,7 @@ function sendOrderConfirmation($toEmail, $orderDetails) {
         $mail->isHTML(true);
         $mail->Body = "
             <h2>Kedves Vásárlónk!</h2>
-            <p>Köszönjük megrendelését! Ez egy automatikus visszaigazóló e-mail. Az alábbiakban találod a rendelés részleteit:</p>
+             <p>Köszönjük megrendelését! Ez egy automatikus visszaigazóló e-mail. Az alábbiakban találja a rendelés adatait (további részletes információkat a weboldal rendeléseim részen talál):</p>
             <p><strong>Rendelés azonosítója:</strong> {$orderDetails['id']}</p>
             <p><strong>Összeg:</strong> {$orderDetails['total']} Ft</p>
             <p><strong>Szállítási cím:</strong> {$orderDetails['address']}</p>
@@ -50,23 +50,6 @@ function sendOrderConfirmation($toEmail, $orderDetails) {
     }
 }
 
-//Email
-require_once './sql_fuggvenyek.php';
-
-$email_cim;
-
-$fh_nev = $_SESSION['felhasznalo']['fh_nev']
-$email_sql = "SELECT felhasznalo.email FROM `felhasznalo` WHERE felhasznalo.fh_nev = '{$fh_nev}';";
-$email = adatokLekerdezese($email_sql);
-if(is_array($email)){
-    foreach($email as $e){
-        $email_cim = $e['email'];
-    }
-}else{
-    echo "Sikertelen az email cím lekérése!";
-}
-
-
 //Adatok
 $orderDetails = [
     'id' =>  $ID_megrendeles,
@@ -76,5 +59,5 @@ $orderDetails = [
     'fizmod' => $fizetesi_mod
 ];
 
-/*echo*/ sendOrderConfirmation($email_cim, $orderDetails);
+/*echo*/ sendOrderConfirmation('13c-lality@ipari.vein.hu', $orderDetails);
 ?>
