@@ -86,35 +86,43 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <h5 class="card-title text-center" name="rendeles_id">ID: <?php echo htmlspecialchars($rendeles['rendeles_id']); ?></h5>
                         <p class="card-text">
                             <strong>Felhasználó:</strong> <?php echo htmlspecialchars($rendeles['fh_nev']); ?><br>
-                            <strong>Termékek:</strong><br> <?php echo htmlspecialchars($rendeles['termekek']); ?><br>
+                            <strong>Termékek:</strong>
+                                <ul>
+                                    <?php
+                                    $termekek = explode(',', $rendeles['termekek']);
+                                    foreach ($termekek as $termek) {
+                                        echo "<li>" . htmlspecialchars($termek) . "</li>";
+                                    }
+                                    ?>
+                                </ul>
                             <strong>Végösszeg:</strong> <?php echo htmlspecialchars($rendeles['vegosszeg']); ?> Ft<br>
                             <strong>Státusz:</strong> <?php echo htmlspecialchars($rendeles['statusz']); ?><br>
                             <strong>Cím:</strong> <?php echo htmlspecialchars($rendeles['kezbesitesi_iranyitoszam']) . " " . $rendeles['kezbesitesi_telepules'] . " " .
                                                                               $rendeles['kezbesitesi_utca'] . " " . $rendeles['kezbesitesi_hazszam'] ?><br>
                             <strong>Telefonszám:</strong> <?php echo htmlspecialchars($rendeles['telefonszam']); ?><br>
                         </p>
-                       
-                        <form method="POST" action="rendeles_statusz.php" class="mt-1 d-inline">
-                            <input type="hidden" name="rendeles_id" value="<?php echo $rendeles['rendeles_id']; ?>">
-                            <select name="statusz" class="form-select form-select-sm">
-                                <option value="feldolgozás alatt" <?php if ($rendeles['statusz'] === 'feldolgozás alatt') echo 'selected'; ?>>Feldolgozás alatt</option>
-                                <option value="kész" <?php if ($rendeles['statusz'] === 'kész') echo 'selected'; ?>>Kész</option>
-                                <!--<option value="törölve" <?//php if ($rendeles['statusz'] === 'törölve') echo 'selected'; ?>>Törölve</option>-->
-                                <option value="csomagolva" <?php if ($rendeles['statusz'] === 'csomagolva') echo 'selected'; ?>>Csomagolva</option>
-                            </select>
-                            <button type="submit" name="statusz_modositas" class="btn btn-success btn-sm mt-2">Mentés</button>
-                        </form>
-                        <form method="POST" action="rendeles_szerkeszt.php" class="mt-2 d-inline">
-                            <input type="hidden" name="rendeles_id" value="<?php echo $rendeles['rendeles_id']; ?>">
-                            <button type="submit" name="szerkeszt" class="btn btn-primary btn-sm mt-2">Szerkesztés</button>
-                        </form>
-                        <form method="POST" action="rendeles_torles.php" class="mt-2 d-inline">
-                            <input type="hidden" name="rendeles_id" value="<?php echo $rendeles['rendeles_id']; ?>">
-                            <button type="button" class="btn btn-danger btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" 
-                                    data-rendelesid="<?php echo $rendeles['rendeles_id']; ?>">
-                                Törlés
-                            </button>
-                        </form>
+
+                           <form method="POST" action="rendeles_statusz.php" class="mt-1 d-inline">
+                               <input type="hidden" name="rendeles_id" value="<?php echo $rendeles['rendeles_id']; ?>">
+                               <select name="statusz" class="form-select form-select-sm">
+                                   <option value="feldolgozás alatt" <?php if ($rendeles['statusz'] === 'feldolgozás alatt') echo 'selected'; ?>>Feldolgozás alatt</option>
+                                   <option value="kész" <?php if ($rendeles['statusz'] === 'kész') echo 'selected'; ?>>Kész</option>
+                                   <!--<option value="törölve" <?//php if ($rendeles['statusz'] === 'törölve') echo 'selected'; ?>>Törölve</option>-->
+                                   <option value="csomagolva" <?php if ($rendeles['statusz'] === 'csomagolva') echo 'selected'; ?>>Csomagolva</option>
+                               </select>
+                               <button type="submit" name="statusz_modositas" class="btn btn-success btn-sm mt-2 col-4">Mentés</button>
+                           </form>
+                           <form method="POST" action="rendeles_szerkeszt.php" class="mt-2 d-inline">
+                               <input type="hidden" name="rendeles_id" value="<?php echo $rendeles['rendeles_id']; ?>">
+                               <button type="submit" name="szerkeszt" class="btn btn-primary btn-sm mt-2 col-4">Szerkesztés</button>
+                           </form>
+                           <form method="POST" action="rendeles_torles.php" class="mt-2 d-inline">
+                               <input type="hidden" name="rendeles_id" value="<?php echo $rendeles['rendeles_id']; ?>">
+                               <button type="button" class="btn btn-danger btn-sm mt-2 col-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" 
+                                       data-rendelesid="<?php echo $rendeles['rendeles_id']; ?>">
+                                   Törlés
+                               </button>
+                           </form>
                     </div>
                 </div>
             </div>
