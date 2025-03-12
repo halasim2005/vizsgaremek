@@ -1,3 +1,27 @@
+function OldalBetolt(){
+    document.getElementById("feszesesDiv").style.display = "block";
+    document.getElementById("arDiv").style.display = "none";
+    document.getElementById("ellenDiv").style.display = "none";
+}
+
+function kalkValaszt(){
+    let selected = document.querySelector('input[name=kalkulatorRadios]:checked');
+
+    if(selected.value === "feszeses"){
+        document.getElementById("feszesesDiv").style.display = "block";
+        document.getElementById("arDiv").style.display = "none";
+        document.getElementById("ellenDiv").style.display = "none";
+    }else if(selected.value === "ellenallas"){
+        document.getElementById("feszesesDiv").style.display = "none";
+        document.getElementById("arDiv").style.display = "none";
+        document.getElementById("ellenDiv").style.display = "block";
+    }else if(selected.value === "arkalk"){
+        document.getElementById("feszesesDiv").style.display = "none";
+        document.getElementById("arDiv").style.display = "block";
+        document.getElementById("ellenDiv").style.display = "none";
+    }
+}
+
 function Szamolas(){
     let eredmenyModal = document.getElementById("eredmenyModal");
     let A = document.getElementById("vezKereszt").value; //keresztmetszet
@@ -101,5 +125,25 @@ function Szamolas(){
     }
 }   
 
+function ellenallas_szamolas(){
+    let V = document.getElementById("feszultseg").value; //feszultseg
+    let I = document.getElementById("aram_ellenallas").value; //áramerősség
+    let ellenallas = 0; //ellenállás értéke
+    let hiba = document.getElementById("hiba_ellenallas");
+
+    if(V == "" || I == ""){
+        hiba.innerHTML = '<div class="alert alert-warning">Kérem töltse ki az összes mezőt!</div>';
+    }else{
+        ellenallas = V / I;
+        document.getElementById("eredmeny_ellenallas").innerHTML = ellenallas + "Ω";
+        document.getElementById("eredmeny_ellenallas").style.color = "green";
+        document.getElementById("eredmeny_ellenallas").style.fontSize = "30px"
+        document.getElementById("eredmeny_ellenallas").style.fontWeight = "bold"
+    }
+}
+
 
 document.getElementById("szamitas").addEventListener("click", Szamolas)
+document.getElementById("szamitas_ellenallas").addEventListener("click", ellenallas_szamolas)
+window.addEventListener("change", kalkValaszt)
+window.addEventListener("load", OldalBetolt)
