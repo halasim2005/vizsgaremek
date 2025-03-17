@@ -23,14 +23,11 @@ header("Pragma: no-cache");
 
     <div class="container form-container">
         <div class="row">
-            <div class="col-lg-4 col-sm-12">
+            <div class="col-lg-6 col-sm-12">
                 <label><input type="radio" name="kalkulatorRadios" value="feszeses" id="feszesesRadio" checked> Feszültségesés </label>
             </div>
-            <div class="col-lg-4 col-sm-12">
+            <div class="col-lg-6 col-sm-12">
                 <label><input type="radio" name="kalkulatorRadios" value="ellenallas" id="ellenallasRadio"> Ellenállás </label>
-            </div>
-            <div class="col-lg-4 col-sm-12">
-                <label><input type="radio" name="kalkulatorRadios" value="arkalk" id="fogyasztasRadio"> Ár (áram) </label>
             </div>
         </div>
     </div>
