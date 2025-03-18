@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $error = "Hibás felhasználónév vagy jelszó.";
         }
     } else {
-        $error = "Hibás felhasználónév vagy jelszó."; //nemlétező felhasználó
+        $error = "Hibás felhasználónév vagy jelszó."; //nemlétező felhasználó, biztonsági okok miatt ugyanezt írjuk ki.
     }
 }
 ?>
