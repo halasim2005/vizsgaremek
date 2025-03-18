@@ -1,17 +1,15 @@
 async function termek_reszletei() {
-    let urlParameterek = new URLSearchParams(window.location.search);
-    let termekId = urlParameterek.get("id");
-    
-    let adatok = await fetch("./termekek_adatok.php/termek", {
+    console.log(window.location.href)
+    /*let adatok = await fetch("./termekek_adatok.php/termek_url", {
         method : "POST",
         headers : {
             "Content-Type" : "application/json"
         },
         body : JSON.stringify({
-            "id" : termekId,
+            "urlnev" : urlnev,
         })
     })
-    let termek_reszletei = await adatok.json();
+    let termek_reszletei = await adatok.json();*/
 
     for (let adat of termek_reszletei) {
         let raktaronSzoveg;

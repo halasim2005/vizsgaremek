@@ -49,6 +49,20 @@ switch (mb_strtolower($url[0])) {
             header('BAD REQUEST', true, 400);
         }
         break;
+    case 'termek_url':
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $termek_sql = "SELECT * FROM termek WHERE termek.urlnev = {$bodyAdatok["urlnev"]};";
+            $termek = adatokLekerdezese($termek_sql);
+            if(is_array($termek)){
+                echo json_encode($termek, JSON_UNESCAPED_UNICODE);
+            }else{
+                echo json_encode(['valasz' => 'A termék adatok lekérése sikertelen! Hiba!'], JSON_UNESCAPED_UNICODE);
+            }
+        }else{
+            echo json_encode(['valasz' => 'Hibás metódus!'], JSON_UNESCAPED_UNICODE);
+            header('BAD REQUEST', true, 400);
+        }
+        break;
     case 'arakleker':
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
             $arak_sql = "SELECT MAX(termek.egysegar) AS arMax, MIN(termek.egysegar) AS arMin FROM termek;";
