@@ -59,5 +59,5 @@ $orderDetails = [
     'fizmod' => $fizetesi_mod
 ];
 
-/*echo*/ sendOrderConfirmation('13c-lality@ipari.vein.hu', $orderDetails);
+echo sendOrderConfirmation($_SESSION['felhasznalo']['email'], $orderDetails);
 ?>
