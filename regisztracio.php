@@ -5,47 +5,58 @@ header("Pragma: no-cache");
 include 'db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $vezeteknev = $_POST['vezNev'];
-    $keresztnev = $_POST['kerNev'];
-    $felhasznalonev = $_POST['felhasznalonev'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $passwordAgain = $_POST['passwordAgain'];
+    $recaptcha = $_POST['g-recaptcha-response'];
+    $secret_key = '6LfhrZ4qAAAAAJob4H4DXTYik72YDWwalvPX83N0';
+    $url = 'https://www.google.com/recaptcha/api/siteverify?secret='
+          . $secret_key . '&response=' . $recaptcha;
+    $response = file_get_contents($url);
+    $response = json_decode($response);
 
-    // Hibakezelés - üzenet inicializálása
-    $error = "";
-
-    // Felhasználónév és email ellenőrzése az adatbázisban
-    $stmt = $pdo->prepare("SELECT * FROM felhasznalo WHERE fh_nev = :fh_name OR email = :email");
-    $stmt->bindParam(':fh_name', $felhasznalonev);
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
-
-    if ($stmt->rowCount() > 0) {
-        $error = "Ez a felhasználónév vagy email már létezik.";
-    } elseif ($password !== $passwordAgain) {
-        $error = "A két jelszó nem egyezik meg.";
-    } else {
-        // Jelszó titkosítása
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        // Új felhasználó mentése az adatbázisba
-        $sql = "INSERT INTO felhasznalo (vezeteknev, keresztnev, fh_nev, email, jelszo) 
-                VALUES (:vezeteknev, :keresztnev, :fh_nev, :email, :jelszo)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':vezeteknev', $vezeteknev);
-        $stmt->bindParam(':keresztnev', $keresztnev);
-        $stmt->bindParam(':fh_nev', $felhasznalonev);
+    if ($response->success == true) {
+        $vezeteknev = $_POST['vezNev'];
+        $keresztnev = $_POST['kerNev'];
+        $felhasznalonev = $_POST['felhasznalonev'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $passwordAgain = $_POST['passwordAgain'];
+    
+        // Hibakezelés - üzenet inicializálása
+        $error = "";
+    
+        // Felhasználónév és email ellenőrzése az adatbázisban
+        $stmt = $pdo->prepare("SELECT * FROM felhasznalo WHERE fh_nev = :fh_name OR email = :email");
+        $stmt->bindParam(':fh_name', $felhasznalonev);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':jelszo', $hashedPassword);
-
-        if ($stmt->execute()) {
-            header("Location: bejelentkezes.php"); // Átirányítás bejelentkezési oldalra sikeres regisztráció után
-            exit();
+        $stmt->execute();
+    
+        if ($stmt->rowCount() > 0) {
+            $error = "Ez a felhasználónév vagy email már létezik.";
+        } elseif ($password !== $passwordAgain) {
+            $error = "A két jelszó nem egyezik meg.";
         } else {
-            $error = "Hiba történt a regisztráció során. Próbálja újra.";
-        }
+            // Jelszó titkosítása
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    
+            // Új felhasználó mentése az adatbázisba
+            $sql = "INSERT INTO felhasznalo (vezeteknev, keresztnev, fh_nev, email, jelszo) 
+                    VALUES (:vezeteknev, :keresztnev, :fh_nev, :email, :jelszo)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':vezeteknev', $vezeteknev);
+            $stmt->bindParam(':keresztnev', $keresztnev);
+            $stmt->bindParam(':fh_nev', $felhasznalonev);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':jelszo', $hashedPassword);
+    
+            if ($stmt->execute()) {
+                header("Location: bejelentkezes.php"); // Átirányítás bejelentkezési oldalra sikeres regisztráció után
+                exit();
+            } else {
+                $error = "Hiba történt a regisztráció során. Próbálja újra.";
+            }
     }
+    
+    }
+    else header("regisztracio");
 }
 ?>
 
@@ -62,6 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Kanit:wght@300&family=Montserrat&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style/style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"async defer></script>
 </head>
 <body>
 
@@ -114,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="text-center">
                 <!-- secret: 6LcSMZ4qAAAAAKoFX-gDaOa9eOgWBqM8CNVkHKuK-->
-                <div class="g-recaptcha" data-sitekey="6LcSMZ4qAAAAAItO8O736KNKGWr5zHMteqreuDqs"></div>
+                <div class="g-recaptcha" data-sitekey="6LfhrZ4qAAAAAKM6FWwbkxfS3zjnRCgE3e_3JmI6"></div>
                 <br/>
                 <button id="navbarGomb" type="submit" class="btn regist-button ms-3 w-100">Regisztráció</button>
             </div>
@@ -124,10 +137,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         include './footer.php';
     ?>
 
-    <script>
-   function onSubmit(token) {
-     document.getElementById("demo-form").submit();
-   }
- </script>
+<script type="text/javascript">
+      var onloadCallback = function() {
+        grecaptcha.render('html_element', {
+          'sitekey' : '6LfhrZ4qAAAAAKM6FWwbkxfS3zjnRCgE3e_3JmI6'
+        });
+      };
+    </script>
 </body>
 </html>

@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $response = json_decode($response);
 
     if ($response->success == true) {
-        $felhasznalonev = $_POST['felhasznalonev'];
+    $felhasznalonev = $_POST['felhasznalonev'];
     $password = $_POST['password'];    
     
 
