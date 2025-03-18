@@ -108,7 +108,7 @@ CREATE TABLE `megrendeles` (
   `szallitas` text NOT NULL,
   `vegosszeg` int(100) NOT NULL,
   `leadas_datum` date NOT NULL,
-  `statusz` text NOT NULL DEFAULT 'feldolgozás alatt'
+  `statusz` VARCHAR(255) NOT NULL DEFAULT 'feldolgozás alatt'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -189,7 +189,7 @@ CREATE TABLE `tetelek` (
   `termek_id` int(10) NOT NULL,
   `tetelek_mennyiseg` int(5) NOT NULL,
   `fh_nev` varchar(100) NOT NULL,
-  `statusz` text NOT NULL DEFAULT 'kosárban'
+  `statusz` VARCHAR(255) NOT NULL DEFAULT 'kosárban'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
