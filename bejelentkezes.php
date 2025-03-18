@@ -6,9 +6,20 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Pragma: no-cache");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $felhasznalonev = $_POST['felhasznalonev'];
+
+    $recaptcha = $_POST['g-recaptcha-response'];
+    $secret_key = '6LfhrZ4qAAAAAJob4H4DXTYik72YDWwalvPX83N0';
+    $url = 'https://www.google.com/recaptcha/api/siteverify?secret='
+          . $secret_key . '&response=' . $recaptcha;
+    $response = file_get_contents($url);
+    $response = json_decode($response);
+
+    if ($response->success == true) {
+        $felhasznalonev = $_POST['felhasznalonev'];
     $password = $_POST['password'];    
     
+
+
     $stmt = $pdo->prepare("SELECT * FROM felhasznalo WHERE fh_nev = :fh_name");
     $stmt->bindParam(':fh_name', $felhasznalonev);
     $stmt->execute();
@@ -29,6 +40,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $error = "Hibás felhasználónév vagy jelszó."; //nemlétező felhasználó, biztonsági okok miatt ugyanezt írjuk ki.
     }
+    } else {
+        header("Location: bejelentkezes");
+    }
+    
 }
 ?>
 
@@ -45,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Kanit:wght@300&family=Montserrat&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style/style.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"async defer></script>
 </head>
 <body>
     <?php include './nav.php'; ?>
@@ -72,8 +88,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             <div class="row">
                 <div class="mb-3">
-                    <!--secret: 6LfhrZ4qAAAAAJob4H4DXTYik72YDWwalvPX83N0-->
-                    <div class="g-recaptcha text-center" data-sitekey="6LfhrZ4qAAAAAKM6FWwbkxfS3zjnRCgE3e_3JmI6"></div>
+                    <!--secret: -->
+                    <div class="g-recaptcha text-center" data-sitekey="6LfhrZ4qAAAAAKM6FWwbkxfS3zjnRCgE3e_3JmI6" theme="dark" ></div>
                 </div>
             </div>
 
@@ -83,5 +99,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
     <?php include './footer.php';?>
+    <script type="text/javascript">
+      var onloadCallback = function() {
+        grecaptcha.render('html_element', {
+          'sitekey' : '6LfhrZ4qAAAAAKM6FWwbkxfS3zjnRCgE3e_3JmI6'
+        });
+      };
+    </script>
 </body>
 </html>
