@@ -262,7 +262,7 @@ async function osszesTermekekLeker() {
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
                                     <input type="hidden" name="mennyiseg" value="1">
-                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" onclick="termekMegnyit('${termek.id}')">Részletek</button>
+                                    <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" onclick="termekMegnyit('${termek.urlnev}')">Részletek</button>
                                     <button type="submit" ${(termek.elerheto_darab == 0) ? `disabled` : ``} id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
                                 </form>
                             </div>
@@ -276,8 +276,8 @@ async function osszesTermekekLeker() {
     }
 }
 
-function termekMegnyit(termekId){
-    window.location.href = `termek_reszletek.php?id=${termekId}`;
+function termekMegnyit(urlnev){
+    window.location.href = `termek_reszletek.php/${urlnev}`;
 }
 
 window.addEventListener("load", kategoriakLeker);

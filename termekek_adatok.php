@@ -82,35 +82,35 @@ switch (mb_strtolower($url[0])) {
             if($bodyAdatok['rendez'] == 'nevAz'){
                 $szures_sql = "
                 SELECT termek.id, termek.nev, termek.egysegar, termek.kep, termek.leiras, termek.gyarto, termek.elerheto_darab, kategoria.nev AS kategoria_nev,
-                termek.akcios_ar, termek.akcio_kezdete, termek.akcio_vege FROM termek
+                termek.akcios_ar, termek.akcio_kezdete, termek.akcio_vege, termek.urlnev FROM termek
                 INNER JOIN kategoria ON termek.kategoria_id = kategoria.id
                 " . (!empty($feltetelek) ? "WHERE " . implode(' AND ', $feltetelek) : "") . " ORDER BY termek.nev ASC;";
             }
             else if($bodyAdatok['rendez'] == 'nevZa'){
                 $szures_sql = "
                 SELECT termek.id, termek.nev, termek.egysegar, termek.kep, termek.leiras, termek.gyarto, termek.elerheto_darab, kategoria.nev AS kategoria_nev,
-                termek.akcios_ar, termek.akcio_kezdete, termek.akcio_vege FROM termek
+                termek.akcios_ar, termek.akcio_kezdete, termek.akcio_vege, termek.urlnev FROM termek
                 INNER JOIN kategoria ON termek.kategoria_id = kategoria.id
                 " . (!empty($feltetelek) ? "WHERE " . implode(' AND ', $feltetelek) : "") . " ORDER BY termek.nev DESC;";
             }
             else if($bodyAdatok['rendez'] == 'arCsokk'){
                 $szures_sql = "
                 SELECT termek.id, termek.nev, termek.egysegar, termek.kep, termek.leiras, termek.gyarto, termek.elerheto_darab, kategoria.nev AS kategoria_nev,
-                termek.akcios_ar, termek.akcio_kezdete, termek.akcio_vege FROM termek
+                termek.akcios_ar, termek.akcio_kezdete, termek.akcio_vege, termek.urlnev FROM termek
                 INNER JOIN kategoria ON termek.kategoria_id = kategoria.id
                 " . (!empty($feltetelek) ? "WHERE " . implode(' AND ', $feltetelek) : "") . " ORDER BY termek.egysegar ASC;";
             }
             else if($bodyAdatok['rendez'] == 'arNov'){
                 $szures_sql = "
                 SELECT termek.id, termek.nev, termek.egysegar, termek.kep, termek.leiras, termek.gyarto, termek.elerheto_darab, kategoria.nev AS kategoria_nev,
-                termek.akcios_ar, termek.akcio_kezdete, termek.akcio_vege FROM termek
+                termek.akcios_ar, termek.akcio_kezdete, termek.akcio_vege, termek.urlnev FROM termek
                 INNER JOIN kategoria ON termek.kategoria_id = kategoria.id
                 " . (!empty($feltetelek) ? "WHERE " . implode(' AND ', $feltetelek) : "") . " ORDER BY termek.egysegar DESC;";
             }
             else if($bodyAdatok['rendez'] == 'akcio'){
                 $szures_sql = "
                 SELECT termek.id, termek.nev, termek.egysegar, termek.kep, termek.leiras, termek.gyarto, termek.elerheto_darab, kategoria.nev AS kategoria_nev,
-                termek.akcios_ar, termek.akcio_kezdete, termek.akcio_vege FROM termek
+                termek.akcios_ar, termek.akcio_kezdete, termek.akcio_vege, termek.urlnev FROM termek
                 INNER JOIN kategoria ON termek.kategoria_id = kategoria.id
                 " . (!empty($feltetelek) ? "WHERE " . implode(' AND ', $feltetelek) : "") . " AND termek.akcios_ar IS NOT NULL AND termek.elerheto_darab > 0 AND termek.akcio_kezdete <= NOW() AND termek.akcio_vege >= NOW()  ORDER BY termek.egysegar DESC;";
             }
