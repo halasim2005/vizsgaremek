@@ -277,7 +277,7 @@ async function osszesTermekekLeker() {
 }
 
 function termekMegnyit(urlnev){
-    window.location.href = `termek_reszletek.php/${urlnev}`;
+    window.location.href = `termek_reszletek.php?termek=${urlnev}`;
 }
 
 window.addEventListener("load", kategoriakLeker);

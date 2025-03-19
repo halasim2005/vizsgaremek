@@ -1,6 +1,11 @@
 async function termek_reszletei() {
-    console.log(window.location.href)
-    /*let adatok = await fetch("./termekek_adatok.php/termek_url", {
+    let urlParams = new URLSearchParams(window.location.search);
+    let urlnev = urlParams.get('termek');
+
+    console.log(urlnev);
+    
+
+    let adatok = await fetch("./termekek_adatok.php/termek_url", {
         method : "POST",
         headers : {
             "Content-Type" : "application/json"
@@ -9,7 +14,10 @@ async function termek_reszletei() {
             "urlnev" : urlnev,
         })
     })
-    let termek_reszletei = await adatok.json();*/
+    let termek_reszletei = await adatok.json();
+
+    console.log(termek_reszletei);
+    
 
     for (let adat of termek_reszletei) {
         let raktaronSzoveg;
@@ -68,8 +76,6 @@ async function termek_reszletei() {
             </div>
         `
     }
-
-    
 }
 
 window.addEventListener("load", termek_reszletei);
