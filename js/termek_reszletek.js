@@ -1,10 +1,7 @@
 async function termek_reszletei() {
     let urlParams = new URLSearchParams(window.location.search);
     let urlnev = urlParams.get('termek');
-
-    console.log(urlnev);
     
-
     let adatok = await fetch("./termekek_adatok.php/termek_url", {
         method : "POST",
         headers : {
@@ -15,9 +12,6 @@ async function termek_reszletei() {
         })
     })
     let termek_reszletei = await adatok.json();
-
-    console.log(termek_reszletei);
-    
 
     for (let adat of termek_reszletei) {
         let raktaronSzoveg;
