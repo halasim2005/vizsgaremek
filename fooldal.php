@@ -19,15 +19,16 @@ header("Pragma: no-cache");
     <link rel="stylesheet" href="./style/style.css">
     <title>HaLáli Webshop</title>
 </head>
+<style>
 
+</style>
 <body>
     <?php include './nav.php';?>
     <div>
-        <!-- Carousel 
         <div id="carouselExample" class="carousel slide row" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img height="700px" src="./képek/carousel1.svg" class="d-block w-100" alt="Slide 1">
+                    <img height="700px" src="./képek/carousel_10000.jpg" class="d-block w-100" alt="Slide 1">
                 </div>
                 <div class="carousel-item">
                     <img height="700px" src="" class="d-block w-100" alt="Slide 2">
@@ -42,7 +43,7 @@ header("Pragma: no-cache");
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
             </button>
-        </div>-->
+        </div>
 
         <div class="row bemutatkozasDiv mr-2" id="rolunk">
             <div class="col-sm-12 col-lg-6 text-center">
