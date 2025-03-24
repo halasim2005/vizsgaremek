@@ -1,45 +1,16 @@
 <?php
-/*session_start();
+session_start();
 
-// Adatbázis kapcsolat betöltése
+//Adatbázis kapcsolat betöltése
 require_once './db.php';
 
-// Ha nincs aktív kosár vagy felhasználó, irányítsuk vissza a főoldalra
+/* Ha nincs aktív kosár vagy felhasználó, irányítsuk vissza a főoldalra
 if (!isset($_SESSION['kosar']) || empty($_SESSION['kosar']) || !isset($_SESSION['felhasznalo']['id'])) {
     header("Location: index.php");
     exit();
-}
+}*/
 
-// A rendelés adatainak mentése
-$felhasznalo_id = $_SESSION['felhasznalo']['id'];
-$kosar = $_SESSION['kosar'];
-$szallitas_mod = $_POST['szallitasi_mod'] ?? 'standard';  // Alapértelmezett érték: standard
-$fizetesi_mod = $_POST['fizetesi_mod'] ?? 'kartya';  // Alapértelmezett érték: bankkártyás
 
-// Végösszeg kiszámítása
-$osszesen = osszegzo($kosar);
-$szallitas_dij = szallitas_dij($kosar);
-$vegosszeg = $osszesen + $szallitas_dij;
-
-// Rendelés mentése az adatbázisba
-$query = "INSERT INTO rendelesek (felhasznalo_id, szallitas_mod, fizetesi_mod, osszeg, szallitas_dij, vegosszeg, statusz)
-          VALUES (?, ?, ?, ?, ?, ?, 'felfuggesztve')";  // A rendelés státusza kezdetben 'felfüggesztve'
-$stmt = $pdo->prepare($query);
-$stmt->execute([$felhasznalo_id, $szallitas_mod, $fizetesi_mod, $osszesen, $szallitas_dij, $vegosszeg]);
-
-// Rendelés tételek mentése
-$rendeles_id = $pdo->lastInsertId();  // Az előző lekérdezés utolsó generált ID-ja
-foreach ($kosar as $termek) {
-    $query = "INSERT INTO rendeles_tetelek (rendeles_id, termek_id, mennyiseg, ar)
-              VALUES (?, ?, ?, ?)";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$rendeles_id, $termek['termek_id'], $termek['tetelek_mennyiseg'], $termek['egysegar']]);
-}
-
-// Kosár ürítése és session törlése
-$_SESSION['kosar'] = [];
-
-// Vásárlás visszaigazolása*/
 ?>
 
 <!DOCTYPE html>
@@ -56,24 +27,29 @@ $_SESSION['kosar'] = [];
     <link rel="stylesheet" href="./style/style.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
+
 <body>
 
     <?php include './nav.php'; ?>
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-success">
-                    <h3>Rendelés sikeres!</h3>
-                    <p>Köszönjük, hogy vásárolt nálunk! A rendelése <strong>felfüggesztve</strong> státuszban van, és hamarosan feldolgozásra kerül.</p>
-                    <p>A rendelés összegzése:</p>
-                    
-                    <p>Ha bármilyen kérdése van, kérjük lépjen kapcsolatba velünk!</p>
-                    <a href="fooldal.php" class="btn btn-primary">Vissza a főoldalra</a>
-                </div>
-            </div>
-        </div>
+    <div class="container text-center my-5">
+        <h1>Sikeres megrendelés!</h1>
+        <p>Köszönjük, hogy minket választott! Rendeléséről visszaigazoló e-mailt küldtünk.</p>
+        <p class="countdown">Visszairányítjuk a főoldalra <span id="countdown">10</span> másodperc múlva...</p>
+        <a href="/" id="" class="btn btn-dark">Vissza a főoldalra</a>
     </div>
-
+    <script>
+        let timeLeft = 10;
+        function countdown() {
+            document.getElementById("countdown").innerText = timeLeft;
+            if (timeLeft === 0) {
+                window.location.href = "./fooldal.php";
+            } else {
+                timeLeft--;
+                setTimeout(countdown, 1000);
+            }
+        }
+        window.onload = countdown;
+    </script>
 </body>
 </html>

@@ -124,6 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $message = "Hiba történt az adatok frissítésekor.";
     }
+    require_once './kijelentkezes.php';
 }
 }
 ?>
