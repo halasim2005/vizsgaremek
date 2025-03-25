@@ -17,13 +17,15 @@ if (isset($_GET['statusz']) && !empty($_GET['statusz'])) {
 // Rendelések lekérdezése
 $query = "SELECT megrendeles.id as rendeles_id, megrendeles.statusz, megrendeles.vegosszeg, 
                 felhasznalo.fh_nev, felhasznalo.kezbesitesi_iranyitoszam, felhasznalo.kezbesitesi_telepules, 
-                felhasznalo.kezbesitesi_utca, felhasznalo.kezbesitesi_hazszam, felhasznalo.telefonszam, GROUP_CONCAT(termek.nev, ' (' , tetelek.tetelek_mennyiseg, ' db)') as termekek
+                felhasznalo.kezbesitesi_utca, felhasznalo.kezbesitesi_hazszam, felhasznalo.telefonszam, 
+                GROUP_CONCAT(termek.nev, ' (' , tetelek.tetelek_mennyiseg, ' db)') as termekek
           FROM megrendeles
-          JOIN felhasznalo ON megrendeles.fh_nev = felhasznalo.fh_nev
-          JOIN tetelek ON megrendeles.id = tetelek.rendeles_id
-          JOIN termek ON tetelek.termek_id = termek.id
+          LEFT JOIN felhasznalo ON megrendeles.fh_nev = felhasznalo.fh_nev
+          LEFT JOIN tetelek ON megrendeles.id = tetelek.rendeles_id
+          LEFT JOIN termek ON tetelek.termek_id = termek.id
           $statuszSzures
-          GROUP BY megrendeles.id";
+          GROUP BY megrendeles.id
+          ORDER BY megrendeles.id DESC"; // Hozzáadtam a rendezést;
 
 $stmt = $pdo->prepare($query);
 

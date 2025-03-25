@@ -36,14 +36,14 @@ if (!isset($_SESSION['kosar']) || empty($_SESSION['kosar']) || !isset($_SESSION[
         <h1>Sikeres megrendelés!</h1>
         <p>Köszönjük, hogy minket választott! Rendeléséről visszaigazoló e-mailt küldtünk.</p>
         <p class="countdown">Visszairányítjuk a főoldalra <span id="countdown">10</span> másodperc múlva...</p>
-        <a href="/" id="" class="btn btn-dark">Vissza a főoldalra</a>
+        <a href="./fooldal" id="" class="btn btn-dark">Vissza a főoldalra</a>
     </div>
     <script>
         let timeLeft = 10;
         function countdown() {
             document.getElementById("countdown").innerText = timeLeft;
             if (timeLeft === 0) {
-                window.location.href = "./fooldal.php";
+                window.location.href = "./fooldal";
             } else {
                 timeLeft--;
                 setTimeout(countdown, 1000);
