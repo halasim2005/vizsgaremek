@@ -54,10 +54,10 @@ function sendOrderConfirmation($toEmail, $orderDetails) {
 $orderDetails = [
     'id' =>  $ID_megrendeles,
     'total' => $vegosszeg,
-    'address' => $_SESSION['felhasznalo']['kezbesitesi_iranyitoszam'] . ", " . $_SESSION['felhasznalo']['kezbesitesi_telepules']. ", " . $_SESSION['felhasznalo']['kezbesitesi_utca']. ", " . $_SESSION['felhasznalo']['kezbesitesi_hazszam'],
-    'szallitas' => $szallitasi_mod,
-    'fizmod' => $fizetesi_mod
+    'address' => $_SESSION['felhasznalo']['kezbesitesi_iranyitoszam'] . ", " . $_SESSION['felhasznalo']['kezbesitesi_telepules']. ", " . $_SESSION['felhasznalo']['kezbesitesi_utca']. " " . $_SESSION['felhasznalo']['kezbesitesi_hazszam'] . ".",
+    'szallitas' => $szallitasi_mod == "standard" ? "Standard" : null,
+    'fizmod' => $fizetesi_mod  == "utanvet" ? "Utánvét" : "Bankkártya"
 ];
 
-echo sendOrderConfirmation($_SESSION['felhasznalo']['email'], $orderDetails);
+sendOrderConfirmation($_SESSION['felhasznalo']['email'], $orderDetails);
 ?>
