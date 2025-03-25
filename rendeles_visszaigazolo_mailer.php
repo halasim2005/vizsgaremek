@@ -31,7 +31,7 @@ function sendOrderConfirmation($toEmail, $orderDetails) {
         $mail->isHTML(true);
         $mail->Body = "
             <h2>Kedves Vásárlónk!</h2>
-             <p>Köszönjük megrendelését! Ez egy automatikus visszaigazóló e-mail. Az alábbiakban találja a rendelés adatait (további részletes információkat a weboldal rendeléseim részen talál):</p>
+            <p>Köszönjük megrendelését! Ez egy automatikus visszaigazóló e-mail. Az alábbiakban találja rendelése adatait (további részletes információkat a weboldal rendeléseim részen talál):</p>
             <p><strong>Rendelés azonosítója:</strong> {$orderDetails['id']}</p>
             <p><strong>Összeg:</strong> {$orderDetails['total']} Ft</p>
             <p><strong>Szállítási cím:</strong> {$orderDetails['address']}</p>
