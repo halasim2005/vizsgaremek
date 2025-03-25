@@ -9,7 +9,7 @@ if (!isset($_SESSION['kosar'])) {
 require_once './db.php';
 include './sql_fuggvenyek.php';
 
-$fh_nev = $_SESSION['felhasznalo']['fh_nev'];
+$fh_nev = isset($_SESSION['felhasznalo']) ? $_SESSION['felhasznalo']['fh_nev'] : null;
 $ID_megrendeles = 0;
 $kosar_szamlalo = 0;
 

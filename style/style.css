@@ -4,6 +4,7 @@ body {
     color: black;
     padding-top: 100px;
     font-family: 'Montserrat';
+    overflow-x: hidden;
 }
 
 #kosarIkon__2{

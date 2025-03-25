@@ -8,8 +8,8 @@ if (!isset($_SESSION['jogosultsag']) || $_SESSION['jogosultsag'] !== 'admin') {
 require_once '../db.php';
 require_once '../sql_fuggvenyek.php';
 
-$rendeles_id = 0;
-$tetel_adatok;
+
+$rendeles_id;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rendeles_id'])) {
     $rendeles_id = $_POST['rendeles_id'];
@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tetel_id'], $_POST['u
         $update_query = "UPDATE tetelek SET tetelek_mennyiseg = ? WHERE id = ?";
         $update_stmt = $pdo->prepare($update_query);
         $update_stmt->execute([$uj_mennyiseg, $tetel_id]);
+        header("Location: rendeles_szerkeszt.php?rendeles_id=$rendeles_id");
     } else {
         // Tétel törlése
         $delete_query = "DELETE FROM tetelek WHERE id = ?";
@@ -40,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tetel_id'], $_POST['u
         $delete_stmt->execute([$tetel_id]);
     }
 
-    header("Location: rendeles_szerkeszt.php?rendeles_id=$rendeles_id");
+    //header("Location: rendeles_szerkeszt.php?rendeles_id=$rendeles_id");
     exit();
 }
 ?>
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tetel_id'], $_POST['u
 <body>
 <div class="container mt-5">
     <h2>Rendelés Szerkesztése (ID: <?php echo htmlspecialchars($rendeles_id); ?>)</h2>
-    <?php foreach ($tetel_adatok as $tetel): ?>
+    <?php if(isset($tetel_adatok) && is_array($tetel_adatok)) foreach ($tetel_adatok as $tetel): ?>
         <form method="POST">
             <input type="hidden" name="tetel_id" value="<?php echo $tetel['tetel_id']; ?>">
             <div class="mb-3">
