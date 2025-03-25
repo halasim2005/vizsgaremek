@@ -150,6 +150,7 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </div>
 </div>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     var confirmDeleteModal = document.getElementById('confirmDeleteModal');
@@ -160,7 +161,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
