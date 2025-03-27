@@ -30,9 +30,7 @@ header("Pragma: no-cache");
                 <label><input type="radio" name="kalkulatorRadios" value="ellenallas" id="ellenallasRadio"> Ellenállás </label>
             </div>
         </div>
-    </div>
-
-    <div class="container form-container" id="feszesesDiv">
+        <div id="feszesesDiv">
         <h2 class="text-center">Feszültségesés kalkulátor</h2>
         <form action="">
             <div class="mb-3">
@@ -77,8 +75,7 @@ header("Pragma: no-cache");
             </div>
         </form>
     </div>
-
-    <div class="container form-container" id="ellenDiv">
+    <div id="ellenDiv">
         <h2 class="text-center">Ellenállás kalkulátor</h2>
         <form action="">
             <div class="mb-3">
@@ -99,7 +96,13 @@ header("Pragma: no-cache");
                 </div>
             </div>
         </form>
+        <br><br><br><br>
     </div>
+    </div>
+
+    
+
+    
 
     <div class="container form-container" id="arDiv">
         <h2 class="text-center">Ár kalkulátor</h2>
