@@ -28,13 +28,16 @@ header("Pragma: no-cache");
         <div id="carouselExample" class="carousel slide row" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img height="700px" src="./képek/carousel_10000.jpg" class="d-block w-100" alt="Slide 1">
+                    <img src="./képek/slider/elsoKep.webp" class="d-block w-100" alt="Slide 1">
                 </div>
                 <div class="carousel-item">
-                    <img height="700px" src="" class="d-block w-100" alt="Slide 2">
+                    <img src="./képek/slider/masodikKep.webp" class="d-block w-100" alt="Slide 2">
                 </div>
                 <div class="carousel-item">
-                    <img height="700px" src="./képek/futar.png" class="d-block w-100" alt="Slide 3">
+                    <img src="./képek/slider/harmadikKep.webp" class="d-block w-100" alt="Slide 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="./képek/slider/negyedikKep.webp" class="d-block w-100" alt="Slide 3">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
