@@ -25,23 +25,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rendeles_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tetel_id'], $_POST['uj_mennyiseg'], $_POST['modositBtn'])) {
+    $rendeles_id = $_POST['rendeles_id'];
     $tetel_id = $_POST['tetel_id'];
     $uj_mennyiseg = $_POST['uj_mennyiseg'];
+    $megrendel_id_query = "SELECT megrendeles.id FROM megrendeles, tetelek WHERE tetelek.rendeles_id = megrendeles.id AND tetelek.id = ?";
+    $megrendel_stmt = $pdo->prepare($megrendel_id_query);
+    $megrendel_stmt->execute([$tetel_id]);
 
     if ($uj_mennyiseg > 0) {
         // Mennyiség frissítése
         $update_query = "UPDATE tetelek SET tetelek_mennyiseg = ? WHERE id = ?";
         $update_stmt = $pdo->prepare($update_query);
         $update_stmt->execute([$uj_mennyiseg, $tetel_id]);
-        header("Location: rendeles_szerkeszt.php?rendeles_id=$rendeles_id");
     } else {
         // Tétel törlése
         $delete_query = "DELETE FROM tetelek WHERE id = ?";
         $delete_stmt = $pdo->prepare($delete_query);
         $delete_stmt->execute([$tetel_id]);
     }
+    
+    /*$update_total_query = "UPDATE megrendeles SET vegosszeg = 
+    (SELECT SUM(tetelek_mennyiseg * termek.egysegar) 
+     FROM tetelek JOIN termek ON tetelek.termek_id = termek.id 
+     WHERE tetelek.rendeles_id = ?) 
+    WHERE id = ?";
+    $update_total_stmt = $pdo->prepare($update_total_query);
+    $update_total_stmt->execute([$rendeles_id, $megrendel_stmt]);
+    
+    
+    $update_total_query2 = "UPDATE megrendeles SET vegosszeg = 
+    (SELECT SUM(tetelek_mennyiseg * termek.egysegar) 
+     FROM tetelek JOIN termek ON tetelek.termek_id = termek.id 
+     WHERE tetelek.rendeles_id = ?) 
+    WHERE id = ?";
+    $update_total_stmt2 = $pdo->prepare($update_total_query2);
+    $update_total_stmt2->execute([$rendeles_id, $rendeles_id]);*/
 
-    //header("Location: rendeles_szerkeszt.php?rendeles_id=$rendeles_id");
+    header("Location: orders.php");
     exit();
 }
 ?>

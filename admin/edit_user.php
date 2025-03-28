@@ -5,7 +5,7 @@ if (!isset($_SESSION['jogosultsag']) || $_SESSION['jogosultsag'] !== 'admin') {
     exit();
 }
 
-include '../db.php'; // Az adatbázis-kapcsolatot tartalmazó fájl
+include '../db.php';
 
 if (!isset($_GET['user']) || empty($_GET['user'])) {
     echo "Nincs kiválasztott felhasználó.";

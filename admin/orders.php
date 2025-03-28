@@ -25,7 +25,7 @@ $query = "SELECT megrendeles.id as rendeles_id, megrendeles.statusz, megrendeles
           LEFT JOIN termek ON tetelek.termek_id = termek.id
           $statuszSzures
           GROUP BY megrendeles.id
-          ORDER BY megrendeles.id DESC"; // Hozzáadtam a rendezést;
+          ORDER BY megrendeles.id DESC";
 
 $stmt = $pdo->prepare($query);
 

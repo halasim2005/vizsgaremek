@@ -103,11 +103,11 @@ if ($conn->connect_error) {
 <script>
 document.querySelectorAll('.delete-product').forEach(btn => {
     btn.addEventListener('click', function(event) {
-        event.preventDefault(); // Megakadályozza az alapértelmezett űrlapbeküldést
-        const productId = this.previousElementSibling.value; // A termék ID-jének lekérése
-        document.getElementById('modalProductId').value = productId; // Átadja a modálnak
+        event.preventDefault();
+        const productId = this.previousElementSibling.value;
+        document.getElementById('modalProductId').value = productId;
         const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
-        modal.show(); // Megjeleníti a modált
+        modal.show();
     });
 });
 

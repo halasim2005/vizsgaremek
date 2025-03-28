@@ -89,10 +89,10 @@ header("Pragma: no-cache");
         <div class="row mt-5 text-center">
             <h4>Kövessen minket</h4>
             <div class="col-md-12">
-                <a href="facebook.com" target="_blank" class="me-3 kovessIkon"><i class="fab fa-facebook fa-2x"></i></a>
-                <a href="instagram.com" target="_blank" class="me-3 kovessIkon"><i class="fab fa-instagram fa-2x"></i></a>
-                <a href="twitter.com" target="_blank" class="me-3 kovessIkon"><i class="fab fa-twitter fa-2x"></i></a>
-                <a href="linkedin.com" target="_blank"><i class="fab fa-linkedin fa-2x kovessIkon"></i></a>
+                <a href="https://facebook.com" target="_blank" class="me-3 kovessIkon"><i class="fab fa-facebook fa-2x"></i></a>
+                <a href="https://instagram.com" target="_blank" class="me-3 kovessIkon"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="https://twitter.com" target="_blank" class="me-3 kovessIkon"><i class="fab fa-twitter fa-2x"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin fa-2x kovessIkon"></i></a>
             </div>
         </div>
     </div>
