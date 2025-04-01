@@ -4,6 +4,10 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Pragma: no-cache");
 
 include './db.php';
+$query = "UPDATE termek SET akcios_ar = NULL, akcio_kezdete = NULL, akcio_vege = NULL 
+          WHERE (akcio_vege IS NOT NULL AND akcio_vege < NOW()) 
+          OR (akcio_kezdete IS NULL AND akcio_vege IS NULL)";
+$pdo->query($query);
 ?>
 
 <!DOCTYPE html>

@@ -6,7 +6,10 @@ if (!isset($_SESSION['jogosultsag']) || $_SESSION['jogosultsag'] !== 'admin') {
 }
 
 require_once '../db.php';
-
+$query = "UPDATE termek SET akcios_ar = NULL, akcio_kezdete = NULL, akcio_vege = NULL 
+          WHERE (akcio_vege IS NOT NULL AND akcio_vege < NOW()) 
+          OR (akcio_kezdete IS NULL AND akcio_vege IS NULL)";
+$pdo->query($query);
 // Termékek lekérdezése
 $query = $pdo->query("SELECT id, nev, egysegar, akcios_ar, akcio_kezdete, akcio_vege FROM termek");
 $termekek = $query->fetchAll(PDO::FETCH_ASSOC);
