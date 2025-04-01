@@ -40,38 +40,22 @@ include './admin_navbar.php';
     <h2>Üdvözlünk, <?php echo htmlspecialchars($_SESSION['felhasznalo']['fh_nev']); ?>!</h2>
     <p>Használd az admin navbar-t a funkciók eléréséhez.</p>
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <div class="alert alert-info text-center">
-            <strong>15</strong> aktív felhasználó
+    <div class="row">
+        <div class="col-md-4">
+            <div class="alert alert-info text-center">
+                <strong>15</strong> aktív felhasználó
+            </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="alert alert-success text-center">
-            <strong>27</strong> függő rendelés
+        <div class="col-md-4">
+            <div class="alert alert-success text-center">
+                <strong>27</strong> függő rendelés
+            </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="alert alert-warning text-center">
-            <strong>8</strong> alacsony készletű termék
+        <div class="col-md-4">
+            <div class="alert alert-warning text-center">
+                <strong>8</strong> alacsony készletű termék
+            </div>
         </div>
-    </div>
-</div>
-
-<!-- Összesített bevétel -->
-<div class="row">
-    <div class="col-md-6">
-        <div class="alert alert-primary text-center">
-            <strong>Bevétel (hó): </strong> 450,000 Ft
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="alert alert-secondary text-center">
-            <strong>Aktuális akciók: </strong> 3
-        </div>
-    </div>
-</div>
-
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
