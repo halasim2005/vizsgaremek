@@ -5,10 +5,7 @@ if (!isset($_SESSION['jogosultsag']) || $_SESSION['jogosultsag'] !== 'admin') {
     exit();
 }
 
-include '../db.php'; // Az adatbázis-kapcsolatot tartalmazó fájl
-
-
-// Felhasználói adatok és költés lekérdezése
+include '../db.php';
 $userQuery = $pdo->prepare("
     SELECT 
         f.fh_nev, 

@@ -13,7 +13,6 @@ $rendeles_id;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rendeles_id'])) {
     $rendeles_id = $_POST['rendeles_id'];
 
-    // Rendelés tételeinek lekérdezése
     $query = "SELECT tetelek.id as tetel_id, termek.nev, tetelek.tetelek_mennyiseg, termek.egysegar
               FROM tetelek
               JOIN termek ON tetelek.termek_id = termek.id
@@ -23,25 +22,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rendeles_id'])) {
     $tetel_adatok = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-//Fizetési mód módosítása
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fizetesi_mod'], $_POST['fizmodBtn'])){
     $fizetesi_mod = isset($_POST['fizetesi_mod']) ? $_POST['fizetesi_mod'] : null;
     $rendeles_id = $_POST['rendeles_id'];
 
-    // Ha van fizetési mód, akkor frissítjük azt is
     if ($fizetesi_mod) {
         $update_total_query = "UPDATE megrendeles SET fizetesi_mod = ? WHERE id = ?";
         $update_total_stmt = $pdo->prepare($update_total_query);
         $update_total_stmt->execute([$fizetesi_mod, $rendeles_id]);
     }
 }
-// Ha módosítanak a rendelés tételein
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tetel_id'], $_POST['uj_mennyiseg'], $_POST['modositBtn'])) {
     $rendeles_id = $_POST['rendeles_id'];
     $tetel_id = $_POST['tetel_id'];
     $uj_mennyiseg = $_POST['uj_mennyiseg'];
 
-    // Mennyiség frissítése vagy tétel törlése
     if ($uj_mennyiseg > 0) {
         $update_query = "UPDATE tetelek SET tetelek_mennyiseg = ? WHERE id = ?";
         $update_stmt = $pdo->prepare($update_query);
@@ -52,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tetel_id'], $_POST['u
         $delete_stmt->execute([$tetel_id]);
     }
 
-    // Új végösszeg kiszámítása
     $osszeg_query = "SELECT SUM(tetelek.tetelek_mennyiseg * COALESCE(termek.akcios_ar, termek.egysegar)) AS vegosszeg
                      FROM tetelek
                      JOIN termek ON tetelek.termek_id = termek.id
@@ -68,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tetel_id'], $_POST['u
     $update_total_query = "UPDATE megrendeles SET vegosszeg = ?, szallitas = ?, osszeg = vegosszeg-szallitas, szallitasi_mod='standard' WHERE id = ?";
     $update_total_stmt = $pdo->prepare($update_total_query);
     $update_total_stmt->execute([$vegosszeg, $szallitasi_dij, $rendeles_id]);
-    
+
     header("Location: orders.php");
     exit();
 }
@@ -97,7 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tetel_id'], $_POST['u
         </form>
     <?php endforeach; ?>
 
-    <!-- Fizetési mód kiválasztása -->
     <form method="POST" class="mt-4">
         <input type="hidden" name="rendeles_id" value="<?php echo $rendeles_id; ?>">
         <div class="mb-3">

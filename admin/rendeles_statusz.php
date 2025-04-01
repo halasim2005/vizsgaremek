@@ -11,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rendeles_id'], $_POST
     $rendeles_id = $_POST['rendeles_id'];
     $uj_statusz = $_POST['statusz'];
 
-    // Státusz módosítása
     $update_query = "UPDATE megrendeles SET statusz = ? WHERE id = ?";
     $stmt = $pdo->prepare($update_query);
     $stmt->execute([$uj_statusz, $rendeles_id]);
