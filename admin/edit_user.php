@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="mb-3 col-md-6">
                 <label for="telefonszam" class="form-label">Telefonszám</label>
-                <input type="text" name="telefonszam" id="telefonszam" class="form-control" value="<?php echo htmlspecialchars($user['telefonszam']); ?>">
+                <input type="text" name="telefonszam" placeholder="+36 30 123 4567" id="telefonszam" class="form-control" value="<?php echo htmlspecialchars($user['telefonszam']); ?>">
             </div>
         </div>
 
@@ -211,5 +211,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/inputmask.min.js"></script>
+<script src="../js/inputmask.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const telefonszamInput = document.getElementById("telefonszam");
+        Inputmask({ mask: "+36 99 999 9999" }).mask(telefonszamInput);
+    });
+</script>
 </body>
 </html>
