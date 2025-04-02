@@ -39,7 +39,7 @@ header("Pragma: no-cache");
                     <li><strong>Cégalapítók:</strong> Halasi Martin, Lálity Dominik</li>
                     <li><strong>Cím:</strong> 8200, Veszprém, Szabadság tér 6.</li>
                     <li><strong>Telefon:</strong> +36 30 123 4567</li>
-                    <li><strong>E-mail:</strong> info@halali.hu</li>
+                    <li><strong>E-mail:</strong> halalikft@gmail.com</li>
                     <li><strong>Nyitva tartás:</strong> H-P: 9:00-17:00</li>
                 </ul>
             </div>
