@@ -157,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <!-- Jelszó módosító űrlap -->
         <div class="card mb-4 password-change">
-            <div class="card-header text-white bg-primary">Jelszó módosítása</div>
+            <div class="card-header text-white profilBG">Jelszó módosítása</div>
             <div class="card-body">
                 <form method="POST">
                     <div class="mb-3">
@@ -172,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label for="confirm_password" class="form-label">Új jelszó megerősítése</label>
                         <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
                     </div>
-                    <button type="submit" name="password_change" class="btn btn-success">Jelszó módosítása</button>
+                    <button type="submit" name="password_change" class="btn profilMentGomb text-center mx-auto">Jelszó módosítása</button>
                 </form>
             </div>
         </div>

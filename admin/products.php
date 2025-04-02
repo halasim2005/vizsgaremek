@@ -31,7 +31,7 @@ if ($conn->connect_error) {
         <a href="add_product.php" class="btn btn-success termek_add_button">Új Termék Hozzáadása</a>
     </div>
     <table class="table table-bordered">
-        <thead>
+        <thead class="thead-dark">
             <tr>
                 <th>ID</th>
                 <th>Név</th>
@@ -53,21 +53,21 @@ if ($conn->connect_error) {
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>
-                        <td>{$row['id']}</td>
-                        <td>{$row['nev']}</td>
-                        <td>{$row['egysegar']} Ft</td>
-                        <td>{$row['kategoria_nev']}</td>
-                        <td>{$row['elerheto_darab']}</td>
-                        <td>{$row['gyarto']}</td>
-                        <td>{$row['tipus']}</td>
-                        <td>
-                            <a href='edit_product.php?id={$row['id']}' class='btn btn-primary btn-sm'>Szerkesztés</a>
-                            <form action='delete_product.php' method='POST' style='display:inline;'>
-                            <input type='hidden' name='product_id' value='{$row['id']}'>
-                            <button type='submit' class='btn btn-danger btn-sm delete-product'>Törlés</button>
-                            </form>
-                        </td>
-                    </tr>";
+                            <td>{$row['id']}</td>
+                            <td>{$row['nev']}</td>
+                            <td class='w-auto'>{$row['egysegar']} Ft</td>
+                            <td>{$row['kategoria_nev']}</td>
+                            <td>{$row['elerheto_darab']}</td>
+                            <td>{$row['gyarto']}</td>
+                            <td>{$row['tipus']}</td>
+                            <td>
+                                <a href='edit_product.php?id={$row['id']}' class='btn btn-primary btn-sm w-100'>Szerkesztés</a>
+                                <form action='delete_product.php' method='POST' style='display:inline;'>
+                                    <input type='hidden' name='product_id' value='{$row['id']}'>
+                                    <button type='submit' class='btn btn-danger btn-sm delete-product w-100'>Törlés</button>
+                                </form>
+                            </td>
+                        </tr>";
                 }
             } else {
                 echo "<tr><td colspan='8' class='text-center'>Nincsenek termékek</td></tr>";

@@ -112,77 +112,115 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <?php include './admin_navbar.php';?>
 <div class="container mt-5">
-    <h2>Felhasználó szerkesztése: <?php echo htmlspecialchars($user['fh_nev']); ?></h2>
     <form method="POST">
-
-        <div class="mb-3"><label>Jelszó</label>
-            <input type="password" name="jelszo" class="form-control">
+    <h2>Felhasználó szerkesztése: <?php echo htmlspecialchars($user['fh_nev']); ?>
+        <button type="submit" class="btn btn-success">Mentés</button>
+        <a href="users.php" class="btn btn-danger">Vissza</a>
+    </h2><hr>
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Jelszó</label>
+                <input type="password" name="jelszo" class="form-control">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="jogosultsag" class="form-label">Jogosultság</label>
+                <select name="jogosultsag" id="jogosultsag" class="form-control">
+                    <option value="user" <?php echo $user['jogosultsag'] === 'user' ? 'selected' : ''; ?>>Felhasználó</option>
+                    <option value="admin" <?php echo $user['jogosultsag'] === 'admin' ? 'selected' : ''; ?>>Adminisztrátor</option>
+                </select>
+            </div>
         </div>
-        <div class="mb-3"><label>Vezetéknév</label>
-            <input type="text" name="vezeteknev" class="form-control" value="<?php echo htmlspecialchars($user['vezeteknev']); ?>" required>
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Vezetéknév</label>
+                <input type="text" name="vezeteknev" class="form-control" value="<?php echo htmlspecialchars($user['vezeteknev']); ?>">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Keresztnév</label>
+                <input type="text" name="keresztnev" class="form-control" value="<?php echo htmlspecialchars($user['keresztnev']); ?>">
+            </div>
         </div>
-        <div class="mb-3"><label>Keresztnév</label>
-            <input type="text" name="keresztnev" class="form-control" value="<?php echo htmlspecialchars($user['keresztnev']); ?>" required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email" class="form-control" value="<?php echo htmlspecialchars($user['email']); ?>" required>
-        </div>
-        <div class="mb-3">
-            <label for="telefonszam" class="form-label">Telefonszám</label>
-            <input type="text" name="telefonszam" id="telefonszam" class="form-control" value="<?php echo htmlspecialchars($user['telefonszam']); ?>" required>
-        </div>
-        <div class="mb-3">
-            <label for="jogosultsag" class="form-label">Jogosultság</label>
-            <select name="jogosultsag" id="jogosultsag" class="form-control">
-                <option value="user" <?php echo $user['jogosultsag'] === 'user' ? 'selected' : ''; ?>>Felhasználó</option>
-                <option value="admin" <?php echo $user['jogosultsag'] === 'admin' ? 'selected' : ''; ?>>Adminisztrátor</option>
-            </select>
-        </div>
-
-
-        <h4>Számlázási adatok</h4>
-        <div class="mb-3"><label>Irányítószám</label>
-            <input type="text" name="szamlazasi_iranyitoszam" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_iranyitoszam']); ?>" required>
-        </div>
-        <div class="mb-3"><label>Település</label>
-            <input type="text" name="szamlazasi_telepules" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_telepules']); ?>" required>
-        </div>
-        <div class="mb-3"><label>Utca</label>
-            <input type="text" name="szamlazasi_utca" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_utca']); ?>" required>
-        </div>
-        <div class="mb-3"><label>Házszám</label>
-            <input type="text" name="szamlazasi_hazszam" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_hazszam']); ?>" required>
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-control" value="<?php echo htmlspecialchars($user['email']); ?>">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="telefonszam" class="form-label">Telefonszám</label>
+                <input type="text" name="telefonszam" placeholder="+36 30 123 4567" id="telefonszam" class="form-control" value="<?php echo htmlspecialchars($user['telefonszam']); ?>">
+            </div>
         </div>
 
+
+        <hr><h4>Számlázási adatok</h4>
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Irányítószám</label>
+                <input type="text" name="szamlazasi_iranyitoszam" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_iranyitoszam']); ?>">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Település</label>
+                <input type="text" name="szamlazasi_telepules" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_telepules']); ?>">
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Utca</label>
+                <input type="text" name="szamlazasi_utca" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_utca']); ?>">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Házszám</label>
+                <input type="text" name="szamlazasi_hazszam" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_hazszam']); ?>">
+            </div>
+        </div>
         
-        <h4>Kézbesítési adatok</h4>
-        <div class="mb-3"><label>Irányítószám</label>
-        <input type="text" name="kezbesitesi_iranyitoszam" class="form-control" value="<?php echo htmlspecialchars($user['kezbesitesi_iranyitoszam']); ?>" required>
+        <hr><h4>Kézbesítési adatok</h4>
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Irányítószám</label>
+                <input type="text" name="kezbesitesi_iranyitoszam" class="form-control" value="<?php echo htmlspecialchars($user['kezbesitesi_iranyitoszam']); ?>">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Település</label>
+                <input type="text" name="kezbesitesi_telepules" class="form-control" value="<?php echo htmlspecialchars($user['kezbesitesi_telepules']); ?>">
+            </div>
         </div>
-        <div class="mb-3"><label>Település</label>
-            <input type="text" name="kezbesitesi_telepules" class="form-control" value="<?php echo htmlspecialchars($user['kezbesitesi_telepules']); ?>" required>
-        </div>
-        <div class="mb-3"><label>Utca</label>
-            <input type="text" name="kezbesitesi_utca" class="form-control" value="<?php echo htmlspecialchars($user['kezbesitesi_utca']); ?>" required>
-        </div>
-        <div class="mb-3"><label>Házszám</label>
-            <input type="text" name="kezbesitesi_hazszam" class="form-control" value="<?php echo htmlspecialchars($user['kezbesitesi_hazszam']); ?>" required>
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Utca</label>
+                <input type="text" name="kezbesitesi_utca" class="form-control" value="<?php echo htmlspecialchars($user['kezbesitesi_utca']); ?>">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Házszám</label>
+                <input type="text" name="kezbesitesi_hazszam" class="form-control" value="<?php echo htmlspecialchars($user['kezbesitesi_hazszam']); ?>">
+            </div>
         </div>
 
-        <h4>Cég adatok</h4>
-        <div class="mb-3"><label>Cégnév</label>
-            <input type="text" name="szamlazasi_cegnev" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_cegnev']); ?>">
+        <hr><h4>Cég adatok</h4>
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Cégnév</label>
+                <input type="text" name="szamlazasi_cegnev" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_cegnev']); ?>">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Adószám</label>
+                <input type="text" name="szamlazasi_adoszam" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_adoszam']); ?>">
+            </div>
         </div>
-        <div class="mb-3"><label>Adószám</label>
-            <input type="text" name="szamlazasi_adoszam" class="form-control" value="<?php echo htmlspecialchars($user['szamlazasi_adoszam']); ?>">
-        </div>
-
+        <hr>
         <button type="submit" class="btn btn-success">Mentés</button>
         <a href="users.php" class="btn btn-danger">Vissza</a>
     </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/inputmask.min.js"></script>
+<script src="../js/inputmask.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const telefonszamInput = document.getElementById("telefonszam");
+        Inputmask({ mask: "+36 99 999 9999" }).mask(telefonszamInput);
+    });
+</script>
 </body>
 </html>
