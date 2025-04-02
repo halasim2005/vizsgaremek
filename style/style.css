@@ -643,3 +643,10 @@ input[type="radio"] {
 #rangeKetto{
     font-size: small;
 }
+
+@media (max-width: 800px){
+    #footerkep{
+        display: none;
+    }
+}
+
