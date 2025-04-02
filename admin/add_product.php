@@ -146,7 +146,7 @@ include './admin_navbar.php';
                         </div>
                         <div class="form-group">
                             <label for="manufacturer">Gyártó:</label>
-                            <input type="text" class="form-control" name="manufacturer" id="manufacturer" required>
+                            <input type="text" class="form-control" name="manufacturer" id="manufacturer">
                             <select class="form-control" name="manufacturer" id="manufacturer" required>
                                 <?php
                                 // Gyártók lekérése
