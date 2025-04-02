@@ -2,7 +2,7 @@
     <table class="footerTable">
         <tr>
             <td class="footerTableTd">
-                <img width="40%" src="./képek/HaLálip.png" alt="HaLáli Kft. Halasi Martin & Lálity Dominik logo">
+                <img width="40%" src="./képek/HaLálip.png" id="footerkep" alt="HaLáli Kft. Halasi Martin & Lálity Dominik logo">
             </td>
             <td class="footerTableTd">
                 Alkotók: Halasi Martin és Lálity Dominik<br><br>
