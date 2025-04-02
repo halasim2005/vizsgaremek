@@ -112,8 +112,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <?php include './admin_navbar.php';?>
 <div class="container mt-5">
-    <h2>Felhasználó szerkesztése: <?php echo htmlspecialchars($user['fh_nev']); ?></h2><hr>
     <form method="POST">
+    <h2>Felhasználó szerkesztése: <?php echo htmlspecialchars($user['fh_nev']); ?>
+        <button type="submit" class="btn btn-success">Mentés</button>
+        <a href="users.php" class="btn btn-danger">Vissza</a>
+    </h2><hr>
         <div class="row">
             <div class="mb-3 col-md-6">
                 <label class="form-label">Jelszó</label>
