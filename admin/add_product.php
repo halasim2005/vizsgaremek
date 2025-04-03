@@ -22,13 +22,21 @@ if (isset($_POST['add_category'])) {
 
 // Termék hozzáadása
 if (isset($_POST['add_product'])) {
+    $gyarto = "";
     $product_name = $_POST['product_name'];
     $product_description = $_POST['product_description'];
     $product_price = $_POST['product_price'];
     $category_id = $_POST['category_id'];
     $available_quantity = $_POST['available_quantity'];
     $manufacturer = $_POST['manufacturer'];
+    $manufacturer_uj = $_POST['manufacturer_uj'];
     $type = $_POST['type'];
+
+    if($manufacturer == "..."){
+        $gyarto = $manufacturer_uj;
+    }else if($manufacturer_uj == ""){
+        $gyarto = $manufacturer;
+    }
 
     // Kép feltöltés
     $target_dir = "képek/";
@@ -63,7 +71,7 @@ if (isset($_POST['add_product'])) {
                 'egysegar' => $product_price,
                 'kategoria_id' => $category_id,
                 'elerheto_darab' => $available_quantity,
-                'gyarto' => $manufacturer,
+                'gyarto' => $gyarto,
                 'tipus' => $type,
                 'kep' => $image_path
             ]);
@@ -146,8 +154,9 @@ include './admin_navbar.php';
                         </div>
                         <div class="form-group">
                             <label for="manufacturer">Gyártó:</label>
-                            <input type="text" class="form-control" name="manufacturer" id="manufacturer">
+                            <input type="text" class="form-control mb-2" name="manufacturer_uj" id="manufacturer_uj">
                             <select class="form-control" name="manufacturer" id="manufacturer" required>
+                                <option>...</option>
                                 <?php
                                 // Gyártók lekérése
                                 $stmt = $pdo->query("SELECT DISTINCT gyarto FROM termek");
