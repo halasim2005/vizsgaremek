@@ -72,6 +72,7 @@ async function arakLeker() {
 }
 
 async function termekekLeker() {
+    document.getElementById("hibaKepDiv").style.display = "none";
     try {
         let kategoria = document.getElementById("kategoriaSzures").value;
         let gyarto = document.getElementById("gyartoSzures").value;
@@ -105,11 +106,13 @@ async function termekekLeker() {
 
         if (termekek.length === 0) {
             termekekTartalom.innerHTML = "Nincs termék a szűrőfeltételeknek megfelelően!";
+            document.getElementById("hibaKepDiv").style.display = "block";
         } else {
             for (let termek of termekek) {
                 // Ellenőrizzük, hogy a termék nem tartalmaz-e hibás adatokat (NaN, undefined)
                 if (isNaN(termek.egysegar) || termek.egysegar === undefined || termek.nev === undefined) {
                     document.getElementById("valaszSzoveg").innerHTML = "Nincs termék a szűrőfeltételeknek megfelelően!";
+                    document.getElementById("hibaKepDiv").style.display = "block";
                     continue; // Ha hibás adat, akkor nem jelenítjük meg
 
                 }
@@ -179,6 +182,7 @@ async function termekekLeker() {
 }
 
 async function osszesTermekekLeker() {
+    document.getElementById("hibaKepDiv").style.display = "none";
     try {
         let bodyAdatok = {
             'kategoria': 'osszes',
@@ -205,11 +209,13 @@ async function osszesTermekekLeker() {
         
         if (termekek.length === 0) {
             termekekTartalom.innerHTML = "Nincs termék a szűrőfeltételeknek megfelelően!";
+            document.getElementById("hibaKepDiv").style.display = "block";
         } else {
             for (let termek of termekek) {
                 // Ellenőrizzük, hogy a termék nem tartalmaz-e hibás adatokat (NaN, undefined)
                 if (isNaN(termek.egysegar) || termek.egysegar === undefined || termek.nev === undefined) {
                     document.getElementById("valaszSzoveg").innerHTML = "Nincs termék a szűrőfeltételeknek megfelelően!";
+                    document.getElementById("hibaKepDiv").style.display = "block";
                     continue; // Ha hibás adat, akkor nem jelenítjük meg
 
                 }

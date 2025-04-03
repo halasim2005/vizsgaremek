@@ -78,7 +78,9 @@ $pdo->query($query);
         </div>
 
         <div id="valaszSzoveg" class="text-center mt-3"></div>
-
+        <div class="text-center" id="hibaKepDiv">
+            <img src="./képek/HaLálip.png" style="margin-bottom:55px" width="300" alt="HaLáli Kft. logo">
+        </div>
     </div>
 
     <?php
