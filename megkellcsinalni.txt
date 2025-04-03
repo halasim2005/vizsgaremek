@@ -2,3 +2,5 @@ termekek feltoltese
 kapcsolat ugyfelszolgalat form megcsinal emailesen
 akciok kiiratása
 design (dark) ???
+doksi
+teszt cypress vagy mi
