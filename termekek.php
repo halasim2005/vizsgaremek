@@ -72,6 +72,10 @@ $pdo->query($query);
 
         </div>
 
+        <div id="talalatokSzama">
+
+        </div>
+
         <!-- Termékek listája -->
         <div id="termekekTartalom" class="row mt-4">
             <!-- Ide töltődnek be dinamikusan a termékek -->
