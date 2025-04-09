@@ -68,9 +68,9 @@ header("Pragma: no-cache");
                     <button type="submit" class="btn kalk-button w-100 kapcsolatBtn">Küldés</button>
                 </form>
                 <?php if (isset($_SESSION['flash_success'])): ?>
-                    <div class="alert alert-success"><?= $_SESSION['flash_success']; unset($_SESSION['flash_success']); ?></div>
+                    <div class="alert alert-success my-2"><?= $_SESSION['flash_success']; unset($_SESSION['flash_success']); ?></div>
                 <?php elseif (isset($_SESSION['flash_error'])): ?>
-                    <div class="alert alert-danger"><?= $_SESSION['flash_error']; unset($_SESSION['flash_error']); ?></div>
+                    <div class="alert alert-danger my-2"><?= $_SESSION['flash_error']; unset($_SESSION['flash_error']); ?></div>
                 <?php endif; ?>
             </div>
         </div>
