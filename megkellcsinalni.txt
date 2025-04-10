@@ -14,25 +14,22 @@ teszt cypress vagy mi
 7
 8
 9
-10
+10, 12, 14, 15: a felhasznalonak regisztracio utan ki kell toltenie a profiljat, csak ekkor tud rendelest leadni, mivel ott tudja kitolteni a kezbesitesi illetve szamlazasi adatait. a felhasznalo csak bejelentkezes utan tud vasarolni. szerintem eleg egyertelmu mindegyik "uzenet".
 11 kesz
-12
-13
-14
-15
+13 INPUT MEZOT MEG KELL CSINALNI. a REST verziot nem tudjuk mar, mivel az egesz kosar erre epul, es ahhoz az egesz mindenseget at kellene irni, ami a kosarhoz kotheto, ez rengeteg idot venne igenybe.
 16 kesz (mivel az adatbazisban int-kent voltak felveve ezert alapbol 0 erteket kaptak, de mar at lett irva varchar-ra es igy ugyanugy ures mezo lesz 0 ertek helyett.)
 17 igen, azert, hogy a sessionben is MEGFELELOEN frissuljon minden adat, ujra be kell jelentkezni, errol kap a felhasznalo tajekoztato uzenetet, mielott elmenti a profiljan az adatokat.
-18
+18 
 19 kesz
 20 ???? ezek csak pelda adatok, hogy ne legyen ures az oldal.
 21 kesz megoldva
 22 kesz
 23 kesz atirva, ilyen egyebkent nem tortenik, csak amit feltoltottunk adatbazis volt ilyen.
-24
-25
+24 kesz
+25 a mentesrol az a visszajelzes, hogy LATHATOAN ujrafrissules utan is megmarad az elotte beallitott majd a mentes gombra kattintas utan is az ertek, torlesnel pedig megerositi, hogy ki akarja torolni, illetve latvanyosan eltunik, amit kitorolt, szerintem ezek elegek visszajelzesnek.
 26 kesz
 27 nem tudok alternativ megoldast, amely reszponziv es jol nez ki, ennyi "csunyasag" belefer.
-28
+28 kesz
 29 kesz
 30 kesz 
 31 kesz 

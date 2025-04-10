@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tetel_id'], $_POST['u
             <input type="hidden" name="tetel_id" value="<?php echo $tetel['tetel_id']; ?>">
             <div class="mb-3">
                 <label><?php echo htmlspecialchars($tetel['nev']); ?> (Egységár: <?php echo htmlspecialchars($tetel['egysegar']); ?> Ft)</label>
-                <input type="number" name="uj_mennyiseg" value="<?php echo htmlspecialchars($tetel['tetelek_mennyiseg']); ?>" class="form-control">
+                <input type="number" name="uj_mennyiseg" value="<?php echo htmlspecialchars($tetel['tetelek_mennyiseg']); ?>" min="0" class="form-control">
             </div>
             <button type="submit" name="modositBtn" class="btn btn-primary">Módosítás</button>
         </form>
