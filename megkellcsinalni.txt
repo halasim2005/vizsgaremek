@@ -25,7 +25,7 @@ teszt cypress vagy mi
 21 kesz megoldva
 22 kesz
 23 kesz atirva, ilyen egyebkent nem tortenik, csak amit feltoltottunk adatbazis volt ilyen.
-24 kesz
+24 kesz, negativat nem enged, torolni ugy lehet, hogy 0-ra allitja es modositja (szerintem logikus).
 25 a mentesrol az a visszajelzes, hogy LATHATOAN ujrafrissules utan is megmarad az elotte beallitott majd a mentes gombra kattintas utan is az ertek, torlesnel pedig megerositi, hogy ki akarja torolni, illetve latvanyosan eltunik, amit kitorolt, szerintem ezek elegek visszajelzesnek.
 26 kesz
 27 nem tudok alternativ megoldast, amely reszponziv es jol nez ki, ennyi "csunyasag" belefer.
