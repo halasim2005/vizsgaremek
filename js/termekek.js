@@ -157,7 +157,7 @@ async function termekekLeker() {
                     <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
                         <div class="card shadow">
                             <div id="termekekKartyaKepKozep">
-                                <img id="termekekKartyaKep" src="${termek.kep}" class="card-img-top" alt="${termek.t_nev}">${akcioSzazalek}
+                                <a style="cursor:pointer" onclick="termekMegnyit('${termek.urlnev}')"><img id="termekekKartyaKep" src="${termek.kep}" class="card-img-top" alt="${termek.t_nev}">${akcioSzazalek}</a>
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title">${termek.nev}</h6>
@@ -258,7 +258,7 @@ async function osszesTermekekLeker() {
                     <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
                         <div class="card shadow">
                             <div id="termekekKartyaKepKozep">
-                                <img id="termekekKartyaKep" src="${termek.kep}" class="card-img-top" alt="${termek.t_nev}">${akcioSzazalek}
+                                <a style="cursor:pointer" onclick="termekMegnyit('${termek.urlnev}')"><img id="termekekKartyaKep" src="${termek.kep}" class="card-img-top" alt="${termek.t_nev}">${akcioSzazalek}</a>
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title">${termek.nev}</h6>
