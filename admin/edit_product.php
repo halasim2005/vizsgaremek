@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="mb-3">
             <label for="product_price" class="form-label">Termék ára:</label>
             <input type="number" name="product_price" id="product_price" class="form-control" 
-                   value="<?= htmlspecialchars($product['egysegar']) ?>" required>
+                   value="<?= htmlspecialchars($product['egysegar']) ?>" min="0" required>
         </div>
         <div class="mb-3">
             <label for="category_id" class="form-label">Kategória:</label>
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="mb-3">
             <label for="available_quantity" class="form-label">Elérhető darabok száma:</label>
             <input type="number" name="available_quantity" id="available_quantity" class="form-control" 
-                   value="<?= htmlspecialchars($product['elerheto_darab']) ?>" required>
+                   value="<?= htmlspecialchars($product['elerheto_darab']) ?>" min="0" required>
         </div>
         <div class="mb-3">
             <label for="manufacturer" class="form-label">Gyártó:</label>

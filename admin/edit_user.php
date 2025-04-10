@@ -26,6 +26,7 @@ if (!$user) {
 
 // Adatok frissítése
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
     $updateData = [
         ':email' => $_POST['email'] ?? $user['email'],
         ':telefonszam' => $_POST['telefonszam'] ?? $user['telefonszam'],
@@ -124,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="mb-3 col-md-6">
                 <label for="jogosultsag" class="form-label">Jogosultság</label>
-                <select name="jogosultsag" id="jogosultsag" class="form-control">
+                <select name="jogosultsag" id="jogosultsag" class="form-control" <?php echo $user['fh_nev'] === $_SESSION['felhasznalo']['fh_nev'] ? 'disabled' : ''  ?>>
                     <option value="user" <?php echo $user['jogosultsag'] === 'user' ? 'selected' : ''; ?>>Felhasználó</option>
                     <option value="admin" <?php echo $user['jogosultsag'] === 'admin' ? 'selected' : ''; ?>>Adminisztrátor</option>
                 </select>

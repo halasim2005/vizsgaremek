@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <?php include './nav.php'; ?>
 
 <div class="container my-5">
-        <h2 class="text-center form-label mb-4">Profil Szerkesztése</h2>
+        <h2 class="text-center form-label mb-4">Profil Szerkesztése: <?= htmlspecialchars($userData['fh_nev']) ?></h2>
         
         <?php if (isset($message)) : ?>
             <div class="alert alert-info text-center" role="alert">
@@ -287,7 +287,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
             </div>
-
+            <p class="text-danger">Figyelem! Mentést követően kijelentkeztetjük, hogy sikeresen frissüljenek az adatai!</p>
     <button type="submit" class="btn profilMentGomb w-100">Mentés</button>
 </form>
 

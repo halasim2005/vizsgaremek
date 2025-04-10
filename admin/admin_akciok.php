@@ -75,7 +75,7 @@ $termekek = $query->fetchAll(PDO::FETCH_ASSOC);
                         <input type="hidden" id="termek_id" name="termek_id">
                         <div class="mb-3">
                             <label class="form-label">Akciós ár (Ft)</label>
-                            <input type="number" id="akcios_ar" name="akcios_ar" class="form-control">
+                            <input type="number" id="akcios_ar" name="akcios_ar" min="0" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Akció kezdete</label>

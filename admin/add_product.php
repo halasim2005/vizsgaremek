@@ -134,14 +134,14 @@ include './admin_navbar.php';
                         </div>
                         <div class="form-group">
                             <label for="product_price">Termék ára:</label>
-                            <input type="number" class="form-control" name="product_price" id="product_price" required>
+                            <input type="number" class="form-control" name="product_price" id="product_price" min="0" required>
                         </div>
                         <div class="form-group">
                             <label for="category_id">Kategória:</label>
                             <select class="form-control" name="category_id" id="category_id" required>
                                 <?php
                                 // Kategóriák lekérése
-                                $stmt = $pdo->query("SELECT * FROM kategoria");
+                                $stmt = $pdo->query("SELECT * FROM kategoria order by nev");
                                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                     echo "<option value='{$row['id']}'>{$row['nev']}</option>";
                                 }
@@ -150,7 +150,7 @@ include './admin_navbar.php';
                         </div>
                         <div class="form-group">
                             <label for="available_quantity">Elérhető darabok száma:</label>
-                            <input type="number" class="form-control" name="available_quantity" id="available_quantity" required>
+                            <input type="number" class="form-control" name="available_quantity" id="available_quantity" min="0" required>
                         </div>
                         <div class="form-group">
                             <label for="manufacturer">Gyártó:</label>
@@ -159,7 +159,7 @@ include './admin_navbar.php';
                                 <option>...</option>
                                 <?php
                                 // Gyártók lekérése
-                                $stmt = $pdo->query("SELECT DISTINCT gyarto FROM termek");
+                                $stmt = $pdo->query("SELECT DISTINCT gyarto FROM termek order by gyarto");
                                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                     echo "<option value='{$row['gyarto']}'>{$row['gyarto']}</option>";
                                 }

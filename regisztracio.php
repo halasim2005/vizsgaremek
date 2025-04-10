@@ -48,8 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':jelszo', $hashedPassword);
     
             if ($stmt->execute()) {
-                header("Location: bejelentkezes.php"); // Átirányítás bejelentkezési oldalra sikeres regisztráció után
-                exit();
+                $_SESSION['reg_success'] = true;
             } else {
                 $error = "Hiba történt a regisztráció során. Próbálja újra.";
             }
@@ -136,13 +135,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php
         include './footer.php';
     ?>
+<?php if (isset($_SESSION['reg_success']) && $_SESSION['reg_success'] === true): ?>
+    <div class="modal fade" id="regSuccessModal" tabindex="-1" aria-labelledby="regSuccessModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="regSuccessModalLabel">Sikeres regisztráció</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Bezárás"></button>
+                </div>
+                <div class="modal-body">
+                    A regisztrációd sikeres volt, most átirányítunk a bejelentkezési oldalra.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="goToLogin" class="btn btn-success">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+        const showModal = new bootstrap.Modal(document.getElementById('regSuccessModal'));
+        showModal.show();
+
+        document.getElementById('goToLogin').addEventListener('click', () => {
+            window.location.href = 'bejelentkezes.php';
+        });
+
+        // Automatikus átirányítás ha nem nyom semmit 5 mp-ig
+        setTimeout(() => {
+            window.location.href = 'bejelentkezes.php';
+        }, 5000);
+</script>
+
+    <?php unset($_SESSION['reg_success']); ?>
+    <?php endif; ?>
 
 <script type="text/javascript">
-      var onloadCallback = function() {
-        grecaptcha.render('html_element', {
-          'sitekey' : '6LfhrZ4qAAAAAKM6FWwbkxfS3zjnRCgE3e_3JmI6'
-        });
-      };
-    </script>
+    var onloadCallback = function() {
+    grecaptcha.render('html_element', {
+        'sitekey' : '6LfhrZ4qAAAAAKM6FWwbkxfS3zjnRCgE3e_3JmI6'
+    });
+    };
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

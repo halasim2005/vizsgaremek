@@ -66,9 +66,9 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                                                     case "kész":
                                                                                         echo "green-bg";
                                                                                         break;
-                                                                                    case "törölve":
-                                                                                        echo "red-bg";
-                                                                                        break;
+                                                                                    //case "törölve":
+                                                                                    //    echo "red-bg";
+                                                                                    //    break;
                                                                                     default:
                                                                                         echo "";
                                                                                 }
@@ -77,7 +77,7 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <option value="">Összes</option>
         <option value="feldolgozás alatt" <?php if(isset($_GET['statusz']) && $_GET['statusz'] == 'feldolgozás alatt') echo 'selected'; ?>>Feldolgozás alatt</option>
         <option value="kész" <?php if(isset($_GET['statusz']) && $_GET['statusz'] == 'kész') echo 'selected'; ?>>Kész</option>
-        <option value="törölve" <?php if(isset($_GET['statusz']) && $_GET['statusz'] == 'törölve') echo 'selected'; ?>>Törölve</option>
+        <!--<option value="törölve" <?//php if(isset($_GET['statusz']) && $_GET['statusz'] == 'törölve') echo 'selected'; ?>>Törölve</option>-->
     </select>
 </form>
     <div class="row">
@@ -88,7 +88,7 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <h5 class="card-title text-center" name="rendeles_id">ID: <?php echo htmlspecialchars($rendeles['rendeles_id']); ?></h5>
                         <p class="card-text">
                             <strong>Felhasználó:</strong> <?php echo htmlspecialchars($rendeles['fh_nev']); ?><br>
-                            <strong>Termékek:</strong>
+                            <strong>Rendeléstételek:</strong>
                                 <ul>
                                     <?php
                                     $termekek = explode(',', $rendeles['termekek']);
@@ -108,9 +108,9 @@ $megrendeles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                <input type="hidden" name="rendeles_id" value="<?php echo $rendeles['rendeles_id']; ?>">
                                <select name="statusz" class="form-select form-select-sm">
                                    <option value="feldolgozás alatt" <?php if ($rendeles['statusz'] === 'feldolgozás alatt') echo 'selected'; ?>>Feldolgozás alatt</option>
+                                   <option value="csomagolva" <?php if ($rendeles['statusz'] === 'csomagolva') echo 'selected'; ?>>Csomagolva</option>
                                    <option value="kész" <?php if ($rendeles['statusz'] === 'kész') echo 'selected'; ?>>Kész</option>
                                    <!--<option value="törölve" <?//php if ($rendeles['statusz'] === 'törölve') echo 'selected'; ?>>Törölve</option>-->
-                                   <option value="csomagolva" <?php if ($rendeles['statusz'] === 'csomagolva') echo 'selected'; ?>>Csomagolva</option>
                                </select>
                                <button type="submit" name="statusz_modositas" class="btn btn-success btn-sm mt-2 col-4">Mentés</button>
                            </form>

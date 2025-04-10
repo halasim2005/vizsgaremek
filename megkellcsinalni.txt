@@ -4,3 +4,35 @@ akciok kiiratása
 design (dark) ???
 doksi
 teszt cypress vagy mi
+
+1
+2
+3
+4
+5 kesz
+6
+7
+8
+9
+10
+11 kesz
+12
+13
+14
+15
+16 kesz (mivel az adatbazisban int-kent voltak felveve ezert alapbol 0 erteket kaptak, de mar at lett irva varchar-ra es igy ugyanugy ures mezo lesz 0 ertek helyett.)
+17 igen, azert, hogy a sessionben is MEGFELELOEN frissuljon minden adat, ujra be kell jelentkezni, errol kap a felhasznalo tajekoztato uzenetet, mielott elmenti a profiljan az adatokat.
+18
+19 kesz
+20 ???? ezek csak pelda adatok, hogy ne legyen ures az oldal.
+21 kesz megoldva
+22 kesz
+23 kesz atirva, ilyen egyebkent nem tortenik, csak amit feltoltottunk adatbazis volt ilyen.
+24
+25
+26 kesz
+27 nem tudok alternativ megoldast, amely reszponziv es jol nez ki, ennyi "csunyasag" belefer.
+28
+29 kesz
+30 kesz 
+31 kesz 
