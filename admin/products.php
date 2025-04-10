@@ -34,6 +34,7 @@ if ($conn->connect_error) {
         <thead class="thead-dark">
             <tr>
                 <th>ID</th>
+                <th>Kép</th>
                 <th>Név</th>
                 <th>Egységár</th>
                 <th>Kategória</th>
@@ -46,7 +47,7 @@ if ($conn->connect_error) {
         <tbody>
             <?php
             // Termékek lekérdezése
-            $sql = "SELECT termek.id, termek.nev, termek.egysegar, termek.kategoria_id, termek.elerheto_darab, termek.gyarto, termek.tipus, kategoria.nev AS kategoria_nev
+            $sql = "SELECT termek.kep, termek.id, termek.nev, termek.egysegar, termek.kategoria_id, termek.elerheto_darab, termek.gyarto, termek.tipus, kategoria.nev AS kategoria_nev
                     FROM termek
                     JOIN kategoria ON termek.kategoria_id = kategoria.id";
             $result = $conn->query($sql);
@@ -54,6 +55,7 @@ if ($conn->connect_error) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>
                             <td>{$row['id']}</td>
+                            <td><img src='{$row['kep']}' style='max-width: 100px;'></td>
                             <td>{$row['nev']}</td>
                             <td class='w-auto'>{$row['egysegar']} Ft</td>
                             <td>{$row['kategoria_nev']}</td>
