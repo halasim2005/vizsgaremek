@@ -7,12 +7,12 @@
             <td class="footerTableTd">
                 Alkotók: Halasi Martin és Lálity Dominik<br><br>
                 Email cím: <a id="footerLinkek" href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&to=%7B%7Bhalalikft@gmail.com%7D%7D&su=Subject&body=Body+Text">halalikft@gmail.com</a><br><br>
-                Együttműködő partnerek<br>
+                Cégnév: HaLáli Kft.<br>
             </td>
             <td class="footerTableTd">
-                Impresszum<br><br>
-                Adatkezelési tájékoztató<br><br>
-                Hírlevél<br>
+                <a class="footerA" href="./imp.php">Impresszum</a><br><br>
+                <a class="footerA" href="./adatkezeles.php">Adatkezelési tájékoztató</a><br><br>
+                <a class="footerA" href="./kapcsolat.php">Kapcsolat</a><br>
             </td>
         </tr>
     </table> 
