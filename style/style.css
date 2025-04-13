@@ -54,7 +54,7 @@ body {
 }
 
 #navLogo{
-    height: 80px;
+    height: 100px;
 }
 
 @media (max-width: 991px){
@@ -638,10 +638,36 @@ input[type="radio"] {
 
 #rangeEgy{
     font-size: small;
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+#rangeEgy:focus{
+    outline: none;
 }
 
 #rangeKetto{
     font-size: small;
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+#rangeKetto::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+}
+
+#rangeEgy::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+}
+
+#rangeKetto:focus{
+    outline: none;
 }
 
 @media (max-width: 800px){

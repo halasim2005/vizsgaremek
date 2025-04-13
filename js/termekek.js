@@ -27,7 +27,7 @@ function arakFeltolt(arak) {
     for (let adat of arak) {
         rangeEgy.innerHTML = `
             <input type="range" id="minRangeAr" style="width: 150px; accent-color: rgb(61, 61, 61)" 
-                min="${(adat.arMin)}" max="${(adat.arMax)}" step="5" value="${(adat.arMin)}" 
+                min="${(adat.arMin)}" max="${(adat.arMax)}" step="5" value="${(adat.arMin)}"
                 oninput="document.getElementById('minArValue').textContent = this.value;">
             <span id="minArValue">${adat.arMin}</span> Ft
         `;
