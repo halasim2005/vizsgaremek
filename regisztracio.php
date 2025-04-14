@@ -120,8 +120,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="row">
-                <label><input type="checkbox" required>
-                Elolvastam és elfogadom az adatkezelési tájékoztatót!</label>
+                <label for="adatkezelesi"><input name="adatkezelesi" id="adatkezelesi" type="checkbox" required>
+                Elolvastam és elfogadom az <a class="text-dark" href="./adatkezeles">adatkezelési tájékoztató</a>t.</label>
             </div>
 
             <div class="text-center">
