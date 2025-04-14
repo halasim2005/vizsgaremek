@@ -5,19 +5,19 @@ teszt (no)
 
 1 kesz
 2 kesz
-3
+3 kesz
 4 kesz
 5 kesz
-6
+6 NEM LEHET MIT CSINALNI
 7 kesz
 8 kesz
-9
+9 kesz
 10, 12, 14, 15: a felhasznalonak regisztracio utan ki kell toltenie a profiljat, csak ekkor tud rendelest leadni, mivel ott tudja kitolteni a kezbesitesi illetve szamlazasi adatait. a felhasznalo csak bejelentkezes utan tud vasarolni. szerintem eleg egyertelmu mindegyik "uzenet".
 11 kesz
 13 INPUT MEZOT MEG KELL CSINALNI. a REST verziot nem tudjuk mar, mivel az egesz kosar erre epul, es ahhoz az egesz mindenseget at kellene irni, ami a kosarhoz kotheto, ez rengeteg idot venne igenybe.
 16 kesz (mivel az adatbazisban int-kent voltak felveve ezert alapbol 0 erteket kaptak, de mar at lett irva varchar-ra es igy ugyanugy ures mezo lesz 0 ertek helyett.)
 17 igen, azert, hogy a sessionben is MEGFELELOEN frissuljon minden adat, ujra be kell jelentkezni, errol kap a felhasznalo tajekoztato uzenetet, mielott elmenti a profiljan az adatokat.
-18 
+18 KESZ
 19 kesz
 20 ???? ezek csak pelda adatok, hogy ne legyen ures az oldal.
 21 kesz megoldva
