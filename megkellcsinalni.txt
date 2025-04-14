@@ -3,14 +3,14 @@ akciok kiiratása
 doksi (no)
 teszt (no)
 
-1
-2
+1 kesz
+2 kesz
 3
-4
+4 kesz
 5 kesz
 6
-7
-8
+7 kesz
+8 kesz
 9
 10, 12, 14, 15: a felhasznalonak regisztracio utan ki kell toltenie a profiljat, csak ekkor tud rendelest leadni, mivel ott tudja kitolteni a kezbesitesi illetve szamlazasi adatait. a felhasznalo csak bejelentkezes utan tud vasarolni. szerintem eleg egyertelmu mindegyik "uzenet".
 11 kesz

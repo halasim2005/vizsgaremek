@@ -456,7 +456,7 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
             <div class="col-lg-8">
                 <h2>Kosár</h2>
                 <?php if (empty($_SESSION['kosar'])): ?>
-                    <div class="alert alert-warning">A kosár üres. <a href="termekek.php">Vásárlás folytatása</a></div>
+                    <div class="alert alert-warning">A kosár üres. <a href="termekek.php">Tovább a termékekhez</a></div>
                 <?php else: ?>
                     <form method="POST" action="kosar.php">
                         <?php foreach ($_SESSION['kosar'] as $index => $termek): ?>
@@ -470,7 +470,7 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                                             <h5 class="card-title kosarFelirat"><?= htmlspecialchars($termek['termek_nev']) ?></h5>
                                             <p class="card-text"><?= (is_null($termek['akcios_ar'])) ? $termek['egysegar'] : $termek['akcios_ar'] ?> Ft / db</p>
                                             <p class="card-text"><strong><?= $termek['elerheto_darab'] ?> db van raktáron.</strong></p>
-                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['tetelek_mennyiseg'] ?>" min="0" class="form-control w-25"><br>
+                                            <input type="number" name="mennyisegek[<?= $index ?>]" value="<?= $termek['tetelek_mennyiseg'] ?>" min="0" max="<?= $termek['elerheto_darab'] ?>" class="form-control w-25"><br>
                                             <p class="card-text kosarAr"><strong><?= (is_null($termek['akcios_ar'])) ? $termek['egysegar'] : $termek['akcios_ar'] * $termek['tetelek_mennyiseg'] ?> Ft</strong></p>
                                                 <input type="hidden" name="termek_id" value="<?= htmlspecialchars($termek['termek_id']) ?>">
                                                 <button type="submit" name="delete_item" value="<?= $termek['termek_id'] ?>" class="kukaGomb" ><img class="kukaKep" src="./képek/torlesikon.svg" href="Törlés"></button>
@@ -490,7 +490,7 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                     <?php elseif (!$profil_teljes): ?>
                         <div class="alert alert-danger">Vásárlás folytatásához kérjük, töltse ki a profilját! <a href="profil.php">Profil szerkesztése</a></div>
                         <?php elseif (empty($_SESSION['kosar'])): ?>
-                            <div class="alert alert-warning">A kosár üres. Kérjük, adjon hozzá termékeket a vásárláshoz!</div>
+                            <!--<div class="alert alert-warning">Kérjük, adjon hozzá termékeket a vásárláshoz!</div>-->
                             <?php else: ?>
                                 <h3 class="mt-5 text-center">Rendelés</h3>
                                     <form action="kosar.php" method="POST">

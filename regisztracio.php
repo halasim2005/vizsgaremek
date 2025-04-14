@@ -120,15 +120,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="row">
-                <label><input type="checkbox" required>
-                Elolvastam és elfogadom az adatkezelési tájékoztatót!</label>
+                <label for="adatkezelesi"><input name="adatkezelesi" id="adatkezelesi" type="checkbox" required>
+                Elolvastam és elfogadom az <a class="text-dark" href="./adatkezeles">adatkezelési tájékoztató</a>t.</label>
             </div>
 
             <div class="text-center">
                 <!-- secret: 6LcSMZ4qAAAAAKoFX-gDaOa9eOgWBqM8CNVkHKuK-->
+                <br>
                 <div class="g-recaptcha" data-sitekey="6LfhrZ4qAAAAAKM6FWwbkxfS3zjnRCgE3e_3JmI6"></div>
-                <br/>
-                <button id="navbarGomb" type="submit" class="btn regist-button ms-3 w-100">Regisztráció</button>
+                <br>
+                <button id="navbarGomb" type="submit" class="btn regist-button w-100">Regisztráció</button>
             </div>
         </form>
     </div>
