@@ -75,12 +75,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"async defer></script>
 </head>
-<style>
-div.g-recaptcha {
-  margin: 0 auto;
-  width: 304px;
-}
-</style>
 <body>
 
     <?php include './nav.php'; ?>
