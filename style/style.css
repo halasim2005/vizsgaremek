@@ -621,6 +621,7 @@ input[type="radio"] {
     padding-bottom: 8px;
     padding-left: 10px;
     padding-right: 10px;
+    height: 40px;
 }
 
 #termekekKartyaKosarGomb:hover{
@@ -635,6 +636,20 @@ input[type="radio"] {
     padding-right: 10px;
 }
 
+.mpGomb{
+    background-color: rgb(61, 61, 61);
+    border: none;
+}
+
+.mpGomb:hover{
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
+
+#dbszam{
+    height: 40px;
+}
 
 #rangeEgy{
     font-size: small;

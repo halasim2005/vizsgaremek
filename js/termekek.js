@@ -166,9 +166,15 @@ async function termekekLeker() {
                                     <input type="hidden" name="termek_id" value="${termek.id}">
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
-                                    <input type="hidden" name="mennyiseg" value="1">
                                     <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" onclick="termekMegnyit('${termek.urlnev}')">Részletek</button>
-                                    <button type="submit" ${(termek.elerheto_darab == 0) ? `disabled` : ``} id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        <div class="input-group">
+                                            <button class="btn btn-secondary mpGomb" type="button" onclick="mennyisegValtoztat(-1, '${termek.elerheto_darab}', 'dbszam_${termek.id}')">−</button>
+                                            <input type="number" class="form-control w-10" id="dbszam_${termek.id}" min="1" max="${termek.elerheto_darab}" name="mennyiseg" value="1">
+                                            <button class="btn btn-secondary mpGomb" type="button" onclick="mennyisegValtoztat(1, '${termek.elerheto_darab}', 'dbszam_${termek.id}')">+</button>
+                                        </div>
+                                        <button type="submit" ${(termek.elerheto_darab == 0) ? `disabled` : ``} id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -267,9 +273,15 @@ async function osszesTermekekLeker() {
                                     <input type="hidden" name="termek_id" value="${termek.id}">
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
                                     <input type="hidden" name="ar" value="${termek.egysegar}">
-                                    <input type="hidden" name="mennyiseg" value="1">
                                     <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" onclick="termekMegnyit('${termek.urlnev}')">Részletek</button>
-                                    <button type="submit" ${(termek.elerheto_darab == 0) ? `disabled` : ``} id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        <div class="input-group">
+                                            <button class="btn btn-secondary mpGomb" type="button" onclick="mennyisegValtoztat(-1, '${termek.elerheto_darab}', 'dbszam_${termek.id}')">−</button>
+                                            <input type="number" class="form-control w-10" id="dbszam_${termek.id}" min="1" max="${termek.elerheto_darab}" name="mennyiseg" value="1">
+                                            <button class="btn btn-secondary mpGomb" type="button" onclick="mennyisegValtoztat(1, '${termek.elerheto_darab}', 'dbszam_${termek.id}')">+</button>
+                                        </div>
+                                        <button type="submit" ${(termek.elerheto_darab == 0) ? `disabled` : ``} id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -284,6 +296,17 @@ async function osszesTermekekLeker() {
 
 function termekMegnyit(urlnev){
     window.location.href = `termek_reszletek?termek=${urlnev}`;
+}
+
+function mennyisegValtoztat(valtozas, maxErtek, inputId) {
+    const input = document.getElementById(inputId);
+    let aktualis = parseInt(input.value) || 1;
+    let ujErtek = aktualis + valtozas;
+
+    if (ujErtek < 1) ujErtek = 1;
+    if (ujErtek > maxErtek) ujErtek = maxErtek;
+
+    input.value = ujErtek;
 }
 
 window.addEventListener("load", kategoriakLeker);
