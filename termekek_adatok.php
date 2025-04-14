@@ -23,7 +23,7 @@ switch (mb_strtolower($url[0])) {
         break;
     case 'gyartokleker':
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
-            $gyartok_sql = "SELECT DISTINCT termek.gyarto AS gyartonev FROM termek;";
+            $gyartok_sql = "SELECT DISTINCT termek.gyarto AS gyartonev FROM termek ORDER BY termek.gyarto;";
             $gyartok = adatokLekerdezese($gyartok_sql);
             if(is_array($gyartok)){
                 echo json_encode($gyartok, JSON_UNESCAPED_UNICODE);
