@@ -90,7 +90,8 @@ switch (mb_strtolower($url[0])) {
                 $feltetelek[] = "termek.egysegar BETWEEN " . intval($bodyAdatok['minRangeAr']) . " AND " . intval($bodyAdatok['maxRangeAr']);
             }
             if (!empty($bodyAdatok['kereses'])) {
-                $feltetelek[] = "termek.nev LIKE '%" . htmlspecialchars($bodyAdatok['kereses']) . "%'";
+                $kereses = htmlspecialchars($bodyAdatok['kereses']);
+                $feltetelek[] = "termek.nev LIKE '%$kereses%' OR termek.leiras LIKE '%$kereses%'";
             }
 
             if($bodyAdatok['rendez'] == 'nevAz'){
