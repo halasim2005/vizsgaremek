@@ -488,7 +488,7 @@ $profil_teljes = $bejelentkezve ? teljes_e_a_profil($_SESSION['felhasznalo']) : 
                 <?php if (!$bejelentkezve): ?>
                     <div class="alert alert-danger">Vásárlás folytatásához kérjük, jelentkezzen be! <a href="profil.php">Bejelentkezés</a></div>
                     <?php elseif (!$profil_teljes): ?>
-                        <div class="alert alert-danger">Vásárlás folytatásához kérjük, töltse ki a profilját! <a href="profil.php">Profil szerkesztése</a></div>
+                        <div class="alert alert-danger">Vásárlás folytatásához kérjük, töltse ki a profilját, ahol meg kell adni a számlázási és kézbesítési adatait! Ezután folytatni tudja a megrendelést. <a href="profil.php">Profil szerkesztése</a></div>
                         <?php elseif (empty($_SESSION['kosar'])): ?>
                             <!--<div class="alert alert-warning">Kérjük, adjon hozzá termékeket a vásárláshoz!</div>-->
                             <?php else: ?>
