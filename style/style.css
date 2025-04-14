@@ -654,11 +654,11 @@ input[type="radio"] {
     background: transparent;
 }
 
-input[type=range]{
+#minRangeAr, #maxRangeAr{
     -webkit-appearance: none;
 }
 
-input[type=range]::-webkit-slider-runnable-track {
+#minRangeAr::-webkit-slider-runnable-track, #maxRangeAr::-webkit-slider-runnable-track {
     width: 300px;
     height: 5px;
     background: #ddd;
@@ -666,7 +666,7 @@ input[type=range]::-webkit-slider-runnable-track {
     border-radius: 3px;
 }
 
-input[type=range]::-webkit-slider-thumb {
+#minRangeAr::-webkit-slider-thumb, #maxRangeAr::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: none;
     height: 16px;
@@ -676,11 +676,11 @@ input[type=range]::-webkit-slider-thumb {
     margin-top: -4px;
 }
 
-input[type=range]:focus {
+#minRangeAr:focus, #maxRangeAr:focus {
     outline: none;
 }
 
-input[type=range]:focus::-webkit-slider-runnable-track {
+#minRangeAr:focus::-webkit-slider-runnable-track, #maxRangeAr:focus::-webkit-slider-runnable-track {
     background: #ccc;
 }
 
