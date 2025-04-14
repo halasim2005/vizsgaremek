@@ -30,7 +30,7 @@ async function termek_reszletei() {
         }
 
         if(adat.elerheto_darab > 0){
-            raktaronSzoveg = adat.elerheto_darab;
+            raktaronSzoveg = adat.elerheto_darab + " db";
             raktaronStyle = `style="color:green;font-weight:bold"`;
         }else{
             raktaronSzoveg = `Nincs a készleten!`;
@@ -52,14 +52,20 @@ async function termek_reszletei() {
                 <div class="col-md-8 col-12 p-3">
                     <h5><span style="font-weight:bold">Gyártó:</span> ${adat.gyarto}</h5>
                     <h5><span style="font-weight:bold">Típus:</span> ${adat.tipus}</h5>
-                    <h5><span style="font-weight:bold">Raktáron:</span> <span ${raktaronStyle}>${raktaronSzoveg} db</h5>
+                    <h5><span style="font-weight:bold">Raktáron:</span> <span ${raktaronStyle}>${raktaronSzoveg}</h5>
                     <h5>${akciosAr}</h5>
                     <form method="POST" action="kosar_muveletek.php">
                         <input type="hidden" name="termek_id" value="${adat.id}">
                         <input type="hidden" name="termek_kep" value="${adat.kep}">
                         <input type="hidden" name="ar" value="${adat.egysegar}">
-                        <input type="hidden" name="mennyiseg" value="1">
-                        <button type="submit" ${(adat.elerheto_darab == 0) ? `disabled` : ``} style="width:160px" id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary my-1" onclick="Szamlalo()">Kosárba</button>
+                        <div class="d-flex gap-1 align-items-center w-50">
+                            <div class="input-group">
+                                <button class="btn btn-secondary mpGomb" type="button" onclick="mennyisegValtoztat(-1, '${adat.elerheto_darab}', 'dbszam_${adat.id}')">−</button>
+                                <input type="number" class="form-control w-10" id="dbszam_${adat.id}" min="1" max="${adat.elerheto_darab}" name="mennyiseg" value="1">
+                                <button class="btn btn-secondary mpGomb" type="button" onclick="mennyisegValtoztat(1, '${adat.elerheto_darab}', 'dbszam_${adat.id}')">+</button>
+                            </div>
+                            <button type="submit" ${(adat.elerheto_darab == 0) ? `disabled` : ``} id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -70,6 +76,17 @@ async function termek_reszletei() {
             </div>
         `
     }
+}
+
+function mennyisegValtoztat(valtozas, maxErtek, inputId) {
+    const input = document.getElementById(inputId);
+    let aktualis = parseInt(input.value) || 1;
+    let ujErtek = aktualis + valtozas;
+
+    if (ujErtek < 1) ujErtek = 1;
+    if (ujErtek > maxErtek) ujErtek = maxErtek;
+
+    input.value = ujErtek;
 }
 
 window.addEventListener("load", termek_reszletei);

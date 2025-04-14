@@ -161,7 +161,7 @@ async function termekekLeker() {
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title">${termek.nev}</h6>
-                                <h6><strong>${kartyaArszoveg} </strong></h6>
+                                <h6><strong>${kartyaArszoveg}</strong> - Raktáron: ${termek.elerheto_darab} db</h6>
                                 <form method="POST" action="kosar_muveletek.php">
                                     <input type="hidden" name="termek_id" value="${termek.id}">
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
@@ -268,7 +268,7 @@ async function osszesTermekekLeker() {
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title">${termek.nev}</h6>
-                                <h6><strong>${kartyaArszoveg} </strong></h6>
+                                <h6><strong>${kartyaArszoveg}</strong> - Raktáron: ${termek.elerheto_darab} db</h6>
                                 <form method="POST" action="kosar_muveletek.php">
                                     <input type="hidden" name="termek_id" value="${termek.id}">
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
