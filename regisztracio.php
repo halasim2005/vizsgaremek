@@ -75,6 +75,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"async defer></script>
 </head>
+<style>
+div.g-recaptcha {
+  margin: 0 auto;
+  width: 304px;
+}
+</style>
 <body>
 
     <?php include './nav.php'; ?>
@@ -126,9 +132,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="text-center">
                 <!-- secret: 6LcSMZ4qAAAAAKoFX-gDaOa9eOgWBqM8CNVkHKuK-->
+                <br>
                 <div class="g-recaptcha" data-sitekey="6LfhrZ4qAAAAAKM6FWwbkxfS3zjnRCgE3e_3JmI6"></div>
-                <br/>
-                <button id="navbarGomb" type="submit" class="btn regist-button ms-3 w-100">Regisztráció</button>
+                <br>
+                <button id="navbarGomb" type="submit" class="btn regist-button w-100">Regisztráció</button>
             </div>
         </form>
     </div>
