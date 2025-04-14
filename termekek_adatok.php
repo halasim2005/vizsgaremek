@@ -91,7 +91,7 @@ switch (mb_strtolower($url[0])) {
             }
             if (!empty($bodyAdatok['kereses'])) {
                 $kereses = htmlspecialchars($bodyAdatok['kereses']);
-                $feltetelek[] = "termek.nev LIKE '%$kereses%' OR termek.leiras LIKE '%$kereses%'";
+                $feltetelek[] = "termek.nev LIKE '%$kereses%'";
             }
 
             if($bodyAdatok['rendez'] == 'nevAz'){
