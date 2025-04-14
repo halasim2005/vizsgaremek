@@ -698,4 +698,8 @@ input[type="radio"] {
 div.g-recaptcha {
     margin: 0 auto;
     width: 304px;
-  }
+}
+
+#keresesSzures{
+    width: 160px;
+}
