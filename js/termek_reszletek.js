@@ -58,7 +58,7 @@ async function termek_reszletei() {
                         <input type="hidden" name="termek_id" value="${adat.id}">
                         <input type="hidden" name="termek_kep" value="${adat.kep}">
                         <input type="hidden" name="ar" value="${adat.egysegar}">
-                        <div class="d-flex gap-1 align-items-center w-50">
+                        <div class="gap-1 align-items-center w-25">
                             <div class="input-group">
                                 <button class="btn btn-secondary mpGomb" type="button" onclick="mennyisegValtoztat(-1, '${adat.elerheto_darab}', 'dbszam_${adat.id}')">−</button>
                                 <input type="number" class="form-control w-10 text-center" id="dbszam_${adat.id}" min="1" max="${adat.elerheto_darab}" name="mennyiseg" value="1">
