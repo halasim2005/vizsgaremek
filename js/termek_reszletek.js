@@ -61,7 +61,7 @@ async function termek_reszletei() {
                         <div class="d-flex gap-1 align-items-center w-50">
                             <div class="input-group">
                                 <button class="btn btn-secondary mpGomb" type="button" onclick="mennyisegValtoztat(-1, '${adat.elerheto_darab}', 'dbszam_${adat.id}')">−</button>
-                                <input type="number" class="form-control w-10" id="dbszam_${adat.id}" min="1" max="${adat.elerheto_darab}" name="mennyiseg" value="1">
+                                <input type="number" class="form-control w-10 text-center" id="dbszam_${adat.id}" min="1" max="${adat.elerheto_darab}" name="mennyiseg" value="1">
                                 <button class="btn btn-secondary mpGomb" type="button" onclick="mennyisegValtoztat(1, '${adat.elerheto_darab}', 'dbszam_${adat.id}')">+</button>
                             </div>
                             <button type="submit" ${(adat.elerheto_darab == 0) ? `disabled` : ``} id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
