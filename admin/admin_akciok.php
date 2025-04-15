@@ -27,6 +27,7 @@ $termekek = $query->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Kanit:wght@300&family=Montserrat&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="admin_style.css">
     <title>Akciók kezelése</title>
+    <link rel="icon" type="image/x-icon" href="./képek/HaLálip.ico">
 </head>
 <body>
     <?php include 'admin_navbar.php'; ?>

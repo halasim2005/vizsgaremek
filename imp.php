@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Kanit:wght@300&family=Montserrat&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style/style.css">
     <title>Impresszum</title>
+    <link rel="icon" type="image/x-icon" href="./képek/HaLálip.ico">
 </head>
 <body>
     <?php

@@ -20,6 +20,7 @@ include './admin_navbar.php';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Kanit:wght@300&family=Montserrat&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="admin_style.css">
+    <link rel="icon" type="image/x-icon" href="../képek/HaLálip.ico">
 </head>
 <style>
     :root {

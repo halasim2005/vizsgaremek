@@ -22,6 +22,7 @@ include './sql_fuggvenyek.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="./style/style.css">
     <title>Rendelés állapota</title>
+    <link rel="icon" type="image/x-icon" href="./képek/HaLálip.ico">
 </head>
 <style>
     .cell {
