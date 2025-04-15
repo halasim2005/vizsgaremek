@@ -46,7 +46,7 @@ require_once '../db.php';
             // Termékek lekérdezése
             $sql = "SELECT termek.kep, termek.id, termek.nev, termek.egysegar, termek.kategoria_id, termek.elerheto_darab, termek.gyarto, termek.tipus, kategoria.nev AS kategoria_nev
                     FROM termek
-                    JOIN kategoria ON termek.kategoria_id = kategoria.id";
+                    JOIN kategoria ON termek.kategoria_id = kategoria.id order by nev ";
             $result = $pdo->query($sql);
             if ($result->rowCount() > 0) {
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
