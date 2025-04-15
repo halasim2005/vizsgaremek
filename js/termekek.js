@@ -165,7 +165,7 @@ async function termekekLeker() {
                                 <form method="POST" action="kosar_muveletek.php">
                                     <input type="hidden" name="termek_id" value="${termek.id}">
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
-                                    <input type="hidden" name="ar" value="${termek.egysegar}">
+                                    <input type="hidden" name="ar" value="${termek.akcios_ar == null ? termek.egysegar : termek.akcios_ar}">
                                     <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" onclick="termekMegnyit('${termek.urlnev}')">Részletek</button>
                                     <div class="d-flex gap-1 align-items-center">
                                         <div class="input-group">
@@ -272,7 +272,7 @@ async function osszesTermekekLeker() {
                                 <form method="POST" action="kosar_muveletek.php">
                                     <input type="hidden" name="termek_id" value="${termek.id}">
                                     <input type="hidden" name="termek_kep" value="${termek.kep}">
-                                    <input type="hidden" name="ar" value="${termek.egysegar}">
+                                    <input type="hidden" name="ar" value="${termek.akcios_ar == null ? termek.egysegar : termek.akcios_ar}">
                                     <button type="button" id="termekekKartyaGomb" class="btn btn-primary w-100 my-1" onclick="termekMegnyit('${termek.urlnev}')">Részletek</button>
                                     <div class="d-flex gap-1 align-items-center">
                                         <div class="input-group">
