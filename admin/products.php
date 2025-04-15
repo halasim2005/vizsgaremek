@@ -5,11 +5,8 @@ if (!isset($_SESSION['jogosultsag']) || $_SESSION['jogosultsag'] !== 'admin') {
     exit();
 }
 include './admin_navbar.php';
+require_once '../db.php';
 
-$conn = new mysqli('localhost', 'root', '', 'halaliweb');
-if ($conn->connect_error) {
-    die("Adatbázis hiba: " . $conn->connect_error);
-}
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -50,9 +47,9 @@ if ($conn->connect_error) {
             $sql = "SELECT termek.kep, termek.id, termek.nev, termek.egysegar, termek.kategoria_id, termek.elerheto_darab, termek.gyarto, termek.tipus, kategoria.nev AS kategoria_nev
                     FROM termek
                     JOIN kategoria ON termek.kategoria_id = kategoria.id";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
+            $result = $pdo->query($sql);
+            if ($result->rowCount() > 0) {
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                     echo "<tr>
                             <td>{$row['id']}</td>
                             <td><img src='{$row['kep']}' style='max-width: 100px;'></td>
@@ -117,4 +114,3 @@ document.querySelectorAll('.delete-product').forEach(btn => {
 
 </body>
 </html>
-<?php $conn->close(); ?>
