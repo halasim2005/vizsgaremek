@@ -170,7 +170,7 @@ async function termekekLeker() {
                                     <div class="d-flex gap-1 align-items-center">
                                         <div class="input-group">
                                             <button class="btn btn-secondary mpGomb" type="button" onclick="mennyisegValtoztat(-1, '${termek.elerheto_darab}', 'dbszam_${termek.id}')">−</button>
-                                            <input type="number" class="form-control w-10" id="dbszam_${termek.id}" min="1" max="${termek.elerheto_darab}" name="mennyiseg" value="1">
+                                            <input type="number" class="form-control w-10 text-center" id="dbszam_${termek.id}" min="1" max="${termek.elerheto_darab}" name="mennyiseg" value="1">
                                             <button class="btn btn-secondary mpGomb" type="button" onclick="mennyisegValtoztat(1, '${termek.elerheto_darab}', 'dbszam_${termek.id}')">+</button>
                                         </div>
                                         <button type="submit" ${(termek.elerheto_darab == 0) ? `disabled` : ``} id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
@@ -277,7 +277,7 @@ async function osszesTermekekLeker() {
                                     <div class="d-flex gap-1 align-items-center">
                                         <div class="input-group">
                                             <button class="btn btn-secondary mpGomb" type="button" onclick="mennyisegValtoztat(-1, '${termek.elerheto_darab}', 'dbszam_${termek.id}')">−</button>
-                                            <input type="number" class="form-control w-10" id="dbszam_${termek.id}" min="1" max="${termek.elerheto_darab}" name="mennyiseg" value="1">
+                                            <input type="number" class="form-control w-10 text-center" id="dbszam_${termek.id}" min="1" max="${termek.elerheto_darab}" name="mennyiseg" value="1">
                                             <button class="btn btn-secondary mpGomb" type="button" onclick="mennyisegValtoztat(1, '${termek.elerheto_darab}', 'dbszam_${termek.id}')">+</button>
                                         </div>
                                         <button type="submit" ${(termek.elerheto_darab == 0) ? `disabled` : ``} id="termekekKartyaKosarGomb" name="add_to_cart" class="btn btn-primary w-100 my-1" onclick="Szamlalo()">Kosárba</button>
