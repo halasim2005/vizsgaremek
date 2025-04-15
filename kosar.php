@@ -112,7 +112,7 @@ betolt_kosar_adatbazisbol($pdo);
 function osszegzo($kosar) {
     $osszesen = 0;
     foreach ($kosar as $termek) {
-        $osszesen += $termek['egysegar'] * $termek['tetelek_mennyiseg'];
+        is_null($termek['akcios_ar']) ?  $osszesen +=  $termek['egysegar'] * $termek['tetelek_mennyiseg'] :   $osszesen +=  $termek['akcios_ar'] * $termek['tetelek_mennyiseg'];
     }
     return $osszesen;
 }
