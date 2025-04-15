@@ -141,24 +141,6 @@ CREATE TABLE `megrendeles` (
   `statusz` text NOT NULL DEFAULT 'feldolgozás alatt'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- A tábla adatainak kiíratása `megrendeles`
---
-
-INSERT INTO `megrendeles` (`id`, `fh_nev`, `szallitasi_mod`, `fizetesi_mod`, `osszeg`, `szallitas`, `vegosszeg`, `leadas_datum`, `statusz`) VALUES
-(33, 'admin', 'standard', 'kartya', 100, '1690', 1790, '2025-02-09', 'kész'),
-(34, 'admin', 'standard', 'kartya', 100, '1690', 1790, '2025-02-18', 'csomagolva'),
-(35, 'admin', 'standard', 'kartya', 100, '1690', 1790, '2025-02-18', 'feldolgozás alatt'),
-(36, 'admin', 'standard', 'kartya', 502210, '0', 502210, '2025-02-18', 'feldolgozás alatt'),
-(37, 'admin', 'standard', 'kartya', 73990, '0', 73990, '2025-02-18', 'kész'),
-(39, 'admin', 'standard', 'kartya', 210520, '0', 210520, '2025-02-18', 'feldolgozás alatt'),
-(40, 'admin', 'standard', 'kartya', 787239, '0', 787239, '2025-02-18', 'csomagolva'),
-(42, 'admin', 'standard', 'utanvet', 1506730, '0', 1506730, '2025-02-25', 'feldolgozás alatt'),
-(43, 'admin', 'standard', 'utanvet', 419, '1690', 2109, '2025-02-28', 'feldolgozás alatt'),
-(44, 'admin', 'standard', 'kartya', 100, '1690', 1790, '2025-03-02', 'feldolgozás alatt'),
-(45, 'admin', 'standard', 'kartya', 73990, '0', 73990, '2025-03-02', 'feldolgozás alatt'),
-(46, 'admin', '', '', 0, '', 0, '2025-03-02', 'feldolgozás alatt');
-
 -- --------------------------------------------------------
 
 --
