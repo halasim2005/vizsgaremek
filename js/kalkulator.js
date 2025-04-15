@@ -15,10 +15,6 @@ function kalkValaszt(){
         document.getElementById("feszesesDiv").style.display = "none";
         document.getElementById("arDiv").style.display = "none";
         document.getElementById("ellenDiv").style.display = "block";
-    }else if(selected.value === "arkalk"){
-        document.getElementById("feszesesDiv").style.display = "none";
-        document.getElementById("arDiv").style.display = "block";
-        document.getElementById("ellenDiv").style.display = "none";
     }
 }
 
